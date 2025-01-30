@@ -43,7 +43,6 @@ Definition eqb_var (v1 v2 : var) : bool :=
   | Array n1 i1, Array n2 i2 => String.eqb n1 n2 && Nat.eqb i1 i2
   | _, _ => false
   end.
-
 (* Define commands *)
 Inductive cmd :=
   | Skip (* No operation *)
@@ -95,16 +94,57 @@ Fixpoint exec (fuel : nat) (c : cmd) (s : state) : option state :=
           end
       end
   end.
+(* Define substitution function *)
+Fixpoint subst (e : expr) (v : var) (e_subst : expr) : expr :=
+  match e with
+  | Const n => Const n
+  | VarExpr x => if eqb_var x v then e_subst else VarExpr x
+  | Plus e1 e2 => Plus (subst e1 v e_subst) (subst e2 v e_subst)
+  | Minus e1 e2 => Minus (subst e1 v e_subst) (subst e2 v e_subst)
+  end.
+(* Definition of cbexp *)
+Inductive cbexp : Type :=
+  | CBTrue : cbexp                (* Represents a constant true condition *)
+  | CBVar : var -> cbexp          (* Represents a Boolean variable *)
+  | CBAnd : cbexp -> cbexp -> cbexp. (* Represents a conjunction (AND) of two `cbexp` expressions *)
+
+(* Evaluation of cbexp *)
+Fixpoint eval_cbexp (env : var -> bool) (e : cbexp) : bool :=
+  match e with
+  | CBTrue => true                          (* True always evaluates to true *)
+  | CBVar v => env v                        (* Lookup the value of the variable in the environment *)
+  | CBAnd e1 e2 => (eval_cbexp env e1) && (eval_cbexp env e2) (* Evaluate both sides and take AND *)
+  end.
+
+(* Define assertions as cpred *)
+Definition cpred := list cbexp.
+Definition assertion := cpred.
 
 (* Define Hoare triples *)
-Definition assertion := state -> Prop.
+Inductive hoare_triple : assertion -> cmd -> assertion -> Prop :=
+  | skip_rule : forall P,
+      hoare_triple P Skip P
+  | seq_rule : forall P Q R c1 c2,
+      hoare_triple P c1 Q ->
+      hoare_triple Q c2 R ->
+      hoare_triple P (Seq c1 c2) R
+  | assign_rule : forall Q v e,
+      hoare_triple Q (Assign v e) Q
+  | if_rule : forall P Q b c1 c2,
+      hoare_triple P c1 Q ->
+      hoare_triple P c2 Q ->
+      hoare_triple P (If b c1 c2) Q
+  | while_rule : forall P b c,
+      hoare_triple P c P ->
+      hoare_triple P (While b c) P
+  | array_write_rule : forall P name idx val,
+      hoare_triple P (ArrayWrite name idx val) P.
+
+
 
 (*
-Inductive hoare_triple : assertion -> program -> assertion -> Prop :
-skip_rule : forall P, P skip P
-| seq_rule : forall P R Q e1 e2, hoare_triple P e1 R -> hoare_triple R e2 Q -> hoare_triple P (Seq e1 e2) Q
-| assign_rule : forall Q x a, hoare_triple (subst Q x a) (Assign x a) Q.
-*)
+(* Define Hoare triples *)
+Definition assertion := state -> Prop.
 
 Definition hoare_triple (P : assertion) (fuel : nat) (c : cmd) (Q : assertion) : Prop :=
   forall (s s' : state),
@@ -201,6 +241,36 @@ Proof.
   intros P b c fuel Hht.
   apply hoare_while; assumption.
 Qed.
+Theorem array_write_updates_index : forall P name idx val fuel,
+  hoare_triple
+    (fun s => P s)
+    fuel
+    (ArrayWrite name idx val)
+    (fun s' => exists i v,
+       eval idx s = Some i /\
+       eval val s = Some v /\
+       s' (Array name i) = Some v).
+Proof.
+  intros P name idx val fuel.
+  unfold hoare_triple.
+  intros s s' HP Hexec.
+  simpl in Hexec.
+  destruct (eval idx s) eqn:Hidx, (eval val s) eqn:Hval; try discriminate.
+  inversion Hexec. subst.
+  exists n, n0. split; [assumption |].
+  split; [assumption | reflexivity].
+Qed.
+
+*)
+
+
+
+
+
+
+
+
+
 
 
 
