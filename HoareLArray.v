@@ -102,23 +102,57 @@ Fixpoint subst (e : expr) (v : var) (e_subst : expr) : expr :=
   | Plus e1 e2 => Plus (subst e1 v e_subst) (subst e2 v e_subst)
   | Minus e1 e2 => Minus (subst e1 v e_subst) (subst e2 v e_subst)
   end.
-(* Definition of cbexp *)
+(* Extend cbexp syntax to handle ArrayWrite *)
 Inductive cbexp : Type :=
   | CBTrue : cbexp                (* Represents a constant true condition *)
   | CBVar : var -> cbexp          (* Represents a Boolean variable *)
+  | CBArrayWrite : string -> expr -> expr -> cbexp (* Represents an array write operation *)
   | CBAnd : cbexp -> cbexp -> cbexp. (* Represents a conjunction (AND) of two `cbexp` expressions *)
-
-(* Evaluation of cbexp *)
-Fixpoint eval_cbexp (env : var -> bool) (e : cbexp) : bool :=
-  match e with
-  | CBTrue => true                          (* True always evaluates to true *)
-  | CBVar v => env v                        (* Lookup the value of the variable in the environment *)
-  | CBAnd e1 e2 => (eval_cbexp env e1) && (eval_cbexp env e2) (* Evaluate both sides and take AND *)
+(* Define evaluation of cbexp *)
+Fixpoint eval_cbexp (s : state) (b : cbexp) : bool :=
+  match b with
+  | CBTrue => true
+  | CBVar v => match s v with Some n => Nat.ltb 0 n | None => false end
+  | CBArrayWrite name idx val => false (* Array writes are not directly evaluable conditions *)
+  | CBAnd b1 b2 => andb (eval_cbexp s b1) (eval_cbexp s b2)
+  end.
+Fixpoint subst_cbexp (b : cbexp) (v : var) (e_subst : expr) : cbexp :=
+  match b with
+  | CBTrue => CBTrue
+  | CBVar x => if eqb_var x v then CBVar v else CBVar x
+  | CBArrayWrite name idx val =>
+      CBArrayWrite name (subst idx v e_subst) (subst val v e_subst)
+  | CBAnd b1 b2 => CBAnd (subst_cbexp b1 v e_subst) (subst_cbexp b2 v e_subst)
   end.
 
 (* Define assertions as cpred *)
 Definition cpred := list cbexp.
 Definition assertion := cpred.
+(* Equality check for expressions *)
+Fixpoint expr_eqb (e1 e2 : expr) : bool :=
+  match e1, e2 with
+  | Const n1, Const n2 => Nat.eqb n1 n2
+  | VarExpr v1, VarExpr v2 => eqb_var v1 v2
+  | Plus e1a e1b, Plus e2a e2b => expr_eqb e1a e2a && expr_eqb e1b e2b
+  | Minus e1a e1b, Minus e2a e2b => expr_eqb e1a e2a && expr_eqb e1b e2b
+  | _, _ => false
+  end.
+
+Fixpoint subst_array (b : cbexp) (name : string) (idx : expr) (val : expr) : cbexp :=
+  match b with
+  | CBTrue => CBTrue
+  | CBVar v => CBVar v
+  | CBArrayWrite n i v =>
+      if String.eqb n name && expr_eqb i idx then CBArrayWrite name idx val
+      else CBArrayWrite n i v
+  | CBAnd b1 b2 => CBAnd (subst_array b1 name idx val) (subst_array b2 name idx val)
+  end.
+
+Definition subst_assertion_array (P : assertion) (name : string) (idx : expr) (val : expr) : assertion :=
+  map (fun b => subst_array b name idx val) P.
+
+Definition subst_assertion (P : assertion) (v : var) (e_subst : expr) : assertion :=
+  map (fun b => subst_cbexp b v e_subst) P.
 
 (* Define Hoare triples *)
 Inductive hoare_triple : assertion -> cmd -> assertion -> Prop :=
@@ -137,140 +171,59 @@ Inductive hoare_triple : assertion -> cmd -> assertion -> Prop :=
   | while_rule : forall P b c,
       hoare_triple P c P ->
       hoare_triple P (While b c) P
-  | array_write_rule : forall P name idx val,
-      hoare_triple P (ArrayWrite name idx val) P.
+| array_write_rule : forall P name idx val,
+      hoare_triple (subst_assertion_array P name idx val) 
+                   (ArrayWrite name idx val) 
+                   P.
 
-
-
-(*
-(* Define Hoare triples *)
-Definition assertion := state -> Prop.
-
-Definition hoare_triple (P : assertion) (fuel : nat) (c : cmd) (Q : assertion) : Prop :=
-  forall (s s' : state),
-    P s ->
-    exec fuel c s = Some s' ->
-    Q s'.
-(* Proof rules for Hoare logic *)
-Axiom hoare_skip : forall P fuel,
-  hoare_triple P fuel Skip P.
-Axiom hoare_assign : forall P v e fuel,
-  hoare_triple
-    (fun s => P (fun x => if eqb_var x v then eval e s else s x))
-    fuel
-    (Assign v e)
-    P.
-Axiom hoare_array_write : forall P name idx val fuel,
-  hoare_triple
-    (fun s => exists i v,
-       eval idx s = Some i /\
-       eval val s = Some v /\
-       P (fun x => if eqb_var x (Array name i) then Some v else s x))
-    fuel
-    (ArrayWrite name idx val)
-    P.
-Axiom hoare_seq : forall P Q R c1 c2 fuel,
-  hoare_triple P fuel c1 Q ->
-  hoare_triple Q fuel c2 R ->
-  hoare_triple P fuel (Seq c1 c2) R.
-Axiom hoare_if : forall P Q b c1 c2 fuel,
-  hoare_triple (fun s => P s /\ eval b s <> Some 0) fuel c1 Q ->
-  hoare_triple (fun s => P s /\ eval b s = Some 0) fuel c2 Q ->
-  hoare_triple P fuel (If b c1 c2) Q.
-Axiom hoare_while : forall P b c fuel,
-  hoare_triple (fun s => P s /\ eval b s <> Some 0) fuel c P ->
-  hoare_triple P fuel (While b c) (fun s => P s /\ eval b s = Some 0).
-(* Example: Proof of array write *)
-Example array_write_example :
-  hoare_triple
-    (fun s => True) (* Precondition: no specific requirement *)
-    10 (* Fuel: maximum 10 steps *)
-    (ArrayWrite "a" (Const 0) (Const 42))
-    (fun s => s (Array "a" 0) = Some 42). (* Postcondition: the value at index 0 is updated to 42 *)
+(* Theorem: Hoare rule for skip *)
+Theorem hoare_skip : forall P,
+  hoare_triple P Skip P.
 Proof.
-  unfold hoare_triple.
-  intros s s' H_pre H_exec.
-  simpl in H_exec.
-  destruct (eval (Const 0) s) eqn:E1; try discriminate.
-  destruct (eval (Const 42) s) eqn:E2; try discriminate.
-  inversion H_exec.
-  subst.
-  simpl.
-  reflexivity.
-Qed.
-Theorem hoare_pre_strengthening : forall (P' P Q : assertion) (c : cmd) (fuel : nat),
-  (forall s, P' s -> P s) ->
-  hoare_triple P fuel c Q ->
-  hoare_triple P' fuel c Q.
-Proof.
-  intros P' P Q c fuel Himp Hht.
-  unfold hoare_triple in *.
-  intros s s' HP' Hexec.
-  apply Himp in HP'.
-  apply Hht with (s := s); assumption.
-Qed.
-Theorem hoare_post_weakening : forall (P Q Q' : assertion) (c : cmd) (fuel : nat),
-  (forall s, Q s -> Q' s) ->
-  hoare_triple P fuel c Q ->
-  hoare_triple P fuel c Q'.
-Proof.
-  intros P Q Q' c fuel Himp Hht.
-  unfold hoare_triple in *.
-  intros s s' HP Hexec.
-  apply Hht in Hexec; try assumption.
-  apply Himp. assumption.
-Qed.
-Theorem hoare_skip_trivial : forall P fuel,
-  hoare_triple P fuel Skip P.
-Proof.
-  intros P fuel.
-  apply hoare_skip.
-Qed.
-Theorem hoare_seq_assign : forall P Q R v1 e1 v2 e2 fuel,
-  hoare_triple P fuel (Assign v1 e1) Q ->
-  hoare_triple Q fuel (Assign v2 e2) R ->
-  hoare_triple P fuel (Seq (Assign v1 e1) (Assign v2 e2)) R.
-Proof.
-  intros P Q R v1 e1 v2 e2 fuel Hht1 Hht2.
-  apply hoare_seq with (Q := Q); assumption.
-Qed.
-Theorem hoare_loop_invariant : forall P b c fuel,
-  hoare_triple (fun s => P s /\ eval b s <> Some 0) fuel c P ->
-  hoare_triple P fuel (While b c) (fun s => P s /\ eval b s = Some 0).
-Proof.
-  intros P b c fuel Hht.
-  apply hoare_while; assumption.
-Qed.
-Theorem array_write_updates_index : forall P name idx val fuel,
-  hoare_triple
-    (fun s => P s)
-    fuel
-    (ArrayWrite name idx val)
-    (fun s' => exists i v,
-       eval idx s = Some i /\
-       eval val s = Some v /\
-       s' (Array name i) = Some v).
-Proof.
-  intros P name idx val fuel.
-  unfold hoare_triple.
-  intros s s' HP Hexec.
-  simpl in Hexec.
-  destruct (eval idx s) eqn:Hidx, (eval val s) eqn:Hval; try discriminate.
-  inversion Hexec. subst.
-  exists n, n0. split; [assumption |].
-  split; [assumption | reflexivity].
+  intros. apply skip_rule.
 Qed.
 
-*)
+(* Theorem: Hoare rule for sequential composition *)
+Theorem hoare_seq : forall P Q R c1 c2,
+  hoare_triple P c1 Q ->
+  hoare_triple Q c2 R ->
+  hoare_triple P (Seq c1 c2) R.
+Proof.
+  intros. apply seq_rule with Q; assumption.
+Qed.
 
+(* Theorem: Hoare rule for assignment *)
+Theorem hoare_assign : forall Q v e,
+  hoare_triple Q (Assign v e) Q.
+Proof.
+  intros. apply assign_rule.
+Qed.
 
+(* Theorem: Hoare rule for conditional statements *)
+Theorem hoare_if : forall P Q b c1 c2,
+  hoare_triple P c1 Q ->
+  hoare_triple P c2 Q ->
+  hoare_triple P (If b c1 c2) Q.
+Proof.
+  intros. apply if_rule; assumption.
+Qed.
 
+(* Theorem: Hoare rule for while loops *)
+Theorem hoare_while : forall P b c,
+  hoare_triple P c P ->
+  hoare_triple P (While b c) P.
+Proof.
+  intros. apply while_rule; assumption.
+Qed.
 
-
-
-
-
-
+(* Theorem: Hoare rule for array writes *)
+Theorem hoare_array_write : forall P name idx val,
+      hoare_triple (subst_assertion_array P name idx val) 
+                   (ArrayWrite name idx val) 
+                   P.
+Proof.
+  intros. apply array_write_rule.
+Qed.
 
 
 
