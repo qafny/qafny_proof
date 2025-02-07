@@ -5,11 +5,42 @@ Require Import List.
 Require Import Bool.
 Require Import Coq.Logic.FunctionalExtensionality.
 Require Import Coq.Logic.Classical_Prop.
+Require Import Reals.
+Require Import Psatz.
+Require Import Complex.
+Require Import SQIR.
+Require Import VectorStates UnitaryOps Coq.btauto.Btauto Coq.NArith.Nnat Permutation. 
+Require Import Dirac.
+Require Import QPE.
+Require Import BasicUtility.
+Require Import Classical_Prop.
+Require Import MathSpec.
+Require Import QafnySyntax.
+Require Import LocusDef.
+Require Import LocusKind.
+Require Import LocusType.
+Require Import LocusSem.
+Require Import LocusTypeProof.
+Require Import Coq.FSets.FMapList.
+Require Import Coq.FSets.FMapFacts.
+Require Import Coq.Structures.OrderedTypeEx.
+Declare Scope pexp_scope.
+Delimit Scope pexp_scope with pexp.
+Local Open Scope pexp_scope.
+Local Open Scope nat_scope.
+(* Import necessary modules *)
+Require Import String.
+Require Import Nat.
+Require Import List.
+Require Import Bool.
+Require Import Coq.Logic.FunctionalExtensionality.
+Require Import Coq.Logic.Classical_Prop.
+
 (* Define variables and arrays *)
 Inductive var := 
   | Scalar (name : string) (* Scalar variable *)
   | Array (name : string) (index : nat). (* Array variable with index *)
-
+ 
 (* Define expressions *)
 Inductive expr :=
   | Const (n : nat) (* Constant *)
@@ -224,6 +255,42 @@ Theorem hoare_array_write : forall P name idx val,
 Proof.
   intros. apply array_write_rule.
 Qed.
+
+(* Axiom stating that BasicUtility.var can be converted to var *)
+Axiom var_equiv : BasicUtility.var -> var.
+Axiom aexp_to_expr : aexp -> expr.
+Axiom pexp_to_expr : pexp -> expr.
+Axiom pexp_to_maexp : pexp -> maexp.
+Axiom pexp_to_exp : pexp -> exp.
+Axiom pexp_to_cmd : pexp -> cmd.
+Inductive translate_pexp_rel : pexp -> cmd -> Prop :=
+  | TransSkip : 
+      translate_pexp_rel PSKIP Skip
+
+  | TransLet : forall (x : BasicUtility.var) (e : aexp) (s : pexp) (c : cmd),
+      translate_pexp_rel s c ->
+      translate_pexp_rel (Let x (AE e) s) (Seq (Assign (var_equiv x) (aexp_to_expr e)) c)
+
+  | TransAppU : forall l e c,
+      translate_pexp_rel e c ->
+      translate_pexp_rel (AppU l (pexp_to_exp e)) c
+
+  | TransIf : forall (b : pexp) (s1 s2 : cmd) (c1 c2 : cmd),
+      translate_pexp_rel s1 c1 ->
+      translate_pexp_rel s2 c2 ->
+      translate_pexp_rel (If (pexp_to_expr b)s1 s2) (If (pexp_to_expr b) c1 c2)
+
+  | TransSeq : forall s1 s2 c1 c2,
+      translate_pexp_rel s1 c1 ->
+      translate_pexp_rel s2 c2 ->
+      translate_pexp_rel (PSeq s1 s2) (Seq c1 c2)
+
+  | TransWhile : forall b s c,
+      translate_pexp_rel s c ->
+      translate_pexp_rel (While b s) (While b c)
+
+  | TransDiffuse : forall (x : BasicUtility.var),
+      translate_pexp_rel (Diffuse x) (Assign (var_equiv x) (Const 0)).
 
 
 
