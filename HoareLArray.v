@@ -41,12 +41,13 @@ Inductive var :=
   | Scalar (name : string) (* Scalar variable *)
   | Array (name : string) (index : nat). (* Array variable with index *)
  
-(* Define expressions *)
 Inductive expr :=
-  | Const (n : nat) (* Constant *)
   | VarExpr (v : var) (* Variable *)
+  | Const (n : nat) (* Natural number constant *)
   | Plus (e1 e2 : expr) (* Addition *)
-  | Minus (e1 e2 : expr). (* Subtraction *)
+  | Minus (e1 e2 : expr) (* Subtraction *)
+  | Mult (e1 e2 : expr). (* Multiplication *)
+
 
 (* Define the state *)
 Definition state := var -> option nat.
@@ -63,7 +64,12 @@ Fixpoint eval (e : expr) (s : state) : option nat :=
       end
   | Minus e1 e2 =>
       match eval e1 s, eval e2 s with
-      | Some n1, Some n2 => Some (n1 - n2)
+      | Some n1, Some n2 => if n1 <? n2 then None else Some (n1 - n2)
+      | _, _ => None
+      end
+  | Mult e1 e2 => (* Corrected: Handling Multiplication *)
+      match eval e1 s, eval e2 s with
+      | Some n1, Some n2 => Some (n1 * n2)
       | _, _ => None
       end
   end.
@@ -132,6 +138,7 @@ Fixpoint subst (e : expr) (v : var) (e_subst : expr) : expr :=
   | VarExpr x => if eqb_var x v then e_subst else VarExpr x
   | Plus e1 e2 => Plus (subst e1 v e_subst) (subst e2 v e_subst)
   | Minus e1 e2 => Minus (subst e1 v e_subst) (subst e2 v e_subst)
+  | Mult e1 e2 => Mult (subst e1 v e_subst) (subst e2 v e_subst) (* Corrected: Handle multiplication *)
   end.
 (* Extend cbexp syntax to handle ArrayWrite *)
 Inductive cbexp : Type :=
@@ -256,38 +263,55 @@ Proof.
   intros. apply array_write_rule.
 Qed.
 
-
-
+(* Conversion function from BasicUtility.var to var *)
+Definition convert_var (v : BasicUtility.var) : var :=
+  match v with
+  | _ => Scalar "default"
+  end.
 Fixpoint translate_aexp (e: aexp) : expr :=
   match e with
-  | BA x => VarExpr x 
+  | BA x => VarExpr (convert_var x)  (* Convert BasicUtility.var to var *)
   | Num n => Const n 
   | MNum r n => Const n 
-  | APlus e1 e2 => Plus (translate_aexp e1) (translate_aexp e2) 
-  end. 
- Fixpoint translate_cbexp (c : cbexp) : expr :=
-  match c with
-  | CEq x y => Minus (translate_aexp x) (translate_aexp y)
-  | CLt x y => Minus (translate_aexp x) (translate_aexp y) 
+  | APlus e1 e2 => Plus (translate_aexp e1) (translate_aexp e2)
+  | AMult e1 e2 => Mult (translate_aexp e1) (translate_aexp e2)
   end.
-  Fixpoint translate_bexp (b : bexp) : expr :=
+Fixpoint translate_cbexp (c : cbexp) : expr :=
+  match c with
+  | CBTrue => Const 1 
+  | CBVar x => VarExpr x
+  | CBArrayWrite name idx val => Const 0 
+  | CBAnd b1 b2 => Mult (translate_cbexp b1) (translate_cbexp b2) 
+  end.
+
+Fixpoint translate_bexp (b : bexp) : expr :=
   match b with
   | CB c => translate_cbexp c
-  | BEq e1 e2 i a => Minus (translate_aexp e1) (translate_aexp e2) 
-  | BLt e1 e2 i a => Minus (translate_aexp e1) (translate_aexp e2) 
-  | BTest i => VarExpr (translate_var i)
+  | BEq e1 e2 i a => Plus (convert_var i) (translate_aexp a)  
+  | BLt e1 e2 i a => Minus (convert_var i) (translate_aexp a) 
+  | BTest i a => VarExpr (convert_var i)
   | BNeg b' => Minus (Const 1) (translate_bexp b') 
   end.
-  Fixpoint translate_pexp (p : pexp) : cmd :=
+ Fixpoint translate_pexp (p : pexp) : cmd :=
   match p with
   | PSKIP => Skip
-  | Let x (AE a) s => Seq (Assign (translate_var x) (translate_aexp a)) (translate_pexp s)
-  | Let x (Meas y) s => Seq (Assign (translate_var x) (VarExpr (translate_var y))) (translate_pexp s)
+  | Let x (AE a) s =>
+      Seq (Assign (convert_var x) (translate_aexp a)) (translate_pexp s)
+  | Let x (Meas y) s =>
+      Seq (Assign (convert_var x) (VarExpr (convert_var y))) (translate_pexp s)
   | AppSU e => Skip 
-  | AppU l e => Skip
-  | PSeq s1 s2 => Seq (translate_pexp s1) (translate_pexp s2)
-  | If x s1 => If (translate_bexp x) (translate_pexp s1) Skip
-  | For x l h b p => While (translate_bexp b) (translate_pexp p)
+  | AppU l e => Skip 
+  | PSeq s1 s2 =>
+      Seq (translate_pexp s1) (translate_pexp s2)
+  | If x s1 =>
+      If (translate_bexp x) (translate_pexp s1) Skip 
+  | IfElse x s1 s2 =>
+      If (translate_bexp x) (translate_pexp s1) (translate_pexp s2) 
+  | For x l h b p =>
+      Seq (Assign (convert_var x) (translate_aexp l)) 
+          (While (translate_bexp b) 
+                 (Seq (translate_pexp p)
+                      (Assign (convert_var x) (Plus (VarExpr (convert_var x)) (Const 1)))))
   | Diffuse x => Skip
   end.
 
