@@ -256,13 +256,67 @@ Proof.
   intros. apply array_write_rule.
 Qed.
 
+
+
+Fixpoint translate_aexp (e: aexp) : expr :=
+  match e with
+  | BA x => VarExpr x (* Translate variable *)
+  | Num n => Const n (* Translate natural number constant *)
+  | MNum r n => Const n (* Ignore 'r' and keep only the natural part *)
+  | APlus e1 e2 => Plus (translate_aexp e1) (translate_aexp e2) (* Translate addition *)
+  end. 
+ Fixpoint translate_cbexp (c : cbexp) : expr :=
+  match c with
+  | CEq x y => Minus (translate_aexp x) (translate_aexp y)
+  | CLt x y => Minus (translate_aexp x) (translate_aexp y) (* Placeholder *)
+  end.
+  Fixpoint translate_bexp (b : bexp) : expr :=
+  match b with
+  | CB c => translate_cbexp c
+  | BEq e1 e2 i a => Minus (translate_aexp e1) (translate_aexp e2) (* Fixed: Use all arguments properly *)
+  | BLt e1 e2 i a => Minus (translate_aexp e1) (translate_aexp e2) (* Fixed: Use all arguments properly *)
+  | BTest i => VarExpr (translate_var i)
+  | BNeg b' => Minus (Const 1) (translate_bexp b') (* Boolean negation *)
+  end.
+  Fixpoint translate_pexp (p : pexp) : cmd :=
+  match p with
+  | PSKIP => Skip
+  | Let x (AE a) s => Seq (Assign (translate_var x) (translate_aexp a)) (translate_pexp s)
+  | Let x (Meas y) s => Seq (Assign (translate_var x) (VarExpr (translate_var y))) (translate_pexp s)
+  | AppSU e => Skip  (* Placeholder for quantum operations *)
+  | AppU l e => Skip
+  | PSeq s1 s2 => Seq (translate_pexp s1) (translate_pexp s2)
+  | If x s1 => If (translate_bexp x) (translate_pexp s1) Skip
+  | For x l h b p => While (translate_bexp b) (translate_pexp p)
+  | Diffuse x => Skip
+  end.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(*
 (* Axiom stating that BasicUtility.var can be converted to var *)
 Axiom var_equiv : BasicUtility.var -> var.
 Axiom aexp_to_expr : aexp -> expr.
 Axiom pexp_to_expr : pexp -> expr.
 Axiom pexp_to_maexp : pexp -> maexp.
 Axiom pexp_to_exp : pexp -> exp.
+Axiom pexp_to_bexp: pexp -> bexp.
 Axiom pexp_to_cmd : pexp -> cmd.
+Axiom bexp_to_expr : bexp -> expr.
+
 Inductive translate_pexp_rel : pexp -> cmd -> Prop :=
   | TransSkip : 
       translate_pexp_rel PSKIP Skip
@@ -291,6 +345,8 @@ Inductive translate_pexp_rel : pexp -> cmd -> Prop :=
 
   | TransDiffuse : forall (x : BasicUtility.var),
       translate_pexp_rel (Diffuse x) (Assign (var_equiv x) (Const 0)).
+
+*)
 
 
 
