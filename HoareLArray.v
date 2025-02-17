@@ -260,30 +260,30 @@ Qed.
 
 Fixpoint translate_aexp (e: aexp) : expr :=
   match e with
-  | BA x => VarExpr x (* Translate variable *)
-  | Num n => Const n (* Translate natural number constant *)
-  | MNum r n => Const n (* Ignore 'r' and keep only the natural part *)
-  | APlus e1 e2 => Plus (translate_aexp e1) (translate_aexp e2) (* Translate addition *)
+  | BA x => VarExpr x 
+  | Num n => Const n 
+  | MNum r n => Const n 
+  | APlus e1 e2 => Plus (translate_aexp e1) (translate_aexp e2) 
   end. 
  Fixpoint translate_cbexp (c : cbexp) : expr :=
   match c with
   | CEq x y => Minus (translate_aexp x) (translate_aexp y)
-  | CLt x y => Minus (translate_aexp x) (translate_aexp y) (* Placeholder *)
+  | CLt x y => Minus (translate_aexp x) (translate_aexp y) 
   end.
   Fixpoint translate_bexp (b : bexp) : expr :=
   match b with
   | CB c => translate_cbexp c
-  | BEq e1 e2 i a => Minus (translate_aexp e1) (translate_aexp e2) (* Fixed: Use all arguments properly *)
-  | BLt e1 e2 i a => Minus (translate_aexp e1) (translate_aexp e2) (* Fixed: Use all arguments properly *)
+  | BEq e1 e2 i a => Minus (translate_aexp e1) (translate_aexp e2) 
+  | BLt e1 e2 i a => Minus (translate_aexp e1) (translate_aexp e2) 
   | BTest i => VarExpr (translate_var i)
-  | BNeg b' => Minus (Const 1) (translate_bexp b') (* Boolean negation *)
+  | BNeg b' => Minus (Const 1) (translate_bexp b') 
   end.
   Fixpoint translate_pexp (p : pexp) : cmd :=
   match p with
   | PSKIP => Skip
   | Let x (AE a) s => Seq (Assign (translate_var x) (translate_aexp a)) (translate_pexp s)
   | Let x (Meas y) s => Seq (Assign (translate_var x) (VarExpr (translate_var y))) (translate_pexp s)
-  | AppSU e => Skip  (* Placeholder for quantum operations *)
+  | AppSU e => Skip 
   | AppU l e => Skip
   | PSeq s1 s2 => Seq (translate_pexp s1) (translate_pexp s2)
   | If x s1 => If (translate_bexp x) (translate_pexp s1) Skip
