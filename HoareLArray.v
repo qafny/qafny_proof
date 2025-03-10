@@ -276,6 +276,7 @@ Fixpoint translate_aexp (e: aexp) : expr :=
   | APlus e1 e2 => Plus (translate_aexp e1) (translate_aexp e2)
   | AMult e1 e2 => Mult (translate_aexp e1) (translate_aexp e2)
   end.
+
 Fixpoint translate_cbexp (c : cbexp) : expr :=
   match c with
   | CBTrue => Const 1 
@@ -283,48 +284,91 @@ Fixpoint translate_cbexp (c : cbexp) : expr :=
   | CBArrayWrite name idx val => Const 0 
   | CBAnd b1 b2 => Mult (translate_cbexp b1) (translate_cbexp b2) 
   end.
-
+Definition extract_var (e : aexp) : option var :=
+  match e with
+  | BA v => Some (convert_var v)  
+  | _ => None 
+  end.
+Definition convert_cbexp (c : QafnySyntax.cbexp) : cbexp :=
+  match c with
+  | QafnySyntax.CEq e1 e2 =>
+      match extract_var e1, extract_var e2 with
+      | Some v1, Some v2 => CBAnd (CBVar v1) (CBVar v2) 
+      | _, _ => CBTrue 
+      end
+  | QafnySyntax.CLt e1 e2 =>
+      match extract_var e1, extract_var e2 with
+      | Some v1, Some v2 => CBAnd (CBVar v1) (CBVar v2) 
+      | _, _ => CBTrue
+      end
+  end.
+Print varia.
+Definition convert_varia_to_aexp (v : varia) : aexp :=
+  match v with
+  | AExp e => e  
+  | Index var exp => APlus (BA var) exp  
+  end.
+Definition safe_eval (e : expr) (s : state) : nat :=
+  match eval e s with
+  | Some n => n
+  | None => 0 
+  end.
 Fixpoint translate_bexp (b : bexp) : expr :=
   match b with
-  | CB c => translate_cbexp c
-  | BEq e1 e2 i a => Plus (convert_var i) (translate_aexp a)  
-  | BLt e1 e2 i a => Minus (convert_var i) (translate_aexp a) 
+  | CB c => translate_cbexp (convert_cbexp c) 
+  | BEq e1 e2 i a => 
+      let left := translate_aexp (convert_varia_to_aexp e1) in
+      let right := translate_aexp (convert_varia_to_aexp e2) in
+      Minus (Const 1) (Plus (Minus left right) (Minus right left)) 
+  | BLt e1 e2 i a => 
+      let left := translate_aexp (convert_varia_to_aexp e1) in
+      let right := translate_aexp (convert_varia_to_aexp e2) in
+      Const (if (Nat.ltb (safe_eval left (fun _ => None)) (safe_eval right (fun _ => None))) then 1 else 0)
   | BTest i a => VarExpr (convert_var i)
   | BNeg b' => Minus (Const 1) (translate_bexp b') 
   end.
- Fixpoint translate_pexp (p : pexp) : cmd :=
+
+Fixpoint translate_pexp (p : pexp) : cmd :=
   match p with
   | PSKIP => Skip
   | Let x (AE a) s =>
       Seq (Assign (convert_var x) (translate_aexp a)) (translate_pexp s)
   | Let x (Meas y) s =>
       Seq (Assign (convert_var x) (VarExpr (convert_var y))) (translate_pexp s)
-  | AppSU e => Skip 
+  | AppSU e => Skip  
   | AppU l e => Skip 
   | PSeq s1 s2 =>
       Seq (translate_pexp s1) (translate_pexp s2)
-  | If x s1 =>
-      If (translate_bexp x) (translate_pexp s1) Skip 
-  | IfElse x s1 s2 =>
-      If (translate_bexp x) (translate_pexp s1) (translate_pexp s2) 
+  | If x s1 => 
+      If (translate_bexp x) (translate_pexp s1) Skip
+  | IfElse x s1 s2 => 
+      If (translate_bexp x) (translate_pexp s1) (translate_pexp s2)
   | For x l h b p =>
-      Seq (Assign (convert_var x) (translate_aexp l)) 
-          (While (translate_bexp b) 
-                 (Seq (translate_pexp p)
-                      (Assign (convert_var x) (Plus (VarExpr (convert_var x)) (Const 1)))))
-  | Diffuse x => Skip
+      Seq (Assign (convert_var x) (translate_aexp l))
+          (While 
+             (Minus (translate_aexp h) (VarExpr (convert_var x))) 
+             (Seq (translate_pexp p)
+                  (Assign (convert_var x) (Plus (VarExpr (convert_var x)) (Const 1)))))
+  | Diffuse x => Skip 
   end.
+  
+(*Soundness*)
+Theorem translate_pexp_sound :
+  forall p s s',
+  exec (translate_pexp p) s = Some s' ->
+  (p ⟶ s').
+Proof.
 
+Admitted.
 
+(*Completeness*)
+Theorem translate_pexp_complete :
+  forall p s s',
+  (p ⟶ s') ->
+  exec (translate_pexp p) s = Some s'.
+Proof.
 
-
-
-
-
-
-
-
-
+Admitted.
 
 
 
