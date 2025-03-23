@@ -192,6 +192,39 @@ Definition subst_assertion_array (P : assertion) (name : string) (idx : expr) (v
 Definition subst_assertion (P : assertion) (v : var) (e_subst : expr) : assertion :=
   map (fun b => subst_cbexp b v e_subst) P.
 
+(* Define logical entailment for assertions *)
+Definition entails (P Q : assertion) : Prop :=
+  forall s, (forall b, In b P -> eval_cbexp s b = true) -> 
+            (forall b, In b Q -> eval_cbexp s b = true).
+
+(* Hoare triples with the consequence rule *)
+Inductive hoare_triple : assertion -> cmd -> assertion -> Prop :=
+  | skip_rule : forall P,
+      hoare_triple P Skip P
+  | seq_rule : forall P Q R c1 c2,
+      hoare_triple P c1 Q ->
+      hoare_triple Q c2 R ->
+      hoare_triple P (Seq c1 c2) R
+  | assign_rule : forall Q v e,
+      hoare_triple Q (Assign v e) Q
+  | if_rule : forall P Q b c1 c2,
+      hoare_triple P c1 Q ->
+      hoare_triple P c2 Q ->
+      hoare_triple P (If b c1 c2) Q
+  | while_rule : forall P b c,
+      hoare_triple P c P ->
+      hoare_triple P (While b c) P
+  | array_write_rule : forall P name idx val,
+      hoare_triple (subst_assertion_array P name idx val) 
+                   (ArrayWrite name idx val) 
+                   P
+  | consequence_rule : forall P P' Q Q' c,
+      entails P P' ->
+      hoare_triple P' c Q' ->
+      entails Q' Q ->
+      hoare_triple P c Q.
+
+(*
 (* Define Hoare triples *)
 Inductive hoare_triple : assertion -> cmd -> assertion -> Prop :=
   | skip_rule : forall P,
@@ -213,6 +246,7 @@ Inductive hoare_triple : assertion -> cmd -> assertion -> Prop :=
       hoare_triple (subst_assertion_array P name idx val) 
                    (ArrayWrite name idx val) 
                    P.
+*)
 
 (* Theorem: Hoare rule for skip *)
 Theorem hoare_skip : forall P,
@@ -262,6 +296,26 @@ Theorem hoare_array_write : forall P name idx val,
 Proof.
   intros. apply array_write_rule.
 Qed.
+Theorem hoare_consequence : forall P P' Q Q' c,
+  entails P P' ->
+  hoare_triple P' c Q' ->
+  entails Q' Q ->
+  hoare_triple P c Q.
+Proof.
+  intros P P' Q Q' c Hpre Hcmd Hpost.
+  apply consequence_rule with (P' := P') (Q' := Q'); assumption.
+Qed.
+Theorem hoare_assign_consequence  :
+  forall v e Q P,
+    entails P (subst_assertion P v e) ->
+    hoare_triple (subst_assertion P v e) (Assign v e) Q ->
+    entails Q P ->
+    hoare_triple P (Assign v e) P.
+Proof.
+  intros.
+  apply hoare_consequence with (P' := subst_assertion P v e) (Q' := Q); assumption.
+Qed.
+
 
 (* Conversion function from BasicUtility.var to var *)
 Definition convert_var (v : BasicUtility.var) : var :=
@@ -327,7 +381,6 @@ Fixpoint translate_bexp (b : bexp) : expr :=
   | BTest i a => VarExpr (convert_var i)
   | BNeg b' => Minus (Const 1) (translate_bexp b') 
   end.
-
 Fixpoint translate_pexp (p : pexp) : cmd :=
   match p with
   | PSKIP => Skip
@@ -335,86 +388,95 @@ Fixpoint translate_pexp (p : pexp) : cmd :=
       Seq (Assign (convert_var x) (translate_aexp a)) (translate_pexp s)
   | Let x (Meas y) s =>
       Seq (Assign (convert_var x) (VarExpr (convert_var y))) (translate_pexp s)
-  | AppSU e => Skip  
+  | AppSU e => Skip 
   | AppU l e => Skip 
   | PSeq s1 s2 =>
       Seq (translate_pexp s1) (translate_pexp s2)
-  | If x s1 => 
+  | QafnySyntax.If x s1 =>  
       If (translate_bexp x) (translate_pexp s1) Skip
-  | IfElse x s1 s2 => 
-      If (translate_bexp x) (translate_pexp s1) (translate_pexp s2)
   | For x l h b p =>
-      Seq (Assign (convert_var x) (translate_aexp l))
+      Seq (Assign (convert_var x) (translate_aexp l)) 
           (While 
              (Minus (translate_aexp h) (VarExpr (convert_var x))) 
-             (Seq (translate_pexp p)
-                  (Assign (convert_var x) (Plus (VarExpr (convert_var x)) (Const 1)))))
+             (If (translate_bexp b)  
+                 (Seq (translate_pexp p)
+                      (Assign (convert_var x) (Plus (VarExpr (convert_var x)) (Const 1))))
+                 Skip))  
   | Diffuse x => Skip 
   end.
-  
-(*Soundness*)
-Theorem translate_pexp_sound :
-  forall p s s',
-  exec (translate_pexp p) s = Some s' ->
-  (p ⟶ s').
+
+
+(* Execution correctness definition *)
+Definition correct (P: assertion) (c: cmd) (Q: assertion) : Prop :=
+  forall s, (forall b, In b P -> eval_cbexp s b = true) ->
+            exists s', exec 100 c s = Some s' /\ (forall b, In b Q -> eval_cbexp s' b = true).
+
+(* Completeness theorem from translate_pexp to hoare triple *)
+Theorem translate_pexp_completeness : forall P p Q,
+  (forall s s', (forall b, In b P -> eval_cbexp s b = true) ->
+                exists fuel, exec fuel (translate_pexp p) s = Some s' ->
+                (forall b, In b Q -> eval_cbexp s' b = true)) ->
+  hoare_triple P (translate_pexp p) Q.
 Proof.
+  intros P p Q H.
+  induction p.
+  - (* Case: PSKIP *)
+    simpl. apply hoare_consequence with (P' := P) (Q' := P).
+    + intros s Hs b Hb. apply Hs. assumption.
+    + apply hoare_skip.
+    + intros s Hs b Hb.
+      specialize (H s s Hs).
+      destruct H as [fuel Hfuel].
+      assert (H_exec : exec fuel Skip s = Some s).
+Admitted.
+
+Theorem hoare_completeness : forall P p Q,
+  (forall s s', (forall b, In b P -> eval_cbexp s b = true) ->
+                exists fuel, exec fuel (translate_pexp p) s = Some s' ->
+                (forall b, In b Q -> eval_cbexp s' b = true)) ->
+  hoare_triple P (translate_pexp p) Q.
+Proof.
+  intros P p Q H.
+  induction p.
+  - (* Case: PSKIP *)
+    simpl. apply hoare_consequence with (P' := P) (Q' := Q).
+    + intros s Hs b Hb. apply Hs. assumption.
 
 Admitted.
 
-(*Completeness*)
-Theorem translate_pexp_complete :
-  forall p s s',
-  (p ⟶ s') ->
-  exec (translate_pexp p) s = Some s'.
+(* Soundness Theorem: If Hoare triple holds for translated pexp, then it holds for original pexp. *)
+Theorem translate_pexp_soundness : forall P p Q,
+  hoare_triple P (translate_pexp p) Q ->
+  forall s, (forall b, In b P -> eval_cbexp s b = true) ->
+            exists s', exists fuel, exec fuel (translate_pexp p) s = Some s' /\
+            (forall b, In b Q -> eval_cbexp s' b = true).
 Proof.
-
+  intros P p Q Hht s HP. induction Hht; simpl in *.
+  - exists s. exists 1. split; auto.
+  - destruct IHHht1 as [s' [fuel1 [Hex1 HQ1]]]; auto.
+    destruct IHHht2 as [s'' [fuel2 [Hex2 HQ2]]]; auto.
 Admitted.
 
+Theorem hoare_soundness : forall P p Q,
+  hoare_triple P (translate_pexp p) Q ->
+  forall s, (forall b, In b P -> eval_cbexp s b = true) ->
+            exists fuel, exists s', exec fuel (translate_pexp p) s = Some s' /\
+            (forall b, In b Q -> eval_cbexp s' b = true).
+Proof.
+  intros P p Q Hht. induction Hht; intros s Hs; simpl.
+  - (* skip_rule: hoare_triple P Skip P *)
+    exists 1. exists s. split.
+    + unfold exec. reflexivity.
+    + intros b Hb. apply Hs. assumption.
 
+  - (* seq_rule: hoare_triple P (Seq c1 c2) R *)
+    destruct (IHHht1 s Hs) as [fuel1 [s' [Hexec1 HQ]]].
+    destruct (IHHht2 s' HQ) as [fuel2 [s'' [Hexec2 HR]]].
+    exists (S (fuel1 + fuel2)). exists s''. split.
+    + unfold exec. fold exec.
 
+Admitted. 
 
-
-(*
-(* Axiom stating that BasicUtility.var can be converted to var *)
-Axiom var_equiv : BasicUtility.var -> var.
-Axiom aexp_to_expr : aexp -> expr.
-Axiom pexp_to_expr : pexp -> expr.
-Axiom pexp_to_maexp : pexp -> maexp.
-Axiom pexp_to_exp : pexp -> exp.
-Axiom pexp_to_bexp: pexp -> bexp.
-Axiom pexp_to_cmd : pexp -> cmd.
-Axiom bexp_to_expr : bexp -> expr.
-
-Inductive translate_pexp_rel : pexp -> cmd -> Prop :=
-  | TransSkip : 
-      translate_pexp_rel PSKIP Skip
-
-  | TransLet : forall (x : BasicUtility.var) (e : aexp) (s : pexp) (c : cmd),
-      translate_pexp_rel s c ->
-      translate_pexp_rel (Let x (AE e) s) (Seq (Assign (var_equiv x) (aexp_to_expr e)) c)
-
-  | TransAppU : forall l e c,
-      translate_pexp_rel e c ->
-      translate_pexp_rel (AppU l (pexp_to_exp e)) c
-
-  | TransIf : forall (b : pexp) (s1 s2 : cmd) (c1 c2 : cmd),
-      translate_pexp_rel s1 c1 ->
-      translate_pexp_rel s2 c2 ->
-      translate_pexp_rel (If (pexp_to_expr b)s1 s2) (If (pexp_to_expr b) c1 c2)
-
-  | TransSeq : forall s1 s2 c1 c2,
-      translate_pexp_rel s1 c1 ->
-      translate_pexp_rel s2 c2 ->
-      translate_pexp_rel (PSeq s1 s2) (Seq c1 c2)
-
-  | TransWhile : forall b s c,
-      translate_pexp_rel s c ->
-      translate_pexp_rel (While b s) (While b c)
-
-  | TransDiffuse : forall (x : BasicUtility.var),
-      translate_pexp_rel (Diffuse x) (Assign (var_equiv x) (Const 0)).
-
-*)
 
 
 
