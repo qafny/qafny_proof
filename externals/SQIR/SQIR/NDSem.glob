@@ -1,0 +1,528 @@
+DIGEST 7ca97c1391c0def50516ece8edd491b6
+FTop.externals.SQIR.SQIR.NDSem
+R15:24 Top.externals.SQIR.SQIR.UnitarySem <> <> lib
+R42:47 Coq.Setoids.Setoid <> <> lib
+def 103:106 <> norm
+binder 109:109 <> n:1
+R118:123 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R125:125 Top.externals.SQIR.SQIR.NDSem <> n:1 var
+binder 113:114 <> ψ:2
+R133:136 Coq.Reals.R_sqrt <> sqrt def
+R139:141 Coq.Init.Datatypes <> fst def
+R144:144 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R150:153 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R156:160 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R147:149 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R145:146 Top.externals.SQIR.SQIR.NDSem <> ψ:2 var
+R154:155 Top.externals.SQIR.SQIR.NDSem <> ψ:2 var
+R160:160 Coq.Init.Datatypes <> O constr
+R158:158 Coq.Init.Datatypes <> O constr
+ind 267:273 <> nd_eval
+constr 353:359 <> nd_skip
+constr 397:401 <> nd_uc
+constr 499:507 <> nd_meas_t
+constr 903:911 <> nd_meas_f
+constr 1129:1134 <> nd_seq
+R282:284 Coq.Init.Datatypes <> nat ind
+binder 276:278 <> dim:3
+R301:304 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R289:296 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R319:322 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R305:310 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R314:314 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R337:340 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R323:328 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R332:332 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R1314:1320 Top.externals.SQIR.SQIR.NDSem <> nd_eval:5 ind
+binder 370:371 <> ψ:6
+R374:380 Top.externals.SQIR.SQIR.NDSem <> nd_eval:4 ind
+R390:391 Top.externals.SQIR.SQIR.NDSem <> ψ:6 var
+R387:388 Top.externals.SQIR.SQIR.NDSem <> ψ:6 var
+R382:385 Top.externals.SQIR.SQIR.SQIR <> skip constr
+R417:425 Top.externals.SQIR.SQIR.SQIR <> base_ucom def
+R427:429 Top.externals.SQIR.SQIR.NDSem <> dim:3 var
+binder 413:413 <> u:7
+R438:443 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R447:447 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R448:450 Top.externals.SQIR.SQIR.NDSem <> dim:3 var
+binder 433:434 <> ψ:8
+R465:467 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R470:475 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R493:493 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R461:462 Top.externals.SQIR.SQIR.SQIR <> uc constr
+R464:464 Top.externals.SQIR.SQIR.NDSem <> u:7 var
+R468:469 Top.externals.SQIR.SQIR.NDSem <> ψ:8 var
+R476:476 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R486:490 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R477:483 Top.externals.SQIR.SQIR.UnitarySem <> uc_eval def
+R485:485 Top.externals.SQIR.SQIR.NDSem <> u:7 var
+R491:492 Top.externals.SQIR.SQIR.NDSem <> ψ:8 var
+R523:525 Coq.Init.Datatypes <> nat ind
+binder 519:519 <> n:9
+R537:544 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R546:548 Top.externals.SQIR.SQIR.NDSem <> dim:3 var
+binder 529:530 <> c1:10
+binder 532:533 <> c2:11
+R562:567 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R571:571 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R572:574 Top.externals.SQIR.SQIR.NDSem <> dim:3 var
+binder 552:553 <> ψ:12
+binder 555:558 <> ψ'':13
+R625:628 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R597:599 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R603:603 Top.externals.SQIR.SQIR.NDSem <> n:9 var
+R605:607 Top.externals.SQIR.SQIR.NDSem <> dim:3 var
+R610:623 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣1⟩⟨1∣' not
+R629:630 Top.externals.SQIR.SQIR.NDSem <> ψ:12 var
+binder 589:591 <> ψ':14
+R657:722 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R650:653 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R642:645 Top.externals.SQIR.SQIR.NDSem <> norm def
+R647:649 Top.externals.SQIR.SQIR.NDSem <> ψ':14 var
+R740:749 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R725:727 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R731:735 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R723:724 Top.externals.SQIR.SQIR.NDSem <> c1:10 var
+R728:730 Top.externals.SQIR.SQIR.NDSem <> ψ':14 var
+R736:739 Top.externals.SQIR.SQIR.NDSem <> ψ'':13 var
+R762:764 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R767:771 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R750:753 Top.externals.SQIR.SQIR.SQIR <> meas constr
+R760:761 Top.externals.SQIR.SQIR.NDSem <> c2:11 var
+R757:758 Top.externals.SQIR.SQIR.NDSem <> c1:10 var
+R755:755 Top.externals.SQIR.SQIR.NDSem <> n:9 var
+R765:766 Top.externals.SQIR.SQIR.NDSem <> ψ:12 var
+R772:775 Top.externals.SQIR.SQIR.NDSem <> ψ'':13 var
+R927:929 Coq.Init.Datatypes <> nat ind
+binder 923:923 <> n:15
+R941:948 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R950:952 Top.externals.SQIR.SQIR.NDSem <> dim:3 var
+binder 933:934 <> c1:16
+binder 936:937 <> c2:17
+R966:971 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R975:975 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R976:978 Top.externals.SQIR.SQIR.NDSem <> dim:3 var
+binder 956:957 <> ψ:18
+binder 959:962 <> ψ'':19
+R1029:1032 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R1001:1003 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R1007:1007 Top.externals.SQIR.SQIR.NDSem <> n:15 var
+R1009:1011 Top.externals.SQIR.SQIR.NDSem <> dim:3 var
+R1014:1027 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣0⟩⟨0∣' not
+R1033:1034 Top.externals.SQIR.SQIR.NDSem <> ψ:18 var
+binder 993:995 <> ψ':20
+R1060:1069 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1053:1056 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R1045:1048 Top.externals.SQIR.SQIR.NDSem <> norm def
+R1050:1052 Top.externals.SQIR.SQIR.NDSem <> ψ':20 var
+R1087:1096 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1072:1074 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1078:1082 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1070:1071 Top.externals.SQIR.SQIR.NDSem <> c2:17 var
+R1075:1077 Top.externals.SQIR.SQIR.NDSem <> ψ':20 var
+R1083:1086 Top.externals.SQIR.SQIR.NDSem <> ψ'':19 var
+R1109:1111 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1114:1118 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1097:1100 Top.externals.SQIR.SQIR.SQIR <> meas constr
+R1107:1108 Top.externals.SQIR.SQIR.NDSem <> c2:17 var
+R1104:1105 Top.externals.SQIR.SQIR.NDSem <> c1:16 var
+R1102:1102 Top.externals.SQIR.SQIR.NDSem <> n:15 var
+R1112:1113 Top.externals.SQIR.SQIR.NDSem <> ψ:18 var
+R1119:1122 Top.externals.SQIR.SQIR.NDSem <> ψ'':19 var
+R1154:1161 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R1163:1165 Top.externals.SQIR.SQIR.NDSem <> dim:3 var
+binder 1146:1147 <> c1:21
+binder 1149:1150 <> c2:22
+R1183:1188 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R1192:1192 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R1193:1195 Top.externals.SQIR.SQIR.NDSem <> dim:3 var
+binder 1169:1170 <> ψ:23
+binder 1172:1174 <> ψ':24
+binder 1176:1179 <> ψ'':25
+R1221:1230 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1208:1210 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1213:1217 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1206:1207 Top.externals.SQIR.SQIR.NDSem <> c1:21 var
+R1211:1212 Top.externals.SQIR.SQIR.NDSem <> ψ:23 var
+R1218:1220 Top.externals.SQIR.SQIR.NDSem <> ψ':24 var
+R1248:1257 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1233:1235 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1239:1243 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1231:1232 Top.externals.SQIR.SQIR.NDSem <> c2:22 var
+R1236:1238 Top.externals.SQIR.SQIR.NDSem <> ψ':24 var
+R1244:1247 Top.externals.SQIR.SQIR.NDSem <> ψ'':25 var
+R1258:1258 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1266:1269 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1272:1276 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1261:1263 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:x_';'_x not
+R1259:1260 Top.externals.SQIR.SQIR.NDSem <> c1:21 var
+R1264:1265 Top.externals.SQIR.SQIR.NDSem <> c2:22 var
+R1270:1271 Top.externals.SQIR.SQIR.NDSem <> ψ:23 var
+R1277:1280 Top.externals.SQIR.SQIR.NDSem <> ψ'':25 var
+R1314:1320 Top.externals.SQIR.SQIR.NDSem <> nd_eval ind
+not 1289:1289 <> :::x_'/'_x_'⇩'_x
+def 1345:1352 <> nd_equiv
+binder 1355:1357 <> dim:26
+R1369:1376 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R1378:1380 Top.externals.SQIR.SQIR.NDSem <> dim:26 var
+binder 1361:1362 <> c1:27
+binder 1364:1365 <> c2:28
+R1403:1408 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R1412:1412 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R1413:1415 Top.externals.SQIR.SQIR.NDSem <> dim:26 var
+binder 1394:1395 <> ψ:29
+binder 1397:1399 <> ψ':30
+R1438:1442 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1425:1427 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1430:1434 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1423:1424 Top.externals.SQIR.SQIR.NDSem <> c1:27 var
+R1428:1429 Top.externals.SQIR.SQIR.NDSem <> ψ:29 var
+R1435:1437 Top.externals.SQIR.SQIR.NDSem <> ψ':30 var
+R1445:1447 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1450:1454 Top.externals.SQIR.SQIR.NDSem <> :::x_'/'_x_'⇩'_x not
+R1443:1444 Top.externals.SQIR.SQIR.NDSem <> c2:28 var
+R1448:1449 Top.externals.SQIR.SQIR.NDSem <> ψ:29 var
+R1455:1457 Top.externals.SQIR.SQIR.NDSem <> ψ':30 var
+R1514:1521 Top.externals.SQIR.SQIR.NDSem <> nd_equiv def
+not 1505:1505 <> ::com_scope:x_'≡'_x
+prf 1543:1554 <> nd_seq_assoc
+binder 1566:1568 <> dim:31
+R1583:1590 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R1592:1594 Top.externals.SQIR.SQIR.NDSem <> dim:31 var
+binder 1572:1573 <> c1:32
+binder 1575:1576 <> c2:33
+binder 1578:1579 <> c3:34
+R1602:1602 Top.externals.SQIR.SQIR.NDSem <> ::com_scope:x_'≡'_x not
+R1617:1623 Top.externals.SQIR.SQIR.NDSem <> ::com_scope:x_'≡'_x not
+R1638:1638 Top.externals.SQIR.SQIR.NDSem <> ::com_scope:x_'≡'_x not
+R1603:1603 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:x_';'_x not
+R1611:1614 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:x_';'_x not
+R1606:1608 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:x_';'_x not
+R1604:1605 Top.externals.SQIR.SQIR.NDSem <> c1:32 var
+R1609:1610 Top.externals.SQIR.SQIR.NDSem <> c2:33 var
+R1615:1616 Top.externals.SQIR.SQIR.NDSem <> c3:34 var
+R1626:1629 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:x_';'_x not
+R1637:1637 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:x_';'_x not
+R1624:1625 Top.externals.SQIR.SQIR.NDSem <> c1:32 var
+R1632:1634 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:x_';'_x not
+R1630:1631 Top.externals.SQIR.SQIR.NDSem <> c2:33 var
+R1635:1636 Top.externals.SQIR.SQIR.NDSem <> c3:34 var
+prf 1927:1939 <> nd_equiv_refl
+binder 1951:1953 <> dim:35
+R1962:1969 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R1971:1973 Top.externals.SQIR.SQIR.NDSem <> dim:35 var
+binder 1957:1958 <> c1:36
+R1979:1983 Top.externals.SQIR.SQIR.NDSem <> ::com_scope:x_'≡'_x not
+R1977:1978 Top.externals.SQIR.SQIR.NDSem <> c1:36 var
+R1984:1985 Top.externals.SQIR.SQIR.NDSem <> c1:36 var
+prf 2014:2025 <> nd_equiv_sym
+binder 2037:2039 <> dim:37
+R2051:2058 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R2060:2062 Top.externals.SQIR.SQIR.NDSem <> dim:37 var
+binder 2043:2044 <> c1:38
+binder 2046:2047 <> c2:39
+R2075:2078 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2068:2072 Top.externals.SQIR.SQIR.NDSem <> ::com_scope:x_'≡'_x not
+R2066:2067 Top.externals.SQIR.SQIR.NDSem <> c1:38 var
+R2073:2074 Top.externals.SQIR.SQIR.NDSem <> c2:39 var
+R2081:2085 Top.externals.SQIR.SQIR.NDSem <> ::com_scope:x_'≡'_x not
+R2079:2080 Top.externals.SQIR.SQIR.NDSem <> c2:39 var
+R2086:2087 Top.externals.SQIR.SQIR.NDSem <> c1:38 var
+prf 2116:2129 <> nd_equiv_trans
+binder 2141:2143 <> dim:40
+R2158:2165 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R2167:2169 Top.externals.SQIR.SQIR.NDSem <> dim:40 var
+binder 2147:2148 <> c1:41
+binder 2150:2151 <> c2:42
+binder 2153:2154 <> c3:43
+R2185:2188 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2178:2182 Top.externals.SQIR.SQIR.NDSem <> ::com_scope:x_'≡'_x not
+R2176:2177 Top.externals.SQIR.SQIR.NDSem <> c1:41 var
+R2183:2184 Top.externals.SQIR.SQIR.NDSem <> c2:42 var
+R2198:2201 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2191:2195 Top.externals.SQIR.SQIR.NDSem <> ::com_scope:x_'≡'_x not
+R2189:2190 Top.externals.SQIR.SQIR.NDSem <> c2:42 var
+R2196:2197 Top.externals.SQIR.SQIR.NDSem <> c3:43 var
+R2204:2208 Top.externals.SQIR.SQIR.NDSem <> ::com_scope:x_'≡'_x not
+R2202:2203 Top.externals.SQIR.SQIR.NDSem <> c1:41 var
+R2209:2210 Top.externals.SQIR.SQIR.NDSem <> c3:43 var
+R2393:2395 Coq.Init.Datatypes <> nat ind
+binder 2387:2389 <> dim:44
+R2401:2408 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R2410:2412 Top.externals.SQIR.SQIR.NDSem <> dim:44 var
+R2415:2422 Top.externals.SQIR.SQIR.NDSem <> nd_equiv def
+R2393:2395 Coq.Init.Datatypes <> nat ind
+binder 2387:2389 <> dim:45
+R2401:2408 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R2410:2412 Top.externals.SQIR.SQIR.NDSem <> dim:45 var
+R2415:2422 Top.externals.SQIR.SQIR.NDSem <> nd_equiv def
+R2449:2461 Top.externals.SQIR.SQIR.NDSem <> nd_equiv_refl thm
+R2393:2395 Coq.Init.Datatypes <> nat ind
+binder 2387:2389 <> dim:46
+R2401:2408 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R2410:2412 Top.externals.SQIR.SQIR.NDSem <> dim:46 var
+R2415:2422 Top.externals.SQIR.SQIR.NDSem <> nd_equiv def
+R2484:2495 Top.externals.SQIR.SQIR.NDSem <> nd_equiv_sym thm
+R2393:2395 Coq.Init.Datatypes <> nat ind
+binder 2387:2389 <> dim:47
+R2401:2408 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R2410:2412 Top.externals.SQIR.SQIR.NDSem <> dim:47 var
+R2415:2422 Top.externals.SQIR.SQIR.NDSem <> nd_equiv def
+R2522:2535 Top.externals.SQIR.SQIR.NDSem <> nd_equiv_trans thm
+R2393:2395 Coq.Init.Datatypes <> nat ind
+binder 2387:2389 <> dim:48
+R2401:2408 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R2410:2412 Top.externals.SQIR.SQIR.NDSem <> dim:48 var
+R2415:2422 Top.externals.SQIR.SQIR.NDSem <> nd_equiv def
+R2449:2461 Top.externals.SQIR.SQIR.NDSem <> nd_equiv_refl thm
+R2484:2495 Top.externals.SQIR.SQIR.NDSem <> nd_equiv_sym thm
+R2522:2535 Top.externals.SQIR.SQIR.NDSem <> nd_equiv_trans thm
+prf 2563:2579 <> nd_seq_congruence
+binder 2591:2593 <> dim:49
+R2613:2620 Top.externals.SQIR.SQIR.SQIR <> base_com def
+R2622:2624 Top.externals.SQIR.SQIR.NDSem <> dim:49 var
+binder 2597:2598 <> c1:50
+binder 2600:2602 <> c1':51
+binder 2604:2605 <> c2:52
+binder 2607:2609 <> c2':53
+R2642:2649 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2634:2638 Top.externals.SQIR.SQIR.NDSem <> ::com_scope:x_'≡'_x not
+R2632:2633 Top.externals.SQIR.SQIR.NDSem <> c1:50 var
+R2639:2641 Top.externals.SQIR.SQIR.NDSem <> c1':51 var
+R2660:2667 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2652:2656 Top.externals.SQIR.SQIR.NDSem <> ::com_scope:x_'≡'_x not
+R2650:2651 Top.externals.SQIR.SQIR.NDSem <> c2:52 var
+R2657:2659 Top.externals.SQIR.SQIR.NDSem <> c2':53 var
+R2675:2679 Top.externals.SQIR.SQIR.NDSem <> ::com_scope:x_'≡'_x not
+R2670:2672 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:x_';'_x not
+R2668:2669 Top.externals.SQIR.SQIR.NDSem <> c1:50 var
+R2673:2674 Top.externals.SQIR.SQIR.NDSem <> c2:52 var
+R2683:2685 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:x_';'_x not
+R2680:2682 Top.externals.SQIR.SQIR.NDSem <> c1':51 var
+R2686:2688 Top.externals.SQIR.SQIR.NDSem <> c2':53 var
+R2991:2993 Coq.Init.Datatypes <> nat ind
+binder 2985:2987 <> dim:54
+R3047:3051 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'==>'_x not
+R3039:3046 Top.externals.SQIR.SQIR.NDSem <> nd_equiv def
+R3060:3064 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'==>'_x not
+R3052:3059 Top.externals.SQIR.SQIR.NDSem <> nd_equiv def
+R3065:3072 Top.externals.SQIR.SQIR.NDSem <> nd_equiv def
+R3000:3002 Top.externals.SQIR.SQIR.SQIR <> seq constr
+R3004:3015 Top.externals.SQIR.SQIR.SQIR <> base_Unitary ind
+R3017:3019 Top.externals.SQIR.SQIR.NDSem <> dim:54 var
+R3123:3139 Top.externals.SQIR.SQIR.NDSem <> nd_seq_congruence thm
+R3123:3139 Top.externals.SQIR.SQIR.NDSem <> nd_seq_congruence thm
+prf 3160:3172 <> double_pad_00
+binder 3183:3185 <> dim:55
+binder 3187:3187 <> q:56
+R3195:3200 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R3204:3204 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R3205:3207 Top.externals.SQIR.SQIR.NDSem <> dim:55 var
+binder 3190:3191 <> ψ:57
+R3280:3282 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3241:3245 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R3279:3279 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R3215:3217 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R3221:3221 Top.externals.SQIR.SQIR.NDSem <> q:56 var
+R3223:3225 Top.externals.SQIR.SQIR.NDSem <> dim:55 var
+R3227:3240 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣0⟩⟨0∣' not
+R3273:3276 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R3247:3249 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R3253:3253 Top.externals.SQIR.SQIR.NDSem <> q:56 var
+R3255:3257 Top.externals.SQIR.SQIR.NDSem <> dim:55 var
+R3259:3272 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣0⟩⟨0∣' not
+R3277:3278 Top.externals.SQIR.SQIR.NDSem <> ψ:57 var
+R3310:3313 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R3284:3286 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R3290:3290 Top.externals.SQIR.SQIR.NDSem <> q:56 var
+R3292:3294 Top.externals.SQIR.SQIR.NDSem <> dim:55 var
+R3296:3309 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣0⟩⟨0∣' not
+R3314:3315 Top.externals.SQIR.SQIR.NDSem <> ψ:57 var
+R3350:3360 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R3350:3360 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R3350:3360 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R3373:3380 Top.externals.SQIR.SQIR.UnitarySem <> pad_mult thm
+R3373:3380 Top.externals.SQIR.SQIR.UnitarySem <> pad_mult thm
+R3373:3380 Top.externals.SQIR.SQIR.UnitarySem <> pad_mult thm
+prf 3438:3450 <> double_pad_01
+binder 3461:3463 <> dim:58
+binder 3465:3465 <> q:59
+R3473:3478 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R3482:3482 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R3483:3485 Top.externals.SQIR.SQIR.NDSem <> dim:58 var
+binder 3468:3469 <> ψ:60
+R3558:3560 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3519:3523 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R3557:3557 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R3493:3495 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R3499:3499 Top.externals.SQIR.SQIR.NDSem <> q:59 var
+R3501:3503 Top.externals.SQIR.SQIR.NDSem <> dim:58 var
+R3505:3518 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣1⟩⟨1∣' not
+R3551:3554 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R3525:3527 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R3531:3531 Top.externals.SQIR.SQIR.NDSem <> q:59 var
+R3533:3535 Top.externals.SQIR.SQIR.NDSem <> dim:58 var
+R3537:3550 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣0⟩⟨0∣' not
+R3555:3556 Top.externals.SQIR.SQIR.NDSem <> ψ:60 var
+R3561:3564 Top.externals.SQIR.externals.QWIRE.Matrix <> Zero def
+R3595:3597 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R3618:3622 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R3614:3616 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3618:3622 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R3614:3616 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3671:3681 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R3671:3681 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R3671:3681 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R3716:3733 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R3716:3733 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R3716:3733 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R3716:3733 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R3716:3733 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R3716:3733 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R3771:3774 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R3757:3770 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣1⟩⟨1∣' not
+R3775:3788 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣0⟩⟨0∣' not
+R3798:3801 Top.externals.SQIR.externals.QWIRE.Matrix <> Zero def
+R3771:3774 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R3757:3770 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣1⟩⟨1∣' not
+R3775:3788 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣0⟩⟨0∣' not
+R3798:3801 Top.externals.SQIR.externals.QWIRE.Matrix <> Zero def
+prf 3877:3889 <> double_pad_10
+binder 3900:3902 <> dim:61
+binder 3904:3904 <> q:62
+R3912:3917 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R3921:3921 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R3922:3924 Top.externals.SQIR.SQIR.NDSem <> dim:61 var
+binder 3907:3908 <> ψ:63
+R3997:3999 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3958:3962 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R3996:3996 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R3932:3934 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R3938:3938 Top.externals.SQIR.SQIR.NDSem <> q:62 var
+R3940:3942 Top.externals.SQIR.SQIR.NDSem <> dim:61 var
+R3944:3957 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣0⟩⟨0∣' not
+R3990:3993 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R3964:3966 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R3970:3970 Top.externals.SQIR.SQIR.NDSem <> q:62 var
+R3972:3974 Top.externals.SQIR.SQIR.NDSem <> dim:61 var
+R3976:3989 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣1⟩⟨1∣' not
+R3994:3995 Top.externals.SQIR.SQIR.NDSem <> ψ:63 var
+R4000:4003 Top.externals.SQIR.externals.QWIRE.Matrix <> Zero def
+R4032:4034 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R4055:4059 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R4051:4053 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4055:4059 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R4051:4053 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4108:4118 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R4108:4118 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R4108:4118 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R4153:4170 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R4153:4170 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R4153:4170 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R4153:4170 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R4153:4170 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R4153:4170 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R4208:4211 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R4194:4207 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣0⟩⟨0∣' not
+R4212:4225 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣1⟩⟨1∣' not
+R4235:4238 Top.externals.SQIR.externals.QWIRE.Matrix <> Zero def
+R4208:4211 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R4194:4207 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣0⟩⟨0∣' not
+R4212:4225 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣1⟩⟨1∣' not
+R4235:4238 Top.externals.SQIR.externals.QWIRE.Matrix <> Zero def
+prf 4314:4326 <> double_pad_11
+binder 4337:4339 <> dim:64
+binder 4341:4341 <> q:65
+R4349:4354 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R4358:4358 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R4359:4361 Top.externals.SQIR.SQIR.NDSem <> dim:64 var
+binder 4344:4345 <> ψ:66
+R4434:4436 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4395:4399 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R4433:4433 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R4369:4371 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R4375:4375 Top.externals.SQIR.SQIR.NDSem <> q:65 var
+R4377:4379 Top.externals.SQIR.SQIR.NDSem <> dim:64 var
+R4381:4394 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣1⟩⟨1∣' not
+R4427:4430 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R4401:4403 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R4407:4407 Top.externals.SQIR.SQIR.NDSem <> q:65 var
+R4409:4411 Top.externals.SQIR.SQIR.NDSem <> dim:64 var
+R4413:4426 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣1⟩⟨1∣' not
+R4431:4432 Top.externals.SQIR.SQIR.NDSem <> ψ:66 var
+R4464:4467 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R4438:4440 Top.externals.SQIR.SQIR.UnitarySem <> pad def
+R4444:4444 Top.externals.SQIR.SQIR.NDSem <> q:65 var
+R4446:4448 Top.externals.SQIR.SQIR.NDSem <> dim:64 var
+R4450:4463 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣1⟩⟨1∣' not
+R4468:4469 Top.externals.SQIR.SQIR.NDSem <> ψ:66 var
+R4504:4514 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R4504:4514 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R4504:4514 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R4527:4534 Top.externals.SQIR.SQIR.UnitarySem <> pad_mult thm
+R4527:4534 Top.externals.SQIR.SQIR.UnitarySem <> pad_mult thm
+R4527:4534 Top.externals.SQIR.SQIR.UnitarySem <> pad_mult thm
+prf 4592:4601 <> meas_reset
+binder 4612:4614 <> dim:67
+binder 4616:4616 <> q:68
+R4623:4630 Top.externals.SQIR.SQIR.NDSem <> nd_equiv def
+R4632:4634 Top.externals.SQIR.SQIR.NDSem <> dim:67 var
+R4646:4648 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:x_';'_x not
+R4637:4644 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:'measure'_x not
+R4645:4645 Top.externals.SQIR.SQIR.NDSem <> q:68 var
+R4649:4654 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:'reset'_x not
+R4655:4655 Top.externals.SQIR.SQIR.NDSem <> q:68 var
+R4655:4655 Top.externals.SQIR.SQIR.NDSem <> q:68 var
+R4659:4664 Top.externals.SQIR.SQIR.SQIR <> ::com_scope:'reset'_x not
+R4665:4665 Top.externals.SQIR.SQIR.NDSem <> q:68 var
+R4665:4665 Top.externals.SQIR.SQIR.NDSem <> q:68 var
+R4871:4883 Top.externals.SQIR.SQIR.NDSem <> double_pad_11 thm
+R4871:4883 Top.externals.SQIR.SQIR.NDSem <> double_pad_11 thm
+R4871:4883 Top.externals.SQIR.SQIR.NDSem <> double_pad_11 thm
+R4906:4918 Top.externals.SQIR.SQIR.NDSem <> double_pad_11 thm
+R4906:4918 Top.externals.SQIR.SQIR.NDSem <> double_pad_11 thm
+R4906:4918 Top.externals.SQIR.SQIR.NDSem <> double_pad_11 thm
+R4939:4947 Top.externals.SQIR.SQIR.NDSem <> nd_meas_t constr
+R4939:4947 Top.externals.SQIR.SQIR.NDSem <> nd_meas_t constr
+R4997:5009 Top.externals.SQIR.SQIR.NDSem <> double_pad_10 thm
+R4997:5009 Top.externals.SQIR.SQIR.NDSem <> double_pad_10 thm
+R4997:5009 Top.externals.SQIR.SQIR.NDSem <> double_pad_10 thm
+R5025:5028 Top.externals.SQIR.SQIR.NDSem <> norm def
+R5065:5070 Coq.Reals.R_sqrt <> sqrt_0 thm
+R5065:5070 Coq.Reals.R_sqrt <> sqrt_0 thm
+R5109:5121 Top.externals.SQIR.SQIR.NDSem <> double_pad_01 thm
+R5109:5121 Top.externals.SQIR.SQIR.NDSem <> double_pad_01 thm
+R5109:5121 Top.externals.SQIR.SQIR.NDSem <> double_pad_01 thm
+R5137:5140 Top.externals.SQIR.SQIR.NDSem <> norm def
+R5177:5182 Coq.Reals.R_sqrt <> sqrt_0 thm
+R5177:5182 Coq.Reals.R_sqrt <> sqrt_0 thm
+R5199:5211 Top.externals.SQIR.SQIR.NDSem <> double_pad_00 thm
+R5199:5211 Top.externals.SQIR.SQIR.NDSem <> double_pad_00 thm
+R5199:5211 Top.externals.SQIR.SQIR.NDSem <> double_pad_00 thm
+R5234:5246 Top.externals.SQIR.SQIR.NDSem <> double_pad_00 thm
+R5234:5246 Top.externals.SQIR.SQIR.NDSem <> double_pad_00 thm
+R5234:5246 Top.externals.SQIR.SQIR.NDSem <> double_pad_00 thm
+R5267:5275 Top.externals.SQIR.SQIR.NDSem <> nd_meas_f constr
+R5267:5275 Top.externals.SQIR.SQIR.NDSem <> nd_meas_f constr
+R5362:5370 Top.externals.SQIR.SQIR.NDSem <> nd_meas_t constr
+R5362:5370 Top.externals.SQIR.SQIR.NDSem <> nd_meas_t constr
+R5401:5407 Top.externals.SQIR.SQIR.NDSem <> nd_skip constr
+R5401:5407 Top.externals.SQIR.SQIR.NDSem <> nd_skip constr
+R5422:5430 Top.externals.SQIR.SQIR.NDSem <> nd_meas_t constr
+R5441:5453 Top.externals.SQIR.SQIR.NDSem <> double_pad_11 thm
+R5422:5430 Top.externals.SQIR.SQIR.NDSem <> nd_meas_t constr
+R5441:5453 Top.externals.SQIR.SQIR.NDSem <> double_pad_11 thm
+R5441:5453 Top.externals.SQIR.SQIR.NDSem <> double_pad_11 thm
+R5441:5453 Top.externals.SQIR.SQIR.NDSem <> double_pad_11 thm
+R5441:5453 Top.externals.SQIR.SQIR.NDSem <> double_pad_11 thm
+R5500:5508 Top.externals.SQIR.SQIR.NDSem <> nd_meas_f constr
+R5500:5508 Top.externals.SQIR.SQIR.NDSem <> nd_meas_f constr
+R5539:5545 Top.externals.SQIR.SQIR.NDSem <> nd_skip constr
+R5539:5545 Top.externals.SQIR.SQIR.NDSem <> nd_skip constr
+R5560:5568 Top.externals.SQIR.SQIR.NDSem <> nd_meas_f constr
+R5579:5591 Top.externals.SQIR.SQIR.NDSem <> double_pad_00 thm
+R5560:5568 Top.externals.SQIR.SQIR.NDSem <> nd_meas_f constr
+R5579:5591 Top.externals.SQIR.SQIR.NDSem <> double_pad_00 thm
+R5579:5591 Top.externals.SQIR.SQIR.NDSem <> double_pad_00 thm
+R5579:5591 Top.externals.SQIR.SQIR.NDSem <> double_pad_00 thm
+R5579:5591 Top.externals.SQIR.SQIR.NDSem <> double_pad_00 thm

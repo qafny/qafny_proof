@@ -1,0 +1,404 @@
+DIGEST e6dd971926ccefcdfacf059bef328adb
+FTop.PQASM
+R15:19 Coq.Reals.Reals <> <> lib
+R37:41 Coq.micromega.Psatz <> <> lib
+R59:62 Top.externals.SQIR.SQIR.SQIR <> <> lib
+R80:91 Top.externals.SQIR.SQIR.VectorStates <> <> lib
+R93:102 Top.externals.SQIR.SQIR.UnitaryOps <> <> lib
+R104:120 Coq.btauto.Btauto <> <> lib
+R122:136 Coq.NArith.Nnat <> <> lib
+R155:159 Top.externals.SQIR.externals.QWIRE.Dirac <> <> lib
+R177:179 Top.externals.SQIR.examples.QPE <> <> lib
+R197:208 Top.BasicUtility <> <> lib
+R226:233 Top.MathSpec <> <> lib
+R251:264 Coq.Logic.Classical_Prop <> <> lib
+R282:286 Top.OQASM <> <> lib
+ind 491:494 <> pexp
+constr 499:502 <> Oexp
+constr 514:514 <> H
+constr 527:530 <> PSeq
+R507:509 Top.OQASM <> exp ind
+binder 505:505 <> e:3
+R519:522 Top.BasicUtility <> posi def
+binder 517:517 <> p:4
+R536:539 Top.PQASM <> pexp:1 ind
+binder 533:534 <> s1:5
+R546:549 Top.PQASM <> pexp:1 ind
+binder 543:544 <> s2:6
+R579:582 Top.PQASM <> PSeq constr
+not 563:563 <> ::exp_scope:x_'[;]'_x
+def 628:635 <> inv_pexp
+binder 637:637 <> p:7
+R650:650 Top.PQASM <> p:7 var
+R661:664 Top.PQASM <> Oexp constr
+R671:674 Top.PQASM <> Oexp constr
+R677:683 Top.OQASM <> inv_exp def
+R692:692 Top.PQASM <> H constr
+R699:699 Top.PQASM <> H constr
+R701:701 Top.PQASM <> p:7 var
+R707:710 Top.PQASM <> PSeq constr
+R732:736 Top.PQASM <> ::exp_scope:x_'[;]'_x not
+R721:728 Top.PQASM <> inv_pexp:8 def
+R737:744 Top.PQASM <> inv_pexp:8 def
+def 832:839 <> pexp_sem
+R849:852 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R846:848 Top.BasicUtility <> var def
+R853:855 Coq.Init.Datatypes <> nat ind
+binder 842:844 <> env:10
+R861:864 Top.PQASM <> pexp ind
+binder 859:859 <> e:11
+R876:879 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R872:875 Top.BasicUtility <> posi def
+R880:882 Top.BasicUtility <> val ind
+binder 868:869 <> st:12
+R892:895 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R888:891 Top.BasicUtility <> posi def
+R896:898 Top.BasicUtility <> val ind
+R913:913 Top.PQASM <> e:11 var
+R921:924 Top.PQASM <> Oexp constr
+R934:940 Top.OQASM <> exp_sem def
+R942:944 Top.PQASM <> env:10 var
+R949:950 Top.PQASM <> st:12 var
+R970:970 Top.PQASM <> H constr
+R979:979 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R981:985 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R997:997 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R977:978 Top.PQASM <> st:12 var
+R986:989 Top.OQASM <> up_h def
+R992:993 Top.PQASM <> st:12 var
+R1017:1021 Top.PQASM <> ::exp_scope:x_'[;]'_x not
+R1028:1035 Top.PQASM <> pexp_sem:13 def
+R1045:1052 Top.PQASM <> pexp_sem:13 def
+R1061:1062 Top.PQASM <> st:12 var
+R1054:1056 Top.PQASM <> env:10 var
+R1037:1039 Top.PQASM <> env:10 var
+ind 1086:1100 <> well_typed_pexp
+constr 1159:1167 <> oexp_type
+constr 1270:1275 <> rz_had
+constr 1382:1388 <> rrz_had
+constr 1496:1500 <> h_nor
+constr 1694:1698 <> h_had
+constr 1900:1905 <> pe_seq
+R1112:1115 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1109:1111 Top.BasicUtility <> var def
+R1116:1118 Coq.Init.Datatypes <> nat ind
+binder 1103:1106 <> aenv:15
+R1126:1129 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1123:1125 Top.OQASM <> env def
+R1134:1137 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1130:1133 Top.PQASM <> pexp ind
+R1141:1144 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1138:1140 Top.OQASM <> env def
+binder 1178:1180 <> env:18
+binder 1182:1182 <> e:19
+binder 1184:1187 <> env':20
+R1221:1224 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1190:1204 Top.OQASM <> well_typed_oexp ind
+R1206:1209 Top.PQASM <> aenv:15 var
+R1211:1213 Top.PQASM <> env:18 var
+R1215:1215 Top.PQASM <> e:19 var
+R1217:1220 Top.PQASM <> env':20 var
+R1225:1239 Top.PQASM <> well_typed_pexp:16 ind
+R1259:1262 Top.PQASM <> env':20 var
+R1251:1254 Top.PQASM <> Oexp constr
+R1256:1256 Top.PQASM <> e:19 var
+R1246:1248 Top.PQASM <> env:18 var
+R1241:1244 Top.PQASM <> aenv:15 var
+binder 1286:1288 <> env:21
+binder 1290:1290 <> b:22
+binder 1292:1292 <> p:23
+binder 1294:1294 <> q:24
+R1327:1330 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1297:1306 Top.OQASM Env MapsTo def
+R1324:1326 Top.PQASM <> env:21 var
+R1317:1319 Top.OQASM <> Had constr
+R1321:1321 Top.PQASM <> b:22 var
+R1309:1311 Coq.Init.Datatypes <> fst def
+R1313:1313 Top.PQASM <> p:23 var
+R1331:1345 Top.PQASM <> well_typed_pexp:16 ind
+R1372:1374 Top.PQASM <> env:21 var
+R1357:1360 Top.PQASM <> Oexp constr
+R1363:1364 Top.OQASM <> RZ constr
+R1366:1366 Top.PQASM <> q:24 var
+R1368:1368 Top.PQASM <> p:23 var
+R1352:1354 Top.PQASM <> env:21 var
+R1347:1350 Top.PQASM <> aenv:15 var
+binder 1399:1401 <> env:25
+binder 1403:1403 <> b:26
+binder 1405:1405 <> p:27
+binder 1407:1407 <> q:28
+R1440:1443 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1410:1419 Top.OQASM Env MapsTo def
+R1437:1439 Top.PQASM <> env:25 var
+R1430:1432 Top.OQASM <> Had constr
+R1434:1434 Top.PQASM <> b:26 var
+R1422:1424 Coq.Init.Datatypes <> fst def
+R1426:1426 Top.PQASM <> p:27 var
+R1444:1458 Top.PQASM <> well_typed_pexp:16 ind
+R1486:1488 Top.PQASM <> env:25 var
+R1470:1473 Top.PQASM <> Oexp constr
+R1476:1478 Top.OQASM <> RRZ constr
+R1480:1480 Top.PQASM <> q:28 var
+R1482:1482 Top.PQASM <> p:27 var
+R1465:1467 Top.PQASM <> env:25 var
+R1460:1463 Top.PQASM <> aenv:15 var
+binder 1511:1513 <> env:29
+binder 1515:1518 <> env':30
+binder 1520:1520 <> p:31
+R1549:1552 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1523:1532 Top.OQASM Env MapsTo def
+R1546:1548 Top.PQASM <> env:29 var
+R1542:1544 Top.OQASM <> Nor constr
+R1535:1537 Coq.Init.Datatypes <> fst def
+R1539:1539 Top.PQASM <> p:31 var
+R1562:1583 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1558:1560 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1553:1555 Coq.Init.Datatypes <> snd def
+R1557:1557 Top.PQASM <> p:31 var
+R1628:1651 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1584:1592 Top.OQASM Env Equal def
+R1600:1606 Top.OQASM Env add def
+R1624:1626 Top.PQASM <> env:29 var
+R1617:1619 Top.OQASM <> Had constr
+R1609:1611 Coq.Init.Datatypes <> fst def
+R1613:1613 Top.PQASM <> p:31 var
+R1594:1597 Top.PQASM <> env':30 var
+R1652:1666 Top.PQASM <> well_typed_pexp:16 ind
+R1683:1686 Top.PQASM <> env':30 var
+R1678:1678 Top.PQASM <> H constr
+R1680:1680 Top.PQASM <> p:31 var
+R1673:1675 Top.PQASM <> env:29 var
+R1668:1671 Top.PQASM <> aenv:15 var
+binder 1709:1711 <> env:32
+binder 1713:1716 <> env':33
+binder 1718:1718 <> p:34
+binder 1720:1720 <> b:35
+R1753:1756 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1723:1732 Top.OQASM Env MapsTo def
+R1750:1752 Top.PQASM <> env:32 var
+R1743:1745 Top.OQASM <> Had constr
+R1747:1747 Top.PQASM <> b:35 var
+R1735:1737 Coq.Init.Datatypes <> fst def
+R1739:1739 Top.PQASM <> p:34 var
+R1768:1785 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1762:1764 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1757:1759 Coq.Init.Datatypes <> snd def
+R1761:1761 Top.PQASM <> p:34 var
+R1765:1765 Coq.Init.Datatypes <> S constr
+R1767:1767 Top.PQASM <> b:35 var
+R1834:1857 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1786:1794 Top.OQASM Env Equal def
+R1802:1808 Top.OQASM Env add def
+R1830:1832 Top.PQASM <> env:32 var
+R1819:1821 Top.OQASM <> Had constr
+R1824:1824 Coq.Init.Datatypes <> S constr
+R1826:1826 Top.PQASM <> b:35 var
+R1811:1813 Coq.Init.Datatypes <> fst def
+R1815:1815 Top.PQASM <> p:34 var
+R1796:1799 Top.PQASM <> env':33 var
+R1858:1872 Top.PQASM <> well_typed_pexp:16 ind
+R1889:1892 Top.PQASM <> env':33 var
+R1884:1884 Top.PQASM <> H constr
+R1886:1886 Top.PQASM <> p:34 var
+R1879:1881 Top.PQASM <> env:32 var
+R1874:1877 Top.PQASM <> aenv:15 var
+binder 1916:1918 <> env:36
+binder 1920:1923 <> env':37
+binder 1925:1929 <> env'':38
+binder 1931:1932 <> e1:39
+binder 1934:1935 <> e2:40
+R1970:1991 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1938:1952 Top.PQASM <> well_typed_pexp:16 ind
+R1966:1969 Top.PQASM <> env':37 var
+R1963:1964 Top.PQASM <> e1:39 var
+R1959:1961 Top.PQASM <> env:36 var
+R1954:1957 Top.PQASM <> aenv:15 var
+R2026:2029 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1992:2006 Top.PQASM <> well_typed_pexp:16 ind
+R2021:2025 Top.PQASM <> env'':38 var
+R2018:2019 Top.PQASM <> e2:40 var
+R2013:2016 Top.PQASM <> env':37 var
+R2008:2011 Top.PQASM <> aenv:15 var
+R2030:2044 Top.PQASM <> well_typed_pexp:16 ind
+R2067:2071 Top.PQASM <> env'':38 var
+R2058:2062 Top.PQASM <> ::exp_scope:x_'[;]'_x not
+R2056:2057 Top.PQASM <> e1:39 var
+R2063:2064 Top.PQASM <> e2:40 var
+R2051:2053 Top.PQASM <> env:36 var
+R2046:2049 Top.PQASM <> aenv:15 var
+ind 2085:2091 <> pexp_WF
+constr 2135:2141 <> oexp_WF
+constr 2201:2204 <> h_wf
+constr 2269:2275 <> pseq_wf
+R2102:2105 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2099:2101 Top.BasicUtility <> var def
+R2106:2108 Coq.Init.Datatypes <> nat ind
+binder 2094:2097 <> aenv:41
+R2116:2119 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2112:2115 Top.PQASM <> pexp ind
+binder 2152:2152 <> e:44
+R2168:2171 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2155:2160 Top.OQASM <> exp_WF ind
+R2162:2165 Top.PQASM <> aenv:41 var
+R2167:2167 Top.PQASM <> e:44 var
+R2172:2178 Top.PQASM <> pexp_WF:42 ind
+R2186:2189 Top.PQASM <> Oexp constr
+R2191:2191 Top.PQASM <> e:44 var
+R2180:2183 Top.PQASM <> aenv:41 var
+binder 2215:2215 <> p:45
+R2238:2241 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2223:2225 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R2218:2220 Coq.Init.Datatypes <> snd def
+R2222:2222 Top.PQASM <> p:45 var
+R2226:2229 Top.PQASM <> aenv:41 var
+R2232:2234 Coq.Init.Datatypes <> fst def
+R2236:2236 Top.PQASM <> p:45 var
+R2242:2248 Top.PQASM <> pexp_WF:42 ind
+R2256:2256 Top.PQASM <> H constr
+R2258:2258 Top.PQASM <> p:45 var
+R2250:2253 Top.PQASM <> aenv:41 var
+binder 2286:2287 <> e1:46
+binder 2289:2290 <> e2:47
+R2308:2311 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2293:2299 Top.PQASM <> pexp_WF:42 ind
+R2306:2307 Top.PQASM <> e1:46 var
+R2301:2304 Top.PQASM <> aenv:41 var
+R2328:2331 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2312:2318 Top.PQASM <> pexp_WF:42 ind
+R2326:2327 Top.PQASM <> e2:47 var
+R2320:2323 Top.PQASM <> aenv:41 var
+R2332:2338 Top.PQASM <> pexp_WF:42 ind
+R2347:2350 Top.PQASM <> PSeq constr
+R2352:2353 Top.PQASM <> e1:46 var
+R2355:2356 Top.PQASM <> e2:47 var
+R2340:2343 Top.PQASM <> aenv:41 var
+def 3474:3480 <> many_CR
+R3485:3487 Top.BasicUtility <> var def
+binder 3483:3483 <> x:48
+R3493:3495 Coq.Init.Datatypes <> nat ind
+binder 3491:3491 <> b:49
+R3503:3505 Coq.Init.Datatypes <> nat ind
+binder 3499:3499 <> n:50
+R3511:3513 Coq.Init.Datatypes <> nat ind
+binder 3509:3509 <> i:51
+R3527:3527 Top.PQASM <> n:50 var
+R3547:3550 Top.OQASM <> SKIP constr
+R3552:3552 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3554:3554 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3556:3556 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3553:3553 Top.PQASM <> x:48 var
+R3555:3555 Top.PQASM <> n:50 var
+R3547:3550 Top.OQASM <> SKIP constr
+R3552:3552 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3554:3554 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3556:3556 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3553:3553 Top.PQASM <> x:48 var
+R3555:3555 Top.PQASM <> n:50 var
+R3562:3562 Coq.Init.Datatypes <> S constr
+R3574:3578 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R3573:3573 Top.PQASM <> b:49 var
+R3637:3640 Top.OQASM <> SKIP constr
+R3642:3642 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3644:3644 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3646:3646 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3643:3643 Top.PQASM <> x:48 var
+R3602:3605 Top.OQASM <> ::exp_scope:x_';'_x not
+R3629:3629 Top.OQASM <> ::exp_scope:x_';'_x not
+R3587:3593 Top.PQASM <> many_CR:52 def
+R3601:3601 Top.PQASM <> i:51 var
+R3597:3597 Top.PQASM <> b:49 var
+R3595:3595 Top.PQASM <> x:48 var
+R3606:3607 Top.OQASM <> CU constr
+R3609:3609 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3611:3611 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3615:3615 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3610:3610 Top.PQASM <> x:48 var
+R3613:3613 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3614:3614 Top.PQASM <> i:51 var
+R3618:3619 Top.OQASM <> RZ constr
+R3621:3621 Top.PQASM <> n:50 var
+R3623:3623 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3625:3625 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3627:3627 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3624:3624 Top.PQASM <> x:48 var
+R3626:3626 Top.PQASM <> i:51 var
+def 3717:3724 <> appx_QFT
+R3729:3731 Top.BasicUtility <> var def
+binder 3727:3727 <> x:54
+R3737:3739 Coq.Init.Datatypes <> nat ind
+binder 3735:3735 <> b:55
+R3747:3749 Coq.Init.Datatypes <> nat ind
+binder 3743:3743 <> n:56
+R3758:3760 Coq.Init.Datatypes <> nat ind
+binder 3753:3756 <> size:57
+R3774:3774 Top.PQASM <> n:56 var
+R3793:3796 Top.PQASM <> Oexp constr
+R3799:3802 Top.OQASM <> SKIP constr
+R3804:3804 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3806:3806 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3808:3808 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3805:3805 Top.PQASM <> x:54 var
+R3807:3807 Top.PQASM <> n:56 var
+R3815:3815 Coq.Init.Datatypes <> S constr
+R3826:3830 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R3825:3825 Top.PQASM <> b:55 var
+R3937:3940 Top.PQASM <> Oexp constr
+R3943:3946 Top.OQASM <> SKIP constr
+R3948:3948 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3950:3950 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3952:3952 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3949:3949 Top.PQASM <> x:54 var
+R3875:3900 Top.PQASM <> ::exp_scope:x_'[;]'_x not
+R3930:3930 Top.PQASM <> ::exp_scope:x_'[;]'_x not
+R3838:3839 Top.PQASM <> ::exp_scope:x_'[;]'_x not
+R3859:3866 Top.PQASM <> ::exp_scope:x_'[;]'_x not
+R3874:3874 Top.PQASM <> ::exp_scope:x_'[;]'_x not
+R3840:3847 Top.PQASM <> appx_QFT:58 def
+R3855:3858 Top.PQASM <> size:57 var
+R3851:3851 Top.PQASM <> b:55 var
+R3849:3849 Top.PQASM <> x:54 var
+R3867:3867 Top.PQASM <> H constr
+R3869:3869 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3871:3871 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3873:3873 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3870:3870 Top.PQASM <> x:54 var
+R3901:3904 Top.PQASM <> Oexp constr
+R3907:3913 Top.PQASM <> many_CR def
+R3915:3915 Top.PQASM <> x:54 var
+R3917:3917 Top.PQASM <> b:55 var
+R3924:3924 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R3920:3923 Top.PQASM <> size:57 var
+def 4087:4098 <> half_k_graph
+R4103:4105 Top.BasicUtility <> var def
+binder 4101:4101 <> x:60
+R4111:4113 Coq.Init.Datatypes <> nat ind
+binder 4109:4109 <> r:61
+R4122:4124 Coq.Init.Datatypes <> nat ind
+binder 4117:4120 <> size:62
+R4139:4142 Top.PQASM <> size:62 var
+R4155:4158 Top.PQASM <> Oexp constr
+R4161:4164 Top.OQASM <> SKIP constr
+R4166:4166 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4168:4168 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4170:4170 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4167:4167 Top.PQASM <> x:60 var
+R4186:4186 Coq.Init.Datatypes <> S constr
+R4226:4230 Top.PQASM <> ::exp_scope:x_'[;]'_x not
+R4193:4193 Top.PQASM <> ::exp_scope:x_'[;]'_x not
+R4201:4207 Top.PQASM <> ::exp_scope:x_'[;]'_x not
+R4225:4225 Top.PQASM <> ::exp_scope:x_'[;]'_x not
+R4194:4194 Top.PQASM <> H constr
+R4196:4196 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4198:4198 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4200:4200 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4197:4197 Top.PQASM <> x:60 var
+R4208:4211 Top.PQASM <> Oexp constr
+R4214:4215 Top.OQASM <> RZ constr
+R4217:4217 Top.PQASM <> r:61 var
+R4219:4219 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4221:4221 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4223:4223 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4220:4220 Top.PQASM <> x:60 var
+R4231:4242 Top.PQASM <> half_k_graph:63 def
+R4246:4246 Top.PQASM <> r:61 var
+R4244:4244 Top.PQASM <> x:60 var

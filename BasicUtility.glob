@@ -1,0 +1,392 @@
+DIGEST 56c629580410db05d9ccbdd4d2b959be
+FTop.BasicUtility
+R15:31 Coq.btauto.Btauto <> <> lib
+R33:47 Coq.NArith.Nnat <> <> lib
+R66:70 Top.externals.SQIR.externals.QWIRE.Dirac <> <> lib
+def 85:87 <> var
+R92:94 Coq.Init.Datatypes <> nat ind
+def 109:112 <> posi
+R128:130 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R125:127 Top.BasicUtility <> var def
+R131:133 Coq.Init.Datatypes <> nat ind
+def 149:155 <> posi_eq
+R166:169 Top.BasicUtility <> posi def
+binder 158:159 <> r1:1
+binder 161:162 <> r2:2
+R174:177 Coq.Init.Datatypes <> bool ind
+R205:206 Top.BasicUtility <> r1:1 var
+R213:213 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R216:216 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R219:219 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R258:259 Top.BasicUtility <> r2:2 var
+R297:297 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R300:300 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R303:303 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R308:308 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R317:322 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R331:331 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R311:314 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R325:328 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R415:421 Top.BasicUtility <> posi_eq def
+not 399:399 <> :::x_'==?'_x
+prf 451:461 <> posi_eqb_eq
+binder 472:472 <> a:5
+binder 474:474 <> b:6
+R491:494 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R484:486 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R478:482 Top.BasicUtility <> :::x_'==?'_x not
+R477:477 Top.BasicUtility <> a:5 var
+R483:483 Top.BasicUtility <> b:6 var
+R487:490 Coq.Init.Datatypes <> true constr
+R496:498 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R495:495 Top.BasicUtility <> a:5 var
+R499:499 Top.BasicUtility <> b:6 var
+R525:531 Top.BasicUtility <> posi_eq def
+R571:583 Coq.Bool.Bool <> andb_true_iff thm
+R571:583 Coq.Bool.Bool <> andb_true_iff thm
+R610:619 Coq.Arith.PeanoNat Nat eqb_eq thm
+R610:619 Coq.Arith.PeanoNat Nat eqb_eq thm
+R634:643 Coq.Arith.PeanoNat Nat eqb_eq thm
+R634:643 Coq.Arith.PeanoNat Nat eqb_eq thm
+prf 677:688 <> posi_eqb_neq
+binder 699:699 <> a:7
+binder 701:701 <> b:8
+R719:722 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R711:713 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R705:709 Top.BasicUtility <> :::x_'==?'_x not
+R704:704 Top.BasicUtility <> a:7 var
+R710:710 Top.BasicUtility <> b:8 var
+R714:718 Coq.Init.Datatypes <> false constr
+R724:727 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R723:723 Top.BasicUtility <> a:7 var
+R728:728 Top.BasicUtility <> b:8 var
+R754:760 Top.BasicUtility <> posi_eq def
+R800:813 Coq.Bool.Bool <> andb_false_iff thm
+R800:813 Coq.Bool.Bool <> andb_false_iff thm
+R840:850 Coq.Arith.PeanoNat Nat eqb_neq thm
+R840:850 Coq.Arith.PeanoNat Nat eqb_neq thm
+R921:931 Coq.Arith.PeanoNat Nat eqb_neq thm
+R921:931 Coq.Arith.PeanoNat Nat eqb_neq thm
+prf 1006:1020 <> posi_eq_reflect
+binder 1031:1032 <> r1:9
+binder 1034:1035 <> r2:10
+R1038:1044 Coq.Bool.Bool <> reflect ind
+R1049:1051 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1047:1048 Top.BasicUtility <> r1:9 var
+R1052:1053 Top.BasicUtility <> r2:10 var
+R1057:1063 Top.BasicUtility <> posi_eq def
+R1065:1066 Top.BasicUtility <> r1:9 var
+R1068:1069 Top.BasicUtility <> r2:10 var
+R1105:1109 Top.BasicUtility <> :::x_'==?'_x not
+R1105:1109 Top.BasicUtility <> :::x_'==?'_x not
+R1132:1139 Coq.Bool.Bool <> ReflectT constr
+R1132:1139 Coq.Bool.Bool <> ReflectT constr
+R1150:1160 Top.BasicUtility <> posi_eqb_eq thm
+R1150:1160 Top.BasicUtility <> posi_eqb_eq thm
+R1209:1220 Top.BasicUtility <> posi_eqb_neq thm
+R1209:1220 Top.BasicUtility <> posi_eqb_neq thm
+prf 1300:1310 <> posi_eq_dec
+R1327:1330 Top.BasicUtility <> posi def
+binder 1321:1321 <> x:11
+binder 1323:1323 <> y:12
+R1333:1333 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R1339:1341 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R1348:1348 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R1335:1337 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1334:1334 Top.BasicUtility <> x:11 var
+R1338:1338 Top.BasicUtility <> y:12 var
+R1343:1346 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R1342:1342 Top.BasicUtility <> x:11 var
+R1347:1347 Top.BasicUtility <> y:12 var
+R1383:1387 Top.BasicUtility <> :::x_'==?'_x not
+R1383:1387 Top.BasicUtility <> :::x_'==?'_x not
+def 1434:1439 <> rz_val
+R1455:1458 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1452:1454 Coq.Init.Datatypes <> nat ind
+R1459:1462 Coq.Init.Datatypes <> bool ind
+ind 1477:1479 <> val
+constr 1484:1487 <> nval
+constr 1511:1514 <> qval
+R1492:1495 Coq.Init.Datatypes <> bool ind
+binder 1490:1490 <> b:15
+R1501:1506 Top.BasicUtility <> rz_val def
+binder 1499:1499 <> r:16
+R1520:1525 Top.BasicUtility <> rz_val def
+binder 1517:1518 <> rc:17
+R1531:1536 Top.BasicUtility <> rz_val def
+binder 1529:1529 <> r:18
+def 1611:1617 <> eupdate
+binder 1620:1620 <> S:19
+R1632:1635 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1628:1631 Top.BasicUtility <> posi def
+R1636:1636 Top.BasicUtility <> S:19 var
+binder 1624:1624 <> f:20
+R1644:1647 Top.BasicUtility <> posi def
+binder 1640:1640 <> i:21
+R1655:1655 Top.BasicUtility <> S:19 var
+binder 1651:1651 <> x:22
+binder 1667:1667 <> j:23
+R1676:1680 Top.BasicUtility <> :::x_'==?'_x not
+R1675:1675 Top.BasicUtility <> j:23 var
+R1681:1681 Top.BasicUtility <> i:21 var
+R1695:1695 Top.BasicUtility <> f:20 var
+R1697:1697 Top.BasicUtility <> j:23 var
+R1688:1688 Top.BasicUtility <> x:22 var
+prf 1707:1722 <> eupdate_index_eq
+binder 1725:1725 <> S:24
+R1746:1749 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1742:1745 Top.BasicUtility <> posi def
+R1750:1750 Top.BasicUtility <> S:24 var
+binder 1738:1738 <> f:25
+binder 1753:1753 <> i:26
+binder 1755:1755 <> b:27
+R1775:1777 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1759:1765 Top.BasicUtility <> eupdate def
+R1771:1771 Top.BasicUtility <> b:27 var
+R1769:1769 Top.BasicUtility <> i:26 var
+R1767:1767 Top.BasicUtility <> f:25 var
+R1774:1774 Top.BasicUtility <> i:26 var
+R1778:1778 Top.BasicUtility <> b:27 var
+R1808:1814 Top.BasicUtility <> eupdate def
+R1831:1835 Top.BasicUtility <> :::x_'==?'_x not
+R1831:1835 Top.BasicUtility <> :::x_'==?'_x not
+prf 1875:1891 <> eupdate_index_neq
+binder 1894:1894 <> S:28
+R1914:1917 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1910:1913 Top.BasicUtility <> posi def
+R1918:1918 Top.BasicUtility <> S:28 var
+binder 1906:1906 <> f:29
+binder 1921:1921 <> i:30
+binder 1923:1923 <> j:31
+binder 1925:1925 <> b:32
+R1934:1937 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1929:1932 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R1928:1928 Top.BasicUtility <> i:30 var
+R1933:1933 Top.BasicUtility <> j:31 var
+R1955:1957 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1939:1945 Top.BasicUtility <> eupdate def
+R1951:1951 Top.BasicUtility <> b:32 var
+R1949:1949 Top.BasicUtility <> i:30 var
+R1947:1947 Top.BasicUtility <> f:29 var
+R1954:1954 Top.BasicUtility <> j:31 var
+R1958:1958 Top.BasicUtility <> f:29 var
+R1960:1960 Top.BasicUtility <> j:31 var
+R1990:1996 Top.BasicUtility <> eupdate def
+R2013:2017 Top.BasicUtility <> :::x_'==?'_x not
+R2013:2017 Top.BasicUtility <> :::x_'==?'_x not
+prf 2073:2084 <> eupdate_same
+binder 2087:2087 <> S:33
+R2107:2110 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2103:2106 Top.BasicUtility <> posi def
+R2111:2111 Top.BasicUtility <> S:33 var
+binder 2099:2099 <> f:34
+binder 2114:2114 <> i:35
+binder 2116:2116 <> b:36
+R2128:2131 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2122:2124 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2121:2121 Top.BasicUtility <> b:36 var
+R2125:2125 Top.BasicUtility <> f:34 var
+R2127:2127 Top.BasicUtility <> i:35 var
+R2145:2147 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2132:2138 Top.BasicUtility <> eupdate def
+R2144:2144 Top.BasicUtility <> b:36 var
+R2142:2142 Top.BasicUtility <> i:35 var
+R2140:2140 Top.BasicUtility <> f:34 var
+R2148:2148 Top.BasicUtility <> f:34 var
+R2176:2200 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R2176:2200 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R2222:2228 Top.BasicUtility <> eupdate def
+R2245:2249 Top.BasicUtility <> :::x_'==?'_x not
+R2245:2249 Top.BasicUtility <> :::x_'==?'_x not
+prf 2286:2299 <> eupdate_same_1
+binder 2302:2302 <> S:37
+R2324:2327 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2320:2323 Top.BasicUtility <> posi def
+R2328:2328 Top.BasicUtility <> S:37 var
+binder 2314:2314 <> f:38
+binder 2316:2317 <> f':39
+binder 2331:2331 <> i:40
+binder 2333:2333 <> b:41
+binder 2335:2336 <> b':42
+R2346:2349 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2341:2343 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2340:2340 Top.BasicUtility <> f:38 var
+R2344:2345 Top.BasicUtility <> f':39 var
+R2356:2359 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2351:2353 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2350:2350 Top.BasicUtility <> b:41 var
+R2354:2355 Top.BasicUtility <> b':42 var
+R2373:2375 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2360:2366 Top.BasicUtility <> eupdate def
+R2372:2372 Top.BasicUtility <> b:41 var
+R2370:2370 Top.BasicUtility <> i:40 var
+R2368:2368 Top.BasicUtility <> f:38 var
+R2376:2382 Top.BasicUtility <> eupdate def
+R2389:2390 Top.BasicUtility <> b':42 var
+R2387:2387 Top.BasicUtility <> i:40 var
+R2384:2385 Top.BasicUtility <> f':39 var
+R2418:2442 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R2418:2442 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R2464:2470 Top.BasicUtility <> eupdate def
+R2487:2491 Top.BasicUtility <> :::x_'==?'_x not
+R2487:2491 Top.BasicUtility <> :::x_'==?'_x not
+prf 2529:2544 <> eupdate_twice_eq
+binder 2547:2547 <> S:43
+R2567:2570 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2563:2566 Top.BasicUtility <> posi def
+R2571:2571 Top.BasicUtility <> S:43 var
+binder 2559:2559 <> f:44
+binder 2574:2574 <> i:45
+binder 2576:2576 <> b:46
+binder 2578:2579 <> b':47
+R2612:2614 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2584:2590 Top.BasicUtility <> eupdate def
+R2610:2611 Top.BasicUtility <> b':47 var
+R2608:2608 Top.BasicUtility <> i:45 var
+R2593:2599 Top.BasicUtility <> eupdate def
+R2605:2605 Top.BasicUtility <> b:46 var
+R2603:2603 Top.BasicUtility <> i:45 var
+R2601:2601 Top.BasicUtility <> f:44 var
+R2615:2621 Top.BasicUtility <> eupdate def
+R2627:2628 Top.BasicUtility <> b':47 var
+R2625:2625 Top.BasicUtility <> i:45 var
+R2623:2623 Top.BasicUtility <> f:44 var
+R2656:2680 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R2656:2680 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R2702:2708 Top.BasicUtility <> eupdate def
+R2725:2729 Top.BasicUtility <> :::x_'==?'_x not
+R2725:2729 Top.BasicUtility <> :::x_'==?'_x not
+prf 2768:2784 <> eupdate_twice_neq
+binder 2787:2787 <> S:48
+R2807:2810 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2803:2806 Top.BasicUtility <> posi def
+R2811:2811 Top.BasicUtility <> S:48 var
+binder 2799:2799 <> f:49
+binder 2814:2814 <> i:50
+binder 2816:2816 <> j:51
+binder 2818:2818 <> b:52
+binder 2820:2821 <> b':53
+R2832:2835 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2827:2830 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R2826:2826 Top.BasicUtility <> i:50 var
+R2831:2831 Top.BasicUtility <> j:51 var
+R2864:2866 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2836:2842 Top.BasicUtility <> eupdate def
+R2862:2863 Top.BasicUtility <> b':53 var
+R2860:2860 Top.BasicUtility <> j:51 var
+R2845:2851 Top.BasicUtility <> eupdate def
+R2857:2857 Top.BasicUtility <> b:52 var
+R2855:2855 Top.BasicUtility <> i:50 var
+R2853:2853 Top.BasicUtility <> f:49 var
+R2867:2873 Top.BasicUtility <> eupdate def
+R2894:2894 Top.BasicUtility <> b:52 var
+R2892:2892 Top.BasicUtility <> i:50 var
+R2876:2882 Top.BasicUtility <> eupdate def
+R2888:2889 Top.BasicUtility <> b':53 var
+R2886:2886 Top.BasicUtility <> j:51 var
+R2884:2884 Top.BasicUtility <> f:49 var
+R2922:2946 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R2922:2946 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R2968:2974 Top.BasicUtility <> eupdate def
+R2991:2995 Top.BasicUtility <> :::x_'==?'_x not
+R3012:3016 Top.BasicUtility <> :::x_'==?'_x not
+R2991:2995 Top.BasicUtility <> :::x_'==?'_x not
+R3012:3016 Top.BasicUtility <> :::x_'==?'_x not
+R3012:3016 Top.BasicUtility <> :::x_'==?'_x not
+R3076:3082 Top.BasicUtility <> eupdate def
+not 3050:3050 <> :::x_'['_x_'|->'_x_']'
+prf 3114:3125 <> same_eupdate
+R3148:3151 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3144:3147 Top.BasicUtility <> posi def
+R3152:3154 Top.BasicUtility <> val ind
+binder 3137:3137 <> f:54
+binder 3139:3140 <> f':55
+binder 3157:3157 <> c:56
+binder 3159:3159 <> v:57
+R3168:3171 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3163:3165 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3162:3162 Top.BasicUtility <> f:54 var
+R3166:3167 Top.BasicUtility <> f':55 var
+R3182:3184 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3173:3173 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R3175:3179 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R3181:3181 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R3172:3172 Top.BasicUtility <> f:54 var
+R3174:3174 Top.BasicUtility <> c:56 var
+R3180:3180 Top.BasicUtility <> v:57 var
+R3187:3187 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R3189:3193 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R3195:3195 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R3185:3186 Top.BasicUtility <> f':55 var
+R3188:3188 Top.BasicUtility <> c:56 var
+R3194:3194 Top.BasicUtility <> v:57 var
+R3224:3248 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R3224:3248 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R3275:3279 Top.BasicUtility <> :::x_'==?'_x not
+R3275:3279 Top.BasicUtility <> :::x_'==?'_x not
+R3303:3318 Top.BasicUtility <> eupdate_index_eq thm
+R3303:3318 Top.BasicUtility <> eupdate_index_eq thm
+R3303:3318 Top.BasicUtility <> eupdate_index_eq thm
+R3337:3353 Top.BasicUtility <> eupdate_index_neq thm
+R3337:3353 Top.BasicUtility <> eupdate_index_neq thm
+R3337:3353 Top.BasicUtility <> eupdate_index_neq thm
+R3337:3353 Top.BasicUtility <> eupdate_index_neq thm
+R3366:3382 Top.BasicUtility <> eupdate_index_neq thm
+R3366:3382 Top.BasicUtility <> eupdate_index_neq thm
+R3366:3382 Top.BasicUtility <> eupdate_index_neq thm
+R3366:3382 Top.BasicUtility <> eupdate_index_neq thm
+prf 3436:3449 <> same_eupdate_1
+R3472:3475 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3468:3471 Top.BasicUtility <> posi def
+R3476:3478 Top.BasicUtility <> val ind
+binder 3461:3461 <> f:58
+binder 3463:3464 <> f':59
+binder 3481:3481 <> c:60
+binder 3483:3483 <> v:61
+binder 3485:3486 <> v':62
+R3495:3498 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3490:3492 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3489:3489 Top.BasicUtility <> f:58 var
+R3493:3494 Top.BasicUtility <> f':59 var
+R3505:3508 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3500:3502 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3499:3499 Top.BasicUtility <> v:61 var
+R3503:3504 Top.BasicUtility <> v':62 var
+R3519:3521 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3510:3510 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R3512:3516 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R3518:3518 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R3509:3509 Top.BasicUtility <> f:58 var
+R3511:3511 Top.BasicUtility <> c:60 var
+R3517:3517 Top.BasicUtility <> v:61 var
+R3524:3524 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R3526:3530 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R3533:3533 Top.BasicUtility <> :::x_'['_x_'|->'_x_']' not
+R3522:3523 Top.BasicUtility <> f':59 var
+R3525:3525 Top.BasicUtility <> c:60 var
+R3531:3532 Top.BasicUtility <> v':62 var
+R3562:3586 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R3562:3586 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R3613:3617 Top.BasicUtility <> :::x_'==?'_x not
+R3613:3617 Top.BasicUtility <> :::x_'==?'_x not
+R3641:3656 Top.BasicUtility <> eupdate_index_eq thm
+R3641:3656 Top.BasicUtility <> eupdate_index_eq thm
+R3641:3656 Top.BasicUtility <> eupdate_index_eq thm
+R3675:3691 Top.BasicUtility <> eupdate_index_neq thm
+R3675:3691 Top.BasicUtility <> eupdate_index_neq thm
+R3675:3691 Top.BasicUtility <> eupdate_index_neq thm
+R3675:3691 Top.BasicUtility <> eupdate_index_neq thm
+R3704:3720 Top.BasicUtility <> eupdate_index_neq thm
+R3704:3720 Top.BasicUtility <> eupdate_index_neq thm
+R3704:3720 Top.BasicUtility <> eupdate_index_neq thm
+R3704:3720 Top.BasicUtility <> eupdate_index_neq thm
+R3863:3865 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4374:4377 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R4374:4377 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R4451:4455 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R4451:4455 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R4530:4533 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R4530:4533 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R4569:4572 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R4491:4495 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R4413:4416 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not

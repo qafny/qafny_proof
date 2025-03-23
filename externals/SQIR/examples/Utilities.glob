@@ -1,0 +1,1656 @@
+DIGEST 78d840428e21f85e8cfc5f727fada59e
+FTop.externals.SQIR.examples.Utilities
+R15:26 Top.externals.SQIR.SQIR.VectorStates <> <> lib
+R44:55 Top.externals.SQIR.SQIR.DiscreteProb <> <> lib
+R65:95 Coq.Arith.PeanoNat Nat b2n def
+def 424:437 <> boolean_oracle
+binder 440:440 <> n:1
+R448:456 Top.externals.SQIR.SQIR.SQIR <> base_ucom def
+R459:459 Coq.Init.Datatypes <> S constr
+R461:461 Top.externals.SQIR.examples.Utilities <> n:1 var
+binder 444:444 <> U:2
+R473:476 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R470:472 Coq.Init.Datatypes <> nat ind
+R477:480 Coq.Init.Datatypes <> bool ind
+binder 466:466 <> f:3
+binder 495:495 <> x:4
+R502:505 Coq.Init.Datatypes <> bool ind
+binder 498:498 <> y:5
+R524:532 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R511:513 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R510:510 Top.externals.SQIR.examples.Utilities <> x:4 var
+R515:517 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R518:518 Top.externals.SQIR.examples.Utilities <> n:1 var
+R596:605 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R534:538 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult def
+R547:553 Top.externals.SQIR.SQIR.UnitarySem <> uc_eval def
+R555:555 Top.externals.SQIR.examples.Utilities <> U:2 var
+R581:585 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R559:570 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R574:576 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R577:577 Top.externals.SQIR.examples.Utilities <> n:1 var
+R580:580 Top.externals.SQIR.examples.Utilities <> x:4 var
+R586:589 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣'_x_'⟩' not
+R591:594 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣'_x_'⟩' not
+R590:590 Top.externals.SQIR.examples.Utilities <> y:5 var
+R628:632 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R606:617 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R621:623 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R624:624 Top.externals.SQIR.examples.Utilities <> n:1 var
+R627:627 Top.externals.SQIR.examples.Utilities <> x:4 var
+R633:636 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣'_x_'⟩' not
+R649:652 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣'_x_'⟩' not
+R637:640 Coq.Init.Datatypes <> xorb def
+R645:645 Top.externals.SQIR.examples.Utilities <> f:3 var
+R647:647 Top.externals.SQIR.examples.Utilities <> x:4 var
+R642:642 Top.externals.SQIR.examples.Utilities <> y:5 var
+def 667:676 <> pad_vector
+binder 679:679 <> n:6
+binder 682:684 <> dim:7
+R691:696 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R700:702 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R703:703 Top.externals.SQIR.examples.Utilities <> n:6 var
+binder 687:687 <> v:8
+R709:714 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R718:720 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R721:723 Top.externals.SQIR.examples.Utilities <> dim:7 var
+R732:736 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R731:731 Top.externals.SQIR.examples.Utilities <> v:8 var
+R737:742 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_n def
+R754:760 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣0⟩' not
+R748:750 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R745:747 Top.externals.SQIR.examples.Utilities <> dim:7 var
+R751:751 Top.externals.SQIR.examples.Utilities <> n:6 var
+prf 770:782 <> wf_pad_vector
+binder 795:795 <> n:9
+binder 797:799 <> dim:10
+R806:811 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R815:817 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R818:818 Top.externals.SQIR.examples.Utilities <> n:9 var
+binder 802:802 <> v:11
+R839:842 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R827:830 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R826:826 Top.externals.SQIR.examples.Utilities <> n:9 var
+R831:833 Top.externals.SQIR.examples.Utilities <> dim:10 var
+R854:857 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R843:851 Top.externals.SQIR.externals.QWIRE.Matrix <> WF_Matrix def
+R853:853 Top.externals.SQIR.examples.Utilities <> v:11 var
+R858:866 Top.externals.SQIR.externals.QWIRE.Matrix <> WF_Matrix def
+R869:878 Top.externals.SQIR.examples.Utilities <> pad_vector def
+R884:884 Top.externals.SQIR.examples.Utilities <> v:11 var
+R880:882 Top.externals.SQIR.examples.Utilities <> dim:10 var
+R926:935 Top.externals.SQIR.examples.Utilities <> pad_vector def
+R946:952 Top.externals.SQIR.externals.QWIRE.Matrix <> WF_kron thm
+R946:952 Top.externals.SQIR.externals.QWIRE.Matrix <> WF_kron thm
+R982:992 Coq.Arith.PeanoNat Nat pow_1_l thm
+R982:992 Coq.Arith.PeanoNat Nat pow_1_l thm
+R982:992 Coq.Arith.PeanoNat Nat pow_1_l thm
+def 1202:1222 <> padded_boolean_oracle
+binder 1225:1227 <> dim:12
+binder 1230:1230 <> n:13
+R1239:1247 Top.externals.SQIR.SQIR.SQIR <> base_ucom def
+R1249:1251 Top.externals.SQIR.examples.Utilities <> dim:12 var
+binder 1235:1235 <> U:14
+R1262:1265 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1259:1261 Coq.Init.Datatypes <> nat ind
+R1266:1269 Coq.Init.Datatypes <> bool ind
+binder 1255:1255 <> f:15
+binder 1284:1284 <> x:16
+R1291:1294 Coq.Init.Datatypes <> bool ind
+binder 1287:1287 <> y:17
+R1315:1320 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1302:1304 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R1301:1301 Top.externals.SQIR.examples.Utilities <> x:16 var
+R1306:1308 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R1309:1309 Top.externals.SQIR.examples.Utilities <> n:13 var
+R1427:1433 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1322:1326 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult def
+R1347:1353 Top.externals.SQIR.SQIR.UnitarySem <> uc_eval def
+R1355:1355 Top.externals.SQIR.examples.Utilities <> U:14 var
+R1366:1375 Top.externals.SQIR.examples.Utilities <> pad_vector def
+R1378:1378 Coq.Init.Datatypes <> S constr
+R1380:1380 Top.externals.SQIR.examples.Utilities <> n:13 var
+R1383:1385 Top.externals.SQIR.examples.Utilities <> dim:12 var
+R1410:1414 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R1388:1399 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R1403:1405 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R1406:1406 Top.externals.SQIR.examples.Utilities <> n:13 var
+R1409:1409 Top.externals.SQIR.examples.Utilities <> x:16 var
+R1415:1418 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣'_x_'⟩' not
+R1420:1423 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣'_x_'⟩' not
+R1419:1419 Top.externals.SQIR.examples.Utilities <> y:17 var
+R1435:1444 Top.externals.SQIR.examples.Utilities <> pad_vector def
+R1447:1447 Coq.Init.Datatypes <> S constr
+R1449:1449 Top.externals.SQIR.examples.Utilities <> n:13 var
+R1452:1454 Top.externals.SQIR.examples.Utilities <> dim:12 var
+R1479:1483 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R1457:1468 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R1472:1474 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R1475:1475 Top.externals.SQIR.examples.Utilities <> n:13 var
+R1478:1478 Top.externals.SQIR.examples.Utilities <> x:16 var
+R1484:1487 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣'_x_'⟩' not
+R1500:1503 Top.externals.SQIR.externals.QWIRE.Quantum <> :::'∣'_x_'⟩' not
+R1488:1491 Coq.Init.Datatypes <> xorb def
+R1496:1496 Top.externals.SQIR.examples.Utilities <> f:15 var
+R1498:1498 Top.externals.SQIR.examples.Utilities <> x:16 var
+R1493:1493 Top.externals.SQIR.examples.Utilities <> y:17 var
+def 1728:1741 <> integer_oracle
+binder 1744:1744 <> n:18
+R1752:1760 Top.externals.SQIR.SQIR.SQIR <> base_ucom def
+R1764:1766 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R1767:1767 Top.externals.SQIR.examples.Utilities <> n:18 var
+binder 1748:1748 <> U:19
+R1779:1782 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1776:1778 Coq.Init.Datatypes <> nat ind
+R1783:1785 Coq.Init.Datatypes <> nat ind
+binder 1772:1772 <> f:20
+R1804:1806 Coq.Init.Datatypes <> nat ind
+binder 1801:1801 <> x:21
+R1825:1833 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1812:1814 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R1811:1811 Top.externals.SQIR.examples.Utilities <> x:21 var
+R1816:1818 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R1819:1819 Top.externals.SQIR.examples.Utilities <> n:18 var
+R1910:1919 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1835:1839 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult def
+R1848:1854 Top.externals.SQIR.SQIR.UnitarySem <> uc_eval def
+R1856:1856 Top.externals.SQIR.examples.Utilities <> U:19 var
+R1882:1886 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R1860:1871 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R1875:1877 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R1878:1878 Top.externals.SQIR.examples.Utilities <> n:18 var
+R1881:1881 Top.externals.SQIR.examples.Utilities <> x:21 var
+R1887:1898 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R1902:1904 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R1905:1905 Top.externals.SQIR.examples.Utilities <> n:18 var
+R1942:1948 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R1975:1976 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R1920:1931 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R1935:1937 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R1938:1938 Top.externals.SQIR.examples.Utilities <> n:18 var
+R1941:1941 Top.externals.SQIR.examples.Utilities <> x:21 var
+R1949:1960 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R1964:1966 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R1967:1967 Top.externals.SQIR.examples.Utilities <> n:18 var
+R1971:1971 Top.externals.SQIR.examples.Utilities <> f:20 var
+R1973:1973 Top.externals.SQIR.examples.Utilities <> x:21 var
+def 2281:2285 <> count
+R2295:2298 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2292:2294 Coq.Init.Datatypes <> nat ind
+R2299:2302 Coq.Init.Datatypes <> bool ind
+binder 2288:2288 <> f:22
+binder 2305:2305 <> a:23
+binder 2307:2307 <> b:24
+R2311:2313 Coq.Init.Datatypes <> nat ind
+R2326:2326 Top.externals.SQIR.examples.Utilities <> b:24 var
+R2337:2337 Coq.Init.Datatypes <> O constr
+R2342:2342 Coq.Init.Datatypes <> O constr
+R2348:2348 Coq.Init.Datatypes <> S constr
+R2367:2369 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2357:2357 Top.externals.SQIR.examples.Utilities <> f:22 var
+R2361:2363 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2360:2360 Top.externals.SQIR.examples.Utilities <> a:23 var
+R2370:2374 Top.externals.SQIR.examples.Utilities <> count:25 def
+R2378:2378 Top.externals.SQIR.examples.Utilities <> a:23 var
+R2376:2376 Top.externals.SQIR.examples.Utilities <> f:22 var
+def 2407:2412 <> count0
+binder 2414:2414 <> f:27
+R2419:2423 Top.externals.SQIR.examples.Utilities <> count def
+R2425:2425 Top.externals.SQIR.examples.Utilities <> f:27 var
+def 2441:2446 <> count1
+binder 2448:2448 <> f:28
+R2453:2457 Top.externals.SQIR.examples.Utilities <> count def
+R2459:2459 Top.externals.SQIR.examples.Utilities <> f:28 var
+prf 2471:2482 <> count_extend
+binder 2493:2493 <> f:29
+binder 2495:2495 <> a:30
+binder 2497:2497 <> b:31
+R2518:2521 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2503:2507 Top.externals.SQIR.examples.Utilities <> count def
+R2509:2509 Top.externals.SQIR.examples.Utilities <> f:29 var
+R2511:2511 Top.externals.SQIR.examples.Utilities <> a:30 var
+R2514:2514 Coq.Init.Datatypes <> S constr
+R2516:2516 Top.externals.SQIR.examples.Utilities <> b:31 var
+R2526:2526 Top.externals.SQIR.examples.Utilities <> f:29 var
+R2530:2532 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2529:2529 Top.externals.SQIR.examples.Utilities <> a:30 var
+R2533:2533 Top.externals.SQIR.examples.Utilities <> b:31 var
+R2567:2571 Top.externals.SQIR.examples.Utilities <> count def
+R2573:2573 Top.externals.SQIR.examples.Utilities <> f:29 var
+R2575:2575 Top.externals.SQIR.examples.Utilities <> a:30 var
+R2577:2577 Top.externals.SQIR.examples.Utilities <> b:31 var
+R2546:2546 Coq.Init.Datatypes <> S constr
+R2549:2553 Top.externals.SQIR.examples.Utilities <> count def
+R2555:2555 Top.externals.SQIR.examples.Utilities <> f:29 var
+R2557:2557 Top.externals.SQIR.examples.Utilities <> a:30 var
+R2559:2559 Top.externals.SQIR.examples.Utilities <> b:31 var
+R2616:2618 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2616:2618 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+prf 2653:2669 <> count_upper_bound
+binder 2680:2680 <> a:32
+binder 2682:2682 <> b:33
+R2692:2695 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2689:2691 Coq.Init.Datatypes <> nat ind
+R2696:2699 Coq.Init.Datatypes <> bool ind
+binder 2685:2685 <> f:34
+R2715:2718 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R2704:2708 Top.externals.SQIR.examples.Utilities <> count def
+R2710:2710 Top.externals.SQIR.examples.Utilities <> f:34 var
+R2712:2712 Top.externals.SQIR.examples.Utilities <> a:32 var
+R2714:2714 Top.externals.SQIR.examples.Utilities <> b:33 var
+R2719:2719 Top.externals.SQIR.examples.Utilities <> b:33 var
+R2789:2791 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2789:2791 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+prf 2825:2839 <> count_all_false
+binder 2850:2850 <> a:35
+binder 2852:2852 <> b:36
+R2881:2883 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2855:2859 Top.externals.SQIR.examples.Utilities <> count def
+R2871:2875 Coq.Init.Datatypes <> false constr
+R2878:2878 Top.externals.SQIR.examples.Utilities <> a:35 var
+R2880:2880 Top.externals.SQIR.examples.Utilities <> b:36 var
+R2884:2884 Coq.Init.Datatypes <> O constr
+prf 2955:2968 <> count_all_true
+binder 2979:2979 <> a:37
+binder 2981:2981 <> b:38
+R3009:3011 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2984:2988 Top.externals.SQIR.examples.Utilities <> count def
+R3000:3003 Coq.Init.Datatypes <> true constr
+R3006:3006 Top.externals.SQIR.examples.Utilities <> a:37 var
+R3008:3008 Top.externals.SQIR.examples.Utilities <> b:38 var
+R3012:3012 Top.externals.SQIR.examples.Utilities <> b:38 var
+prf 3067:3076 <> count_zero
+binder 3087:3087 <> a:39
+binder 3089:3089 <> b:40
+R3099:3102 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3096:3098 Coq.Init.Datatypes <> nat ind
+R3103:3106 Coq.Init.Datatypes <> bool ind
+binder 3092:3092 <> f:41
+R3128:3131 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3124:3126 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3113:3117 Top.externals.SQIR.examples.Utilities <> count def
+R3119:3119 Top.externals.SQIR.examples.Utilities <> f:41 var
+R3121:3121 Top.externals.SQIR.examples.Utilities <> a:39 var
+R3123:3123 Top.externals.SQIR.examples.Utilities <> b:40 var
+R3127:3127 Coq.Init.Datatypes <> O constr
+binder 3139:3139 <> i:42
+R3162:3165 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3144:3147 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R3149:3151 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R3143:3143 Top.externals.SQIR.examples.Utilities <> a:39 var
+R3148:3148 Top.externals.SQIR.examples.Utilities <> i:42 var
+R3148:3148 Top.externals.SQIR.examples.Utilities <> i:42 var
+R3153:3155 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3152:3152 Top.externals.SQIR.examples.Utilities <> a:39 var
+R3156:3156 Top.externals.SQIR.examples.Utilities <> b:40 var
+R3169:3171 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3166:3166 Top.externals.SQIR.examples.Utilities <> f:41 var
+R3168:3168 Top.externals.SQIR.examples.Utilities <> i:42 var
+R3172:3176 Coq.Init.Datatypes <> false constr
+R3261:3272 Coq.Arith.PeanoNat Nat eq_add_0 thm
+R3261:3272 Coq.Arith.PeanoNat Nat eq_add_0 thm
+R3303:3306 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R3308:3310 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3303:3306 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R3308:3310 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3342:3344 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3342:3344 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+prf 3403:3415 <> count_nonzero
+binder 3426:3426 <> a:43
+binder 3428:3428 <> b:44
+R3438:3441 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3435:3437 Coq.Init.Datatypes <> nat ind
+R3442:3445 Coq.Init.Datatypes <> bool ind
+binder 3431:3431 <> f:45
+R3468:3472 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R3463:3466 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R3452:3456 Top.externals.SQIR.examples.Utilities <> count def
+R3458:3458 Top.externals.SQIR.examples.Utilities <> f:45 var
+R3460:3460 Top.externals.SQIR.examples.Utilities <> a:43 var
+R3462:3462 Top.externals.SQIR.examples.Utilities <> b:44 var
+R3467:3467 Coq.Init.Datatypes <> O constr
+R3473:3479 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R3481:3482 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 3480:3480 <> i:46
+R3503:3506 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3485:3488 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R3490:3492 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R3484:3484 Top.externals.SQIR.examples.Utilities <> a:43 var
+R3489:3489 Top.externals.SQIR.examples.Utilities <> i:46 var
+R3489:3489 Top.externals.SQIR.examples.Utilities <> i:46 var
+R3494:3496 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3493:3493 Top.externals.SQIR.examples.Utilities <> a:43 var
+R3497:3497 Top.externals.SQIR.examples.Utilities <> b:44 var
+R3510:3512 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3507:3507 Top.externals.SQIR.examples.Utilities <> f:45 var
+R3509:3509 Top.externals.SQIR.examples.Utilities <> i:46 var
+R3513:3516 Coq.Init.Datatypes <> true constr
+R3652:3655 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R3641:3645 Top.externals.SQIR.examples.Utilities <> count def
+R3652:3655 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R3641:3645 Top.externals.SQIR.examples.Utilities <> count def
+R3694:3696 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3694:3696 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3743:3745 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3743:3745 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3933:3936 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R3938:3940 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3933:3936 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R3938:3940 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4013:4015 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4013:4015 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+prf 4042:4049 <> count_eq
+binder 4060:4060 <> a:47
+binder 4062:4062 <> b:48
+binder 4064:4064 <> f:49
+binder 4066:4066 <> g:50
+R4073:4073 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4117:4125 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 4081:4081 <> x:51
+R4104:4107 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4086:4089 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R4091:4093 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R4085:4085 Top.externals.SQIR.examples.Utilities <> a:47 var
+R4090:4090 Top.externals.SQIR.examples.Utilities <> x:51 var
+R4090:4090 Top.externals.SQIR.examples.Utilities <> x:51 var
+R4095:4097 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4094:4094 Top.externals.SQIR.examples.Utilities <> a:47 var
+R4098:4098 Top.externals.SQIR.examples.Utilities <> b:48 var
+R4111:4113 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4108:4108 Top.externals.SQIR.examples.Utilities <> f:49 var
+R4110:4110 Top.externals.SQIR.examples.Utilities <> x:51 var
+R4114:4114 Top.externals.SQIR.examples.Utilities <> g:50 var
+R4116:4116 Top.externals.SQIR.examples.Utilities <> x:51 var
+R4137:4139 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4126:4130 Top.externals.SQIR.examples.Utilities <> count def
+R4132:4132 Top.externals.SQIR.examples.Utilities <> f:49 var
+R4134:4134 Top.externals.SQIR.examples.Utilities <> a:47 var
+R4136:4136 Top.externals.SQIR.examples.Utilities <> b:48 var
+R4140:4144 Top.externals.SQIR.examples.Utilities <> count def
+R4146:4146 Top.externals.SQIR.examples.Utilities <> g:50 var
+R4148:4148 Top.externals.SQIR.examples.Utilities <> a:47 var
+R4150:4150 Top.externals.SQIR.examples.Utilities <> b:48 var
+R4215:4217 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4210:4212 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4222:4224 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4215:4217 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4210:4212 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4222:4224 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+prf 4349:4364 <> count_update_oob
+binder 4375:4375 <> f:52
+binder 4377:4377 <> x:53
+binder 4379:4379 <> v:54
+binder 4381:4381 <> a:55
+binder 4383:4383 <> b:56
+R4420:4426 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4400:4403 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R4391:4393 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R4390:4390 Top.externals.SQIR.examples.Utilities <> x:53 var
+R4394:4394 Top.externals.SQIR.examples.Utilities <> a:55 var
+R4410:4413 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R4406:4408 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4405:4405 Top.externals.SQIR.examples.Utilities <> a:55 var
+R4409:4409 Top.externals.SQIR.examples.Utilities <> b:56 var
+R4414:4414 Top.externals.SQIR.examples.Utilities <> x:53 var
+R4438:4440 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4427:4431 Top.externals.SQIR.examples.Utilities <> count def
+R4433:4433 Top.externals.SQIR.examples.Utilities <> f:52 var
+R4435:4435 Top.externals.SQIR.examples.Utilities <> a:55 var
+R4437:4437 Top.externals.SQIR.examples.Utilities <> b:56 var
+R4441:4445 Top.externals.SQIR.examples.Utilities <> count def
+R4448:4453 Top.externals.SQIR.SQIR.VectorStates <> update def
+R4459:4459 Top.externals.SQIR.examples.Utilities <> v:54 var
+R4457:4457 Top.externals.SQIR.examples.Utilities <> x:53 var
+R4455:4455 Top.externals.SQIR.examples.Utilities <> f:52 var
+R4462:4462 Top.externals.SQIR.examples.Utilities <> a:55 var
+R4464:4464 Top.externals.SQIR.examples.Utilities <> b:56 var
+R4490:4497 Top.externals.SQIR.examples.Utilities <> count_eq thm
+R4490:4497 Top.externals.SQIR.examples.Utilities <> count_eq thm
+R4518:4533 Top.externals.SQIR.SQIR.VectorStates <> update_index_neq thm
+R4518:4533 Top.externals.SQIR.SQIR.VectorStates <> update_index_neq thm
+R4518:4533 Top.externals.SQIR.SQIR.VectorStates <> update_index_neq thm
+R4518:4533 Top.externals.SQIR.SQIR.VectorStates <> update_index_neq thm
+prf 4559:4570 <> count_update
+binder 4581:4581 <> f:57
+binder 4583:4583 <> x:58
+binder 4585:4585 <> v:59
+binder 4587:4587 <> a:60
+binder 4589:4589 <> b:61
+R4615:4621 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4597:4600 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R4602:4604 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R4596:4596 Top.externals.SQIR.examples.Utilities <> a:60 var
+R4601:4601 Top.externals.SQIR.examples.Utilities <> x:58 var
+R4601:4601 Top.externals.SQIR.examples.Utilities <> x:58 var
+R4606:4608 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4605:4605 Top.externals.SQIR.examples.Utilities <> a:60 var
+R4609:4609 Top.externals.SQIR.examples.Utilities <> b:61 var
+R4632:4638 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4625:4627 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4622:4622 Top.externals.SQIR.examples.Utilities <> f:57 var
+R4624:4624 Top.externals.SQIR.examples.Utilities <> x:58 var
+R4628:4631 Coq.Init.Datatypes <> true constr
+R4663:4665 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4639:4643 Top.externals.SQIR.examples.Utilities <> count def
+R4646:4651 Top.externals.SQIR.SQIR.VectorStates <> update def
+R4657:4657 Top.externals.SQIR.examples.Utilities <> v:59 var
+R4655:4655 Top.externals.SQIR.examples.Utilities <> x:58 var
+R4653:4653 Top.externals.SQIR.examples.Utilities <> f:57 var
+R4660:4660 Top.externals.SQIR.examples.Utilities <> a:60 var
+R4662:4662 Top.externals.SQIR.examples.Utilities <> b:61 var
+R4669:4669 Top.externals.SQIR.examples.Utilities <> v:59 var
+R4694:4694 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R4706:4709 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R4695:4699 Top.externals.SQIR.examples.Utilities <> count def
+R4701:4701 Top.externals.SQIR.examples.Utilities <> f:57 var
+R4703:4703 Top.externals.SQIR.examples.Utilities <> a:60 var
+R4705:4705 Top.externals.SQIR.examples.Utilities <> b:61 var
+R4676:4680 Top.externals.SQIR.examples.Utilities <> count def
+R4682:4682 Top.externals.SQIR.examples.Utilities <> f:57 var
+R4684:4684 Top.externals.SQIR.examples.Utilities <> a:60 var
+R4686:4686 Top.externals.SQIR.examples.Utilities <> b:61 var
+R4775:4785 Top.externals.SQIR.SQIR.VectorStates <> update_same thm
+R4775:4785 Top.externals.SQIR.SQIR.VectorStates <> update_same thm
+R4775:4785 Top.externals.SQIR.SQIR.VectorStates <> update_same thm
+R4775:4785 Top.externals.SQIR.SQIR.VectorStates <> update_same thm
+R4808:4811 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R4813:4815 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4808:4811 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R4813:4815 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4846:4860 Top.externals.SQIR.SQIR.VectorStates <> update_index_eq thm
+R4846:4860 Top.externals.SQIR.SQIR.VectorStates <> update_index_eq thm
+R4846:4860 Top.externals.SQIR.SQIR.VectorStates <> update_index_eq thm
+R4888:4903 Top.externals.SQIR.examples.Utilities <> count_update_oob thm
+R4888:4903 Top.externals.SQIR.examples.Utilities <> count_update_oob thm
+R4888:4903 Top.externals.SQIR.examples.Utilities <> count_update_oob thm
+R4888:4903 Top.externals.SQIR.examples.Utilities <> count_update_oob thm
+R4935:4950 Top.externals.SQIR.SQIR.VectorStates <> update_index_neq thm
+R4935:4950 Top.externals.SQIR.SQIR.VectorStates <> update_index_neq thm
+R4935:4950 Top.externals.SQIR.SQIR.VectorStates <> update_index_neq thm
+R4978:4980 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4978:4980 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5047:5050 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R5036:5040 Top.externals.SQIR.examples.Utilities <> count def
+R5047:5050 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R5036:5040 Top.externals.SQIR.examples.Utilities <> count def
+R5068:5080 Top.externals.SQIR.examples.Utilities <> count_nonzero thm
+R5068:5080 Top.externals.SQIR.examples.Utilities <> count_nonzero thm
+prf 5168:5185 <> count_update_false
+binder 5196:5196 <> a:62
+binder 5198:5198 <> b:63
+binder 5200:5200 <> x:64
+binder 5202:5202 <> f:65
+R5228:5234 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5210:5213 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R5215:5217 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R5209:5209 Top.externals.SQIR.examples.Utilities <> a:62 var
+R5214:5214 Top.externals.SQIR.examples.Utilities <> x:64 var
+R5214:5214 Top.externals.SQIR.examples.Utilities <> x:64 var
+R5219:5221 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5218:5218 Top.externals.SQIR.examples.Utilities <> a:62 var
+R5222:5222 Top.externals.SQIR.examples.Utilities <> b:63 var
+R5245:5251 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5238:5240 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5235:5235 Top.externals.SQIR.examples.Utilities <> f:65 var
+R5237:5237 Top.externals.SQIR.examples.Utilities <> x:64 var
+R5241:5244 Coq.Init.Datatypes <> true constr
+R5284:5286 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5252:5252 Coq.Init.Datatypes <> S constr
+R5255:5259 Top.externals.SQIR.examples.Utilities <> count def
+R5262:5267 Top.externals.SQIR.SQIR.VectorStates <> update def
+R5273:5277 Coq.Init.Datatypes <> false constr
+R5271:5271 Top.externals.SQIR.examples.Utilities <> x:64 var
+R5269:5269 Top.externals.SQIR.examples.Utilities <> f:65 var
+R5280:5280 Top.externals.SQIR.examples.Utilities <> a:62 var
+R5282:5282 Top.externals.SQIR.examples.Utilities <> b:63 var
+R5287:5291 Top.externals.SQIR.examples.Utilities <> count def
+R5293:5293 Top.externals.SQIR.examples.Utilities <> f:65 var
+R5295:5295 Top.externals.SQIR.examples.Utilities <> a:62 var
+R5297:5297 Top.externals.SQIR.examples.Utilities <> b:63 var
+R5339:5342 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R5328:5332 Top.externals.SQIR.examples.Utilities <> count def
+R5339:5342 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R5328:5332 Top.externals.SQIR.examples.Utilities <> count def
+R5360:5372 Top.externals.SQIR.examples.Utilities <> count_nonzero thm
+R5360:5372 Top.externals.SQIR.examples.Utilities <> count_nonzero thm
+R5419:5430 Top.externals.SQIR.examples.Utilities <> count_update thm
+R5419:5430 Top.externals.SQIR.examples.Utilities <> count_update thm
+R5419:5430 Top.externals.SQIR.examples.Utilities <> count_update thm
+prf 5466:5476 <> count0_Nsum
+binder 5487:5487 <> n:66
+binder 5489:5489 <> f:67
+R5502:5504 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5492:5497 Top.externals.SQIR.examples.Utilities <> count0 def
+R5499:5499 Top.externals.SQIR.examples.Utilities <> f:67 var
+R5501:5501 Top.externals.SQIR.examples.Utilities <> n:66 var
+R5505:5508 Top.externals.SQIR.externals.QWIRE.Prelim <> Nsum def
+R5510:5510 Top.externals.SQIR.examples.Utilities <> n:66 var
+binder 5517:5517 <> i:68
+R5525:5525 Top.externals.SQIR.examples.Utilities <> f:67 var
+R5527:5527 Top.externals.SQIR.examples.Utilities <> i:68 var
+R5543:5543 Coq.Init.Datatypes <> O constr
+R5534:5534 Coq.Init.Datatypes <> S constr
+R5536:5536 Coq.Init.Datatypes <> O constr
+R5563:5568 Top.externals.SQIR.examples.Utilities <> count0 def
+prf 5670:5680 <> count1_Nsum
+binder 5691:5691 <> n:69
+binder 5693:5693 <> f:70
+R5709:5715 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5701:5703 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5698:5698 Top.externals.SQIR.examples.Utilities <> f:70 var
+R5700:5700 Coq.Init.Datatypes <> O constr
+R5704:5708 Coq.Init.Datatypes <> false constr
+R5727:5732 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5719:5721 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5716:5716 Top.externals.SQIR.examples.Utilities <> f:70 var
+R5718:5718 Top.externals.SQIR.examples.Utilities <> n:69 var
+R5722:5726 Coq.Init.Datatypes <> false constr
+R5743:5745 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5733:5738 Top.externals.SQIR.examples.Utilities <> count1 def
+R5740:5740 Top.externals.SQIR.examples.Utilities <> f:70 var
+R5742:5742 Top.externals.SQIR.examples.Utilities <> n:69 var
+R5746:5749 Top.externals.SQIR.externals.QWIRE.Prelim <> Nsum def
+R5751:5751 Top.externals.SQIR.examples.Utilities <> n:69 var
+binder 5758:5758 <> i:71
+R5766:5766 Top.externals.SQIR.examples.Utilities <> f:70 var
+R5768:5768 Top.externals.SQIR.examples.Utilities <> i:71 var
+R5784:5784 Coq.Init.Datatypes <> O constr
+R5775:5775 Coq.Init.Datatypes <> S constr
+R5777:5777 Coq.Init.Datatypes <> O constr
+R5804:5809 Top.externals.SQIR.examples.Utilities <> count1 def
+R5858:5860 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5847:5851 Top.externals.SQIR.examples.Utilities <> count def
+R5861:5864 Top.externals.SQIR.externals.QWIRE.Prelim <> Nsum def
+R5867:5867 Coq.Init.Datatypes <> S constr
+binder 5877:5877 <> i:72
+R5887:5887 Top.externals.SQIR.examples.Utilities <> i:72 var
+R5903:5903 Coq.Init.Datatypes <> O constr
+R5894:5894 Coq.Init.Datatypes <> S constr
+R5896:5896 Coq.Init.Datatypes <> O constr
+R5858:5860 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5847:5851 Top.externals.SQIR.examples.Utilities <> count def
+R5861:5864 Top.externals.SQIR.externals.QWIRE.Prelim <> Nsum def
+R5867:5867 Coq.Init.Datatypes <> S constr
+binder 5877:5877 <> i:73
+R5887:5887 Top.externals.SQIR.examples.Utilities <> i:73 var
+R5903:5903 Coq.Init.Datatypes <> O constr
+R5894:5894 Coq.Init.Datatypes <> S constr
+R5896:5896 Coq.Init.Datatypes <> O constr
+R6008:6008 Coq.Init.Datatypes <> S constr
+R6008:6008 Coq.Init.Datatypes <> S constr
+prf 6112:6127 <> count_complement
+binder 6138:6138 <> a:74
+binder 6140:6140 <> b:75
+binder 6142:6142 <> f:76
+binder 6144:6144 <> g:77
+R6221:6223 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6182:6184 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6151:6155 Top.externals.SQIR.examples.Utilities <> count def
+binder 6162:6162 <> i:78
+R6170:6173 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R6167:6167 Top.externals.SQIR.examples.Utilities <> f:76 var
+R6169:6169 Top.externals.SQIR.examples.Utilities <> i:78 var
+R6174:6174 Top.externals.SQIR.examples.Utilities <> g:77 var
+R6176:6176 Top.externals.SQIR.examples.Utilities <> i:78 var
+R6179:6179 Top.externals.SQIR.examples.Utilities <> a:74 var
+R6181:6181 Top.externals.SQIR.examples.Utilities <> b:75 var
+R6185:6189 Top.externals.SQIR.examples.Utilities <> count def
+binder 6196:6196 <> i:79
+R6204:6207 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R6201:6201 Top.externals.SQIR.examples.Utilities <> f:76 var
+R6203:6203 Top.externals.SQIR.examples.Utilities <> i:79 var
+R6208:6211 Top.externals.SQIR.externals.QWIRE.Prelim <> :::'¬'_x not
+R6215:6215 Top.externals.SQIR.externals.QWIRE.Prelim <> :::'¬'_x not
+R6212:6212 Top.externals.SQIR.examples.Utilities <> g:77 var
+R6214:6214 Top.externals.SQIR.examples.Utilities <> i:79 var
+R6218:6218 Top.externals.SQIR.examples.Utilities <> a:74 var
+R6220:6220 Top.externals.SQIR.examples.Utilities <> b:75 var
+R6224:6228 Top.externals.SQIR.examples.Utilities <> count def
+R6230:6230 Top.externals.SQIR.examples.Utilities <> f:76 var
+R6232:6232 Top.externals.SQIR.examples.Utilities <> a:74 var
+R6234:6234 Top.externals.SQIR.examples.Utilities <> b:75 var
+R6301:6303 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6327:6329 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6301:6303 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6327:6329 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6327:6329 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+prf 6363:6375 <> count_implies
+binder 6386:6386 <> a:80
+binder 6388:6388 <> b:81
+binder 6390:6390 <> f:82
+binder 6392:6392 <> g:83
+R6455:6460 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 6405:6405 <> x:84
+R6422:6425 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6409:6412 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R6414:6416 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R6408:6408 Top.externals.SQIR.examples.Utilities <> a:80 var
+R6413:6413 Top.externals.SQIR.examples.Utilities <> x:84 var
+R6413:6413 Top.externals.SQIR.examples.Utilities <> x:84 var
+R6418:6420 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6417:6417 Top.externals.SQIR.examples.Utilities <> a:80 var
+R6421:6421 Top.externals.SQIR.examples.Utilities <> b:81 var
+R6436:6439 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6429:6431 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6426:6426 Top.externals.SQIR.examples.Utilities <> f:82 var
+R6428:6428 Top.externals.SQIR.examples.Utilities <> x:84 var
+R6432:6435 Coq.Init.Datatypes <> true constr
+R6443:6445 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6440:6440 Top.externals.SQIR.examples.Utilities <> g:83 var
+R6442:6442 Top.externals.SQIR.examples.Utilities <> x:84 var
+R6446:6449 Coq.Init.Datatypes <> true constr
+R6473:6476 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R6462:6466 Top.externals.SQIR.examples.Utilities <> count def
+R6468:6468 Top.externals.SQIR.examples.Utilities <> f:82 var
+R6470:6470 Top.externals.SQIR.examples.Utilities <> a:80 var
+R6472:6472 Top.externals.SQIR.examples.Utilities <> b:81 var
+R6477:6481 Top.externals.SQIR.examples.Utilities <> count def
+R6483:6483 Top.externals.SQIR.examples.Utilities <> g:83 var
+R6485:6485 Top.externals.SQIR.examples.Utilities <> a:80 var
+R6487:6487 Top.externals.SQIR.examples.Utilities <> b:81 var
+R6552:6555 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R6541:6545 Top.externals.SQIR.examples.Utilities <> count def
+R6556:6560 Top.externals.SQIR.examples.Utilities <> count def
+R6552:6555 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R6541:6545 Top.externals.SQIR.examples.Utilities <> count def
+R6556:6560 Top.externals.SQIR.examples.Utilities <> count def
+R6642:6644 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6642:6644 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6722:6724 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6722:6724 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+prf 6758:6766 <> count_orb
+binder 6777:6777 <> a:85
+binder 6779:6779 <> b:86
+binder 6781:6781 <> f:87
+binder 6783:6783 <> g:88
+R6819:6826 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6788:6792 Top.externals.SQIR.examples.Utilities <> count def
+binder 6799:6799 <> i:89
+R6807:6810 Coq.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R6804:6804 Top.externals.SQIR.examples.Utilities <> f:87 var
+R6806:6806 Top.externals.SQIR.examples.Utilities <> i:89 var
+R6811:6811 Top.externals.SQIR.examples.Utilities <> g:88 var
+R6813:6813 Top.externals.SQIR.examples.Utilities <> i:89 var
+R6816:6816 Top.externals.SQIR.examples.Utilities <> a:85 var
+R6818:6818 Top.externals.SQIR.examples.Utilities <> b:86 var
+R6839:6841 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6828:6832 Top.externals.SQIR.examples.Utilities <> count def
+R6834:6834 Top.externals.SQIR.examples.Utilities <> f:87 var
+R6836:6836 Top.externals.SQIR.examples.Utilities <> a:85 var
+R6838:6838 Top.externals.SQIR.examples.Utilities <> b:86 var
+R6842:6846 Top.externals.SQIR.examples.Utilities <> count def
+binder 6853:6853 <> i:90
+R6866:6869 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R6858:6861 Top.externals.SQIR.externals.QWIRE.Prelim <> :::'¬'_x not
+R6865:6865 Top.externals.SQIR.externals.QWIRE.Prelim <> :::'¬'_x not
+R6862:6862 Top.externals.SQIR.examples.Utilities <> f:87 var
+R6864:6864 Top.externals.SQIR.examples.Utilities <> i:90 var
+R6870:6870 Top.externals.SQIR.examples.Utilities <> g:88 var
+R6872:6872 Top.externals.SQIR.examples.Utilities <> i:90 var
+R6876:6876 Top.externals.SQIR.examples.Utilities <> a:85 var
+R6878:6878 Top.externals.SQIR.examples.Utilities <> b:86 var
+R6916:6931 Top.externals.SQIR.examples.Utilities <> count_complement thm
+R6916:6931 Top.externals.SQIR.examples.Utilities <> count_complement thm
+R6916:6931 Top.externals.SQIR.examples.Utilities <> count_complement thm
+binder 6963:6964 <> n1:91
+binder 6966:6967 <> n2:92
+binder 6969:6970 <> n3:93
+binder 6972:6973 <> n4:94
+R6983:6986 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6978:6980 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6976:6977 Top.externals.SQIR.examples.Utilities <> n1:91 var
+R6981:6982 Top.externals.SQIR.examples.Utilities <> n3:93 var
+R6994:6997 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6989:6991 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6987:6988 Top.externals.SQIR.examples.Utilities <> n2:92 var
+R6992:6993 Top.externals.SQIR.examples.Utilities <> n4:94 var
+R7005:7007 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7000:7002 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6998:6999 Top.externals.SQIR.examples.Utilities <> n1:91 var
+R7003:7004 Top.externals.SQIR.examples.Utilities <> n2:92 var
+R7010:7012 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R7008:7009 Top.externals.SQIR.examples.Utilities <> n3:93 var
+R7013:7014 Top.externals.SQIR.examples.Utilities <> n4:94 var
+binder 6963:6964 <> n1:95
+binder 6966:6967 <> n2:96
+binder 6969:6970 <> n3:97
+binder 6972:6973 <> n4:98
+R6983:6986 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6978:6980 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6976:6977 Top.externals.SQIR.examples.Utilities <> n1:95 var
+R6981:6982 Top.externals.SQIR.examples.Utilities <> n3:97 var
+R6994:6997 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6989:6991 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6987:6988 Top.externals.SQIR.examples.Utilities <> n2:96 var
+R6992:6993 Top.externals.SQIR.examples.Utilities <> n4:98 var
+R7005:7007 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7000:7002 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6998:6999 Top.externals.SQIR.examples.Utilities <> n1:95 var
+R7003:7004 Top.externals.SQIR.examples.Utilities <> n2:96 var
+R7010:7012 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R7008:7009 Top.externals.SQIR.examples.Utilities <> n3:97 var
+R7013:7014 Top.externals.SQIR.examples.Utilities <> n4:98 var
+R7046:7053 Top.externals.SQIR.examples.Utilities <> count_eq thm
+R7046:7053 Top.externals.SQIR.examples.Utilities <> count_eq thm
+R7046:7053 Top.externals.SQIR.examples.Utilities <> count_eq thm
+def 7126:7129 <> negf
+R7139:7142 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7136:7138 Coq.Init.Datatypes <> nat ind
+R7143:7146 Coq.Init.Datatypes <> bool ind
+binder 7132:7132 <> f:99
+binder 7149:7149 <> i:100
+R7154:7157 Coq.Init.Datatypes <> negb def
+R7160:7160 Top.externals.SQIR.examples.Utilities <> f:99 var
+R7162:7162 Top.externals.SQIR.examples.Utilities <> i:100 var
+prf 7173:7187 <> negf_involutive
+binder 7198:7198 <> f:101
+R7214:7216 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7201:7204 Top.externals.SQIR.examples.Utilities <> negf def
+R7207:7210 Top.externals.SQIR.examples.Utilities <> negf def
+R7212:7212 Top.externals.SQIR.examples.Utilities <> f:101 var
+R7217:7217 Top.externals.SQIR.examples.Utilities <> f:101 var
+R7246:7249 Top.externals.SQIR.examples.Utilities <> negf def
+R7260:7284 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R7260:7284 Coq.Logic.FunctionalExtensionality <> functional_extensionality thm
+R7304:7318 Coq.Bool.Bool <> negb_involutive thm
+R7304:7318 Coq.Bool.Bool <> negb_involutive thm
+R7340:7346 Coq.Arith.PeanoNat Nat sub def
+prf 7355:7364 <> count_negf
+binder 7375:7375 <> a:102
+binder 7377:7377 <> b:103
+R7387:7390 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7384:7386 Coq.Init.Datatypes <> nat ind
+R7391:7394 Coq.Init.Datatypes <> bool ind
+binder 7380:7380 <> f:104
+R7418:7420 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7400:7404 Top.externals.SQIR.examples.Utilities <> count def
+R7407:7410 Top.externals.SQIR.examples.Utilities <> negf def
+R7412:7412 Top.externals.SQIR.examples.Utilities <> f:104 var
+R7415:7415 Top.externals.SQIR.examples.Utilities <> a:102 var
+R7417:7417 Top.externals.SQIR.examples.Utilities <> b:103 var
+R7423:7425 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R7422:7422 Top.externals.SQIR.examples.Utilities <> b:103 var
+R7426:7430 Top.externals.SQIR.examples.Utilities <> count def
+R7432:7432 Top.externals.SQIR.examples.Utilities <> f:104 var
+R7434:7434 Top.externals.SQIR.examples.Utilities <> a:102 var
+R7436:7436 Top.externals.SQIR.examples.Utilities <> b:103 var
+R7522:7525 Top.externals.SQIR.examples.Utilities <> negf def
+R7542:7558 Top.externals.SQIR.examples.Utilities <> count_upper_bound thm
+R7542:7558 Top.externals.SQIR.examples.Utilities <> count_upper_bound thm
+R7589:7591 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R7589:7591 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+prf 7625:7635 <> vsum_count0
+binder 7646:7646 <> n:105
+R7656:7659 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7653:7655 Coq.Init.Datatypes <> nat ind
+R7660:7663 Coq.Init.Datatypes <> bool ind
+binder 7649:7649 <> f:106
+R7718:7725 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7669:7672 Top.externals.SQIR.SQIR.VectorStates <> vsum def
+R7685:7687 Coq.Init.Datatypes <> nat ind
+binder 7681:7681 <> i:107
+R7695:7695 Top.externals.SQIR.examples.Utilities <> f:106 var
+R7697:7697 Top.externals.SQIR.examples.Utilities <> i:107 var
+R7713:7716 Top.externals.SQIR.externals.QWIRE.Matrix <> Zero def
+R7704:7704 Top.externals.SQIR.externals.QWIRE.Matrix <> I def
+R7674:7674 Top.externals.SQIR.examples.Utilities <> n:105 var
+R7742:7745 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'.*'_x not
+R7726:7728 Coq.Reals.Raxioms <> INR def
+R7731:7736 Top.externals.SQIR.examples.Utilities <> count0 def
+R7738:7738 Top.externals.SQIR.examples.Utilities <> f:106 var
+R7740:7740 Top.externals.SQIR.examples.Utilities <> n:105 var
+R7746:7746 Top.externals.SQIR.externals.QWIRE.Matrix <> I def
+R7767:7772 Top.externals.SQIR.examples.Utilities <> count0 def
+R7818:7830 Top.externals.SQIR.SQIR.VectorStates <> vsum_extend_r thm
+R7818:7830 Top.externals.SQIR.SQIR.VectorStates <> vsum_extend_r thm
+R7818:7830 Top.externals.SQIR.SQIR.VectorStates <> vsum_extend_r thm
+R7863:7870 Coq.Reals.RIneq <> plus_INR thm
+R7863:7870 Coq.Reals.RIneq <> plus_INR thm
+R7863:7870 Coq.Reals.RIneq <> plus_INR thm
+prf 7915:7924 <> nth_repeat
+binder 7935:7935 <> n:108
+binder 7937:7937 <> r:109
+binder 7939:7939 <> i:110
+R7955:7958 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7946:7948 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R7945:7945 Top.externals.SQIR.examples.Utilities <> i:110 var
+R7949:7949 Top.externals.SQIR.examples.Utilities <> n:108 var
+R7979:7981 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7959:7961 Coq.Lists.List <> nth def
+R7966:7971 Coq.Lists.List <> repeat def
+R7975:7975 Top.externals.SQIR.examples.Utilities <> n:108 var
+R7973:7973 Top.externals.SQIR.examples.Utilities <> r:109 var
+R7963:7963 Top.externals.SQIR.examples.Utilities <> i:110 var
+R7982:7982 Top.externals.SQIR.examples.Utilities <> r:109 var
+R8021:8029 Coq.Lists.List <> nth_indep thm
+R8021:8029 Coq.Lists.List <> nth_indep thm
+R8021:8029 Coq.Lists.List <> nth_indep thm
+R8021:8029 Coq.Lists.List <> nth_indep thm
+R8149:8161 Coq.Lists.List <> repeat_length thm
+R8149:8161 Coq.Lists.List <> repeat_length thm
+R8149:8161 Coq.Lists.List <> repeat_length thm
+prf 8190:8209 <> pr_outcome_sum_count
+binder 8220:8220 <> l:111
+binder 8222:8222 <> u:112
+binder 8224:8224 <> f:113
+R8240:8245 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8231:8233 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R8230:8230 Top.externals.SQIR.examples.Utilities <> l:111 var
+R8234:8234 Top.externals.SQIR.examples.Utilities <> u:112 var
+R8276:8281 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8246:8259 Top.externals.SQIR.SQIR.DiscreteProb <> pr_outcome_sum def
+R8262:8268 Top.externals.SQIR.SQIR.DiscreteProb <> uniform def
+R8270:8270 Top.externals.SQIR.examples.Utilities <> l:111 var
+R8272:8272 Top.externals.SQIR.examples.Utilities <> u:112 var
+R8275:8275 Top.externals.SQIR.examples.Utilities <> f:113 var
+R8332:8334 Coq.Reals.Rdefinitions <> ::R_scope:x_'/'_x not
+R8283:8285 Coq.Reals.Raxioms <> INR def
+R8288:8293 Top.externals.SQIR.examples.Utilities <> count1 def
+binder 8300:8300 <> x:114
+R8305:8305 Top.externals.SQIR.examples.Utilities <> f:113 var
+R8313:8315 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R8309:8311 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R8308:8308 Top.externals.SQIR.examples.Utilities <> l:111 var
+R8312:8312 Top.externals.SQIR.examples.Utilities <> x:114 var
+R8326:8328 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R8325:8325 Top.externals.SQIR.examples.Utilities <> u:112 var
+R8329:8329 Top.externals.SQIR.examples.Utilities <> l:111 var
+R8335:8337 Coq.Reals.Raxioms <> INR def
+R8341:8343 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R8340:8340 Top.externals.SQIR.examples.Utilities <> u:112 var
+R8344:8344 Top.externals.SQIR.examples.Utilities <> l:111 var
+R8385:8391 Top.externals.SQIR.SQIR.DiscreteProb <> uniform def
+R8404:8424 Top.externals.SQIR.SQIR.DiscreteProb <> pr_outcome_sum_append thm
+R8404:8424 Top.externals.SQIR.SQIR.DiscreteProb <> pr_outcome_sum_append thm
+R8404:8424 Top.externals.SQIR.SQIR.DiscreteProb <> pr_outcome_sum_append thm
+R8437:8463 Top.externals.SQIR.SQIR.DiscreteProb <> pr_outcome_sum_repeat_false thm
+R8437:8463 Top.externals.SQIR.SQIR.DiscreteProb <> pr_outcome_sum_repeat_false thm
+R8437:8463 Top.externals.SQIR.SQIR.DiscreteProb <> pr_outcome_sum_repeat_false thm
+R8476:8484 Coq.Reals.Raxioms <> Rplus_0_l thm
+R8476:8484 Coq.Reals.Raxioms <> Rplus_0_l thm
+R8476:8484 Coq.Reals.Raxioms <> Rplus_0_l thm
+R8500:8502 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R8500:8502 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R8531:8533 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
+R8531:8533 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
+R8573:8586 Top.externals.SQIR.SQIR.DiscreteProb <> pr_outcome_sum def
+R8601:8613 Coq.Lists.List <> repeat_length thm
+R8601:8613 Coq.Lists.List <> repeat_length thm
+R8601:8613 Coq.Lists.List <> repeat_length thm
+R8601:8613 Coq.Lists.List <> repeat_length thm
+R8627:8641 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R8627:8641 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R8627:8641 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R8627:8641 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R8688:8690 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R8703:8705 Coq.Lists.List <> nth def
+R8710:8715 Coq.Lists.List <> repeat def
+R8719:8721 Coq.Reals.Rdefinitions <> ::R_scope:x_'/'_x not
+R8722:8724 Coq.Reals.Raxioms <> INR def
+R8774:8777 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R8808:8808 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R8763:8765 Coq.Reals.Rdefinitions <> ::R_scope:x_'/'_x not
+R8766:8768 Coq.Reals.Raxioms <> INR def
+R8785:8787 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R8688:8690 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R8703:8705 Coq.Lists.List <> nth def
+R8710:8715 Coq.Lists.List <> repeat def
+R8719:8721 Coq.Reals.Rdefinitions <> ::R_scope:x_'/'_x not
+R8722:8724 Coq.Reals.Raxioms <> INR def
+R8774:8777 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R8808:8808 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R8763:8765 Coq.Reals.Rdefinitions <> ::R_scope:x_'/'_x not
+R8766:8768 Coq.Reals.Raxioms <> INR def
+R8785:8787 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R8855:8857 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R8855:8857 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R8882:8891 Top.externals.SQIR.examples.Utilities <> nth_repeat thm
+R8882:8891 Top.externals.SQIR.examples.Utilities <> nth_repeat thm
+R8882:8891 Top.externals.SQIR.examples.Utilities <> nth_repeat thm
+R8947:8956 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_scale thm
+R8947:8956 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_scale thm
+R8947:8956 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_scale thm
+R9019:9021 Coq.Reals.Rdefinitions <> ::R_scope:x_'/'_x not
+R8970:8972 Coq.Reals.Raxioms <> INR def
+R8975:8980 Top.externals.SQIR.examples.Utilities <> count1 def
+R8991:8993 Coq.Init.Datatypes <> nat ind
+binder 8987:8987 <> x:115
+R9006:9008 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R9002:9004 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9005:9005 Top.externals.SQIR.examples.Utilities <> x:115 var
+R9022:9024 Coq.Reals.Raxioms <> INR def
+R9046:9048 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R9038:9040 Coq.Reals.Rdefinitions <> ::R_scope:x_'/'_x not
+R9041:9043 Coq.Reals.Raxioms <> INR def
+R9049:9051 Coq.Reals.Raxioms <> INR def
+R9054:9059 Top.externals.SQIR.examples.Utilities <> count1 def
+R9070:9072 Coq.Init.Datatypes <> nat ind
+binder 9066:9066 <> x:116
+R9085:9087 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R9081:9083 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9084:9084 Top.externals.SQIR.examples.Utilities <> x:116 var
+R9019:9021 Coq.Reals.Rdefinitions <> ::R_scope:x_'/'_x not
+R8970:8972 Coq.Reals.Raxioms <> INR def
+R8975:8980 Top.externals.SQIR.examples.Utilities <> count1 def
+R8991:8993 Coq.Init.Datatypes <> nat ind
+binder 8987:8987 <> x:117
+R9006:9008 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R9002:9004 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9005:9005 Top.externals.SQIR.examples.Utilities <> x:117 var
+R9022:9024 Coq.Reals.Raxioms <> INR def
+R9046:9048 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R9038:9040 Coq.Reals.Rdefinitions <> ::R_scope:x_'/'_x not
+R9041:9043 Coq.Reals.Raxioms <> INR def
+R9049:9051 Coq.Reals.Raxioms <> INR def
+R9054:9059 Top.externals.SQIR.examples.Utilities <> count1 def
+R9070:9072 Coq.Init.Datatypes <> nat ind
+binder 9066:9066 <> x:118
+R9085:9087 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R9081:9083 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9084:9084 Top.externals.SQIR.examples.Utilities <> x:118 var
+R9118:9125 Coq.Init.Logic <> f_equal2 thm
+R9118:9125 Coq.Init.Logic <> f_equal2 thm
+R9197:9207 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_extend thm
+R9197:9207 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_extend thm
+R9197:9207 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_extend thm
+R9243:9248 Top.externals.SQIR.examples.Utilities <> count1 def
+R9276:9278 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R9270:9272 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9273:9273 Coq.Init.Datatypes <> S constr
+R9293:9295 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9276:9278 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R9270:9272 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9273:9273 Coq.Init.Datatypes <> S constr
+R9293:9295 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9327:9329 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9327:9329 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9350:9361 Coq.Reals.RIneq <> S_O_plus_INR thm
+R9350:9361 Coq.Reals.RIneq <> S_O_plus_INR thm
+R9350:9361 Coq.Reals.RIneq <> S_O_plus_INR thm
+prf 9447:9456 <> seq_extend
+binder 9469:9469 <> n:119
+binder 9471:9471 <> x:120
+R9490:9492 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R9474:9481 Coq.Lists.List <> seq def
+R9486:9486 Coq.Init.Datatypes <> S constr
+R9488:9488 Top.externals.SQIR.examples.Utilities <> n:119 var
+R9483:9483 Top.externals.SQIR.examples.Utilities <> x:120 var
+R9505:9508 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R9493:9500 Coq.Lists.List <> seq def
+R9504:9504 Top.externals.SQIR.examples.Utilities <> n:119 var
+R9502:9502 Top.externals.SQIR.examples.Utilities <> x:120 var
+R9509:9509 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R9521:9521 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R9512:9514 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9511:9511 Top.externals.SQIR.examples.Utilities <> x:120 var
+R9515:9515 Top.externals.SQIR.examples.Utilities <> n:119 var
+R9569:9579 Coq.Arith.PeanoNat Nat add_0_r thm
+R9569:9579 Coq.Arith.PeanoNat Nat add_0_r thm
+R9569:9579 Coq.Arith.PeanoNat Nat add_0_r thm
+R9599:9606 Coq.Lists.List <> seq def
+R9611:9611 Coq.Init.Datatypes <> S constr
+R9614:9614 Coq.Init.Datatypes <> S constr
+R9628:9631 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9632:9639 Coq.Lists.List <> seq def
+R9648:9648 Coq.Init.Datatypes <> S constr
+R9642:9642 Coq.Init.Datatypes <> S constr
+R9599:9606 Coq.Lists.List <> seq def
+R9611:9611 Coq.Init.Datatypes <> S constr
+R9614:9614 Coq.Init.Datatypes <> S constr
+R9628:9631 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9632:9639 Coq.Lists.List <> seq def
+R9648:9648 Coq.Init.Datatypes <> S constr
+R9642:9642 Coq.Init.Datatypes <> S constr
+R9695:9697 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9698:9698 Coq.Init.Datatypes <> S constr
+R9713:9713 Coq.Init.Datatypes <> S constr
+R9717:9719 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9695:9697 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9698:9698 Coq.Init.Datatypes <> S constr
+R9713:9713 Coq.Init.Datatypes <> S constr
+R9717:9719 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+prf 9756:9771 <> count_filter_seq
+binder 9782:9782 <> a:121
+binder 9784:9784 <> b:122
+binder 9786:9786 <> f:123
+R9803:9805 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R9792:9796 Top.externals.SQIR.examples.Utilities <> count def
+R9798:9798 Top.externals.SQIR.examples.Utilities <> f:123 var
+R9800:9800 Top.externals.SQIR.examples.Utilities <> a:121 var
+R9802:9802 Top.externals.SQIR.examples.Utilities <> b:122 var
+R9806:9811 Coq.Init.Datatypes <> length def
+R9814:9819 Coq.Lists.List <> filter def
+R9824:9831 Coq.Lists.List <> seq def
+R9835:9835 Top.externals.SQIR.examples.Utilities <> b:122 var
+R9833:9833 Top.externals.SQIR.examples.Utilities <> a:121 var
+R9821:9821 Top.externals.SQIR.examples.Utilities <> f:123 var
+R9895:9904 Top.externals.SQIR.examples.Utilities <> seq_extend thm
+R9895:9904 Top.externals.SQIR.examples.Utilities <> seq_extend thm
+R9895:9904 Top.externals.SQIR.examples.Utilities <> seq_extend thm
+R9915:9924 Coq.Lists.List <> filter_app thm
+R9915:9924 Coq.Lists.List <> filter_app thm
+R9915:9924 Coq.Lists.List <> filter_app thm
+R9935:9944 Coq.Lists.List <> app_length thm
+R9935:9944 Coq.Lists.List <> app_length thm
+R9935:9944 Coq.Lists.List <> app_length thm
+R9988:9990 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R9988:9990 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+def 10216:10237 <> probability_of_outcome
+binder 10240:10240 <> n:124
+R10252:10257 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R10259:10259 Top.externals.SQIR.examples.Utilities <> n:124 var
+binder 10244:10245 <> ϕ:125
+binder 10247:10248 <> ψ:126
+R10264:10264 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R10280:10280 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R10286:10289 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R10292:10296 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R10283:10285 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R10281:10282 Top.externals.SQIR.examples.Utilities <> ϕ:125 var
+R10290:10291 Top.externals.SQIR.examples.Utilities <> ψ:126 var
+R10296:10296 Coq.Init.Datatypes <> O constr
+R10294:10294 Coq.Init.Datatypes <> O constr
+binder 10275:10275 <> c:127
+R10303:10303 Coq.Reals.Rfunctions <> ::R_scope:x_'^'_x not
+R10310:10313 Coq.Reals.Rfunctions <> ::R_scope:x_'^'_x not
+R10304:10307 Top.externals.SQIR.externals.QWIRE.Complex <> Cmod def
+R10309:10309 Top.externals.SQIR.examples.Utilities <> c:127 var
+def 10429:10445 <> prob_partial_meas
+binder 10448:10448 <> m:128
+binder 10450:10450 <> n:129
+R10459:10464 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R10468:10468 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R10469:10469 Top.externals.SQIR.examples.Utilities <> m:128 var
+binder 10454:10455 <> ϕ:130
+R10479:10484 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R10488:10489 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R10495:10495 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R10491:10493 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R10490:10490 Top.externals.SQIR.examples.Utilities <> m:128 var
+R10494:10494 Top.externals.SQIR.examples.Utilities <> n:129 var
+binder 10474:10475 <> ψ:131
+R10504:10507 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum def
+R10511:10511 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R10512:10512 Top.externals.SQIR.examples.Utilities <> n:129 var
+binder 10520:10520 <> y:132
+R10525:10546 Top.externals.SQIR.examples.Utilities <> probability_of_outcome def
+R10578:10579 Top.externals.SQIR.examples.Utilities <> ψ:131 var
+R10551:10555 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R10549:10550 Top.externals.SQIR.examples.Utilities <> ϕ:130 var
+R10556:10567 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R10571:10571 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R10572:10572 Top.externals.SQIR.examples.Utilities <> n:129 var
+R10575:10575 Top.externals.SQIR.examples.Utilities <> y:132 var
+prf 10590:10616 <> probability_of_outcome_comm
+binder 10628:10628 <> d:133
+R10640:10645 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R10647:10647 Top.externals.SQIR.examples.Utilities <> d:133 var
+binder 10632:10633 <> ϕ:134
+binder 10635:10636 <> ψ:135
+R10681:10683 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R10653:10674 Top.externals.SQIR.examples.Utilities <> probability_of_outcome def
+R10679:10680 Top.externals.SQIR.examples.Utilities <> ψ:135 var
+R10676:10677 Top.externals.SQIR.examples.Utilities <> ϕ:134 var
+R10684:10705 Top.externals.SQIR.examples.Utilities <> probability_of_outcome def
+R10710:10711 Top.externals.SQIR.examples.Utilities <> ϕ:134 var
+R10707:10708 Top.externals.SQIR.examples.Utilities <> ψ:135 var
+R10746:10767 Top.externals.SQIR.examples.Utilities <> probability_of_outcome def
+R10787:10790 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R10783:10786 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R10807:10810 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R10803:10806 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R10817:10819 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R10813:10816 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R10834:10851 Top.externals.SQIR.externals.QWIRE.Matrix <> adjoint_involutive thm
+R10787:10790 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R10783:10786 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R10807:10810 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R10803:10806 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R10817:10819 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R10813:10816 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R10834:10851 Top.externals.SQIR.externals.QWIRE.Matrix <> adjoint_involutive thm
+R10834:10851 Top.externals.SQIR.externals.QWIRE.Matrix <> adjoint_involutive thm
+R10874:10886 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_adjoint thm
+R10874:10886 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_adjoint thm
+R10874:10886 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_adjoint thm
+R10898:10904 Top.externals.SQIR.externals.QWIRE.Matrix <> adjoint def
+R10917:10926 Top.externals.SQIR.externals.QWIRE.Complex <> Cmod_Cconj thm
+R10917:10926 Top.externals.SQIR.externals.QWIRE.Complex <> Cmod_Cconj thm
+R10917:10926 Top.externals.SQIR.externals.QWIRE.Complex <> Cmod_Cconj thm
+prf 10956:10985 <> probability_of_outcome_is_norm
+binder 10997:10997 <> d:136
+R11009:11014 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R11016:11016 Top.externals.SQIR.examples.Utilities <> d:136 var
+binder 11001:11002 <> ϕ:137
+binder 11004:11005 <> ψ:138
+R11050:11052 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11022:11043 Top.externals.SQIR.examples.Utilities <> probability_of_outcome def
+R11048:11049 Top.externals.SQIR.examples.Utilities <> ψ:138 var
+R11045:11046 Top.externals.SQIR.examples.Utilities <> ϕ:137 var
+R11054:11054 Coq.Reals.Rfunctions <> ::R_scope:x_'^'_x not
+R11073:11076 Coq.Reals.Rfunctions <> ::R_scope:x_'^'_x not
+R11055:11058 Top.externals.SQIR.externals.QWIRE.Quantum <> norm def
+R11066:11069 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R11063:11065 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R11061:11062 Top.externals.SQIR.examples.Utilities <> ϕ:137 var
+R11070:11071 Top.externals.SQIR.examples.Utilities <> ψ:138 var
+R11117:11138 Top.externals.SQIR.examples.Utilities <> probability_of_outcome def
+R11141:11144 Top.externals.SQIR.externals.QWIRE.Complex <> Cmod def
+R11147:11150 Top.externals.SQIR.externals.QWIRE.Quantum <> norm def
+R11161:11168 Coq.Init.Logic <> f_equal2 thm
+R11161:11168 Coq.Init.Logic <> f_equal2 thm
+R11196:11202 Coq.Init.Logic <> f_equal thm
+R11196:11202 Coq.Init.Logic <> f_equal thm
+R11214:11218 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult def
+R11221:11227 Top.externals.SQIR.externals.QWIRE.Matrix <> adjoint def
+prf 11291:11299 <> Rsum_Msum
+binder 11310:11310 <> n:139
+R11320:11323 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11317:11319 Coq.Init.Datatypes <> nat ind
+R11324:11329 Top.externals.SQIR.externals.QWIRE.Matrix <> Square syndef
+binder 11313:11313 <> f:140
+R11384:11386 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11337:11340 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum def
+R11342:11342 Top.externals.SQIR.examples.Utilities <> n:139 var
+R11353:11355 Coq.Init.Datatypes <> nat ind
+binder 11349:11349 <> i:141
+R11360:11372 Coq.Init.Datatypes <> fst def
+R11375:11375 Top.externals.SQIR.examples.Utilities <> f:140 var
+R11379:11379 Coq.Init.Datatypes <> O constr
+R11381:11381 Coq.Init.Datatypes <> O constr
+R11377:11377 Top.externals.SQIR.examples.Utilities <> i:141 var
+R11387:11399 Coq.Init.Datatypes <> fst def
+R11402:11405 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum def
+R11413:11413 Coq.Init.Datatypes <> O constr
+R11411:11411 Coq.Init.Datatypes <> O constr
+R11409:11409 Top.externals.SQIR.examples.Utilities <> f:140 var
+R11407:11407 Top.externals.SQIR.examples.Utilities <> n:139 var
+R11444:11452 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_Csum thm
+R11444:11452 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_Csum thm
+R11444:11452 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_Csum thm
+R11468:11476 Top.externals.SQIR.externals.QWIRE.Complex <> Rsum_Csum thm
+R11468:11476 Top.externals.SQIR.externals.QWIRE.Complex <> Rsum_Csum thm
+R11468:11476 Top.externals.SQIR.externals.QWIRE.Complex <> Rsum_Csum thm
+prf 11558:11578 <> prob_partial_meas_alt
+binder 11593:11593 <> m:142
+binder 11595:11595 <> n:143
+R11604:11609 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R11613:11613 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R11614:11614 Top.externals.SQIR.examples.Utilities <> m:142 var
+binder 11599:11600 <> ϕ:144
+R11624:11629 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R11633:11634 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R11640:11640 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R11636:11638 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R11635:11635 Top.externals.SQIR.examples.Utilities <> m:142 var
+R11639:11639 Top.externals.SQIR.examples.Utilities <> n:143 var
+binder 11619:11620 <> ψ:145
+R11675:11677 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11648:11664 Top.externals.SQIR.examples.Utilities <> prob_partial_meas def
+R11666:11666 Top.externals.SQIR.examples.Utilities <> m:142 var
+R11668:11668 Top.externals.SQIR.examples.Utilities <> n:143 var
+R11670:11671 Top.externals.SQIR.examples.Utilities <> ϕ:144 var
+R11673:11674 Top.externals.SQIR.examples.Utilities <> ψ:145 var
+R11679:11679 Coq.Reals.Rfunctions <> ::R_scope:x_'^'_x not
+R11714:11717 Coq.Reals.Rfunctions <> ::R_scope:x_'^'_x not
+R11680:11683 Top.externals.SQIR.externals.QWIRE.Quantum <> norm def
+R11707:11710 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R11686:11686 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R11703:11706 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R11689:11693 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R11687:11688 Top.externals.SQIR.examples.Utilities <> ϕ:144 var
+R11694:11694 Top.externals.SQIR.externals.QWIRE.Matrix <> I def
+R11698:11700 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R11701:11701 Top.externals.SQIR.examples.Utilities <> n:143 var
+R11711:11712 Top.externals.SQIR.examples.Utilities <> ψ:145 var
+R11750:11766 Top.externals.SQIR.examples.Utilities <> prob_partial_meas def
+R11780:11786 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq thm
+R11780:11786 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq thm
+R11780:11786 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq thm
+R11780:11786 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq thm
+R11819:11848 Top.externals.SQIR.examples.Utilities <> probability_of_outcome_is_norm thm
+R11819:11848 Top.externals.SQIR.examples.Utilities <> probability_of_outcome_is_norm thm
+R11819:11848 Top.externals.SQIR.examples.Utilities <> probability_of_outcome_is_norm thm
+R11865:11868 Top.externals.SQIR.externals.QWIRE.Quantum <> norm def
+R11886:11894 Top.externals.SQIR.externals.QWIRE.RealAux <> pow2_sqrt thm
+R11886:11894 Top.externals.SQIR.externals.QWIRE.RealAux <> pow2_sqrt thm
+R11886:11894 Top.externals.SQIR.externals.QWIRE.RealAux <> pow2_sqrt thm
+R11886:11894 Top.externals.SQIR.externals.QWIRE.RealAux <> pow2_sqrt thm
+R11982:11992 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R11982:11992 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R11982:11992 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R11982:11992 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12035:12045 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12050:12054 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R12035:12045 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12050:12054 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R12035:12045 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12050:12054 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R12075:12092 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R12075:12092 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R12075:12092 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R12136:12146 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12136:12146 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12136:12146 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12183:12200 Top.externals.SQIR.externals.QWIRE.Quantum <> inner_product_ge_0 thm
+R12183:12200 Top.externals.SQIR.externals.QWIRE.Quantum <> inner_product_ge_0 thm
+R12217:12232 Top.externals.SQIR.SQIR.VectorStates <> rewrite_I_as_sum thm
+R12217:12232 Top.externals.SQIR.SQIR.VectorStates <> rewrite_I_as_sum thm
+R12217:12232 Top.externals.SQIR.SQIR.VectorStates <> rewrite_I_as_sum thm
+R12252:12268 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_Msum_distr_l thm
+R12252:12268 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_Msum_distr_l thm
+R12252:12268 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_Msum_distr_l thm
+R12281:12292 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_adjoint thm
+R12281:12292 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_adjoint thm
+R12281:12292 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_adjoint thm
+R12306:12320 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R12306:12320 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R12306:12320 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R12306:12320 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R12383:12400 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_Msum_distr_r thm
+R12383:12400 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_Msum_distr_r thm
+R12383:12400 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_Msum_distr_r thm
+R12412:12415 Top.externals.SQIR.externals.QWIRE.Quantum <> norm def
+R12428:12436 Top.externals.SQIR.externals.QWIRE.RealAux <> pow2_sqrt thm
+R12428:12436 Top.externals.SQIR.externals.QWIRE.RealAux <> pow2_sqrt thm
+R12428:12436 Top.externals.SQIR.externals.QWIRE.RealAux <> pow2_sqrt thm
+R12428:12436 Top.externals.SQIR.externals.QWIRE.RealAux <> pow2_sqrt thm
+R12450:12467 Top.externals.SQIR.externals.QWIRE.Quantum <> inner_product_ge_0 thm
+R12450:12467 Top.externals.SQIR.externals.QWIRE.Quantum <> inner_product_ge_0 thm
+R12480:12491 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_adjoint thm
+R12494:12511 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_Msum_distr_l thm
+R12480:12491 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_adjoint thm
+R12480:12491 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_adjoint thm
+R12494:12511 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_Msum_distr_l thm
+R12494:12511 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_Msum_distr_l thm
+R12525:12539 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R12525:12539 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R12525:12539 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R12525:12539 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R12571:12588 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_Msum_distr_r thm
+R12571:12588 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_Msum_distr_r thm
+R12571:12588 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_Msum_distr_r thm
+R12607:12621 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R12607:12621 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R12607:12621 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R12607:12621 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R12719:12729 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12719:12729 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12719:12729 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12719:12729 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12780:12790 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12795:12799 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R12780:12790 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12795:12799 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R12780:12790 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12795:12799 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R12824:12841 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R12824:12841 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R12824:12841 Top.externals.SQIR.externals.QWIRE.Matrix <> kron_mixed_product thm
+R12870:12880 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12870:12880 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12870:12880 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12870:12880 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12906:12916 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12920:12922 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R12906:12916 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12920:12922 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R12906:12916 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R12920:12922 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R12984:12996 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_diagonal thm
+R12984:12996 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_diagonal thm
+R12984:12996 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_diagonal thm
+R12984:12996 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_diagonal thm
+R13022:13045 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_neq thm
+R13022:13045 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_neq thm
+R13022:13045 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_neq thm
+R13102:13116 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R13102:13116 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R13102:13116 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R13102:13116 Top.externals.SQIR.externals.QWIRE.Matrix <> Msum_eq_bounded thm
+R13142:13164 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_eq thm
+R13142:13164 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_eq thm
+R13142:13164 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_eq thm
+R13237:13247 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R13237:13247 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R13237:13247 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R13237:13247 Top.externals.SQIR.externals.QWIRE.Matrix <> Mmult_assoc thm
+R13292:13294 Coq.Init.Datatypes <> nat ind
+binder 13288:13288 <> i:146
+R13382:13385 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13304:13308 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13381:13381 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13301:13303 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13320:13325 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R13380:13380 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R13311:13314 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13317:13319 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13348:13351 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13326:13337 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R13341:13343 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13347:13347 Top.externals.SQIR.examples.Utilities <> i:146 var
+R13352:13352 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13375:13379 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13353:13364 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R13368:13370 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13374:13374 Top.externals.SQIR.examples.Utilities <> i:146 var
+R13292:13294 Coq.Init.Datatypes <> nat ind
+binder 13288:13288 <> i:147
+R13382:13385 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13304:13308 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13381:13381 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13301:13303 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13320:13325 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R13380:13380 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R13311:13314 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13317:13319 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13348:13351 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13326:13337 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R13341:13343 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13347:13347 Top.externals.SQIR.examples.Utilities <> i:147 var
+R13352:13352 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13375:13379 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13353:13364 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R13368:13370 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13374:13374 Top.externals.SQIR.examples.Utilities <> i:147 var
+R13407:13413 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq thm
+R13407:13413 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq thm
+R13407:13413 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq thm
+R13407:13413 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq thm
+R13530:13533 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13452:13456 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13529:13529 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13449:13451 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13468:13473 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R13528:13528 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R13459:13462 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13465:13467 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13496:13499 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13474:13485 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R13489:13491 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13500:13500 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13523:13527 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13501:13512 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R13516:13518 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13530:13533 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13452:13456 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13529:13529 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13449:13451 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13468:13473 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R13528:13528 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R13459:13462 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13465:13467 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13496:13499 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R13474:13485 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R13489:13491 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13500:13500 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13523:13527 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'†' not
+R13501:13512 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R13516:13518 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13604:13612 Top.externals.SQIR.examples.Utilities <> Rsum_Msum thm
+R13604:13612 Top.externals.SQIR.examples.Utilities <> Rsum_Msum thm
+prf 13627:13645 <> partial_meas_tensor
+binder 13660:13660 <> m:148
+binder 13662:13662 <> n:149
+R13671:13676 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R13680:13680 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13681:13681 Top.externals.SQIR.examples.Utilities <> m:148 var
+binder 13666:13667 <> ϕ:150
+R13692:13697 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R13701:13701 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13702:13702 Top.externals.SQIR.examples.Utilities <> m:148 var
+binder 13686:13688 <> ψ1:151
+R13713:13718 Top.externals.SQIR.externals.QWIRE.Matrix <> Vector syndef
+R13722:13722 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13723:13723 Top.externals.SQIR.examples.Utilities <> n:149 var
+binder 13707:13709 <> ψ2:152
+R13751:13756 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13730:13746 Top.externals.SQIR.externals.QWIRE.Quantum <> Pure_State_Vector def
+R13748:13750 Top.externals.SQIR.examples.Utilities <> ψ2:152 var
+R13796:13798 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R13758:13774 Top.externals.SQIR.examples.Utilities <> prob_partial_meas def
+R13776:13776 Top.externals.SQIR.examples.Utilities <> m:148 var
+R13778:13778 Top.externals.SQIR.examples.Utilities <> n:149 var
+R13780:13781 Top.externals.SQIR.examples.Utilities <> ϕ:150 var
+R13787:13791 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'⊗'_x not
+R13784:13786 Top.externals.SQIR.examples.Utilities <> ψ1:151 var
+R13792:13794 Top.externals.SQIR.examples.Utilities <> ψ2:152 var
+R13799:13820 Top.externals.SQIR.examples.Utilities <> probability_of_outcome def
+R13825:13827 Top.externals.SQIR.examples.Utilities <> ψ1:151 var
+R13822:13823 Top.externals.SQIR.examples.Utilities <> ϕ:150 var
+R13874:13894 Top.externals.SQIR.examples.Utilities <> prob_partial_meas_alt thm
+R13874:13894 Top.externals.SQIR.examples.Utilities <> prob_partial_meas_alt thm
+R13874:13894 Top.externals.SQIR.examples.Utilities <> prob_partial_meas_alt thm
+R13907:13936 Top.externals.SQIR.examples.Utilities <> probability_of_outcome_is_norm thm
+R13907:13936 Top.externals.SQIR.examples.Utilities <> probability_of_outcome_is_norm thm
+R13907:13936 Top.externals.SQIR.examples.Utilities <> probability_of_outcome_is_norm thm
+R13948:13951 Top.externals.SQIR.externals.QWIRE.Quantum <> norm def
+R13962:13969 Coq.Init.Logic <> f_equal2 thm
+R13962:13969 Coq.Init.Logic <> f_equal2 thm
+R14002:14008 Coq.Init.Logic <> f_equal thm
+R14002:14008 Coq.Init.Logic <> f_equal thm
+R14002:14008 Coq.Init.Logic <> f_equal thm
+prf 14094:14127 <> nth_apply_u_probability_of_outcome
+binder 14138:14138 <> n:153
+R14145:14150 Top.externals.SQIR.externals.QWIRE.Matrix <> Square syndef
+R14154:14156 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R14157:14157 Top.externals.SQIR.examples.Utilities <> n:153 var
+R14154:14156 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R14157:14157 Top.externals.SQIR.examples.Utilities <> n:153 var
+binder 14141:14141 <> u:154
+binder 14161:14161 <> x:155
+R14181:14186 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14168:14170 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R14167:14167 Top.externals.SQIR.examples.Utilities <> x:155 var
+R14172:14174 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R14175:14175 Top.externals.SQIR.examples.Utilities <> n:153 var
+R14198:14203 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14187:14195 Top.externals.SQIR.externals.QWIRE.Matrix <> WF_Matrix def
+R14197:14197 Top.externals.SQIR.examples.Utilities <> u:154 var
+R14223:14230 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R14204:14206 Coq.Lists.List <> nth def
+R14211:14217 Top.externals.SQIR.SQIR.DiscreteProb <> apply_u def
+R14219:14219 Top.externals.SQIR.examples.Utilities <> u:154 var
+R14208:14208 Top.externals.SQIR.examples.Utilities <> x:155 var
+R14231:14252 Top.externals.SQIR.examples.Utilities <> probability_of_outcome def
+R14297:14300 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R14296:14296 Top.externals.SQIR.examples.Utilities <> u:154 var
+R14301:14312 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R14316:14316 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R14317:14317 Top.externals.SQIR.examples.Utilities <> n:153 var
+R14264:14275 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R14279:14279 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R14280:14280 Top.externals.SQIR.examples.Utilities <> n:153 var
+R14283:14283 Top.externals.SQIR.examples.Utilities <> x:155 var
+R14363:14369 Top.externals.SQIR.SQIR.DiscreteProb <> apply_u def
+R14372:14393 Top.externals.SQIR.examples.Utilities <> probability_of_outcome def
+R14426:14430 Top.externals.SQIR.SQIR.DiscreteProb <> Cmod2 def
+R14406:14414 Coq.Lists.List <> nth_indep thm
+R14426:14430 Top.externals.SQIR.SQIR.DiscreteProb <> Cmod2 def
+R14406:14414 Coq.Lists.List <> nth_indep thm
+R14426:14430 Top.externals.SQIR.SQIR.DiscreteProb <> Cmod2 def
+R14406:14414 Coq.Lists.List <> nth_indep thm
+R14426:14430 Top.externals.SQIR.SQIR.DiscreteProb <> Cmod2 def
+R14406:14414 Coq.Lists.List <> nth_indep thm
+R14446:14452 Coq.Lists.List <> map_nth thm
+R14446:14452 Coq.Lists.List <> map_nth thm
+R14446:14452 Coq.Lists.List <> map_nth thm
+R14468:14471 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R14472:14483 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R14487:14489 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R14468:14471 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R14472:14483 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R14487:14489 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R14513:14527 Top.externals.SQIR.externals.QWIRE.Matrix <> nth_vec_to_list thm
+R14513:14527 Top.externals.SQIR.externals.QWIRE.Matrix <> nth_vec_to_list thm
+R14513:14527 Top.externals.SQIR.externals.QWIRE.Matrix <> nth_vec_to_list thm
+R14555:14573 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_decomp thm
+R14555:14573 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_decomp thm
+R14555:14573 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_decomp thm
+R14555:14573 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_decomp thm
+R14595:14612 Top.externals.SQIR.SQIR.VectorStates <> Mmult_vsum_distr_l thm
+R14595:14612 Top.externals.SQIR.SQIR.VectorStates <> Mmult_vsum_distr_l thm
+R14595:14612 Top.externals.SQIR.SQIR.VectorStates <> Mmult_vsum_distr_l thm
+R14638:14648 Top.externals.SQIR.SQIR.VectorStates <> vsum_unique thm
+R14638:14648 Top.externals.SQIR.SQIR.VectorStates <> vsum_unique thm
+R14638:14648 Top.externals.SQIR.SQIR.VectorStates <> vsum_unique thm
+R14638:14648 Top.externals.SQIR.SQIR.VectorStates <> vsum_unique thm
+R14720:14737 Top.externals.SQIR.externals.QWIRE.Matrix <> Mscale_mult_dist_r thm
+R14720:14737 Top.externals.SQIR.externals.QWIRE.Matrix <> Mscale_mult_dist_r thm
+R14720:14737 Top.externals.SQIR.externals.QWIRE.Matrix <> Mscale_mult_dist_r thm
+R14756:14778 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_eq thm
+R14756:14778 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_eq thm
+R14756:14778 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_eq thm
+R14756:14778 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_eq thm
+R14855:14872 Top.externals.SQIR.externals.QWIRE.Matrix <> Mscale_mult_dist_r thm
+R14855:14872 Top.externals.SQIR.externals.QWIRE.Matrix <> Mscale_mult_dist_r thm
+R14855:14872 Top.externals.SQIR.externals.QWIRE.Matrix <> Mscale_mult_dist_r thm
+R14891:14914 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_neq thm
+R14891:14914 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_neq thm
+R14891:14914 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_product_neq thm
+R14949:14952 Top.externals.SQIR.externals.QWIRE.Complex <> Cmod def
+R14955:14959 Top.externals.SQIR.SQIR.DiscreteProb <> Cmod2 def
+R14972:14980 Top.externals.SQIR.externals.QWIRE.RealAux <> pow2_sqrt thm
+R14972:14980 Top.externals.SQIR.externals.QWIRE.RealAux <> pow2_sqrt thm
+R14972:14980 Top.externals.SQIR.externals.QWIRE.RealAux <> pow2_sqrt thm
+R14972:14980 Top.externals.SQIR.externals.QWIRE.RealAux <> pow2_sqrt thm
+R14992:14992 Top.externals.SQIR.externals.QWIRE.Matrix <> I def
+R14995:14999 Top.externals.SQIR.SQIR.DiscreteProb <> scale def
+R15026:15045 Coq.Reals.RIneq <> Rplus_le_le_0_compat thm
+R15054:15062 Coq.Reals.Ratan <> pow2_ge_0 thm
+R15026:15045 Coq.Reals.RIneq <> Rplus_le_le_0_compat thm
+R15054:15062 Coq.Reals.Ratan <> pow2_ge_0 thm
+R15054:15062 Coq.Reals.Ratan <> pow2_ge_0 thm
+R15083:15089 Top.externals.SQIR.externals.QWIRE.Matrix <> WF_mult thm
+R15083:15089 Top.externals.SQIR.externals.QWIRE.Matrix <> WF_mult thm
+R15114:15128 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_WF thm
+R15114:15128 Top.externals.SQIR.SQIR.VectorStates <> basis_vector_WF thm
+R15139:15150 Top.externals.SQIR.externals.QWIRE.Prelim <> pow_positive thm
+R15139:15150 Top.externals.SQIR.externals.QWIRE.Prelim <> pow_positive thm
+R15168:15177 Coq.Lists.List <> map_length thm
+R15168:15177 Coq.Lists.List <> map_length thm
+R15168:15177 Coq.Lists.List <> map_length thm
+R15192:15209 Top.externals.SQIR.externals.QWIRE.Matrix <> vec_to_list_length thm
+R15192:15209 Top.externals.SQIR.externals.QWIRE.Matrix <> vec_to_list_length thm
+R15192:15209 Top.externals.SQIR.externals.QWIRE.Matrix <> vec_to_list_length thm
+prf 15238:15259 <> rewrite_pr_outcome_sum
+binder 15270:15270 <> n:156
+binder 15272:15272 <> k:157
+R15279:15284 Top.externals.SQIR.externals.QWIRE.Matrix <> Square syndef
+R15288:15291 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R15297:15297 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R15293:15295 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R15292:15292 Top.externals.SQIR.examples.Utilities <> n:156 var
+R15296:15296 Top.externals.SQIR.examples.Utilities <> k:157 var
+R15288:15291 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R15297:15297 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R15293:15295 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R15292:15292 Top.externals.SQIR.examples.Utilities <> n:156 var
+R15296:15296 Top.externals.SQIR.examples.Utilities <> k:157 var
+binder 15275:15275 <> u:158
+binder 15301:15301 <> f:159
+R15317:15322 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15306:15314 Top.externals.SQIR.externals.QWIRE.Matrix <> WF_Matrix def
+R15316:15316 Top.externals.SQIR.examples.Utilities <> u:158 var
+R15372:15377 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15323:15336 Top.externals.SQIR.SQIR.DiscreteProb <> pr_outcome_sum def
+R15339:15345 Top.externals.SQIR.SQIR.DiscreteProb <> apply_u def
+R15347:15347 Top.externals.SQIR.examples.Utilities <> u:158 var
+binder 15355:15355 <> x:160
+R15360:15360 Top.externals.SQIR.examples.Utilities <> f:159 var
+R15363:15365 Top.externals.SQIR.SQIR.DiscreteProb <> fst def
+R15367:15367 Top.externals.SQIR.examples.Utilities <> k:157 var
+R15369:15369 Top.externals.SQIR.examples.Utilities <> x:160 var
+R15378:15381 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum def
+R15385:15387 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R15388:15388 Top.externals.SQIR.examples.Utilities <> n:156 var
+binder 15396:15396 <> x:161
+R15402:15402 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R15423:15451 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R15406:15406 Top.externals.SQIR.examples.Utilities <> f:159 var
+R15408:15408 Top.externals.SQIR.examples.Utilities <> x:161 var
+R15452:15468 Top.externals.SQIR.examples.Utilities <> prob_partial_meas def
+R15525:15528 Top.externals.SQIR.externals.QWIRE.Matrix <> ::matrix_scope:x_'×'_x not
+R15524:15524 Top.externals.SQIR.examples.Utilities <> u:158 var
+R15529:15540 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R15544:15547 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R15553:15553 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R15549:15551 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R15548:15548 Top.externals.SQIR.examples.Utilities <> n:156 var
+R15552:15552 Top.externals.SQIR.examples.Utilities <> k:157 var
+R15471:15482 Top.externals.SQIR.SQIR.VectorStates <> basis_vector def
+R15486:15488 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R15489:15489 Top.externals.SQIR.examples.Utilities <> n:156 var
+R15492:15492 Top.externals.SQIR.examples.Utilities <> x:161 var
+R15602:15615 Top.externals.SQIR.SQIR.DiscreteProb <> pr_outcome_sum def
+R15627:15633 Top.externals.SQIR.SQIR.DiscreteProb <> apply_u def
+R15651:15660 Coq.Lists.List <> map_length thm
+R15651:15660 Coq.Lists.List <> map_length thm
+R15651:15660 Coq.Lists.List <> map_length thm
+R15673:15690 Top.externals.SQIR.externals.QWIRE.Matrix <> vec_to_list_length thm
+R15673:15690 Top.externals.SQIR.externals.QWIRE.Matrix <> vec_to_list_length thm
+R15673:15690 Top.externals.SQIR.externals.QWIRE.Matrix <> vec_to_list_length thm
+R15703:15713 Top.externals.SQIR.externals.QWIRE.RealAux <> nested_Rsum thm
+R15703:15713 Top.externals.SQIR.externals.QWIRE.RealAux <> nested_Rsum thm
+R15703:15713 Top.externals.SQIR.externals.QWIRE.RealAux <> nested_Rsum thm
+R15724:15738 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R15724:15738 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R15791:15799 Coq.Reals.Raxioms <> Rmult_1_l thm
+R15791:15799 Coq.Reals.Raxioms <> Rmult_1_l thm
+R15791:15799 Coq.Reals.Raxioms <> Rmult_1_l thm
+R15813:15827 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R15813:15827 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R15813:15827 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R15813:15827 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R15866:15877 Top.externals.SQIR.SQIR.DiscreteProb <> simplify_fst thm
+R15866:15877 Top.externals.SQIR.SQIR.DiscreteProb <> simplify_fst thm
+R15866:15877 Top.externals.SQIR.SQIR.DiscreteProb <> simplify_fst thm
+R15928:15961 Top.externals.SQIR.examples.Utilities <> nth_apply_u_probability_of_outcome thm
+R15928:15961 Top.externals.SQIR.examples.Utilities <> nth_apply_u_probability_of_outcome thm
+R15928:15961 Top.externals.SQIR.examples.Utilities <> nth_apply_u_probability_of_outcome thm
+R15928:15961 Top.externals.SQIR.examples.Utilities <> nth_apply_u_probability_of_outcome thm
+R15928:15961 Top.externals.SQIR.examples.Utilities <> nth_apply_u_probability_of_outcome thm
+R16001:16004 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16010:16010 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16006:16008 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R16028:16030 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R16024:16026 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16032:16034 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16001:16004 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16010:16010 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16006:16008 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R16028:16030 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R16024:16026 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16032:16034 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16098:16114 Top.externals.SQIR.examples.Utilities <> prob_partial_meas def
+R16128:16142 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R16128:16142 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R16128:16142 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R16128:16142 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R16186:16203 Top.externals.SQIR.SQIR.VectorStates <> split_basis_vector thm
+R16186:16203 Top.externals.SQIR.SQIR.VectorStates <> split_basis_vector thm
+R16186:16203 Top.externals.SQIR.SQIR.VectorStates <> split_basis_vector thm
+R16232:16235 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16241:16241 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16237:16239 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R16259:16261 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R16255:16257 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16263:16265 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16232:16235 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16241:16241 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16237:16239 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R16259:16261 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R16255:16257 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16263:16265 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R16317:16325 Coq.Reals.RIneq <> Rmult_0_l thm
+R16317:16325 Coq.Reals.RIneq <> Rmult_0_l thm
+R16317:16325 Coq.Reals.RIneq <> Rmult_0_l thm
+R16339:16353 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R16339:16353 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R16339:16353 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R16339:16353 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_eq_bounded thm
+R16384:16395 Top.externals.SQIR.SQIR.DiscreteProb <> simplify_fst thm
+R16384:16395 Top.externals.SQIR.SQIR.DiscreteProb <> simplify_fst thm
+R16384:16395 Top.externals.SQIR.SQIR.DiscreteProb <> simplify_fst thm
+R16454:16459 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_0 thm
+R16454:16459 Top.externals.SQIR.externals.QWIRE.RealAux <> Rsum_0 thm

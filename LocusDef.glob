@@ -1,0 +1,3645 @@
+DIGEST 74979ffd7bc0a8ae4f666ae0bde7cb90
+FTop.LocusDef
+R15:19 Coq.Reals.Reals <> <> lib
+R37:41 Coq.micromega.Psatz <> <> lib
+R59:65 Top.externals.SQIR.externals.QWIRE.Complex <> <> lib
+R83:86 Top.externals.SQIR.SQIR.SQIR <> <> lib
+R104:115 Top.externals.SQIR.SQIR.VectorStates <> <> lib
+R117:126 Top.externals.SQIR.SQIR.UnitaryOps <> <> lib
+R128:144 Coq.btauto.Btauto <> <> lib
+R146:160 Coq.NArith.Nnat <> <> lib
+R162:172 Coq.Sorting.Permutation <> <> lib
+R191:195 Top.externals.SQIR.externals.QWIRE.Dirac <> <> lib
+R213:215 Top.externals.SQIR.examples.QPE <> <> lib
+R233:237 Top.OQASM <> <> lib
+R255:266 Top.BasicUtility <> <> lib
+R284:297 Coq.Logic.Classical_Prop <> <> lib
+R315:322 Top.MathSpec <> <> lib
+R340:350 Top.QafnySyntax <> <> lib
+R445:451 Coq.Lists.ListSet <> <> lib
+R469:486 Coq.FSets.FMapList <> <> lib
+R504:522 Coq.FSets.FMapFacts <> <> lib
+R540:567 Coq.Structures.OrderedTypeEx <> <> lib
+R605:607 Top.QafnySyntax <> exp ind
+ind 1024:1033 <> simple_ses
+constr 1058:1073 <> simple_ses_empty
+constr 1096:1110 <> simple_ses_many
+R1042:1045 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1037:1041 Top.QafnySyntax <> locus def
+R1077:1086 Top.LocusDef <> simple_ses:1 ind
+R1088:1090 Coq.Init.Datatypes <> nil constr
+binder 1122:1122 <> a:3
+binder 1124:1124 <> x:4
+binder 1126:1126 <> y:5
+binder 1128:1128 <> l:6
+R1145:1148 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1131:1142 Top.QafnySyntax <> simple_bound def
+R1144:1144 Top.LocusDef <> x:4 var
+R1163:1166 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1149:1160 Top.QafnySyntax <> simple_bound def
+R1162:1162 Top.LocusDef <> y:5 var
+R1179:1182 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1167:1176 Top.LocusDef <> simple_ses:1 ind
+R1178:1178 Top.LocusDef <> l:6 var
+R1183:1192 Top.LocusDef <> simple_ses:1 ind
+R1202:1203 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1195:1195 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1197:1197 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1199:1199 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1201:1201 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1196:1196 Top.LocusDef <> a:3 var
+R1198:1198 Top.LocusDef <> x:4 var
+R1200:1200 Top.LocusDef <> y:5 var
+R1204:1204 Top.LocusDef <> l:6 var
+ind 1220:1225 <> ses_eq
+constr 1258:1269 <> ses_eq_empty
+constr 1297:1314 <> ses_eq_range_empty
+constr 1373:1384 <> ses_eq_split
+constr 1521:1532 <> ses_eq_merge
+R1234:1237 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1229:1233 Top.QafnySyntax <> locus def
+R1243:1246 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1238:1242 Top.QafnySyntax <> locus def
+binder 1280:1280 <> a:9
+R1283:1288 Top.LocusDef <> ses_eq:7 ind
+R1292:1292 Top.LocusDef <> a:9 var
+R1290:1290 Top.LocusDef <> a:9 var
+binder 1325:1325 <> x:10
+binder 1327:1327 <> n:11
+binder 1329:1329 <> a:12
+binder 1331:1331 <> b:13
+R1344:1347 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1334:1339 Top.LocusDef <> ses_eq:7 ind
+R1343:1343 Top.LocusDef <> b:13 var
+R1341:1341 Top.LocusDef <> a:12 var
+R1348:1353 Top.LocusDef <> ses_eq:7 ind
+R1368:1368 Top.LocusDef <> b:13 var
+R1363:1364 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1356:1356 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1358:1358 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1360:1360 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1362:1362 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1357:1357 Top.LocusDef <> x:10 var
+R1359:1359 Top.LocusDef <> n:11 var
+R1361:1361 Top.LocusDef <> n:11 var
+R1365:1365 Top.LocusDef <> a:12 var
+binder 1394:1394 <> x:14
+binder 1396:1396 <> i:15
+binder 1398:1398 <> n:16
+binder 1400:1400 <> m:17
+binder 1402:1402 <> a:18
+binder 1404:1404 <> b:19
+R1417:1429 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1408:1411 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R1413:1415 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R1407:1407 Top.LocusDef <> n:16 var
+R1412:1412 Top.LocusDef <> i:15 var
+R1412:1412 Top.LocusDef <> i:15 var
+R1416:1416 Top.LocusDef <> m:17 var
+R1482:1485 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1430:1435 Top.LocusDef <> ses_eq:7 ind
+R1481:1481 Top.LocusDef <> b:19 var
+R1455:1457 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1478:1478 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1438:1438 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1440:1440 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1447:1447 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1454:1454 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1439:1439 Top.LocusDef <> x:14 var
+R1441:1444 Top.QafnySyntax <> BNum constr
+R1446:1446 Top.LocusDef <> n:16 var
+R1448:1451 Top.QafnySyntax <> BNum constr
+R1453:1453 Top.LocusDef <> i:15 var
+R1475:1476 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1458:1458 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1460:1460 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1467:1467 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1474:1474 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1459:1459 Top.LocusDef <> x:14 var
+R1461:1464 Top.QafnySyntax <> BNum constr
+R1466:1466 Top.LocusDef <> i:15 var
+R1468:1471 Top.QafnySyntax <> BNum constr
+R1473:1473 Top.LocusDef <> m:17 var
+R1477:1477 Top.LocusDef <> a:18 var
+R1486:1491 Top.LocusDef <> ses_eq:7 ind
+R1516:1516 Top.LocusDef <> b:19 var
+R1511:1512 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1494:1494 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1496:1496 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1503:1503 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1510:1510 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1495:1495 Top.LocusDef <> x:14 var
+R1497:1500 Top.QafnySyntax <> BNum constr
+R1502:1502 Top.LocusDef <> n:16 var
+R1504:1507 Top.QafnySyntax <> BNum constr
+R1509:1509 Top.LocusDef <> m:17 var
+R1513:1513 Top.LocusDef <> a:18 var
+binder 1542:1542 <> x:20
+binder 1544:1544 <> i:21
+binder 1546:1546 <> n:22
+binder 1548:1548 <> m:23
+binder 1550:1550 <> a:24
+binder 1552:1552 <> b:25
+R1565:1568 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1556:1559 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R1561:1563 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R1555:1555 Top.LocusDef <> n:22 var
+R1560:1560 Top.LocusDef <> i:21 var
+R1560:1560 Top.LocusDef <> i:21 var
+R1564:1564 Top.LocusDef <> m:23 var
+R1600:1611 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1569:1574 Top.LocusDef <> ses_eq:7 ind
+R1599:1599 Top.LocusDef <> b:25 var
+R1594:1595 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1577:1577 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1579:1579 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1586:1586 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1593:1593 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1578:1578 Top.LocusDef <> x:20 var
+R1580:1583 Top.QafnySyntax <> BNum constr
+R1585:1585 Top.LocusDef <> n:22 var
+R1587:1590 Top.QafnySyntax <> BNum constr
+R1592:1592 Top.LocusDef <> m:23 var
+R1596:1596 Top.LocusDef <> a:24 var
+R1612:1617 Top.LocusDef <> ses_eq:7 ind
+R1663:1663 Top.LocusDef <> b:25 var
+R1637:1639 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1660:1660 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1620:1620 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1622:1622 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1629:1629 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1636:1636 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1621:1621 Top.LocusDef <> x:20 var
+R1623:1626 Top.QafnySyntax <> BNum constr
+R1628:1628 Top.LocusDef <> n:22 var
+R1630:1633 Top.QafnySyntax <> BNum constr
+R1635:1635 Top.LocusDef <> i:21 var
+R1657:1658 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1640:1640 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1642:1642 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1649:1649 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1656:1656 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1641:1641 Top.LocusDef <> x:20 var
+R1643:1646 Top.QafnySyntax <> BNum constr
+R1648:1648 Top.LocusDef <> i:21 var
+R1650:1653 Top.QafnySyntax <> BNum constr
+R1655:1655 Top.LocusDef <> m:23 var
+R1659:1659 Top.LocusDef <> a:24 var
+ax 1673:1683 <> ses_eq_comm
+binder 1693:1693 <> a:26
+binder 1695:1695 <> b:27
+R1708:1711 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1698:1703 Top.LocusDef <> ses_eq ind
+R1705:1705 Top.LocusDef <> a:26 var
+R1707:1707 Top.LocusDef <> b:27 var
+R1712:1717 Top.LocusDef <> ses_eq ind
+R1719:1719 Top.LocusDef <> b:27 var
+R1721:1721 Top.LocusDef <> a:26 var
+def 1734:1745 <> is_ses_empty
+R1750:1754 Top.QafnySyntax <> locus def
+binder 1748:1748 <> s:29
+R1776:1776 Top.LocusDef <> s:29 var
+R1783:1785 Coq.Init.Datatypes <> nil constr
+R1790:1794 Coq.Init.Logic <> False ind
+R1819:1820 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1812:1812 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1814:1814 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1816:1816 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1818:1818 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1827:1827 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1833:1837 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1829:1831 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1838:1849 Top.LocusDef <> is_ses_empty:30 def
+ax 1870:1878 <> ses_eq_id
+binder 1888:1888 <> l:32
+R1891:1896 Top.LocusDef <> ses_eq ind
+R1898:1898 Top.LocusDef <> l:32 var
+R1900:1900 Top.LocusDef <> l:32 var
+ind 1914:1920 <> ses_sub
+constr 1953:1964 <> ses_sub_prop
+R1929:1932 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1924:1928 Top.QafnySyntax <> locus def
+R1938:1941 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1933:1937 Top.QafnySyntax <> locus def
+binder 1975:1975 <> a:36
+binder 1977:1977 <> b:37
+binder 1979:1980 <> b':38
+R1999:2002 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1983:1988 Top.LocusDef <> ses_eq ind
+R1992:1993 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R1991:1991 Top.LocusDef <> a:36 var
+R1994:1995 Top.LocusDef <> b':38 var
+R1998:1998 Top.LocusDef <> b:37 var
+R2003:2009 Top.LocusDef <> ses_sub:34 ind
+R2013:2013 Top.LocusDef <> b:37 var
+R2011:2011 Top.LocusDef <> a:36 var
+def 2028:2035 <> in_range
+R2044:2048 Top.QafnySyntax <> range def
+binder 2038:2039 <> r1:39
+binder 2041:2042 <> r2:40
+R2062:2063 Top.LocusDef <> r1:39 var
+R2070:2070 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2072:2072 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2079:2079 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2086:2086 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2073:2076 Top.QafnySyntax <> BNum constr
+R2080:2083 Top.QafnySyntax <> BNum constr
+R2102:2103 Top.LocusDef <> r2:40 var
+R2110:2110 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2112:2112 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2119:2120 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2127:2127 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2113:2116 Top.QafnySyntax <> BNum constr
+R2121:2124 Top.QafnySyntax <> BNum constr
+R2133:2133 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2139:2143 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2135:2137 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2144:2144 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2151:2156 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2163:2163 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2146:2149 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R2158:2161 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R2191:2195 Coq.Init.Logic <> False ind
+R2226:2230 Coq.Init.Logic <> False ind
+ind 2250:2260 <> ses_dis_aux
+constr 2295:2311 <> ses_dis_aux_empty
+constr 2347:2362 <> ses_dis_aux_many
+R2269:2272 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2264:2268 Top.QafnySyntax <> range def
+R2278:2281 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2273:2277 Top.QafnySyntax <> locus def
+binder 2322:2322 <> r:45
+R2325:2335 Top.LocusDef <> ses_dis_aux:43 ind
+R2339:2341 Coq.Init.Datatypes <> nil constr
+R2337:2337 Top.LocusDef <> r:45 var
+binder 2372:2372 <> r:46
+binder 2374:2374 <> a:47
+binder 2376:2376 <> l:48
+R2393:2396 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2379:2380 Coq.Init.Logic <> ::type_scope:'~'_x not
+R2381:2388 Top.LocusDef <> in_range def
+R2390:2390 Top.LocusDef <> r:46 var
+R2392:2392 Top.LocusDef <> a:47 var
+R2412:2415 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2397:2407 Top.LocusDef <> ses_dis_aux:43 ind
+R2411:2411 Top.LocusDef <> l:48 var
+R2409:2409 Top.LocusDef <> r:46 var
+R2416:2426 Top.LocusDef <> ses_dis_aux:43 ind
+R2432:2433 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2431:2431 Top.LocusDef <> a:47 var
+R2434:2434 Top.LocusDef <> l:48 var
+R2428:2428 Top.LocusDef <> r:46 var
+ind 2450:2461 <> ses_dis_aux2
+constr 2496:2508 <> ses_dis_empty
+constr 2545:2556 <> ses_dis_many
+R2470:2473 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2465:2469 Top.QafnySyntax <> range def
+R2479:2482 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2474:2478 Top.QafnySyntax <> locus def
+binder 2519:2519 <> r:51
+R2522:2533 Top.LocusDef <> ses_dis_aux2:49 ind
+R2537:2539 Coq.Init.Datatypes <> nil constr
+R2535:2535 Top.LocusDef <> r:51 var
+binder 2566:2566 <> r:52
+binder 2568:2568 <> a:53
+binder 2570:2570 <> l:54
+R2593:2596 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2573:2583 Top.LocusDef <> ses_dis_aux ind
+R2585:2585 Top.LocusDef <> r:52 var
+R2589:2590 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2588:2588 Top.LocusDef <> a:53 var
+R2591:2591 Top.LocusDef <> l:54 var
+R2613:2616 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2597:2608 Top.LocusDef <> ses_dis_aux2:49 ind
+R2612:2612 Top.LocusDef <> l:54 var
+R2610:2610 Top.LocusDef <> a:53 var
+R2617:2628 Top.LocusDef <> ses_dis_aux2:49 ind
+R2634:2635 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2633:2633 Top.LocusDef <> a:53 var
+R2636:2636 Top.LocusDef <> l:54 var
+R2630:2630 Top.LocusDef <> r:52 var
+def 2652:2658 <> ses_dis
+R2663:2667 Top.QafnySyntax <> locus def
+binder 2661:2661 <> s:55
+R2682:2682 Top.LocusDef <> s:55 var
+R2689:2690 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R2695:2698 Coq.Init.Logic <> True ind
+R2704:2705 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2712:2723 Top.LocusDef <> ses_dis_aux2 ind
+ind 2745:2755 <> two_ses_dis
+constr 2788:2800 <> two_ses_empty
+constr 2835:2846 <> two_ses_many
+R2764:2767 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2759:2763 Top.QafnySyntax <> locus def
+R2773:2776 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2768:2772 Top.QafnySyntax <> locus def
+binder 2811:2811 <> s:59
+R2814:2824 Top.LocusDef <> two_ses_dis:57 ind
+R2830:2830 Top.LocusDef <> s:59 var
+R2826:2828 Coq.Init.Datatypes <> nil constr
+binder 2856:2856 <> a:60
+binder 2858:2858 <> l:61
+binder 2860:2860 <> s:62
+R2878:2881 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2863:2873 Top.LocusDef <> ses_dis_aux ind
+R2875:2875 Top.LocusDef <> a:60 var
+R2877:2877 Top.LocusDef <> s:62 var
+R2897:2900 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2882:2892 Top.LocusDef <> two_ses_dis:57 ind
+R2896:2896 Top.LocusDef <> s:62 var
+R2894:2894 Top.LocusDef <> l:61 var
+R2901:2911 Top.LocusDef <> two_ses_dis:57 ind
+R2920:2920 Top.LocusDef <> s:62 var
+R2915:2916 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2914:2914 Top.LocusDef <> a:60 var
+R2917:2917 Top.LocusDef <> l:61 var
+def 2937:2948 <> join_two_ses
+R2965:2967 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R2957:2959 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R2954:2956 Top.BasicUtility <> var def
+R2960:2964 Top.QafnySyntax <> bound ind
+R2968:2972 Top.QafnySyntax <> bound ind
+binder 2951:2951 <> a:63
+R2989:2989 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R2983:2983 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R2980:2982 Top.BasicUtility <> var def
+R2984:2988 Top.QafnySyntax <> bound ind
+R2990:2994 Top.QafnySyntax <> bound ind
+binder 2977:2977 <> b:64
+R3010:3010 Top.LocusDef <> a:63 var
+R3017:3017 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3019:3019 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3027:3027 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3035:3035 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3020:3023 Top.QafnySyntax <> BNum constr
+R3028:3031 Top.QafnySyntax <> BNum constr
+R3053:3053 Top.LocusDef <> b:64 var
+R3060:3060 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3062:3062 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3070:3070 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3078:3078 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3063:3066 Top.QafnySyntax <> BNum constr
+R3071:3074 Top.QafnySyntax <> BNum constr
+R3100:3103 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R3532:3535 Coq.Init.Datatypes <> None constr
+R3117:3121 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R3364:3367 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R3419:3422 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R3489:3492 Coq.Init.Datatypes <> Some constr
+R3494:3494 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3496:3496 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3504:3504 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3512:3512 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3497:3500 Top.QafnySyntax <> BNum constr
+R3505:3508 Top.QafnySyntax <> BNum constr
+R3431:3434 Coq.Init.Datatypes <> Some constr
+R3436:3436 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3438:3438 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3446:3446 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3454:3454 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3439:3442 Top.QafnySyntax <> BNum constr
+R3447:3450 Top.QafnySyntax <> BNum constr
+R3376:3379 Coq.Init.Datatypes <> None constr
+R3168:3171 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R3227:3230 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R3301:3304 Coq.Init.Datatypes <> Some constr
+R3305:3305 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3307:3307 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3315:3315 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3323:3323 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3308:3311 Top.QafnySyntax <> BNum constr
+R3316:3319 Top.QafnySyntax <> BNum constr
+R3239:3242 Coq.Init.Datatypes <> Some constr
+R3244:3244 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3246:3246 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3254:3254 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3262:3262 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3247:3250 Top.QafnySyntax <> BNum constr
+R3255:3258 Top.QafnySyntax <> BNum constr
+R3180:3183 Coq.Init.Datatypes <> None constr
+R3556:3559 Coq.Init.Datatypes <> None constr
+R3587:3590 Coq.Init.Datatypes <> None constr
+def 3610:3612 <> dom
+binder 3615:3615 <> A:67
+R3627:3630 Coq.Init.Datatypes <> list ind
+R3638:3640 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R3633:3637 Top.QafnySyntax <> locus def
+R3641:3641 Top.LocusDef <> A:67 var
+binder 3624:3624 <> l:68
+R3658:3658 Top.LocusDef <> l:68 var
+R3665:3666 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R3671:3672 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R3697:3698 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3692:3692 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3694:3694 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3696:3696 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3707:3709 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3716:3716 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3710:3712 Top.LocusDef <> dom:69 def
+def 3737:3748 <> join_ses_aux
+R3765:3767 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R3757:3759 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R3754:3756 Top.BasicUtility <> var def
+R3760:3764 Top.QafnySyntax <> bound ind
+R3768:3772 Top.QafnySyntax <> bound ind
+binder 3751:3751 <> a:71
+R3779:3782 Coq.Init.Datatypes <> list ind
+R3797:3799 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R3789:3791 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R3786:3788 Top.BasicUtility <> var def
+R3792:3796 Top.QafnySyntax <> bound ind
+R3800:3804 Top.QafnySyntax <> bound ind
+binder 3777:3777 <> l:72
+R3823:3823 Top.LocusDef <> l:72 var
+R3830:3831 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R3837:3837 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R3839:3839 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R3838:3838 Top.LocusDef <> a:71 var
+R3857:3858 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3872:3883 Top.LocusDef <> join_two_ses def
+R3885:3885 Top.LocusDef <> a:71 var
+R3894:3897 Coq.Init.Datatypes <> None constr
+R3903:3904 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3905:3916 Top.LocusDef <> join_ses_aux:73 def
+R3918:3918 Top.LocusDef <> a:71 var
+R3966:3969 Coq.Init.Datatypes <> Some constr
+R3979:3980 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+def 4032:4039 <> join_ses
+R4048:4051 Coq.Init.Datatypes <> list ind
+R4066:4068 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R4058:4060 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R4055:4057 Top.BasicUtility <> var def
+R4061:4065 Top.QafnySyntax <> bound ind
+R4069:4073 Top.QafnySyntax <> bound ind
+binder 4042:4043 <> l1:75
+binder 4045:4046 <> l2:76
+R4091:4092 Top.LocusDef <> l1:75 var
+R4099:4100 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R4105:4106 Top.LocusDef <> l2:76 var
+R4126:4127 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4134:4145 Top.LocusDef <> join_ses_aux def
+R4150:4157 Top.LocusDef <> join_ses:77 def
+R4162:4163 Top.LocusDef <> l2:76 var
+def 4238:4248 <> ses_map_dom
+R4256:4259 Coq.Init.Datatypes <> list ind
+R4261:4265 Top.QafnySyntax <> locus def
+binder 4251:4252 <> l1:79
+R4279:4280 Top.LocusDef <> l1:79 var
+R4287:4288 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R4293:4294 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R4311:4312 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4318:4325 Top.LocusDef <> join_ses def
+R4330:4340 Top.LocusDef <> ses_map_dom:80 def
+def 4747:4755 <> type_cfac
+R4770:4773 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4767:4769 Coq.Init.Datatypes <> nat ind
+R4774:4779 Top.BasicUtility <> rz_val def
+ind 4792:4798 <> se_type
+constr 4810:4813 <> TNor
+constr 4817:4820 <> THad
+constr 4824:4825 <> CH
+def 4902:4909 <> type_map
+R4914:4917 Coq.Init.Datatypes <> list ind
+R4925:4927 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R4920:4924 Top.QafnySyntax <> locus def
+R4928:4934 Top.LocusDef <> se_type ind
+def 4950:4960 <> simple_tenv
+R4965:4972 Top.LocusDef <> type_map def
+binder 4963:4963 <> t:84
+binder 4985:4985 <> a:85
+binder 4987:4987 <> b:86
+R5000:5003 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4990:4991 Coq.Lists.List <> In def
+R4999:4999 Top.LocusDef <> t:84 var
+R4993:4993 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4995:4995 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4997:4997 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4994:4994 Top.LocusDef <> a:85 var
+R4996:4996 Top.LocusDef <> b:86 var
+R5004:5013 Top.LocusDef <> simple_ses ind
+R5015:5015 Top.LocusDef <> a:85 var
+def 5028:5038 <> ses_len_aux
+R5043:5046 Coq.Init.Datatypes <> list ind
+R5058:5060 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R5052:5054 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R5049:5051 Top.BasicUtility <> var def
+R5055:5057 Coq.Init.Datatypes <> nat ind
+R5061:5063 Coq.Init.Datatypes <> nat ind
+binder 5041:5041 <> l:87
+R5079:5079 Top.LocusDef <> l:87 var
+R5086:5088 Coq.Init.Datatypes <> nil constr
+R5104:5105 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5097:5097 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5099:5099 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5101:5101 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5103:5103 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5112:5112 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5118:5121 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5114:5116 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R5117:5117 Top.LocusDef <> l:87 var
+R5122:5132 Top.LocusDef <> ses_len_aux:88 def
+def 5153:5164 <> get_core_ses
+R5169:5173 Top.QafnySyntax <> locus def
+binder 5167:5167 <> l:90
+R5188:5188 Top.LocusDef <> l:90 var
+R5195:5196 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R5201:5204 Coq.Init.Datatypes <> Some constr
+R5206:5208 Coq.Init.Datatypes <> nil constr
+R5241:5242 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5223:5223 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5225:5225 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5232:5233 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5240:5240 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5226:5229 Top.QafnySyntax <> BNum constr
+R5234:5237 Top.QafnySyntax <> BNum constr
+R5262:5273 Top.LocusDef <> get_core_ses:91 def
+R5283:5286 Coq.Init.Datatypes <> None constr
+R5291:5294 Coq.Init.Datatypes <> None constr
+R5325:5328 Coq.Init.Datatypes <> Some constr
+R5336:5339 Coq.Init.Datatypes <> Some constr
+R5349:5350 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5342:5342 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5344:5344 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5346:5346 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5348:5348 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5384:5387 Coq.Init.Datatypes <> None constr
+def 5409:5415 <> ses_len
+R5420:5424 Top.QafnySyntax <> locus def
+binder 5418:5418 <> l:93
+R5436:5447 Top.LocusDef <> get_core_ses def
+R5449:5449 Top.LocusDef <> l:93 var
+R5456:5459 Coq.Init.Datatypes <> None constr
+R5464:5467 Coq.Init.Datatypes <> None constr
+R5471:5474 Coq.Init.Datatypes <> Some constr
+R5482:5485 Coq.Init.Datatypes <> Some constr
+R5488:5498 Top.LocusDef <> ses_len_aux def
+ax 5516:5530 <> app_length_same
+binder 5541:5542 <> l1:94
+binder 5544:5545 <> l2:95
+binder 5547:5548 <> l3:96
+binder 5550:5551 <> l4:97
+binder 5553:5553 <> n:98
+R5575:5582 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5566:5568 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5556:5562 Top.LocusDef <> ses_len def
+R5564:5565 Top.LocusDef <> l1:94 var
+R5569:5572 Coq.Init.Datatypes <> Some constr
+R5574:5574 Top.LocusDef <> n:98 var
+R5602:5605 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5593:5595 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5583:5589 Top.LocusDef <> ses_len def
+R5591:5592 Top.LocusDef <> l3:96 var
+R5596:5599 Coq.Init.Datatypes <> Some constr
+R5601:5601 Top.LocusDef <> n:98 var
+R5623:5626 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5612:5614 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5608:5609 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R5606:5607 Top.LocusDef <> l1:94 var
+R5610:5611 Top.LocusDef <> l2:95 var
+R5617:5620 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R5615:5616 Top.LocusDef <> l3:96 var
+R5621:5622 Top.LocusDef <> l4:97 var
+R5634:5637 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R5629:5631 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5627:5628 Top.LocusDef <> l1:94 var
+R5632:5633 Top.LocusDef <> l3:96 var
+R5640:5642 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5638:5639 Top.LocusDef <> l2:95 var
+R5643:5644 Top.LocusDef <> l4:97 var
+prf 5654:5669 <> get_core_ses_app
+binder 5679:5679 <> l:100
+binder 5681:5682 <> l':101
+binder 5684:5685 <> l1:102
+binder 5687:5689 <> l1':103
+R5716:5719 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5706:5708 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5692:5703 Top.LocusDef <> get_core_ses def
+R5705:5705 Top.LocusDef <> l:100 var
+R5709:5712 Coq.Init.Datatypes <> Some constr
+R5714:5715 Top.LocusDef <> l':101 var
+R5746:5755 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5735:5737 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5720:5731 Top.LocusDef <> get_core_ses def
+R5733:5734 Top.LocusDef <> l1:102 var
+R5738:5741 Coq.Init.Datatypes <> Some constr
+R5743:5745 Top.LocusDef <> l1':103 var
+R5776:5778 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5756:5767 Top.LocusDef <> get_core_ses def
+R5771:5772 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R5770:5770 Top.LocusDef <> l:100 var
+R5773:5774 Top.LocusDef <> l1:102 var
+R5779:5782 Coq.Init.Datatypes <> Some constr
+R5787:5788 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R5785:5786 Top.LocusDef <> l':101 var
+R5789:5791 Top.LocusDef <> l1':103 var
+R5935:5946 Top.LocusDef <> get_core_ses def
+R5935:5946 Top.LocusDef <> get_core_ses def
+prf 6024:6044 <> get_core_ses_app_none
+binder 6054:6054 <> l:104
+binder 6056:6057 <> l':105
+binder 6059:6060 <> l1:106
+R6087:6090 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6077:6079 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6063:6074 Top.LocusDef <> get_core_ses def
+R6076:6076 Top.LocusDef <> l:104 var
+R6080:6083 Coq.Init.Datatypes <> Some constr
+R6085:6086 Top.LocusDef <> l':105 var
+R6113:6122 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6106:6108 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6091:6102 Top.LocusDef <> get_core_ses def
+R6104:6105 Top.LocusDef <> l1:106 var
+R6109:6112 Coq.Init.Datatypes <> None constr
+R6143:6145 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6123:6134 Top.LocusDef <> get_core_ses def
+R6138:6139 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6137:6137 Top.LocusDef <> l:104 var
+R6140:6141 Top.LocusDef <> l1:106 var
+R6146:6149 Coq.Init.Datatypes <> None constr
+R6283:6294 Top.LocusDef <> get_core_ses def
+R6283:6294 Top.LocusDef <> get_core_ses def
+prf 6378:6392 <> ses_len_aux_add
+binder 6403:6403 <> l:107
+binder 6405:6406 <> l1:108
+R6428:6430 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6409:6419 Top.LocusDef <> ses_len_aux def
+R6423:6424 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6422:6422 Top.LocusDef <> l:107 var
+R6425:6426 Top.LocusDef <> l1:108 var
+R6431:6431 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6445:6449 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6464:6464 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6432:6442 Top.LocusDef <> ses_len_aux def
+R6444:6444 Top.LocusDef <> l:107 var
+R6450:6460 Top.LocusDef <> ses_len_aux def
+R6462:6463 Top.LocusDef <> l1:108 var
+prf 6573:6587 <> ses_len_app_add
+binder 6597:6597 <> l:109
+binder 6599:6600 <> l1:110
+binder 6602:6602 <> n:111
+binder 6604:6605 <> n1:112
+R6626:6629 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6617:6619 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6608:6614 Top.LocusDef <> ses_len def
+R6616:6616 Top.LocusDef <> l:109 var
+R6620:6623 Coq.Init.Datatypes <> Some constr
+R6625:6625 Top.LocusDef <> n:111 var
+R6650:6658 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6640:6642 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6630:6636 Top.LocusDef <> ses_len def
+R6638:6639 Top.LocusDef <> l1:110 var
+R6643:6646 Coq.Init.Datatypes <> Some constr
+R6648:6649 Top.LocusDef <> n1:112 var
+R6674:6676 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6659:6665 Top.LocusDef <> ses_len def
+R6669:6670 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6668:6668 Top.LocusDef <> l:109 var
+R6671:6672 Top.LocusDef <> l1:110 var
+R6677:6680 Coq.Init.Datatypes <> Some constr
+R6684:6684 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6683:6683 Top.LocusDef <> n:111 var
+R6685:6686 Top.LocusDef <> n1:112 var
+R6714:6720 Top.LocusDef <> ses_len def
+R6740:6751 Top.LocusDef <> get_core_ses def
+R6740:6751 Top.LocusDef <> get_core_ses def
+R6787:6798 Top.LocusDef <> get_core_ses def
+R6787:6798 Top.LocusDef <> get_core_ses def
+R6837:6852 Top.LocusDef <> get_core_ses_app thm
+R6837:6852 Top.LocusDef <> get_core_ses_app thm
+R6903:6917 Top.LocusDef <> ses_len_aux_add thm
+R6903:6917 Top.LocusDef <> ses_len_aux_add thm
+R6903:6917 Top.LocusDef <> ses_len_aux_add thm
+prf 6953:6967 <> ses_len_app_sub
+binder 6977:6977 <> l:113
+binder 6979:6980 <> l1:114
+binder 6982:6982 <> n:115
+binder 6984:6985 <> n1:116
+R7006:7009 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6997:6999 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6988:6994 Top.LocusDef <> ses_len def
+R6996:6996 Top.LocusDef <> l:113 var
+R7000:7003 Coq.Init.Datatypes <> Some constr
+R7005:7005 Top.LocusDef <> n:115 var
+R7035:7043 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7025:7027 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7010:7016 Top.LocusDef <> ses_len def
+R7020:7021 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R7019:7019 Top.LocusDef <> l:113 var
+R7022:7023 Top.LocusDef <> l1:114 var
+R7028:7031 Coq.Init.Datatypes <> Some constr
+R7033:7034 Top.LocusDef <> n1:116 var
+R7056:7058 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7044:7050 Top.LocusDef <> ses_len def
+R7053:7054 Top.LocusDef <> l1:114 var
+R7059:7062 Coq.Init.Datatypes <> Some constr
+R7067:7069 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R7065:7066 Top.LocusDef <> n1:116 var
+R7070:7070 Top.LocusDef <> n:115 var
+R7098:7104 Top.LocusDef <> ses_len def
+R7124:7135 Top.LocusDef <> get_core_ses def
+R7124:7135 Top.LocusDef <> get_core_ses def
+R7171:7182 Top.LocusDef <> get_core_ses def
+R7171:7182 Top.LocusDef <> get_core_ses def
+R7221:7236 Top.LocusDef <> get_core_ses_app thm
+R7221:7236 Top.LocusDef <> get_core_ses_app thm
+R7301:7315 Top.LocusDef <> ses_len_aux_add thm
+R7301:7315 Top.LocusDef <> ses_len_aux_add thm
+R7301:7315 Top.LocusDef <> ses_len_aux_add thm
+R7367:7369 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R7350:7352 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R7336:7346 Top.LocusDef <> ses_len_aux def
+R7353:7363 Top.LocusDef <> ses_len_aux def
+R7370:7380 Top.LocusDef <> ses_len_aux def
+R7392:7402 Top.LocusDef <> ses_len_aux def
+R7367:7369 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R7350:7352 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R7336:7346 Top.LocusDef <> ses_len_aux def
+R7353:7363 Top.LocusDef <> ses_len_aux def
+R7370:7380 Top.LocusDef <> ses_len_aux def
+R7392:7402 Top.LocusDef <> ses_len_aux def
+R7430:7450 Top.LocusDef <> get_core_ses_app_none thm
+R7430:7450 Top.LocusDef <> get_core_ses_app_none thm
+prf 7534:7550 <> ses_len_app_small
+binder 7560:7560 <> l:117
+binder 7562:7563 <> l1:118
+binder 7565:7565 <> n:119
+binder 7567:7568 <> n1:120
+R7589:7592 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7580:7582 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7571:7577 Top.LocusDef <> ses_len def
+R7579:7579 Top.LocusDef <> l:117 var
+R7583:7586 Coq.Init.Datatypes <> Some constr
+R7588:7588 Top.LocusDef <> n:119 var
+R7618:7626 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7608:7610 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7593:7599 Top.LocusDef <> ses_len def
+R7603:7604 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R7602:7602 Top.LocusDef <> l:117 var
+R7605:7606 Top.LocusDef <> l1:118 var
+R7611:7614 Coq.Init.Datatypes <> Some constr
+R7616:7617 Top.LocusDef <> n1:120 var
+R7628:7631 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R7627:7627 Top.LocusDef <> n:119 var
+R7632:7633 Top.LocusDef <> n1:120 var
+R7659:7673 Top.LocusDef <> ses_len_app_sub thm
+R7659:7673 Top.LocusDef <> ses_len_app_sub thm
+R7733:7739 Top.LocusDef <> ses_len def
+R7759:7770 Top.LocusDef <> get_core_ses def
+R7759:7770 Top.LocusDef <> get_core_ses def
+R7806:7817 Top.LocusDef <> get_core_ses def
+R7806:7817 Top.LocusDef <> get_core_ses def
+R7856:7871 Top.LocusDef <> get_core_ses_app thm
+R7856:7871 Top.LocusDef <> get_core_ses_app thm
+R7928:7942 Top.LocusDef <> ses_len_aux_add thm
+R7928:7942 Top.LocusDef <> ses_len_aux_add thm
+R7928:7942 Top.LocusDef <> ses_len_aux_add thm
+ind 7997:8003 <> subtype
+constr 8043:8050 <> sub_refl
+constr 8081:8086 <> nor_ch
+constr 8111:8116 <> had_ch
+R8015:8018 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8008:8014 Top.LocusDef <> se_type ind
+R8026:8029 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8019:8025 Top.LocusDef <> se_type ind
+binder 8060:8060 <> a:123
+R8063:8069 Top.LocusDef <> subtype:121 ind
+R8073:8073 Top.LocusDef <> a:123 var
+R8071:8071 Top.LocusDef <> a:123 var
+R8090:8096 Top.LocusDef <> subtype:121 ind
+R8103:8104 Top.LocusDef <> CH constr
+R8098:8101 Top.LocusDef <> TNor constr
+R8120:8126 Top.LocusDef <> subtype:121 ind
+R8133:8134 Top.LocusDef <> CH constr
+R8128:8131 Top.LocusDef <> THad constr
+ind 8597:8606 <> times_type
+constr 8654:8663 <> nor_nor_to
+constr 8696:8705 <> had_had_to
+constr 8738:8747 <> ch_ch_to_1
+constr 8784:8793 <> ch_ch_to_2
+R8616:8619 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8609:8615 Top.LocusDef <> se_type ind
+R8627:8630 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8620:8626 Top.LocusDef <> se_type ind
+R8638:8641 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8631:8637 Top.LocusDef <> se_type ind
+R8666:8675 Top.LocusDef <> times_type:124 ind
+R8687:8690 Top.LocusDef <> TNor constr
+R8682:8685 Top.LocusDef <> TNor constr
+R8677:8680 Top.LocusDef <> TNor constr
+R8708:8717 Top.LocusDef <> times_type:124 ind
+R8729:8732 Top.LocusDef <> THad constr
+R8724:8727 Top.LocusDef <> THad constr
+R8719:8722 Top.LocusDef <> THad constr
+binder 8758:8758 <> a:126
+R8761:8770 Top.LocusDef <> times_type:124 ind
+R8777:8778 Top.LocusDef <> CH constr
+R8774:8775 Top.LocusDef <> CH constr
+R8772:8772 Top.LocusDef <> a:126 var
+binder 8804:8804 <> b:127
+R8807:8816 Top.LocusDef <> times_type:124 ind
+R8823:8824 Top.LocusDef <> CH constr
+R8821:8821 Top.LocusDef <> b:127 var
+R8818:8819 Top.LocusDef <> CH constr
+ind 9164:9173 <> split_type
+constr 9210:9218 <> nor_split
+constr 9246:9254 <> had_split
+R9183:9186 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9176:9182 Top.LocusDef <> se_type ind
+R9194:9197 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9187:9193 Top.LocusDef <> se_type ind
+R9221:9230 Top.LocusDef <> split_type:128 ind
+R9237:9240 Top.LocusDef <> TNor constr
+R9232:9235 Top.LocusDef <> TNor constr
+R9257:9266 Top.LocusDef <> split_type:128 ind
+R9273:9276 Top.LocusDef <> THad constr
+R9268:9271 Top.LocusDef <> THad constr
+ind 9617:9625 <> env_equiv
+constr 9668:9673 <> env_id
+constr 9769:9776 <> env_comm
+constr 9828:9838 <> env_subtype
+constr 9914:9926 <> env_ses_assoc
+constr 10004:10013 <> env_ses_eq
+constr 10088:10100 <> env_ses_split
+constr 10190:10202 <> env_ses_merge
+constr 10297:10303 <> env_mut
+R9637:9640 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9629:9636 Top.LocusDef <> type_map def
+R9649:9652 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9641:9648 Top.LocusDef <> type_map def
+binder 9684:9684 <> S:132
+R9687:9695 Top.LocusDef <> env_equiv:130 ind
+R9699:9699 Top.LocusDef <> S:132 var
+R9697:9697 Top.LocusDef <> S:132 var
+binder 9786:9787 <> a1:133
+binder 9789:9790 <> a2:134
+R9793:9801 Top.LocusDef <> env_equiv:130 ind
+R9815:9816 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R9813:9814 Top.LocusDef <> a2:134 var
+R9817:9818 Top.LocusDef <> a1:133 var
+R9806:9807 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R9804:9805 Top.LocusDef <> a1:133 var
+R9808:9809 Top.LocusDef <> a2:134 var
+binder 9848:9848 <> s:135
+binder 9850:9850 <> v:136
+binder 9852:9853 <> v':137
+binder 9855:9855 <> S:138
+R9870:9873 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9858:9864 Top.LocusDef <> subtype ind
+R9866:9866 Top.LocusDef <> v:136 var
+R9868:9869 Top.LocusDef <> v':137 var
+R9874:9882 Top.LocusDef <> env_equiv:130 ind
+R9902:9903 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9896:9896 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9898:9898 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9901:9901 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9897:9897 Top.LocusDef <> s:135 var
+R9899:9900 Top.LocusDef <> v':137 var
+R9904:9904 Top.LocusDef <> S:138 var
+R9890:9891 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9885:9885 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9887:9887 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9889:9889 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9886:9886 Top.LocusDef <> s:135 var
+R9888:9888 Top.LocusDef <> v:136 var
+R9892:9892 Top.LocusDef <> S:138 var
+binder 9936:9936 <> s:139
+binder 9938:9938 <> v:140
+binder 9940:9940 <> S:141
+binder 9942:9943 <> S':142
+R9960:9963 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9946:9954 Top.LocusDef <> env_equiv:130 ind
+R9958:9959 Top.LocusDef <> S':142 var
+R9956:9956 Top.LocusDef <> S:141 var
+R9964:9972 Top.LocusDef <> env_equiv:130 ind
+R9991:9992 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9986:9986 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9988:9988 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9990:9990 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9987:9987 Top.LocusDef <> s:139 var
+R9989:9989 Top.LocusDef <> v:140 var
+R9993:9994 Top.LocusDef <> S':142 var
+R9980:9981 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9975:9975 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9977:9977 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9979:9979 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9976:9976 Top.LocusDef <> s:139 var
+R9978:9978 Top.LocusDef <> v:140 var
+R9982:9982 Top.LocusDef <> S:141 var
+binder 10023:10023 <> s:143
+binder 10025:10026 <> s':144
+binder 10028:10028 <> v:145
+binder 10030:10030 <> S:146
+R10044:10047 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10033:10038 Top.LocusDef <> ses_eq ind
+R10040:10040 Top.LocusDef <> s:143 var
+R10042:10043 Top.LocusDef <> s':144 var
+R10048:10056 Top.LocusDef <> env_equiv:130 ind
+R10076:10077 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10070:10070 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10073:10073 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10075:10075 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10071:10072 Top.LocusDef <> s':144 var
+R10074:10074 Top.LocusDef <> v:145 var
+R10078:10078 Top.LocusDef <> S:146 var
+R10064:10065 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10059:10059 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10061:10061 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10063:10063 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10060:10060 Top.LocusDef <> s:143 var
+R10062:10062 Top.LocusDef <> v:145 var
+R10066:10066 Top.LocusDef <> S:146 var
+binder 10110:10110 <> s:147
+binder 10112:10113 <> s':148
+binder 10115:10115 <> v:149
+binder 10117:10117 <> S:150
+R10134:10137 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10120:10129 Top.LocusDef <> split_type ind
+R10131:10131 Top.LocusDef <> v:149 var
+R10133:10133 Top.LocusDef <> v:149 var
+R10138:10146 Top.LocusDef <> env_equiv:130 ind
+R10169:10170 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10164:10164 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10166:10166 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10168:10168 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10165:10165 Top.LocusDef <> s:147 var
+R10167:10167 Top.LocusDef <> v:149 var
+R10177:10178 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10171:10171 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10174:10174 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10176:10176 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10172:10173 Top.LocusDef <> s':148 var
+R10175:10175 Top.LocusDef <> v:149 var
+R10179:10179 Top.LocusDef <> S:150 var
+R10158:10159 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10149:10149 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10155:10155 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10157:10157 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10151:10152 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R10150:10150 Top.LocusDef <> s:147 var
+R10153:10154 Top.LocusDef <> s':148 var
+R10156:10156 Top.LocusDef <> v:149 var
+R10160:10160 Top.LocusDef <> S:150 var
+binder 10212:10212 <> s:151
+binder 10214:10215 <> s':152
+binder 10217:10217 <> a:153
+binder 10219:10219 <> b:154
+binder 10221:10221 <> c:155
+binder 10223:10223 <> S:156
+R10242:10245 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10226:10235 Top.LocusDef <> times_type ind
+R10237:10237 Top.LocusDef <> a:153 var
+R10239:10239 Top.LocusDef <> b:154 var
+R10241:10241 Top.LocusDef <> c:155 var
+R10246:10254 Top.LocusDef <> env_equiv:130 ind
+R10285:10286 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10276:10276 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10282:10282 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10284:10284 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10278:10279 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R10277:10277 Top.LocusDef <> s:151 var
+R10280:10281 Top.LocusDef <> s':152 var
+R10283:10283 Top.LocusDef <> c:155 var
+R10287:10287 Top.LocusDef <> S:156 var
+R10262:10263 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10257:10257 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10259:10259 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10261:10261 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10258:10258 Top.LocusDef <> s:151 var
+R10260:10260 Top.LocusDef <> a:153 var
+R10270:10271 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10264:10264 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10267:10267 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10269:10269 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10265:10266 Top.LocusDef <> s':152 var
+R10268:10268 Top.LocusDef <> b:154 var
+R10272:10272 Top.LocusDef <> S:156 var
+binder 10313:10314 <> l1:157
+binder 10316:10317 <> l2:158
+binder 10319:10319 <> a:159
+binder 10321:10321 <> b:160
+binder 10323:10323 <> v:161
+binder 10325:10325 <> S:162
+R10328:10336 Top.LocusDef <> env_equiv:130 ind
+R10381:10382 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10363:10363 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10378:10378 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10380:10380 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10366:10368 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R10377:10377 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R10364:10365 Top.LocusDef <> l1:157 var
+R10370:10371 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10369:10369 Top.LocusDef <> b:160 var
+R10373:10374 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10372:10372 Top.LocusDef <> a:159 var
+R10375:10376 Top.LocusDef <> l2:158 var
+R10379:10379 Top.LocusDef <> v:161 var
+R10383:10383 Top.LocusDef <> S:162 var
+R10357:10358 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10339:10339 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10354:10354 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10356:10356 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10342:10344 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R10353:10353 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R10340:10341 Top.LocusDef <> l1:157 var
+R10346:10347 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10345:10345 Top.LocusDef <> a:159 var
+R10349:10350 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10348:10348 Top.LocusDef <> b:160 var
+R10351:10352 Top.LocusDef <> l2:158 var
+R10355:10355 Top.LocusDef <> v:161 var
+R10359:10359 Top.LocusDef <> S:162 var
+ax 10394:10408 <> env_equiv_trans
+binder 10419:10420 <> T1:163
+binder 10422:10423 <> T2:164
+binder 10425:10426 <> T3:165
+R10444:10447 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10429:10437 Top.LocusDef <> env_equiv ind
+R10439:10440 Top.LocusDef <> T1:163 var
+R10442:10443 Top.LocusDef <> T2:164 var
+R10463:10466 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10448:10456 Top.LocusDef <> env_equiv ind
+R10458:10459 Top.LocusDef <> T2:164 var
+R10461:10462 Top.LocusDef <> T3:165 var
+R10467:10475 Top.LocusDef <> env_equiv ind
+R10477:10478 Top.LocusDef <> T1:163 var
+R10480:10481 Top.LocusDef <> T3:165 var
+ax 10491:10504 <> env_equiv_cong
+binder 10515:10516 <> S1:167
+binder 10518:10519 <> S2:168
+binder 10521:10522 <> S3:169
+R10541:10544 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10526:10534 Top.LocusDef <> env_equiv ind
+R10536:10537 Top.LocusDef <> S1:167 var
+R10539:10540 Top.LocusDef <> S2:168 var
+R10546:10554 Top.LocusDef <> env_equiv ind
+R10559:10560 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R10557:10558 Top.LocusDef <> S1:167 var
+R10561:10562 Top.LocusDef <> S3:169 var
+R10568:10569 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R10566:10567 Top.LocusDef <> S2:168 var
+R10570:10571 Top.LocusDef <> S3:169 var
+ind 10586:10593 <> find_env
+constr 10668:10681 <> find_env_empty
+constr 10719:10733 <> find_env_many_1
+constr 10807:10821 <> find_env_many_2
+binder 10596:10596 <> A:171
+R10621:10624 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10605:10608 Coq.Init.Datatypes <> list ind
+R10616:10618 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R10611:10615 Top.QafnySyntax <> locus def
+R10630:10633 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10625:10629 Top.QafnySyntax <> locus def
+R10652:10655 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10634:10639 Coq.Init.Datatypes <> option ind
+R10647:10649 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R10642:10646 Top.QafnySyntax <> locus def
+binder 10692:10692 <> l:174
+R10695:10702 Top.LocusDef <> find_env:172 ind
+R10710:10713 Coq.Init.Datatypes <> None constr
+R10708:10708 Top.LocusDef <> l:174 var
+R10704:10706 Coq.Init.Datatypes <> nil constr
+binder 10744:10744 <> S:175
+binder 10746:10746 <> x:176
+binder 10748:10748 <> y:177
+binder 10750:10750 <> t:178
+R10764:10767 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10753:10759 Top.LocusDef <> ses_sub ind
+R10761:10761 Top.LocusDef <> x:176 var
+R10763:10763 Top.LocusDef <> y:177 var
+R10768:10775 Top.LocusDef <> find_env:172 ind
+R10791:10794 Coq.Init.Datatypes <> Some constr
+R10796:10796 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10798:10798 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10800:10800 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10797:10797 Top.LocusDef <> y:177 var
+R10799:10799 Top.LocusDef <> t:178 var
+R10788:10788 Top.LocusDef <> x:176 var
+R10783:10784 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10778:10778 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10780:10780 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10782:10782 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10779:10779 Top.LocusDef <> y:177 var
+R10781:10781 Top.LocusDef <> t:178 var
+R10785:10785 Top.LocusDef <> S:175 var
+binder 10832:10832 <> S:179
+binder 10834:10834 <> x:180
+binder 10836:10836 <> y:181
+binder 10838:10838 <> v:182
+binder 10840:10840 <> t:183
+R10856:10859 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10843:10844 Coq.Init.Logic <> ::type_scope:'~'_x not
+R10845:10851 Top.LocusDef <> ses_sub ind
+R10853:10853 Top.LocusDef <> x:180 var
+R10855:10855 Top.LocusDef <> y:181 var
+R10874:10877 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10860:10867 Top.LocusDef <> find_env:172 ind
+R10873:10873 Top.LocusDef <> t:183 var
+R10871:10871 Top.LocusDef <> y:181 var
+R10869:10869 Top.LocusDef <> S:179 var
+R10878:10885 Top.LocusDef <> find_env:172 ind
+R10900:10900 Top.LocusDef <> t:183 var
+R10898:10898 Top.LocusDef <> y:181 var
+R10893:10894 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10888:10888 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10890:10890 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10892:10892 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10889:10889 Top.LocusDef <> x:180 var
+R10891:10891 Top.LocusDef <> v:182 var
+R10895:10895 Top.LocusDef <> S:179 var
+ind 10914:10922 <> find_type
+constr 10989:11002 <> find_type_rule
+R10934:10937 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10926:10933 Top.LocusDef <> type_map def
+R10943:10946 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10938:10942 Top.QafnySyntax <> locus def
+R10971:10974 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10947:10952 Coq.Init.Datatypes <> option ind
+R10960:10962 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R10955:10959 Top.QafnySyntax <> locus def
+R10963:10969 Top.LocusDef <> se_type ind
+binder 11012:11012 <> S:186
+binder 11014:11015 <> S':187
+binder 11017:11017 <> x:188
+binder 11019:11019 <> t:189
+R11036:11039 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11022:11030 Top.LocusDef <> env_equiv ind
+R11032:11032 Top.LocusDef <> S:186 var
+R11034:11035 Top.LocusDef <> S':187 var
+R11055:11058 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11040:11047 Top.LocusDef <> find_env ind
+R11054:11054 Top.LocusDef <> t:189 var
+R11052:11052 Top.LocusDef <> x:188 var
+R11049:11050 Top.LocusDef <> S':187 var
+R11059:11067 Top.LocusDef <> find_type:184 ind
+R11073:11073 Top.LocusDef <> t:189 var
+R11071:11071 Top.LocusDef <> x:188 var
+R11069:11069 Top.LocusDef <> S:186 var
+ind 11087:11096 <> update_env
+constr 11174:11185 <> up_env_empty
+constr 11234:11246 <> up_env_many_1
+constr 11330:11342 <> up_env_many_2
+binder 11099:11099 <> A:190
+R11124:11127 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11108:11111 Coq.Init.Datatypes <> list ind
+R11119:11121 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R11114:11118 Top.QafnySyntax <> locus def
+R11133:11136 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11128:11132 Top.QafnySyntax <> locus def
+R11138:11141 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11158:11161 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11142:11145 Coq.Init.Datatypes <> list ind
+R11153:11155 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R11148:11152 Top.QafnySyntax <> locus def
+binder 11196:11196 <> l:193
+binder 11198:11198 <> t:194
+R11201:11210 Top.LocusDef <> update_env:191 ind
+R11221:11221 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R11227:11227 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R11222:11222 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11224:11224 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11226:11226 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11223:11223 Top.LocusDef <> l:193 var
+R11225:11225 Top.LocusDef <> t:194 var
+R11218:11218 Top.LocusDef <> t:194 var
+R11216:11216 Top.LocusDef <> l:193 var
+R11212:11214 Coq.Init.Datatypes <> nil constr
+binder 11257:11257 <> S:195
+binder 11259:11259 <> x:196
+binder 11261:11262 <> x':197
+binder 11264:11264 <> t:198
+binder 11266:11267 <> t':199
+R11282:11285 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11270:11276 Top.LocusDef <> ses_sub ind
+R11278:11278 Top.LocusDef <> x:196 var
+R11280:11281 Top.LocusDef <> x':197 var
+R11286:11295 Top.LocusDef <> update_env:191 ind
+R11321:11322 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R11315:11315 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11317:11317 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11320:11320 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11316:11316 Top.LocusDef <> x:196 var
+R11318:11319 Top.LocusDef <> t':199 var
+R11323:11323 Top.LocusDef <> S:195 var
+R11311:11312 Top.LocusDef <> t':199 var
+R11309:11309 Top.LocusDef <> x:196 var
+R11304:11305 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R11298:11298 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11301:11301 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11303:11303 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11299:11300 Top.LocusDef <> x':197 var
+R11302:11302 Top.LocusDef <> t:198 var
+R11306:11306 Top.LocusDef <> S:195 var
+binder 11353:11353 <> S:200
+binder 11355:11356 <> S':201
+binder 11358:11358 <> x:202
+binder 11360:11360 <> y:203
+binder 11362:11362 <> t:204
+binder 11364:11365 <> t':205
+R11381:11384 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11368:11369 Coq.Init.Logic <> ::type_scope:'~'_x not
+R11370:11376 Top.LocusDef <> ses_sub ind
+R11378:11378 Top.LocusDef <> x:202 var
+R11380:11380 Top.LocusDef <> y:203 var
+R11405:11408 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11385:11394 Top.LocusDef <> update_env:191 ind
+R11403:11404 Top.LocusDef <> S':201 var
+R11400:11401 Top.LocusDef <> t':205 var
+R11398:11398 Top.LocusDef <> x:202 var
+R11396:11396 Top.LocusDef <> S:200 var
+R11409:11418 Top.LocusDef <> update_env:191 ind
+R11442:11443 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R11437:11437 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11439:11439 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11441:11441 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11438:11438 Top.LocusDef <> y:203 var
+R11440:11440 Top.LocusDef <> t:204 var
+R11444:11445 Top.LocusDef <> S':201 var
+R11433:11434 Top.LocusDef <> t':205 var
+R11431:11431 Top.LocusDef <> x:202 var
+R11426:11427 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R11421:11421 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11423:11423 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11425:11425 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11422:11422 Top.LocusDef <> y:203 var
+R11424:11424 Top.LocusDef <> t:204 var
+R11428:11428 Top.LocusDef <> S:200 var
+ind 11758:11767 <> state_elem
+constr 11791:11794 <> Nval
+constr 11832:11835 <> Hval
+constr 11874:11877 <> Cval
+R11799:11799 Top.externals.SQIR.externals.QWIRE.Complex <> C def
+binder 11797:11797 <> p:208
+R11805:11810 Top.BasicUtility <> rz_val def
+binder 11803:11803 <> r:209
+R11843:11846 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11840:11842 Coq.Init.Datatypes <> nat ind
+R11847:11852 Top.BasicUtility <> rz_val def
+binder 11838:11838 <> b:210
+R11882:11884 Coq.Init.Datatypes <> nat ind
+binder 11880:11880 <> m:211
+R11895:11898 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11892:11894 Coq.Init.Datatypes <> nat ind
+R11900:11902 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R11899:11899 Top.externals.SQIR.externals.QWIRE.Complex <> C def
+R11903:11908 Top.BasicUtility <> rz_val def
+binder 11888:11888 <> b:212
+def 11924:11929 <> qstate
+R11934:11937 Coq.Init.Datatypes <> list ind
+R11945:11947 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R11940:11944 Top.QafnySyntax <> locus def
+R11948:11957 Top.LocusDef <> state_elem ind
+def 12019:12026 <> n_rotate
+R12034:12036 Coq.Init.Datatypes <> nat ind
+binder 12029:12032 <> rmax:213
+R12046:12051 Top.BasicUtility <> rz_val def
+binder 12040:12041 <> r1:214
+binder 12043:12044 <> r2:215
+R12066:12069 Top.LocusDef <> rmax:213 var
+R12081:12082 Top.LocusDef <> r1:214 var
+R12100:12100 Coq.Init.Datatypes <> S constr
+R12110:12111 Top.LocusDef <> r2:215 var
+R12152:12159 Top.LocusDef <> n_rotate:216 def
+R12166:12167 Top.LocusDef <> r2:215 var
+R12163:12164 Top.LocusDef <> r1:214 var
+R12120:12127 Top.LocusDef <> n_rotate:216 def
+R12144:12145 Top.LocusDef <> r2:215 var
+R12132:12136 Top.MathSpec <> addto def
+R12138:12139 Top.LocusDef <> r1:214 var
+def 12187:12196 <> sum_rotate
+R12201:12203 Coq.Init.Datatypes <> nat ind
+binder 12199:12199 <> n:218
+R12212:12213 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12209:12211 Coq.Init.Datatypes <> nat ind
+R12214:12217 Coq.Init.Datatypes <> bool ind
+binder 12207:12207 <> b:219
+R12226:12228 Coq.Init.Datatypes <> nat ind
+binder 12221:12224 <> rmax:220
+R12237:12240 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12234:12236 Coq.Init.Datatypes <> nat ind
+R12241:12246 Top.BasicUtility <> rz_val def
+binder 12232:12232 <> r:221
+R12261:12261 Top.LocusDef <> n:218 var
+R12273:12280 Top.MathSpec <> allfalse def
+R12297:12297 Coq.Init.Datatypes <> S constr
+R12307:12307 Top.LocusDef <> b:219 var
+R12365:12374 Top.LocusDef <> sum_rotate:222 def
+R12385:12385 Top.LocusDef <> r:221 var
+R12380:12383 Top.LocusDef <> rmax:220 var
+R12378:12378 Top.LocusDef <> b:219 var
+R12316:12323 Top.LocusDef <> n_rotate def
+R12325:12328 Top.LocusDef <> rmax:220 var
+R12331:12340 Top.LocusDef <> sum_rotate:222 def
+R12351:12351 Top.LocusDef <> r:221 var
+R12346:12349 Top.LocusDef <> rmax:220 var
+R12344:12344 Top.LocusDef <> b:219 var
+R12355:12355 Top.LocusDef <> r:221 var
+def 12405:12414 <> r_n_rotate
+R12422:12424 Coq.Init.Datatypes <> nat ind
+binder 12417:12420 <> rmax:224
+R12434:12439 Top.BasicUtility <> rz_val def
+binder 12428:12429 <> r1:225
+binder 12431:12432 <> r2:226
+R12454:12457 Top.LocusDef <> rmax:224 var
+R12469:12470 Top.LocusDef <> r1:225 var
+R12488:12488 Coq.Init.Datatypes <> S constr
+R12498:12499 Top.LocusDef <> r2:226 var
+R12544:12553 Top.LocusDef <> r_n_rotate:227 def
+R12560:12561 Top.LocusDef <> r2:226 var
+R12557:12558 Top.LocusDef <> r1:225 var
+R12508:12517 Top.LocusDef <> r_n_rotate:227 def
+R12536:12537 Top.LocusDef <> r2:226 var
+R12522:12528 Top.MathSpec <> addto_n def
+R12530:12531 Top.LocusDef <> r1:225 var
+def 12583:12590 <> a_nat2fb
+binder 12592:12592 <> f:229
+binder 12594:12594 <> n:230
+R12599:12604 Top.MathSpec <> natsum def
+R12606:12606 Top.LocusDef <> n:230 var
+binder 12613:12613 <> i:231
+R12631:12633 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R12618:12624 Coq.Arith.PeanoNat Nat b2n def
+R12627:12627 Top.LocusDef <> f:229 var
+R12629:12629 Top.LocusDef <> i:231 var
+R12635:12635 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R12636:12636 Top.LocusDef <> i:231 var
+def 12650:12661 <> turn_angle_r
+R12673:12676 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12670:12672 Coq.Init.Datatypes <> nat ind
+R12677:12680 Coq.Init.Datatypes <> bool ind
+binder 12664:12667 <> rval:232
+R12686:12688 Coq.Init.Datatypes <> nat ind
+binder 12684:12684 <> n:233
+R12697:12699 Coq.Init.Datatypes <> nat ind
+binder 12692:12695 <> size:234
+R12704:12704 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R12718:12718 Top.LocusDef <> n:233 var
+R12733:12733 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R12751:12751 Coq.Init.Datatypes <> S constr
+R12758:12758 Coq.Reals.Rdefinitions <> ::R_scope:x_'+'_x not
+R12807:12810 Coq.Reals.Rdefinitions <> ::R_scope:x_'+'_x not
+R12763:12766 Top.LocusDef <> rval:232 var
+R12805:12805 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R12778:12780 Coq.Reals.Rdefinitions <> ::R_scope:x_'/'_x not
+R12794:12794 Coq.Reals.Rdefinitions <> ::R_scope:x_'/'_x not
+R12782:12784 Coq.Reals.Rfunctions <> ::R_scope:x_'^'_x not
+R12793:12793 Coq.Reals.Rfunctions <> ::R_scope:x_'^'_x not
+R12789:12791 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R12785:12788 Top.LocusDef <> size:234 var
+R12811:12822 Top.LocusDef <> turn_angle_r:235 def
+R12831:12834 Top.LocusDef <> size:234 var
+R12824:12827 Top.LocusDef <> rval:232 var
+def 12855:12864 <> turn_angle
+R12875:12878 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12872:12874 Coq.Init.Datatypes <> nat ind
+R12879:12882 Coq.Init.Datatypes <> bool ind
+binder 12867:12870 <> rval:237
+R12888:12890 Coq.Init.Datatypes <> nat ind
+binder 12886:12886 <> n:238
+R12895:12895 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R12906:12917 Top.LocusDef <> turn_angle_r def
+R12920:12924 Top.MathSpec <> fbrev def
+R12928:12931 Top.LocusDef <> rval:237 var
+R12926:12926 Top.LocusDef <> n:238 var
+R12934:12934 Top.LocusDef <> n:238 var
+R12936:12936 Top.LocusDef <> n:238 var
+def 12951:12963 <> get_amplitude
+R12971:12973 Coq.Init.Datatypes <> nat ind
+binder 12966:12969 <> rmax:239
+R12980:12980 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+binder 12977:12978 <> r1:240
+R12987:12992 Top.BasicUtility <> rz_val def
+binder 12984:12985 <> r2:241
+R12997:12997 Top.externals.SQIR.externals.QWIRE.Complex <> C def
+R13009:13011 Top.externals.SQIR.externals.QWIRE.Complex <> ::C_scope:x_'*'_x not
+R13007:13008 Top.LocusDef <> r1:240 var
+R13012:13015 Top.externals.SQIR.externals.QWIRE.Complex <> Cexp def
+R13022:13025 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R13044:13044 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R13019:13019 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R13020:13021 Coq.Reals.Rtrigo1 <> PI def
+R13026:13035 Top.LocusDef <> turn_angle def
+R13037:13038 Top.LocusDef <> r2:241 var
+R13040:13043 Top.LocusDef <> rmax:239 var
+def 13060:13070 <> sum_rotates
+R13075:13077 Coq.Init.Datatypes <> nat ind
+binder 13073:13073 <> n:242
+R13086:13088 Coq.Init.Datatypes <> nat ind
+binder 13081:13084 <> rmax:243
+R13097:13100 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13094:13096 Coq.Init.Datatypes <> nat ind
+R13101:13106 Top.BasicUtility <> rz_val def
+binder 13092:13092 <> r:244
+binder 13120:13120 <> i:245
+R13129:13132 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R13128:13128 Top.LocusDef <> i:245 var
+R13134:13134 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13135:13135 Top.LocusDef <> n:242 var
+R13238:13238 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13241:13241 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13250:13250 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13239:13240 Top.externals.SQIR.externals.QWIRE.Complex <> C0 syndef
+R13242:13249 Top.MathSpec <> allfalse def
+R13151:13151 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13222:13222 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13231:13231 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13152:13164 Top.LocusDef <> get_amplitude def
+R13166:13169 Top.LocusDef <> rmax:243 var
+R13174:13174 Coq.Reals.Rdefinitions <> ::R_scope:x_'/'_x not
+R13175:13178 Coq.Reals.R_sqrt <> sqrt def
+R13182:13182 Coq.Reals.Rfunctions <> ::R_scope:x_'^'_x not
+R13183:13183 Top.LocusDef <> n:242 var
+R13191:13200 Top.LocusDef <> sum_rotate def
+R13202:13202 Top.LocusDef <> n:242 var
+R13205:13210 Top.MathSpec <> nat2fb def
+R13212:13212 Top.LocusDef <> i:245 var
+R13215:13218 Top.LocusDef <> rmax:243 var
+R13220:13220 Top.LocusDef <> r:244 var
+R13223:13228 Top.MathSpec <> nat2fb def
+R13230:13230 Top.LocusDef <> i:245 var
+ind 13264:13273 <> state_same
+constr 13336:13347 <> nor_ch_ssame
+constr 13466:13477 <> ch_nor_ssame
+constr 13552:13563 <> had_ch_ssame
+R13281:13283 Coq.Init.Datatypes <> nat ind
+binder 13276:13279 <> rmax:246
+R13291:13294 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13288:13290 Coq.Init.Datatypes <> nat ind
+R13305:13308 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13295:13304 Top.LocusDef <> state_elem ind
+R13319:13322 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13309:13318 Top.LocusDef <> state_elem ind
+binder 13357:13357 <> n:249
+binder 13359:13359 <> r:250
+binder 13361:13361 <> c:251
+R13364:13373 Top.LocusDef <> state_same:247 ind
+R13402:13405 Top.LocusDef <> Cval constr
+binder 13414:13414 <> i:252
+R13423:13426 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R13422:13422 Top.LocusDef <> i:252 var
+R13445:13445 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13448:13448 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13457:13457 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13446:13447 Top.externals.SQIR.externals.QWIRE.Complex <> C0 syndef
+R13449:13456 Top.MathSpec <> allfalse def
+R13434:13434 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13436:13436 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13438:13438 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13435:13435 Top.LocusDef <> r:250 var
+R13437:13437 Top.LocusDef <> c:251 var
+R13378:13381 Top.LocusDef <> Nval constr
+R13383:13383 Top.LocusDef <> r:250 var
+R13385:13385 Top.LocusDef <> c:251 var
+R13375:13375 Top.LocusDef <> n:249 var
+binder 13487:13487 <> n:253
+binder 13489:13489 <> r:254
+R13492:13501 Top.LocusDef <> state_same:247 ind
+R13517:13520 Top.LocusDef <> Nval constr
+R13523:13525 Coq.Init.Datatypes <> fst def
+R13528:13528 Top.LocusDef <> r:254 var
+R13535:13537 Coq.Init.Datatypes <> snd def
+R13540:13540 Top.LocusDef <> r:254 var
+R13506:13509 Top.LocusDef <> Cval constr
+R13513:13513 Top.LocusDef <> r:254 var
+R13503:13503 Top.LocusDef <> n:253 var
+binder 13574:13574 <> n:255
+binder 13576:13576 <> r:256
+R13579:13588 Top.LocusDef <> state_same:247 ind
+R13602:13605 Top.LocusDef <> Cval constr
+R13609:13609 Coq.Arith.PeanoNat <> ::nat_scope:x_'^'_x not
+R13610:13610 Top.LocusDef <> n:255 var
+R13614:13624 Top.LocusDef <> sum_rotates def
+R13626:13626 Top.LocusDef <> n:255 var
+R13628:13631 Top.LocusDef <> rmax:246 var
+R13633:13633 Top.LocusDef <> r:256 var
+R13593:13596 Top.LocusDef <> Hval constr
+R13598:13598 Top.LocusDef <> r:256 var
+R13590:13590 Top.LocusDef <> n:255 var
+def 13983:13995 <> mut_had_state
+R14007:14009 Coq.Init.Datatypes <> nat ind
+binder 13998:14000 <> pos:257
+binder 14002:14002 <> n:258
+binder 14004:14004 <> m:259
+R14021:14024 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14018:14020 Coq.Init.Datatypes <> nat ind
+R14025:14030 Top.BasicUtility <> rz_val def
+binder 14013:14013 <> r:260
+binder 14045:14045 <> i:261
+R14054:14057 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R14053:14053 Top.LocusDef <> i:261 var
+R14058:14060 Top.LocusDef <> pos:257 var
+R14085:14085 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R14095:14100 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R14113:14113 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R14089:14093 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R14086:14088 Top.LocusDef <> pos:257 var
+R14094:14094 Top.LocusDef <> i:261 var
+R14102:14105 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R14101:14101 Top.LocusDef <> i:261 var
+R14109:14111 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R14106:14108 Top.LocusDef <> pos:257 var
+R14112:14112 Top.LocusDef <> m:259 var
+R14142:14142 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R14156:14161 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R14178:14178 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R14150:14154 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R14146:14148 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R14143:14145 Top.LocusDef <> pos:257 var
+R14149:14149 Top.LocusDef <> m:259 var
+R14155:14155 Top.LocusDef <> i:261 var
+R14163:14166 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R14162:14162 Top.LocusDef <> i:261 var
+R14174:14176 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R14170:14172 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R14167:14169 Top.LocusDef <> pos:257 var
+R14173:14173 Top.LocusDef <> m:259 var
+R14177:14177 Top.LocusDef <> n:258 var
+R14206:14206 Top.LocusDef <> r:260 var
+R14208:14208 Top.LocusDef <> i:261 var
+R14185:14185 Top.LocusDef <> r:260 var
+R14189:14191 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R14188:14188 Top.LocusDef <> i:261 var
+R14192:14192 Top.LocusDef <> m:259 var
+R14120:14120 Top.LocusDef <> r:260 var
+R14124:14124 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R14123:14123 Top.LocusDef <> i:261 var
+R14125:14125 Top.LocusDef <> n:258 var
+R14067:14067 Top.LocusDef <> r:260 var
+R14069:14069 Top.LocusDef <> i:261 var
+def 14384:14394 <> mut_nor_aux
+R14406:14408 Coq.Init.Datatypes <> nat ind
+binder 14397:14399 <> pos:262
+binder 14401:14401 <> n:263
+binder 14403:14403 <> m:264
+R14416:14421 Top.BasicUtility <> rz_val def
+binder 14412:14412 <> r:265
+binder 14435:14435 <> i:266
+R14444:14447 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R14443:14443 Top.LocusDef <> i:266 var
+R14448:14450 Top.LocusDef <> pos:262 var
+R14475:14475 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R14485:14490 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R14503:14503 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R14479:14483 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R14476:14478 Top.LocusDef <> pos:262 var
+R14484:14484 Top.LocusDef <> i:266 var
+R14492:14495 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R14491:14491 Top.LocusDef <> i:266 var
+R14499:14501 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R14496:14498 Top.LocusDef <> pos:262 var
+R14502:14502 Top.LocusDef <> m:264 var
+R14532:14532 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R14546:14551 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R14568:14568 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R14540:14544 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R14536:14538 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R14533:14535 Top.LocusDef <> pos:262 var
+R14539:14539 Top.LocusDef <> m:264 var
+R14545:14545 Top.LocusDef <> i:266 var
+R14553:14556 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R14552:14552 Top.LocusDef <> i:266 var
+R14564:14566 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R14560:14562 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R14557:14559 Top.LocusDef <> pos:262 var
+R14563:14563 Top.LocusDef <> m:264 var
+R14567:14567 Top.LocusDef <> n:263 var
+R14596:14596 Top.LocusDef <> r:265 var
+R14598:14598 Top.LocusDef <> i:266 var
+R14575:14575 Top.LocusDef <> r:265 var
+R14579:14581 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R14578:14578 Top.LocusDef <> i:266 var
+R14582:14582 Top.LocusDef <> m:264 var
+R14510:14510 Top.LocusDef <> r:265 var
+R14514:14514 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R14513:14513 Top.LocusDef <> i:266 var
+R14515:14515 Top.LocusDef <> n:263 var
+R14457:14457 Top.LocusDef <> r:265 var
+R14459:14459 Top.LocusDef <> i:266 var
+def 14613:14619 <> mut_nor
+R14630:14632 Coq.Init.Datatypes <> nat ind
+binder 14622:14624 <> pos:267
+binder 14626:14626 <> n:268
+binder 14628:14628 <> m:269
+R14639:14644 Coq.Init.Datatypes <> option ind
+R14646:14651 Top.BasicUtility <> rz_val def
+binder 14636:14636 <> r:270
+R14666:14666 Top.LocusDef <> r:270 var
+R14673:14676 Coq.Init.Datatypes <> None constr
+R14681:14684 Coq.Init.Datatypes <> None constr
+R14688:14691 Coq.Init.Datatypes <> Some constr
+R14699:14702 Coq.Init.Datatypes <> Some constr
+R14705:14715 Top.LocusDef <> mut_nor_aux def
+R14717:14719 Top.LocusDef <> pos:267 var
+R14721:14721 Top.LocusDef <> n:268 var
+R14723:14723 Top.LocusDef <> m:269 var
+def 14747:14756 <> mut_ch_aux
+R14768:14770 Coq.Init.Datatypes <> nat ind
+binder 14759:14761 <> pos:272
+binder 14763:14763 <> n:273
+binder 14765:14765 <> m:274
+R14778:14786 Top.LocusDef <> type_cfac def
+binder 14774:14774 <> r:275
+R14791:14799 Top.LocusDef <> type_cfac def
+binder 14812:14812 <> i:276
+R14817:14827 Top.LocusDef <> mut_nor_aux def
+R14829:14831 Top.LocusDef <> pos:272 var
+R14833:14833 Top.LocusDef <> n:273 var
+R14835:14835 Top.LocusDef <> m:274 var
+R14838:14838 Top.LocusDef <> r:275 var
+R14840:14840 Top.LocusDef <> i:276 var
+def 14856:14861 <> mut_ch
+R14874:14876 Coq.Init.Datatypes <> nat ind
+binder 14864:14866 <> pos:277
+binder 14868:14868 <> n:278
+binder 14870:14870 <> m:279
+R14884:14889 Coq.Init.Datatypes <> option ind
+R14895:14897 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R14892:14894 Coq.Init.Datatypes <> nat ind
+R14898:14906 Top.LocusDef <> type_cfac def
+binder 14880:14880 <> r:280
+R14921:14921 Top.LocusDef <> r:280 var
+R14928:14931 Coq.Init.Datatypes <> None constr
+R14936:14939 Coq.Init.Datatypes <> None constr
+R14943:14946 Coq.Init.Datatypes <> Some constr
+R14948:14948 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R14952:14952 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R14955:14955 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R14960:14963 Coq.Init.Datatypes <> Some constr
+R14965:14965 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R14969:14970 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R14992:14992 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R14971:14980 Top.LocusDef <> mut_ch_aux def
+R14982:14984 Top.LocusDef <> pos:277 var
+R14986:14986 Top.LocusDef <> n:278 var
+R14988:14988 Top.LocusDef <> m:279 var
+def 15011:15023 <> mut_fch_state
+R15034:15036 Coq.Init.Datatypes <> nat ind
+binder 15026:15028 <> pos:282
+binder 15030:15030 <> n:283
+binder 15032:15032 <> m:284
+R15047:15050 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15044:15046 Coq.Init.Datatypes <> nat ind
+R15052:15054 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R15051:15051 Top.externals.SQIR.externals.QWIRE.Complex <> C def
+R15055:15060 Top.BasicUtility <> rz_val def
+binder 15040:15040 <> r:285
+binder 15074:15074 <> i:286
+R15079:15079 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15089:15090 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15122:15122 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15080:15082 Coq.Init.Datatypes <> fst def
+R15085:15085 Top.LocusDef <> r:285 var
+R15087:15087 Top.LocusDef <> i:286 var
+R15091:15101 Top.LocusDef <> mut_nor_aux def
+R15103:15105 Top.LocusDef <> pos:282 var
+R15107:15107 Top.LocusDef <> n:283 var
+R15109:15109 Top.LocusDef <> m:284 var
+R15112:15114 Coq.Init.Datatypes <> snd def
+R15117:15117 Top.LocusDef <> r:285 var
+R15119:15119 Top.LocusDef <> i:286 var
+def 15137:15144 <> join_val
+binder 15147:15147 <> A:287
+R15159:15161 Coq.Init.Datatypes <> nat ind
+binder 15156:15156 <> n:288
+R15174:15177 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15171:15173 Coq.Init.Datatypes <> nat ind
+R15178:15178 Top.LocusDef <> A:287 var
+binder 15165:15166 <> r1:289
+binder 15168:15169 <> r2:290
+binder 15188:15188 <> i:291
+R15197:15200 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R15196:15196 Top.LocusDef <> i:291 var
+R15201:15201 Top.LocusDef <> n:288 var
+R15218:15219 Top.LocusDef <> r2:290 var
+R15223:15223 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R15222:15222 Top.LocusDef <> i:291 var
+R15224:15224 Top.LocusDef <> n:288 var
+R15208:15209 Top.LocusDef <> r1:289 var
+R15211:15211 Top.LocusDef <> n:288 var
+def 15240:15249 <> lshift_fun
+binder 15252:15252 <> A:292
+R15266:15269 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15263:15265 Coq.Init.Datatypes <> nat ind
+R15270:15270 Top.LocusDef <> A:292 var
+binder 15261:15261 <> f:293
+R15276:15278 Coq.Init.Datatypes <> nat ind
+binder 15274:15274 <> n:294
+binder 15288:15288 <> i:295
+R15293:15293 Top.LocusDef <> f:293 var
+R15297:15297 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R15296:15296 Top.LocusDef <> i:295 var
+R15298:15298 Top.LocusDef <> n:294 var
+def 15314:15322 <> join_cval
+R15330:15332 Coq.Init.Datatypes <> nat ind
+binder 15325:15328 <> rmax:296
+R15338:15340 Coq.Init.Datatypes <> nat ind
+binder 15336:15336 <> m:297
+R15361:15363 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R15352:15354 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R15351:15351 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R15355:15360 Top.BasicUtility <> rz_val def
+R15364:15369 Top.BasicUtility <> rz_val def
+binder 15344:15345 <> r1:298
+binder 15347:15348 <> r2:299
+R15380:15380 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15416:15416 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15460:15460 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15489:15489 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15382:15382 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R15395:15399 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R15412:15412 Coq.Reals.Rdefinitions <> ::R_scope:x_'*'_x not
+R15383:15385 Coq.Init.Datatypes <> fst def
+R15388:15390 Coq.Init.Datatypes <> fst def
+R15392:15393 Top.LocusDef <> r1:298 var
+R15400:15402 Coq.Init.Datatypes <> fst def
+R15405:15407 Coq.Init.Datatypes <> fst def
+R15409:15410 Top.LocusDef <> r2:299 var
+R15417:15424 Top.LocusDef <> n_rotate def
+R15426:15429 Top.LocusDef <> rmax:296 var
+R15432:15434 Coq.Init.Datatypes <> snd def
+R15437:15439 Coq.Init.Datatypes <> fst def
+R15441:15442 Top.LocusDef <> r1:298 var
+R15447:15449 Coq.Init.Datatypes <> snd def
+R15452:15454 Coq.Init.Datatypes <> fst def
+R15456:15457 Top.LocusDef <> r2:299 var
+R15461:15468 Top.LocusDef <> join_val def
+R15482:15484 Coq.Init.Datatypes <> snd def
+R15486:15487 Top.LocusDef <> r2:299 var
+R15473:15475 Coq.Init.Datatypes <> snd def
+R15477:15478 Top.LocusDef <> r1:298 var
+R15470:15470 Top.LocusDef <> m:297 var
+def 15502:15509 <> car_s_ch
+R15517:15519 Coq.Init.Datatypes <> nat ind
+binder 15512:15515 <> rmax:300
+R15525:15527 Coq.Init.Datatypes <> nat ind
+binder 15523:15523 <> i:301
+R15533:15535 Coq.Init.Datatypes <> nat ind
+binder 15531:15531 <> n:302
+R15541:15543 Coq.Init.Datatypes <> nat ind
+binder 15539:15539 <> m:303
+R15558:15558 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R15551:15551 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R15550:15550 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R15552:15557 Top.BasicUtility <> rz_val def
+R15559:15564 Top.BasicUtility <> rz_val def
+binder 15547:15548 <> r1:304
+R15576:15579 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15573:15575 Coq.Init.Datatypes <> nat ind
+R15588:15588 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R15581:15581 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R15580:15580 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R15582:15587 Top.BasicUtility <> rz_val def
+R15589:15594 Top.BasicUtility <> rz_val def
+binder 15568:15569 <> r2:305
+R15611:15611 Top.LocusDef <> n:302 var
+binder 15628:15628 <> x:308
+R15633:15633 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15637:15637 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15646:15646 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15655:15655 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15638:15645 Top.MathSpec <> allfalse def
+R15647:15654 Top.MathSpec <> allfalse def
+R15674:15674 Coq.Init.Datatypes <> S constr
+binder 15687:15687 <> x:309
+R15696:15699 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R15695:15695 Top.LocusDef <> x:309 var
+R15701:15701 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R15700:15700 Top.LocusDef <> i:301 var
+R15762:15769 Top.LocusDef <> car_s_ch:306 def
+R15789:15789 Top.LocusDef <> x:309 var
+R15786:15787 Top.LocusDef <> r2:305 var
+R15783:15784 Top.LocusDef <> r1:304 var
+R15781:15781 Top.LocusDef <> m:303 var
+R15776:15776 Top.LocusDef <> i:301 var
+R15771:15774 Top.LocusDef <> rmax:300 var
+R15729:15737 Top.LocusDef <> join_cval def
+R15739:15742 Top.LocusDef <> rmax:300 var
+R15744:15744 Top.LocusDef <> m:303 var
+R15746:15747 Top.LocusDef <> r1:304 var
+R15750:15751 Top.LocusDef <> r2:305 var
+def 15810:15819 <> car_fun_ch
+R15836:15838 Coq.Init.Datatypes <> nat ind
+binder 15822:15825 <> rmax:310
+binder 15827:15830 <> size:311
+binder 15832:15832 <> n:312
+binder 15834:15834 <> m:313
+R15852:15855 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15849:15851 Coq.Init.Datatypes <> nat ind
+R15866:15868 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R15857:15859 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R15856:15856 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R15860:15865 Top.BasicUtility <> rz_val def
+R15869:15874 Top.BasicUtility <> rz_val def
+binder 15842:15843 <> r1:314
+binder 15845:15846 <> r2:315
+R15889:15889 Top.LocusDef <> n:312 var
+binder 15906:15906 <> x:318
+R15911:15911 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15915:15915 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15924:15924 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15933:15933 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15916:15923 Top.MathSpec <> allfalse def
+R15925:15932 Top.MathSpec <> allfalse def
+R15946:15946 Coq.Init.Datatypes <> S constr
+binder 15959:15959 <> x:319
+R15967:15967 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R15980:15985 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R15996:15996 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R15974:15978 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R15969:15971 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R15968:15968 Top.LocusDef <> m:313 var
+R15979:15979 Top.LocusDef <> x:319 var
+R15987:15990 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R15986:15986 Top.LocusDef <> x:319 var
+R15992:15994 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R15991:15991 Top.LocusDef <> m:313 var
+R15995:15995 Top.LocusDef <> n:312 var
+R16099:16108 Top.LocusDef <> car_fun_ch:316 def
+R16131:16131 Top.LocusDef <> x:319 var
+R16128:16129 Top.LocusDef <> r2:315 var
+R16125:16126 Top.LocusDef <> r1:314 var
+R16123:16123 Top.LocusDef <> m:313 var
+R16115:16118 Top.LocusDef <> size:311 var
+R16110:16113 Top.LocusDef <> rmax:310 var
+R16027:16034 Top.LocusDef <> car_s_ch def
+R16036:16039 Top.LocusDef <> rmax:310 var
+R16043:16045 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R16042:16042 Top.LocusDef <> m:313 var
+R16050:16050 Top.LocusDef <> m:313 var
+R16052:16055 Top.LocusDef <> size:311 var
+R16058:16059 Top.LocusDef <> r1:314 var
+R16065:16066 Top.LocusDef <> r2:315 var
+R16068:16068 Top.LocusDef <> x:319 var
+def 16154:16162 <> join_fval
+R16167:16169 Coq.Init.Datatypes <> nat ind
+binder 16165:16165 <> m:320
+R16181:16183 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R16180:16180 Top.externals.SQIR.externals.QWIRE.Complex <> C def
+R16184:16189 Top.BasicUtility <> rz_val def
+binder 16173:16174 <> r1:321
+binder 16176:16177 <> r2:322
+R16195:16197 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R16194:16194 Top.externals.SQIR.externals.QWIRE.Complex <> C def
+R16198:16203 Top.BasicUtility <> rz_val def
+R16213:16213 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R16237:16237 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R16266:16266 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R16215:16215 Top.externals.SQIR.externals.QWIRE.Complex <> ::C_scope:x_'*'_x not
+R16222:16226 Top.externals.SQIR.externals.QWIRE.Complex <> ::C_scope:x_'*'_x not
+R16233:16233 Top.externals.SQIR.externals.QWIRE.Complex <> ::C_scope:x_'*'_x not
+R16216:16218 Coq.Init.Datatypes <> fst def
+R16220:16221 Top.LocusDef <> r1:321 var
+R16227:16229 Coq.Init.Datatypes <> fst def
+R16231:16232 Top.LocusDef <> r2:322 var
+R16238:16245 Top.LocusDef <> join_val def
+R16259:16261 Coq.Init.Datatypes <> snd def
+R16263:16264 Top.LocusDef <> r2:322 var
+R16250:16252 Coq.Init.Datatypes <> snd def
+R16254:16255 Top.LocusDef <> r1:321 var
+R16247:16247 Top.LocusDef <> m:320 var
+def 16279:16287 <> car_s_fch
+R16292:16294 Coq.Init.Datatypes <> nat ind
+binder 16290:16290 <> i:323
+R16300:16302 Coq.Init.Datatypes <> nat ind
+binder 16298:16298 <> n:324
+R16308:16310 Coq.Init.Datatypes <> nat ind
+binder 16306:16306 <> m:325
+R16318:16320 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R16317:16317 Top.externals.SQIR.externals.QWIRE.Complex <> C def
+R16321:16326 Top.BasicUtility <> rz_val def
+binder 16314:16315 <> r1:326
+R16338:16341 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16335:16337 Coq.Init.Datatypes <> nat ind
+R16343:16345 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R16342:16342 Top.externals.SQIR.externals.QWIRE.Complex <> C def
+R16346:16351 Top.BasicUtility <> rz_val def
+binder 16330:16331 <> r2:327
+R16368:16368 Top.LocusDef <> n:324 var
+binder 16385:16385 <> x:330
+R16390:16390 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R16393:16393 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R16402:16402 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R16391:16392 Top.externals.SQIR.externals.QWIRE.Complex <> C0 syndef
+R16394:16401 Top.MathSpec <> allfalse def
+R16421:16421 Coq.Init.Datatypes <> S constr
+binder 16434:16434 <> x:331
+R16443:16446 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R16442:16442 Top.LocusDef <> x:331 var
+R16448:16448 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R16447:16447 Top.LocusDef <> i:323 var
+R16504:16512 Top.LocusDef <> car_s_fch:328 def
+R16527:16527 Top.LocusDef <> x:331 var
+R16524:16525 Top.LocusDef <> r2:327 var
+R16521:16522 Top.LocusDef <> r1:326 var
+R16519:16519 Top.LocusDef <> m:325 var
+R16514:16514 Top.LocusDef <> i:323 var
+R16476:16484 Top.LocusDef <> join_fval def
+R16486:16486 Top.LocusDef <> m:325 var
+R16488:16489 Top.LocusDef <> r1:326 var
+R16492:16493 Top.LocusDef <> r2:327 var
+def 16548:16558 <> car_fun_fch
+R16570:16572 Coq.Init.Datatypes <> nat ind
+binder 16561:16564 <> size:332
+binder 16566:16566 <> n:333
+binder 16568:16568 <> m:334
+R16586:16589 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16583:16585 Coq.Init.Datatypes <> nat ind
+R16591:16593 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R16590:16590 Top.externals.SQIR.externals.QWIRE.Complex <> C def
+R16594:16599 Top.BasicUtility <> rz_val def
+binder 16576:16577 <> r1:335
+binder 16579:16580 <> r2:336
+R16614:16614 Top.LocusDef <> n:333 var
+binder 16631:16631 <> x:339
+R16636:16636 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R16639:16639 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R16648:16648 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R16637:16638 Top.externals.SQIR.externals.QWIRE.Complex <> C0 syndef
+R16640:16647 Top.MathSpec <> allfalse def
+R16661:16661 Coq.Init.Datatypes <> S constr
+binder 16674:16674 <> x:340
+R16682:16682 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R16695:16700 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R16711:16711 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R16689:16693 Coq.Arith.PeanoNat <> ::nat_scope:x_'<=?'_x not
+R16684:16686 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R16683:16683 Top.LocusDef <> m:334 var
+R16694:16694 Top.LocusDef <> x:340 var
+R16702:16705 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R16701:16701 Top.LocusDef <> x:340 var
+R16707:16709 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R16706:16706 Top.LocusDef <> m:334 var
+R16710:16710 Top.LocusDef <> n:333 var
+R16810:16820 Top.LocusDef <> car_fun_fch:337 def
+R16838:16838 Top.LocusDef <> x:340 var
+R16835:16836 Top.LocusDef <> r2:336 var
+R16832:16833 Top.LocusDef <> r1:335 var
+R16830:16830 Top.LocusDef <> m:334 var
+R16822:16825 Top.LocusDef <> size:332 var
+R16742:16750 Top.LocusDef <> car_s_fch def
+R16754:16756 Coq.Init.Peano <> ::nat_scope:x_'*'_x not
+R16753:16753 Top.LocusDef <> m:334 var
+R16761:16761 Top.LocusDef <> m:334 var
+R16763:16766 Top.LocusDef <> size:332 var
+R16769:16770 Top.LocusDef <> r1:335 var
+R16776:16777 Top.LocusDef <> r2:336 var
+R16779:16779 Top.LocusDef <> x:340 var
+ind 16861:16869 <> mut_state
+constr 16933:16945 <> nor_mut_state
+constr 17047:17059 <> had_mut_state
+constr 17256:17268 <> fch_mut_state
+R16875:16878 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16872:16874 Coq.Init.Datatypes <> nat ind
+R16882:16885 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16879:16881 Coq.Init.Datatypes <> nat ind
+R16889:16892 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16886:16888 Coq.Init.Datatypes <> nat ind
+R16903:16906 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16893:16902 Top.LocusDef <> state_elem ind
+R16917:16920 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16907:16916 Top.LocusDef <> state_elem ind
+binder 16955:16957 <> pos:343
+binder 16959:16959 <> n:344
+binder 16961:16961 <> m:345
+binder 16963:16963 <> r:346
+binder 16965:16965 <> c:347
+R16981:16989 Top.LocusDef <> mut_state:341 ind
+R17011:17014 Top.LocusDef <> Nval constr
+R17016:17016 Top.LocusDef <> r:346 var
+R17019:17029 Top.LocusDef <> mut_nor_aux def
+R17031:17033 Top.LocusDef <> pos:343 var
+R17035:17035 Top.LocusDef <> n:344 var
+R17037:17037 Top.LocusDef <> m:345 var
+R17039:17039 Top.LocusDef <> c:347 var
+R17000:17003 Top.LocusDef <> Nval constr
+R17005:17005 Top.LocusDef <> r:346 var
+R17007:17007 Top.LocusDef <> c:347 var
+R16997:16997 Top.LocusDef <> m:345 var
+R16995:16995 Top.LocusDef <> n:344 var
+R16991:16993 Top.LocusDef <> pos:343 var
+binder 17069:17071 <> pos:348
+binder 17073:17073 <> n:349
+binder 17075:17075 <> m:350
+binder 17077:17077 <> r:351
+R17080:17088 Top.LocusDef <> mut_state:341 ind
+R17108:17111 Top.LocusDef <> Hval constr
+R17114:17126 Top.LocusDef <> mut_had_state def
+R17128:17130 Top.LocusDef <> pos:348 var
+R17132:17132 Top.LocusDef <> n:349 var
+R17134:17134 Top.LocusDef <> m:350 var
+R17136:17136 Top.LocusDef <> r:351 var
+R17099:17102 Top.LocusDef <> Hval constr
+R17104:17104 Top.LocusDef <> r:351 var
+R17096:17096 Top.LocusDef <> m:350 var
+R17094:17094 Top.LocusDef <> n:349 var
+R17090:17092 Top.LocusDef <> pos:348 var
+binder 17278:17280 <> pos:352
+binder 17282:17282 <> n:353
+binder 17284:17284 <> m:354
+binder 17286:17288 <> num:355
+binder 17290:17290 <> r:356
+R17293:17301 Top.LocusDef <> mut_state:341 ind
+R17325:17328 Top.LocusDef <> Cval constr
+R17330:17332 Top.LocusDef <> num:355 var
+R17335:17347 Top.LocusDef <> mut_fch_state def
+R17349:17351 Top.LocusDef <> pos:352 var
+R17353:17353 Top.LocusDef <> n:353 var
+R17355:17355 Top.LocusDef <> m:354 var
+R17357:17357 Top.LocusDef <> r:356 var
+R17312:17315 Top.LocusDef <> Cval constr
+R17317:17319 Top.LocusDef <> num:355 var
+R17321:17321 Top.LocusDef <> r:356 var
+R17309:17309 Top.LocusDef <> m:354 var
+R17307:17307 Top.LocusDef <> n:353 var
+R17303:17305 Top.LocusDef <> pos:352 var
+ind 17373:17383 <> times_state
+constr 17458:17473 <> state_nor_nor_to
+constr 17593:17608 <> state_had_had_to
+R17391:17393 Coq.Init.Datatypes <> nat ind
+binder 17386:17389 <> rmax:357
+R17400:17403 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17397:17399 Coq.Init.Datatypes <> nat ind
+R17414:17417 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17404:17413 Top.LocusDef <> state_elem ind
+R17428:17431 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17418:17427 Top.LocusDef <> state_elem ind
+R17442:17445 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17432:17441 Top.LocusDef <> state_elem ind
+binder 17483:17483 <> n:360
+binder 17485:17486 <> r1:361
+binder 17488:17489 <> r2:362
+binder 17491:17492 <> p1:363
+binder 17494:17495 <> p2:364
+R17513:17523 Top.LocusDef <> times_state:358 ind
+R17554:17557 Top.LocusDef <> Nval constr
+R17562:17562 Top.externals.SQIR.externals.QWIRE.Complex <> ::C_scope:x_'*'_x not
+R17560:17561 Top.LocusDef <> r1:361 var
+R17563:17564 Top.LocusDef <> r2:362 var
+R17570:17577 Top.LocusDef <> join_val def
+R17584:17585 Top.LocusDef <> p2:364 var
+R17581:17582 Top.LocusDef <> p1:363 var
+R17579:17579 Top.LocusDef <> n:360 var
+R17541:17544 Top.LocusDef <> Nval constr
+R17546:17547 Top.LocusDef <> r2:362 var
+R17549:17550 Top.LocusDef <> p2:364 var
+R17528:17531 Top.LocusDef <> Nval constr
+R17533:17534 Top.LocusDef <> r1:361 var
+R17536:17537 Top.LocusDef <> p1:363 var
+R17525:17525 Top.LocusDef <> n:360 var
+binder 17618:17618 <> n:365
+binder 17620:17621 <> p1:366
+binder 17623:17624 <> p2:367
+R17642:17652 Top.LocusDef <> times_state:358 ind
+R17677:17680 Top.LocusDef <> Hval constr
+R17683:17690 Top.LocusDef <> join_val def
+R17697:17698 Top.LocusDef <> p2:367 var
+R17694:17695 Top.LocusDef <> p1:366 var
+R17692:17692 Top.LocusDef <> n:365 var
+R17667:17670 Top.LocusDef <> Hval constr
+R17672:17673 Top.LocusDef <> p2:367 var
+R17657:17660 Top.LocusDef <> Hval constr
+R17662:17663 Top.LocusDef <> p1:366 var
+R17654:17654 Top.LocusDef <> n:365 var
+def 18010:18017 <> cut_n_rz
+R18025:18028 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18022:18024 Coq.Init.Datatypes <> nat ind
+R18029:18034 Top.BasicUtility <> rz_val def
+binder 18020:18020 <> f:368
+R18040:18042 Coq.Init.Datatypes <> nat ind
+binder 18038:18038 <> n:369
+binder 18052:18052 <> i:370
+R18061:18064 Coq.Arith.PeanoNat <> ::nat_scope:x_'<?'_x not
+R18060:18060 Top.LocusDef <> i:370 var
+R18065:18065 Top.LocusDef <> n:369 var
+R18081:18088 Top.MathSpec <> allfalse def
+R18072:18072 Top.LocusDef <> f:368 var
+R18074:18074 Top.LocusDef <> i:370 var
+ind 18102:18112 <> split_state
+constr 18186:18200 <> nor_split_state
+constr 18293:18307 <> had_split_state
+R18120:18122 Coq.Init.Datatypes <> nat ind
+binder 18115:18118 <> rmax:371
+R18129:18132 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18126:18128 Coq.Init.Datatypes <> nat ind
+R18143:18146 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18133:18142 Top.LocusDef <> state_elem ind
+R18170:18173 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18157:18159 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R18147:18156 Top.LocusDef <> state_elem ind
+R18160:18169 Top.LocusDef <> state_elem ind
+binder 18210:18210 <> n:374
+binder 18212:18212 <> r:375
+binder 18214:18214 <> c:376
+R18217:18227 Top.LocusDef <> split_state:372 ind
+R18242:18242 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18261:18262 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18287:18287 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18243:18246 Top.LocusDef <> Nval constr
+R18248:18248 Top.LocusDef <> r:375 var
+R18251:18255 Top.MathSpec <> cut_n def
+R18257:18257 Top.LocusDef <> c:376 var
+R18259:18259 Top.LocusDef <> n:374 var
+R18263:18266 Top.LocusDef <> Nval constr
+R18268:18269 Top.externals.SQIR.externals.QWIRE.Complex <> C1 syndef
+R18272:18281 Top.LocusDef <> lshift_fun def
+R18285:18285 Top.LocusDef <> n:374 var
+R18283:18283 Top.LocusDef <> c:376 var
+R18232:18235 Top.LocusDef <> Nval constr
+R18237:18237 Top.LocusDef <> r:375 var
+R18239:18239 Top.LocusDef <> c:376 var
+R18229:18229 Top.LocusDef <> n:374 var
+binder 18317:18317 <> n:377
+binder 18319:18319 <> r:378
+R18322:18332 Top.LocusDef <> split_state:372 ind
+R18345:18345 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18365:18366 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18388:18388 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18346:18349 Top.LocusDef <> Hval constr
+R18352:18359 Top.LocusDef <> cut_n_rz def
+R18361:18361 Top.LocusDef <> r:378 var
+R18363:18363 Top.LocusDef <> n:377 var
+R18367:18370 Top.LocusDef <> Hval constr
+R18373:18382 Top.LocusDef <> lshift_fun def
+R18386:18386 Top.LocusDef <> n:377 var
+R18384:18384 Top.LocusDef <> r:378 var
+R18337:18340 Top.LocusDef <> Hval constr
+R18342:18342 Top.LocusDef <> r:378 var
+R18334:18334 Top.LocusDef <> n:377 var
+ind 18684:18694 <> state_equiv
+constr 18744:18751 <> state_id
+constr 18853:18862 <> state_comm
+constr 18916:18930 <> state_ses_assoc
+constr 19499:19509 <> state_merge
+constr 19665:19675 <> state_split
+R18702:18704 Coq.Init.Datatypes <> nat ind
+binder 18697:18700 <> rmax:379
+R18715:18718 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18709:18714 Top.LocusDef <> qstate def
+R18725:18728 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18719:18724 Top.LocusDef <> qstate def
+binder 18762:18762 <> S:382
+R18765:18775 Top.LocusDef <> state_equiv:380 ind
+R18779:18779 Top.LocusDef <> S:382 var
+R18777:18777 Top.LocusDef <> S:382 var
+binder 18872:18873 <> a1:383
+binder 18875:18876 <> a2:384
+R18879:18889 Top.LocusDef <> state_equiv:380 ind
+R18903:18904 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R18901:18902 Top.LocusDef <> a2:384 var
+R18905:18906 Top.LocusDef <> a1:383 var
+R18894:18895 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R18892:18893 Top.LocusDef <> a1:383 var
+R18896:18897 Top.LocusDef <> a2:384 var
+binder 18940:18940 <> s:385
+binder 18942:18942 <> v:386
+binder 18944:18944 <> S:387
+binder 18946:18947 <> S':388
+R18966:18969 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18950:18960 Top.LocusDef <> state_equiv:380 ind
+R18964:18965 Top.LocusDef <> S':388 var
+R18962:18962 Top.LocusDef <> S:387 var
+R18970:18980 Top.LocusDef <> state_equiv:380 ind
+R18999:19000 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R18994:18994 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18996:18996 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18998:18998 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18995:18995 Top.LocusDef <> s:385 var
+R18997:18997 Top.LocusDef <> v:386 var
+R19001:19002 Top.LocusDef <> S':388 var
+R18988:18989 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R18983:18983 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18985:18985 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18987:18987 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18984:18984 Top.LocusDef <> s:385 var
+R18986:18986 Top.LocusDef <> v:386 var
+R18990:18990 Top.LocusDef <> S:387 var
+binder 19519:19519 <> x:389
+binder 19521:19521 <> n:390
+binder 19523:19523 <> v:391
+binder 19525:19525 <> y:392
+binder 19527:19527 <> u:393
+binder 19529:19529 <> a:394
+binder 19531:19532 <> vu:395
+R19553:19580 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19544:19546 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R19535:19541 Top.LocusDef <> ses_len def
+R19543:19543 Top.LocusDef <> x:389 var
+R19547:19550 Coq.Init.Datatypes <> Some constr
+R19552:19552 Top.LocusDef <> n:390 var
+R19607:19610 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19582:19592 Top.LocusDef <> times_state ind
+R19594:19597 Top.LocusDef <> rmax:379 var
+R19599:19599 Top.LocusDef <> n:390 var
+R19601:19601 Top.LocusDef <> v:391 var
+R19603:19603 Top.LocusDef <> u:393 var
+R19605:19606 Top.LocusDef <> vu:395 var
+R19611:19621 Top.LocusDef <> state_equiv:380 ind
+R19653:19654 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R19644:19644 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19649:19649 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19652:19652 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19646:19647 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R19645:19645 Top.LocusDef <> x:389 var
+R19648:19648 Top.LocusDef <> y:392 var
+R19650:19651 Top.LocusDef <> vu:395 var
+R19655:19655 Top.LocusDef <> a:394 var
+R19629:19631 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R19640:19640 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R19624:19624 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19626:19626 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19628:19628 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19625:19625 Top.LocusDef <> x:389 var
+R19627:19627 Top.LocusDef <> v:391 var
+R19637:19638 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R19632:19632 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19634:19634 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19636:19636 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19633:19633 Top.LocusDef <> y:392 var
+R19635:19635 Top.LocusDef <> u:393 var
+R19639:19639 Top.LocusDef <> a:394 var
+binder 19685:19685 <> x:396
+binder 19687:19687 <> n:397
+binder 19689:19689 <> y:398
+binder 19691:19691 <> v:399
+binder 19693:19694 <> v1:400
+binder 19696:19697 <> v2:401
+binder 19699:19699 <> a:402
+R19720:19742 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19711:19713 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R19702:19708 Top.LocusDef <> ses_len def
+R19710:19710 Top.LocusDef <> x:396 var
+R19714:19717 Coq.Init.Datatypes <> Some constr
+R19719:19719 Top.LocusDef <> n:397 var
+R19772:19775 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19744:19754 Top.LocusDef <> split_state ind
+R19756:19759 Top.LocusDef <> rmax:379 var
+R19761:19761 Top.LocusDef <> n:397 var
+R19763:19763 Top.LocusDef <> v:399 var
+R19765:19765 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19768:19768 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19771:19771 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19766:19767 Top.LocusDef <> v1:400 var
+R19769:19770 Top.LocusDef <> v2:401 var
+R19776:19786 Top.LocusDef <> state_equiv:380 ind
+R19809:19810 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R19803:19803 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19805:19805 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19808:19808 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19804:19804 Top.LocusDef <> x:396 var
+R19806:19807 Top.LocusDef <> v1:400 var
+R19817:19818 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R19811:19811 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19813:19813 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19816:19816 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19812:19812 Top.LocusDef <> y:398 var
+R19814:19815 Top.LocusDef <> v2:401 var
+R19819:19819 Top.LocusDef <> a:402 var
+R19797:19798 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R19789:19789 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19794:19794 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19796:19796 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19791:19792 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R19790:19790 Top.LocusDef <> x:396 var
+R19793:19793 Top.LocusDef <> y:398 var
+R19795:19795 Top.LocusDef <> v:399 var
+R19799:19799 Top.LocusDef <> a:402 var
+ax 19830:19846 <> state_equiv_trans
+binder 19857:19860 <> rmax:403
+binder 19862:19863 <> S1:404
+binder 19865:19866 <> S2:405
+binder 19868:19869 <> S3:406
+R19895:19898 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19873:19883 Top.LocusDef <> state_equiv ind
+R19885:19888 Top.LocusDef <> rmax:403 var
+R19890:19891 Top.LocusDef <> S1:404 var
+R19893:19894 Top.LocusDef <> S2:405 var
+R19922:19925 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19900:19910 Top.LocusDef <> state_equiv ind
+R19912:19915 Top.LocusDef <> rmax:403 var
+R19917:19918 Top.LocusDef <> S2:405 var
+R19920:19921 Top.LocusDef <> S3:406 var
+R19927:19937 Top.LocusDef <> state_equiv ind
+R19939:19942 Top.LocusDef <> rmax:403 var
+R19944:19945 Top.LocusDef <> S1:404 var
+R19947:19948 Top.LocusDef <> S3:406 var
+ax 19958:19972 <> state_equiv_sym
+binder 19983:19986 <> rmax:408
+binder 19988:19989 <> S1:409
+binder 19991:19992 <> S2:410
+R20018:20021 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19996:20006 Top.LocusDef <> state_equiv ind
+R20008:20011 Top.LocusDef <> rmax:408 var
+R20013:20014 Top.LocusDef <> S1:409 var
+R20016:20017 Top.LocusDef <> S2:410 var
+R20023:20033 Top.LocusDef <> state_equiv ind
+R20035:20038 Top.LocusDef <> rmax:408 var
+R20040:20041 Top.LocusDef <> S2:410 var
+R20043:20044 Top.LocusDef <> S1:409 var
+ax 20054:20069 <> state_equiv_cong
+binder 20080:20083 <> rmax:412
+binder 20085:20086 <> S1:413
+binder 20088:20089 <> S2:414
+binder 20091:20092 <> S3:415
+R20118:20121 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20096:20106 Top.LocusDef <> state_equiv ind
+R20108:20111 Top.LocusDef <> rmax:412 var
+R20113:20114 Top.LocusDef <> S1:413 var
+R20116:20117 Top.LocusDef <> S2:414 var
+R20123:20133 Top.LocusDef <> state_equiv ind
+R20135:20138 Top.LocusDef <> rmax:412 var
+R20143:20144 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R20141:20142 Top.LocusDef <> S1:413 var
+R20145:20146 Top.LocusDef <> S3:415 var
+R20152:20153 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R20150:20151 Top.LocusDef <> S2:414 var
+R20154:20155 Top.LocusDef <> S3:415 var
+def 20210:20223 <> build_type_par
+R20234:20236 Coq.Init.Datatypes <> nat ind
+binder 20226:20226 <> m:417
+binder 20228:20228 <> n:418
+binder 20230:20230 <> v:419
+binder 20232:20232 <> i:420
+R20246:20254 Top.LocusDef <> type_cfac def
+binder 20240:20240 <> f:421
+binder 20242:20244 <> acc:422
+R20270:20270 Top.LocusDef <> m:417 var
+R20282:20282 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20284:20284 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20288:20288 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20283:20283 Top.LocusDef <> i:420 var
+R20285:20287 Top.LocusDef <> acc:422 var
+R20306:20306 Coq.Init.Datatypes <> S constr
+R20333:20336 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R20317:20324 Top.LocusDef <> a_nat2fb def
+R20327:20327 Top.LocusDef <> f:421 var
+R20329:20329 Top.LocusDef <> i:420 var
+R20332:20332 Top.LocusDef <> n:418 var
+R20337:20337 Top.LocusDef <> v:419 var
+R20461:20474 Top.LocusDef <> build_type_par:423 def
+R20487:20489 Top.LocusDef <> acc:422 var
+R20485:20485 Top.LocusDef <> f:421 var
+R20483:20483 Top.LocusDef <> i:420 var
+R20481:20481 Top.LocusDef <> v:419 var
+R20479:20479 Top.LocusDef <> n:418 var
+R20357:20370 Top.LocusDef <> build_type_par:423 def
+binder 20392:20392 <> x:425
+R20401:20404 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R20400:20400 Top.LocusDef <> x:425 var
+R20405:20405 Top.LocusDef <> i:420 var
+R20436:20438 Top.LocusDef <> acc:422 var
+R20440:20440 Top.LocusDef <> x:425 var
+R20412:20421 Top.LocusDef <> lshift_fun def
+R20429:20429 Top.LocusDef <> n:418 var
+R20424:20424 Top.LocusDef <> f:421 var
+R20426:20426 Top.LocusDef <> i:420 var
+R20385:20385 Top.LocusDef <> f:421 var
+R20381:20381 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R20380:20380 Top.LocusDef <> i:420 var
+R20377:20377 Top.LocusDef <> v:419 var
+R20375:20375 Top.LocusDef <> n:418 var
+def 20511:20525 <> build_type_pars
+binder 20527:20527 <> m:426
+binder 20529:20529 <> n:427
+binder 20531:20531 <> v:428
+binder 20533:20533 <> f:429
+R20538:20551 Top.LocusDef <> build_type_par def
+R20553:20553 Top.LocusDef <> m:426 var
+R20555:20555 Top.LocusDef <> n:427 var
+R20557:20557 Top.LocusDef <> v:428 var
+R20561:20561 Top.LocusDef <> f:429 var
+binder 20568:20568 <> i:430
+R20573:20580 Top.MathSpec <> allfalse def
+def 20843:20852 <> merge_acc'
+R20864:20866 Coq.Init.Datatypes <> nat ind
+binder 20855:20855 <> m:431
+binder 20857:20860 <> size:432
+binder 20862:20862 <> n:433
+R20872:20880 Top.LocusDef <> type_cfac def
+binder 20870:20870 <> f:434
+R20886:20891 Top.BasicUtility <> rz_val def
+binder 20884:20884 <> r:435
+R20907:20907 Top.LocusDef <> m:431 var
+R20919:20919 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20926:20926 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20964:20964 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20924:20924 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R20920:20923 Top.LocusDef <> size:432 var
+binder 20931:20931 <> i:438
+R20940:20943 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R20939:20939 Top.LocusDef <> i:438 var
+R20944:20947 Top.LocusDef <> size:432 var
+R20961:20961 Top.LocusDef <> f:434 var
+R20963:20963 Top.LocusDef <> i:438 var
+R20954:20954 Top.LocusDef <> r:435 var
+R20981:20981 Coq.Init.Datatypes <> S constr
+R21007:21010 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R20991:20998 Top.LocusDef <> a_nat2fb def
+R21001:21001 Top.LocusDef <> f:434 var
+R21006:21006 Top.LocusDef <> n:433 var
+R21011:21018 Top.LocusDef <> a_nat2fb def
+R21020:21020 Top.LocusDef <> r:435 var
+R21022:21022 Top.LocusDef <> n:433 var
+R21043:21052 Top.LocusDef <> merge_acc':436 def
+R21065:21065 Top.LocusDef <> r:435 var
+R21063:21063 Top.LocusDef <> f:434 var
+R21061:21061 Top.LocusDef <> n:433 var
+R21056:21059 Top.LocusDef <> size:432 var
+R21029:21029 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21034:21034 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21036:21036 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21030:21033 Top.LocusDef <> size:432 var
+R21035:21035 Top.LocusDef <> f:434 var
+def 21086:21094 <> merge_acc
+R21101:21103 Coq.Init.Datatypes <> nat ind
+binder 21097:21097 <> m:439
+binder 21099:21099 <> n:440
+R21109:21117 Top.LocusDef <> type_cfac def
+binder 21107:21107 <> f:441
+R21123:21128 Top.BasicUtility <> rz_val def
+binder 21121:21121 <> r:442
+R21134:21143 Top.LocusDef <> merge_acc' def
+R21145:21145 Top.LocusDef <> m:439 var
+R21147:21147 Top.LocusDef <> m:439 var
+R21149:21149 Top.LocusDef <> n:440 var
+R21151:21151 Top.LocusDef <> f:441 var
+R21153:21153 Top.LocusDef <> r:442 var
+def 21166:21179 <> build_type_fac
+R21186:21188 Coq.Init.Datatypes <> nat ind
+binder 21182:21182 <> m:443
+binder 21184:21184 <> n:444
+R21194:21202 Top.LocusDef <> type_cfac def
+binder 21192:21192 <> f:445
+R21214:21216 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R21211:21213 Coq.Init.Datatypes <> nat ind
+R21217:21225 Top.LocusDef <> type_cfac def
+binder 21206:21208 <> acc:446
+R21241:21241 Top.LocusDef <> m:443 var
+R21253:21255 Top.LocusDef <> acc:446 var
+R21273:21273 Coq.Init.Datatypes <> S constr
+R21280:21293 Top.LocusDef <> build_type_fac:447 def
+R21302:21310 Top.LocusDef <> merge_acc def
+R21313:21315 Coq.Init.Datatypes <> fst def
+R21317:21319 Top.LocusDef <> acc:446 var
+R21322:21322 Top.LocusDef <> n:444 var
+R21325:21327 Coq.Init.Datatypes <> snd def
+R21329:21331 Top.LocusDef <> acc:446 var
+R21335:21339 Top.MathSpec <> cut_n def
+R21342:21342 Top.LocusDef <> f:445 var
+R21347:21347 Top.LocusDef <> n:444 var
+R21299:21299 Top.LocusDef <> f:445 var
+R21297:21297 Top.LocusDef <> n:444 var
+def 21371:21385 <> build_type_facs
+R21392:21394 Coq.Init.Datatypes <> nat ind
+binder 21388:21388 <> m:449
+binder 21390:21390 <> n:450
+R21400:21408 Top.LocusDef <> type_cfac def
+binder 21398:21398 <> f:451
+R21414:21427 Top.LocusDef <> build_type_fac def
+R21429:21429 Top.LocusDef <> m:449 var
+R21431:21431 Top.LocusDef <> n:450 var
+R21433:21433 Top.LocusDef <> f:451 var
+R21435:21435 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21437:21437 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21455:21455 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+binder 21442:21442 <> i:452
+R21447:21454 Top.MathSpec <> allfalse def
+def 21612:21619 <> to_sum_c
+R21628:21630 Coq.Init.Datatypes <> nat ind
+binder 21622:21622 <> m:453
+binder 21624:21624 <> n:454
+binder 21626:21626 <> v:455
+R21641:21644 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21638:21640 Coq.Init.Datatypes <> nat ind
+R21646:21646 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R21645:21645 Top.externals.SQIR.externals.QWIRE.Complex <> C def
+R21647:21652 Top.BasicUtility <> rz_val def
+binder 21634:21634 <> f:456
+R21667:21667 Top.LocusDef <> m:453 var
+R21697:21697 Coq.Init.Datatypes <> S constr
+R21731:21734 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R21708:21715 Top.LocusDef <> a_nat2fb def
+R21718:21720 Coq.Init.Datatypes <> snd def
+R21723:21723 Top.LocusDef <> f:456 var
+R21730:21730 Top.LocusDef <> n:454 var
+R21735:21735 Top.LocusDef <> v:455 var
+R21816:21823 Top.LocusDef <> to_sum_c:457 def
+R21832:21832 Top.LocusDef <> f:456 var
+R21830:21830 Top.LocusDef <> v:455 var
+R21828:21828 Top.LocusDef <> n:454 var
+R21743:21743 Coq.Reals.Rdefinitions <> ::R_scope:x_'+'_x not
+R21761:21763 Coq.Reals.Rdefinitions <> ::R_scope:x_'+'_x not
+R21785:21785 Coq.Reals.Rdefinitions <> ::R_scope:x_'+'_x not
+R21744:21751 Top.LocusDef <> to_sum_c:457 def
+R21760:21760 Top.LocusDef <> f:456 var
+R21758:21758 Top.LocusDef <> v:455 var
+R21756:21756 Top.LocusDef <> n:454 var
+R21764:21764 Coq.Reals.Rfunctions <> ::R_scope:x_'^'_x not
+R21782:21783 Coq.Reals.Rfunctions <> ::R_scope:x_'^'_x not
+R21765:21768 Top.externals.SQIR.externals.QWIRE.Complex <> Cmod def
+R21771:21773 Coq.Init.Datatypes <> fst def
+R21776:21776 Top.LocusDef <> f:456 var
+def 21852:21867 <> build_state_pars
+R21876:21878 Coq.Init.Datatypes <> nat ind
+binder 21870:21870 <> m:459
+binder 21872:21872 <> n:460
+binder 21874:21874 <> v:461
+R21884:21884 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+binder 21882:21882 <> r:462
+R21893:21896 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21890:21892 Coq.Init.Datatypes <> nat ind
+R21898:21900 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R21897:21897 Top.externals.SQIR.externals.QWIRE.Complex <> C def
+R21901:21906 Top.BasicUtility <> rz_val def
+binder 21888:21888 <> f:463
+R21922:21922 Top.LocusDef <> m:459 var
+R21934:21934 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21936:21937 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21960:21961 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+binder 21942:21942 <> i:466
+R21947:21947 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21950:21950 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21959:21959 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21948:21949 Top.externals.SQIR.externals.QWIRE.Complex <> C0 syndef
+R21951:21958 Top.MathSpec <> allfalse def
+R21979:21979 Coq.Init.Datatypes <> S constr
+R21993:22008 Top.LocusDef <> build_state_pars:464 def
+R22019:22019 Top.LocusDef <> f:463 var
+R22017:22017 Top.LocusDef <> r:462 var
+R22015:22015 Top.LocusDef <> v:461 var
+R22013:22013 Top.LocusDef <> n:460 var
+R22026:22026 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22028:22028 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22032:22032 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22082:22085 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R22059:22066 Top.LocusDef <> a_nat2fb def
+R22069:22071 Coq.Init.Datatypes <> snd def
+R22074:22074 Top.LocusDef <> f:463 var
+R22081:22081 Top.LocusDef <> n:460 var
+R22086:22086 Top.LocusDef <> v:461 var
+R22164:22164 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22166:22166 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22170:22170 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22093:22093 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22097:22097 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22157:22157 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22095:22095 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R22098:22103 Top.externals.SQIR.SQIR.VectorStates <> update def
+R22111:22111 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22130:22130 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22156:22156 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22123:22125 Top.externals.SQIR.externals.QWIRE.Complex <> ::C_scope:x_'/'_x not
+R22113:22115 Coq.Init.Datatypes <> fst def
+R22118:22118 Top.LocusDef <> f:463 var
+R22126:22126 Top.LocusDef <> r:462 var
+R22131:22140 Top.LocusDef <> lshift_fun def
+R22155:22155 Top.LocusDef <> n:460 var
+R22143:22145 Coq.Init.Datatypes <> snd def
+R22148:22148 Top.LocusDef <> f:463 var
+def 22220:22233 <> build_state_ch
+binder 22235:22235 <> n:467
+binder 22237:22237 <> v:468
+R22244:22253 Top.LocusDef <> state_elem ind
+binder 22240:22240 <> t:469
+R22271:22271 Top.LocusDef <> t:469 var
+R22280:22283 Top.LocusDef <> Cval constr
+R22287:22287 Coq.Reals.Rtopology <> f proj
+R22298:22313 Top.LocusDef <> build_state_pars def
+R22317:22317 Top.LocusDef <> n:467 var
+R22319:22319 Top.LocusDef <> v:468 var
+R22322:22329 Top.LocusDef <> to_sum_c def
+R22333:22333 Top.LocusDef <> n:467 var
+R22335:22335 Top.LocusDef <> v:468 var
+R22347:22347 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22350:22350 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22353:22353 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22358:22361 Coq.Init.Datatypes <> Some constr
+R22364:22367 Top.LocusDef <> Cval constr
+R22403:22406 Coq.Init.Datatypes <> None constr
+def 22448:22457 <> subst_aexp
+R22462:22465 Top.QafnySyntax <> aexp ind
+binder 22460:22460 <> a:471
+R22471:22473 Top.BasicUtility <> var def
+binder 22469:22469 <> x:472
+R22479:22481 Coq.Init.Datatypes <> nat ind
+binder 22477:22477 <> n:473
+R22497:22497 Top.LocusDef <> a:471 var
+R22504:22505 Top.QafnySyntax <> BA constr
+R22516:22519 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R22515:22515 Top.LocusDef <> x:472 var
+R22538:22539 Top.QafnySyntax <> BA constr
+R22527:22529 Top.QafnySyntax <> Num constr
+R22531:22531 Top.LocusDef <> n:473 var
+R22559:22561 Top.QafnySyntax <> Num constr
+R22568:22570 Top.QafnySyntax <> Num constr
+R22572:22572 Top.LocusDef <> a:471 var
+R22590:22593 Top.QafnySyntax <> MNum constr
+R22602:22605 Top.QafnySyntax <> MNum constr
+R22609:22609 Top.LocusDef <> a:471 var
+R22627:22631 Top.QafnySyntax <> APlus constr
+R22641:22645 Top.QafnySyntax <> APlus constr
+R22648:22657 Top.LocusDef <> subst_aexp:474 def
+R22663:22663 Top.LocusDef <> n:473 var
+R22661:22661 Top.LocusDef <> x:472 var
+R22667:22676 Top.LocusDef <> subst_aexp:474 def
+R22682:22682 Top.LocusDef <> n:473 var
+R22680:22680 Top.LocusDef <> x:472 var
+R22702:22706 Top.QafnySyntax <> AMult constr
+R22716:22720 Top.QafnySyntax <> AMult constr
+R22723:22732 Top.LocusDef <> subst_aexp:474 def
+R22738:22738 Top.LocusDef <> n:473 var
+R22736:22736 Top.LocusDef <> x:472 var
+R22742:22751 Top.LocusDef <> subst_aexp:474 def
+R22757:22757 Top.LocusDef <> n:473 var
+R22755:22755 Top.LocusDef <> x:472 var
+def 22783:22793 <> subst_varia
+R22798:22802 Top.QafnySyntax <> varia ind
+binder 22796:22796 <> a:476
+R22808:22810 Top.BasicUtility <> var def
+binder 22806:22806 <> x:477
+R22816:22818 Coq.Init.Datatypes <> nat ind
+binder 22814:22814 <> n:478
+R22833:22833 Top.LocusDef <> a:476 var
+R22840:22843 Top.QafnySyntax <> AExp constr
+R22850:22853 Top.QafnySyntax <> AExp constr
+R22856:22865 Top.LocusDef <> subst_aexp def
+R22869:22869 Top.LocusDef <> x:477 var
+R22871:22871 Top.LocusDef <> n:478 var
+R22890:22894 Top.QafnySyntax <> Index constr
+R22903:22907 Top.QafnySyntax <> Index constr
+R22909:22909 Top.LocusDef <> x:477 var
+R22912:22921 Top.LocusDef <> subst_aexp def
+R22925:22925 Top.LocusDef <> x:477 var
+R22927:22927 Top.LocusDef <> n:478 var
+def 22951:22961 <> subst_cbexp
+R22966:22970 Top.QafnySyntax <> cbexp ind
+binder 22964:22964 <> a:480
+R22976:22978 Top.BasicUtility <> var def
+binder 22974:22974 <> x:481
+R22984:22986 Coq.Init.Datatypes <> nat ind
+binder 22982:22982 <> n:482
+R23002:23002 Top.LocusDef <> a:480 var
+R23009:23011 Top.QafnySyntax <> CEq constr
+R23020:23022 Top.QafnySyntax <> CEq constr
+R23025:23034 Top.LocusDef <> subst_aexp def
+R23038:23038 Top.LocusDef <> x:481 var
+R23040:23040 Top.LocusDef <> n:482 var
+R23044:23053 Top.LocusDef <> subst_aexp def
+R23057:23057 Top.LocusDef <> x:481 var
+R23059:23059 Top.LocusDef <> n:482 var
+R23078:23080 Top.QafnySyntax <> CLt constr
+R23089:23091 Top.QafnySyntax <> CLt constr
+R23094:23103 Top.LocusDef <> subst_aexp def
+R23107:23107 Top.LocusDef <> x:481 var
+R23109:23109 Top.LocusDef <> n:482 var
+R23113:23122 Top.LocusDef <> subst_aexp def
+R23126:23126 Top.LocusDef <> x:481 var
+R23128:23128 Top.LocusDef <> n:482 var
+def 23150:23159 <> subst_bexp
+R23164:23167 Top.QafnySyntax <> bexp ind
+binder 23162:23162 <> a:484
+R23173:23175 Top.BasicUtility <> var def
+binder 23171:23171 <> x:485
+R23181:23183 Coq.Init.Datatypes <> nat ind
+binder 23179:23179 <> n:486
+R23199:23199 Top.LocusDef <> a:484 var
+R23206:23207 Top.QafnySyntax <> CB constr
+R23214:23215 Top.QafnySyntax <> CB constr
+R23218:23228 Top.LocusDef <> subst_cbexp def
+R23232:23232 Top.LocusDef <> x:485 var
+R23234:23234 Top.LocusDef <> n:486 var
+R23253:23255 Top.QafnySyntax <> BEq constr
+R23268:23270 Top.QafnySyntax <> BEq constr
+R23273:23283 Top.LocusDef <> subst_varia def
+R23287:23287 Top.LocusDef <> x:485 var
+R23289:23289 Top.LocusDef <> n:486 var
+R23293:23303 Top.LocusDef <> subst_varia def
+R23307:23307 Top.LocusDef <> x:485 var
+R23309:23309 Top.LocusDef <> n:486 var
+R23315:23324 Top.LocusDef <> subst_aexp def
+R23328:23328 Top.LocusDef <> x:485 var
+R23330:23330 Top.LocusDef <> n:486 var
+R23349:23351 Top.QafnySyntax <> BLt constr
+R23364:23366 Top.QafnySyntax <> BLt constr
+R23369:23379 Top.LocusDef <> subst_varia def
+R23383:23383 Top.LocusDef <> x:485 var
+R23385:23385 Top.LocusDef <> n:486 var
+R23389:23399 Top.LocusDef <> subst_varia def
+R23403:23403 Top.LocusDef <> x:485 var
+R23405:23405 Top.LocusDef <> n:486 var
+R23411:23420 Top.LocusDef <> subst_aexp def
+R23424:23424 Top.LocusDef <> x:485 var
+R23426:23426 Top.LocusDef <> n:486 var
+R23445:23449 Top.QafnySyntax <> BTest constr
+R23458:23462 Top.QafnySyntax <> BTest constr
+R23467:23476 Top.LocusDef <> subst_aexp def
+R23480:23480 Top.LocusDef <> x:485 var
+R23482:23482 Top.LocusDef <> n:486 var
+R23501:23504 Top.QafnySyntax <> BNeg constr
+R23511:23514 Top.QafnySyntax <> BNeg constr
+R23517:23526 Top.LocusDef <> subst_bexp:487 def
+R23532:23532 Top.LocusDef <> n:486 var
+R23530:23530 Top.LocusDef <> x:485 var
+def 23556:23566 <> subst_bound
+R23571:23575 Top.QafnySyntax <> bound ind
+binder 23569:23569 <> b:489
+R23581:23583 Top.BasicUtility <> var def
+binder 23579:23579 <> x:490
+R23589:23591 Coq.Init.Datatypes <> nat ind
+binder 23587:23587 <> n:491
+R23606:23606 Top.LocusDef <> b:489 var
+R23614:23617 Top.QafnySyntax <> BVar constr
+R23631:23634 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R23630:23630 Top.LocusDef <> x:490 var
+R23659:23662 Top.QafnySyntax <> BVar constr
+R23642:23645 Top.QafnySyntax <> BNum constr
+R23649:23649 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R23648:23648 Top.LocusDef <> n:491 var
+R23671:23674 Top.QafnySyntax <> BNum constr
+R23681:23684 Top.QafnySyntax <> BNum constr
+def 23705:23715 <> subst_range
+R23720:23724 Top.QafnySyntax <> range def
+binder 23718:23718 <> r:493
+R23730:23732 Top.BasicUtility <> var def
+binder 23728:23728 <> x:494
+R23738:23740 Coq.Init.Datatypes <> nat ind
+binder 23736:23736 <> n:495
+R23756:23756 Top.LocusDef <> r:493 var
+R23763:23763 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23765:23765 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23767:23767 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23769:23769 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23774:23774 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23776:23776 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23794:23794 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23812:23812 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23777:23787 Top.LocusDef <> subst_bound def
+R23791:23791 Top.LocusDef <> x:494 var
+R23793:23793 Top.LocusDef <> n:495 var
+R23795:23805 Top.LocusDef <> subst_bound def
+R23809:23809 Top.LocusDef <> x:494 var
+R23811:23811 Top.LocusDef <> n:495 var
+def 23829:23839 <> subst_locus
+R23844:23848 Top.QafnySyntax <> locus def
+binder 23842:23842 <> l:497
+R23854:23856 Top.BasicUtility <> var def
+binder 23852:23852 <> x:498
+R23862:23864 Coq.Init.Datatypes <> nat ind
+binder 23860:23860 <> n:499
+R23878:23878 Top.LocusDef <> l:497 var
+R23885:23887 Coq.Init.Datatypes <> nil constr
+R23892:23894 Coq.Init.Datatypes <> nil constr
+R23909:23910 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R23917:23917 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R23935:23938 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R23957:23957 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R23918:23928 Top.LocusDef <> subst_range def
+R23932:23932 Top.LocusDef <> x:498 var
+R23934:23934 Top.LocusDef <> n:499 var
+R23939:23949 Top.LocusDef <> subst_locus:500 def
+R23956:23956 Top.LocusDef <> n:499 var
+R23954:23954 Top.LocusDef <> x:498 var
+def 23976:23984 <> subst_exp
+R23989:23991 Top.QafnySyntax <> exp ind
+binder 23987:23987 <> e:502
+R23997:23999 Top.BasicUtility <> var def
+binder 23995:23995 <> x:503
+R24005:24007 Coq.Init.Datatypes <> nat ind
+binder 24003:24003 <> n:504
+R24027:24027 Top.LocusDef <> e:502 var
+R24034:24037 Top.QafnySyntax <> SKIP constr
+R24046:24049 Top.QafnySyntax <> SKIP constr
+R24054:24063 Top.LocusDef <> subst_aexp def
+R24067:24067 Top.LocusDef <> x:503 var
+R24069:24069 Top.LocusDef <> n:504 var
+R24093:24093 Top.QafnySyntax <> X constr
+R24102:24102 Top.QafnySyntax <> X constr
+R24107:24116 Top.LocusDef <> subst_aexp def
+R24120:24120 Top.LocusDef <> x:503 var
+R24122:24122 Top.LocusDef <> n:504 var
+R24147:24148 Top.QafnySyntax <> CU constr
+R24160:24161 Top.QafnySyntax <> CU constr
+R24166:24175 Top.LocusDef <> subst_aexp def
+R24179:24179 Top.LocusDef <> x:503 var
+R24181:24181 Top.LocusDef <> n:504 var
+R24185:24193 Top.LocusDef <> subst_exp:505 def
+R24200:24200 Top.LocusDef <> n:504 var
+R24198:24198 Top.LocusDef <> x:503 var
+R24224:24225 Top.QafnySyntax <> RZ constr
+R24236:24237 Top.QafnySyntax <> RZ constr
+R24244:24253 Top.LocusDef <> subst_aexp def
+R24257:24257 Top.LocusDef <> x:503 var
+R24259:24259 Top.LocusDef <> n:504 var
+R24283:24285 Top.QafnySyntax <> RRZ constr
+R24296:24298 Top.QafnySyntax <> RRZ constr
+R24305:24314 Top.LocusDef <> subst_aexp def
+R24318:24318 Top.LocusDef <> x:503 var
+R24320:24320 Top.LocusDef <> n:504 var
+R24344:24345 Top.QafnySyntax <> SR constr
+R24354:24355 Top.QafnySyntax <> SR constr
+R24382:24384 Top.QafnySyntax <> SRR constr
+R24393:24395 Top.QafnySyntax <> SRR constr
+R24422:24427 Top.QafnySyntax <> Lshift constr
+R24434:24439 Top.QafnySyntax <> Lshift constr
+R24441:24441 Top.LocusDef <> x:503 var
+R24464:24469 Top.QafnySyntax <> Rshift constr
+R24476:24481 Top.QafnySyntax <> Rshift constr
+R24483:24483 Top.LocusDef <> x:503 var
+R24506:24508 Top.QafnySyntax <> Rev constr
+R24515:24517 Top.QafnySyntax <> Rev constr
+R24519:24519 Top.LocusDef <> x:503 var
+R24542:24544 Top.QafnySyntax <> QFT constr
+R24553:24555 Top.QafnySyntax <> QFT constr
+R24557:24557 Top.LocusDef <> x:503 var
+R24582:24585 Top.QafnySyntax <> RQFT constr
+R24594:24597 Top.QafnySyntax <> RQFT constr
+R24599:24599 Top.LocusDef <> x:503 var
+R24624:24626 Top.QafnySyntax <> Seq constr
+R24637:24639 Top.QafnySyntax <> Seq constr
+R24642:24650 Top.LocusDef <> subst_exp:505 def
+R24657:24657 Top.LocusDef <> n:504 var
+R24655:24655 Top.LocusDef <> x:503 var
+R24661:24669 Top.LocusDef <> subst_exp:505 def
+R24676:24676 Top.LocusDef <> n:504 var
+R24674:24674 Top.LocusDef <> x:503 var
+def 24704:24713 <> subst_mexp
+R24718:24722 Top.QafnySyntax <> maexp ind
+binder 24716:24716 <> e:507
+R24728:24730 Top.BasicUtility <> var def
+binder 24726:24726 <> x:508
+R24736:24738 Coq.Init.Datatypes <> nat ind
+binder 24734:24734 <> n:509
+R24753:24753 Top.LocusDef <> e:507 var
+R24760:24761 Top.QafnySyntax <> AE constr
+R24768:24769 Top.QafnySyntax <> AE constr
+R24772:24781 Top.LocusDef <> subst_aexp def
+R24785:24785 Top.LocusDef <> x:508 var
+R24787:24787 Top.LocusDef <> n:509 var
+R24806:24809 Top.QafnySyntax <> Meas constr
+R24816:24819 Top.QafnySyntax <> Meas constr
+def 24841:24850 <> subst_pexp
+R24855:24858 Top.QafnySyntax <> pexp ind
+binder 24853:24853 <> e:511
+R24864:24866 Top.BasicUtility <> var def
+binder 24862:24862 <> x:512
+R24872:24874 Coq.Init.Datatypes <> nat ind
+binder 24870:24870 <> n:513
+R24905:24905 Top.LocusDef <> e:511 var
+R24912:24916 Top.QafnySyntax <> PSKIP constr
+R24921:24925 Top.QafnySyntax <> PSKIP constr
+R24948:24950 Top.QafnySyntax <> Let constr
+R24966:24969 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R24970:24970 Top.LocusDef <> x:512 var
+R25010:25012 Top.QafnySyntax <> Let constr
+R25017:25026 Top.LocusDef <> subst_mexp def
+R25030:25030 Top.LocusDef <> x:512 var
+R25032:25032 Top.LocusDef <> n:513 var
+R25036:25045 Top.LocusDef <> subst_pexp:514 def
+R25052:25052 Top.LocusDef <> n:513 var
+R25050:25050 Top.LocusDef <> x:512 var
+R24977:24979 Top.QafnySyntax <> Let constr
+R24984:24993 Top.LocusDef <> subst_mexp def
+R24997:24997 Top.LocusDef <> x:512 var
+R24999:24999 Top.LocusDef <> n:513 var
+R25076:25080 Top.QafnySyntax <> AppSU constr
+R25083:25084 Top.QafnySyntax <> RH constr
+R25092:25096 Top.QafnySyntax <> AppSU constr
+R25099:25100 Top.QafnySyntax <> RH constr
+R25103:25113 Top.LocusDef <> subst_varia def
+R25117:25117 Top.LocusDef <> x:512 var
+R25119:25119 Top.LocusDef <> n:513 var
+R25144:25148 Top.QafnySyntax <> AppSU constr
+R25155:25159 Top.QafnySyntax <> AppSU constr
+R25184:25187 Top.QafnySyntax <> AppU constr
+R25197:25200 Top.QafnySyntax <> AppU constr
+R25205:25213 Top.LocusDef <> subst_exp def
+R25218:25218 Top.LocusDef <> x:512 var
+R25220:25220 Top.LocusDef <> n:513 var
+R25244:25245 Top.QafnySyntax <> If constr
+R25254:25255 Top.QafnySyntax <> If constr
+R25258:25267 Top.LocusDef <> subst_bexp def
+R25271:25271 Top.LocusDef <> x:512 var
+R25273:25273 Top.LocusDef <> n:513 var
+R25277:25286 Top.LocusDef <> subst_pexp:514 def
+R25292:25292 Top.LocusDef <> n:513 var
+R25290:25290 Top.LocusDef <> x:512 var
+R25316:25318 Top.QafnySyntax <> For constr
+R25337:25340 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R25341:25341 Top.LocusDef <> x:512 var
+R25439:25441 Top.QafnySyntax <> For constr
+R25446:25455 Top.LocusDef <> subst_aexp def
+R25459:25459 Top.LocusDef <> x:512 var
+R25461:25461 Top.LocusDef <> n:513 var
+R25465:25474 Top.LocusDef <> subst_aexp def
+R25478:25478 Top.LocusDef <> x:512 var
+R25480:25480 Top.LocusDef <> n:513 var
+R25484:25493 Top.LocusDef <> subst_bexp def
+R25497:25497 Top.LocusDef <> x:512 var
+R25499:25499 Top.LocusDef <> n:513 var
+R25503:25512 Top.LocusDef <> subst_pexp:514 def
+R25518:25518 Top.LocusDef <> n:513 var
+R25516:25516 Top.LocusDef <> x:512 var
+R25348:25350 Top.QafnySyntax <> For constr
+R25355:25364 Top.LocusDef <> subst_aexp def
+R25368:25368 Top.LocusDef <> x:512 var
+R25370:25370 Top.LocusDef <> n:513 var
+R25374:25383 Top.LocusDef <> subst_aexp def
+R25387:25387 Top.LocusDef <> x:512 var
+R25389:25389 Top.LocusDef <> n:513 var
+R25542:25548 Top.QafnySyntax <> Diffuse constr
+R25555:25561 Top.QafnySyntax <> Diffuse constr
+R25586:25589 Top.QafnySyntax <> PSeq constr
+R25600:25603 Top.QafnySyntax <> PSeq constr
+R25606:25615 Top.LocusDef <> subst_pexp:514 def
+R25622:25622 Top.LocusDef <> n:513 var
+R25620:25620 Top.LocusDef <> x:512 var
+R25626:25635 Top.LocusDef <> subst_pexp:514 def
+R25642:25642 Top.LocusDef <> n:513 var
+R25640:25640 Top.LocusDef <> x:512 var
+prf 25665:25685 <> depth_subst_pexp_same
+binder 25695:25695 <> e:516
+binder 25697:25697 <> x:517
+binder 25699:25699 <> v:518
+R25731:25733 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R25702:25711 Top.QafnySyntax <> depth_pexp def
+R25714:25723 Top.LocusDef <> subst_pexp def
+R25725:25725 Top.LocusDef <> e:516 var
+R25727:25727 Top.LocusDef <> x:517 var
+R25729:25729 Top.LocusDef <> v:518 var
+R25734:25743 Top.QafnySyntax <> depth_pexp def
+R25745:25745 Top.LocusDef <> e:516 var
+R25810:25813 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R25810:25813 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R25951:25954 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R25951:25954 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R26345:26357 Coq.FSets.FMapList Make <> modtype
+R26359:26367 Coq.Structures.OrderedTypeEx Nat_as_OT <> modtype
+mod 26337:26340 <> AEnv
+R26390:26404 Coq.FSets.FMapFacts Facts <> modtype
+R26407:26410 Top.LocusDef AEnv <> modtype
+mod 26377:26385 <> AEnvFacts
+def 26425:26428 <> aenv
+R26433:26438 Top.LocusDef <> t def
+R26440:26444 Top.QafnySyntax <> ktype ind
+def 26458:26467 <> empty_aenv
+R26473:26482 Top.LocusDef <> empty def
+R26484:26488 Top.QafnySyntax <> ktype ind
+def 26543:26550 <> ses_vars
+R26555:26559 Top.QafnySyntax <> locus def
+binder 26553:26553 <> s:519
+R26573:26573 Top.LocusDef <> s:519 var
+R26580:26582 Coq.Init.Datatypes <> nil constr
+R26587:26589 Coq.Init.Datatypes <> nil constr
+R26612:26613 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R26605:26605 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R26607:26607 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R26609:26609 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R26611:26611 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R26620:26626 Coq.Lists.ListSet <> set_add def
+R26628:26630 Top.BasicUtility <> var def
+R26633:26642 Coq.Arith.PeanoNat Nat eq_dec thm
+R26648:26655 Top.LocusDef <> ses_vars:520 def
+def 26677:26685 <> form_oenv
+R26690:26693 Coq.Init.Datatypes <> list ind
+R26695:26697 Top.BasicUtility <> var def
+binder 26688:26688 <> s:522
+R26713:26713 Top.LocusDef <> s:522 var
+R26720:26722 Coq.Init.Datatypes <> nil constr
+R26727:26741 Top.OQASM <> empty_env def
+R26760:26761 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R26768:26780 Top.OQASM Env add def
+R26795:26803 Top.LocusDef <> form_oenv:523 def
+R26784:26792 Top.OQASM <> Nor constr
+def 26827:26837 <> var_in_list
+R26844:26847 Coq.Init.Datatypes <> list ind
+R26849:26851 Top.BasicUtility <> var def
+binder 26840:26840 <> l:525
+R26857:26859 Top.BasicUtility <> var def
+binder 26855:26855 <> a:526
+R26876:26876 Top.LocusDef <> l:525 var
+R26883:26885 Coq.Init.Datatypes <> nil constr
+R26890:26894 Coq.Init.Datatypes <> false constr
+R26909:26910 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R26918:26918 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R26925:26930 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R26947:26947 Coq.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R26920:26923 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R26924:26924 Top.LocusDef <> a:526 var
+R26931:26941 Top.LocusDef <> var_in_list:527 def
+R26946:26946 Top.LocusDef <> a:526 var
+def 26969:26975 <> id_qenv
+R26983:26986 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R26980:26982 Top.BasicUtility <> var def
+R26987:26989 Coq.Init.Datatypes <> nat ind
+def 27017:27032 <> compile_ses_qenv
+R27039:27042 Top.LocusDef <> aenv def
+binder 27035:27037 <> env:529
+R27048:27052 Top.QafnySyntax <> locus def
+binder 27046:27046 <> l:530
+R27058:27058 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R27069:27072 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R27062:27065 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R27059:27061 Top.BasicUtility <> var def
+R27066:27068 Coq.Init.Datatypes <> nat ind
+R27073:27076 Coq.Init.Datatypes <> list ind
+R27078:27080 Top.BasicUtility <> var def
+R27095:27095 Top.LocusDef <> l:530 var
+R27102:27104 Coq.Init.Datatypes <> nil constr
+R27109:27109 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27117:27117 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27121:27121 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27110:27116 Top.LocusDef <> id_qenv def
+R27118:27120 Coq.Init.Datatypes <> nil constr
+R27140:27141 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R27133:27133 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27135:27135 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27137:27137 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27139:27139 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27155:27163 Top.LocusDef <> find def
+R27167:27169 Top.LocusDef <> env:529 var
+R27190:27193 Coq.Init.Datatypes <> Some constr
+R27196:27197 Top.QafnySyntax <> QT constr
+R27225:27240 Top.LocusDef <> compile_ses_qenv:531 def
+R27242:27244 Top.LocusDef <> env:529 var
+R27254:27254 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27256:27256 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27258:27258 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27255:27255 Coq.Reals.Rtopology <> f proj
+R27284:27294 Top.LocusDef <> var_in_list def
+R27296:27296 Top.LocusDef <> l:530 var
+R27316:27316 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27351:27351 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27356:27356 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+binder 27321:27321 <> y:533
+R27330:27333 Coq.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R27329:27329 Top.LocusDef <> y:533 var
+R27350:27350 Top.LocusDef <> y:533 var
+R27353:27354 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R27355:27355 Top.LocusDef <> l:530 var
+R27305:27305 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27307:27307 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27309:27309 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27308:27308 Top.LocusDef <> l:530 var
+R27397:27412 Top.LocusDef <> compile_ses_qenv:531 def
+R27414:27416 Top.LocusDef <> env:529 var
+def 27456:27475 <> compile_exp_to_oqasm
+R27480:27482 Top.QafnySyntax <> exp ind
+binder 27478:27478 <> e:534
+R27487:27492 Coq.Init.Datatypes <> option ind
+R27494:27502 Top.OQASM <> exp ind
+R27517:27517 Top.LocusDef <> e:534 var
+R27524:27527 Top.QafnySyntax <> SKIP constr
+R27532:27534 Top.QafnySyntax <> Num constr
+R27542:27545 Coq.Init.Datatypes <> Some constr
+R27548:27557 Top.OQASM <> SKIP constr
+R27559:27559 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27561:27561 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27563:27563 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27582:27582 Top.QafnySyntax <> X constr
+R27587:27589 Top.QafnySyntax <> Num constr
+R27597:27600 Coq.Init.Datatypes <> Some constr
+R27603:27609 Top.OQASM <> X constr
+R27611:27611 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27613:27613 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27615:27615 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27634:27635 Top.QafnySyntax <> CU constr
+R27640:27642 Top.QafnySyntax <> Num constr
+R27667:27686 Top.LocusDef <> compile_exp_to_oqasm:535 def
+R27688:27688 Top.LocusDef <> e:534 var
+R27695:27698 Coq.Init.Datatypes <> None constr
+R27703:27706 Coq.Init.Datatypes <> None constr
+R27749:27752 Coq.Init.Datatypes <> Some constr
+R27760:27763 Coq.Init.Datatypes <> Some constr
+R27766:27773 Top.OQASM <> CU constr
+R27775:27775 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27777:27777 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27779:27779 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27813:27814 Top.QafnySyntax <> RZ constr
+R27821:27823 Top.QafnySyntax <> Num constr
+R27831:27834 Coq.Init.Datatypes <> Some constr
+R27837:27844 Top.OQASM <> RZ constr
+R27848:27848 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27850:27850 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27852:27852 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27871:27873 Top.QafnySyntax <> RRZ constr
+R27880:27882 Top.QafnySyntax <> Num constr
+R27890:27893 Coq.Init.Datatypes <> Some constr
+R27896:27904 Top.OQASM <> RRZ constr
+R27908:27908 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27910:27910 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27912:27912 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27931:27932 Top.QafnySyntax <> SR constr
+R27941:27944 Coq.Init.Datatypes <> Some constr
+R27947:27954 Top.OQASM <> SR constr
+R27977:27979 Top.QafnySyntax <> SRR constr
+R27988:27991 Coq.Init.Datatypes <> Some constr
+R27994:28002 Top.OQASM <> SRR constr
+R28025:28030 Top.QafnySyntax <> Lshift constr
+R28037:28040 Coq.Init.Datatypes <> Some constr
+R28043:28054 Top.OQASM <> Lshift constr
+R28075:28080 Top.QafnySyntax <> Rshift constr
+R28087:28090 Coq.Init.Datatypes <> Some constr
+R28093:28104 Top.OQASM <> Rshift constr
+R28125:28127 Top.QafnySyntax <> Rev constr
+R28134:28137 Coq.Init.Datatypes <> Some constr
+R28140:28148 Top.OQASM <> Rev constr
+R28169:28171 Top.QafnySyntax <> QFT constr
+R28180:28183 Coq.Init.Datatypes <> Some constr
+R28186:28194 Top.OQASM <> QFT constr
+R28217:28220 Top.QafnySyntax <> RQFT constr
+R28229:28232 Coq.Init.Datatypes <> Some constr
+R28235:28244 Top.OQASM <> RQFT constr
+R28267:28269 Top.QafnySyntax <> Seq constr
+R28294:28313 Top.LocusDef <> compile_exp_to_oqasm:535 def
+R28323:28326 Coq.Init.Datatypes <> None constr
+R28331:28334 Coq.Init.Datatypes <> None constr
+R28361:28364 Coq.Init.Datatypes <> Some constr
+R28397:28416 Top.LocusDef <> compile_exp_to_oqasm:535 def
+R28426:28429 Coq.Init.Datatypes <> None constr
+R28434:28437 Coq.Init.Datatypes <> None constr
+R28465:28468 Coq.Init.Datatypes <> Some constr
+R28477:28480 Coq.Init.Datatypes <> Some constr
+R28483:28491 Top.OQASM <> Seq constr
+R28547:28550 Coq.Init.Datatypes <> None constr
+def 28572:28582 <> oracle_prop
+R28589:28592 Top.LocusDef <> aenv def
+binder 28585:28587 <> env:537
+R28598:28602 Top.QafnySyntax <> locus def
+binder 28596:28596 <> l:538
+R28608:28610 Top.QafnySyntax <> exp ind
+binder 28606:28606 <> e:539
+R28633:28648 Top.LocusDef <> compile_ses_qenv def
+R28650:28652 Top.LocusDef <> env:537 var
+R28654:28654 Top.LocusDef <> l:538 var
+R28661:28661 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R28666:28666 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R28668:28668 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R28685:28704 Top.LocusDef <> compile_exp_to_oqasm def
+R28706:28706 Top.LocusDef <> e:539 var
+R28713:28716 Coq.Init.Datatypes <> None constr
+R28721:28725 Coq.Init.Logic <> False ind
+R28742:28745 Coq.Init.Datatypes <> Some constr
+R28821:28825 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R28878:28878 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R28770:28784 Top.OQASM <> well_typed_oexp ind
+R28792:28800 Top.LocusDef <> form_oenv def
+R28809:28817 Top.LocusDef <> form_oenv def
+binder 28833:28833 <> x:540
+R28836:28851 Top.OQASM Env MapsTo def
+R28866:28874 Top.LocusDef <> form_oenv def
+R28855:28863 Top.OQASM <> Nor constr
+R28853:28853 Top.LocusDef <> x:540 var
+def 28910:28914 <> stack
+R28919:28924 Top.LocusDef <> t def
+R28928:28930 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R28927:28927 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R28931:28933 Coq.Init.Datatypes <> nat ind
+def 28948:28958 <> empty_stack
+R28964:28973 Top.LocusDef <> empty def
+R28977:28979 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R28976:28976 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R28980:28982 Coq.Init.Datatypes <> nat ind
+def 28998:29002 <> state
+R29020:29022 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R29015:29019 Top.LocusDef <> stack def
+R29023:29028 Top.LocusDef <> qstate def
+def 29044:29052 <> find_cenv
+R29057:29061 Top.LocusDef <> state def
+binder 29055:29055 <> l:541
+R29067:29069 Top.BasicUtility <> var def
+binder 29065:29065 <> a:542
+R29076:29084 Top.LocusDef <> find def
+R29089:29091 Coq.Init.Datatypes <> fst def
+R29093:29093 Top.LocusDef <> l:541 var
+R29086:29086 Top.LocusDef <> a:542 var
+ind 29109:29119 <> remove_type
+constr 29169:29184 <> remove_type_rule
+R29131:29134 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29123:29130 Top.LocusDef <> type_map def
+R29140:29143 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29135:29139 Top.QafnySyntax <> locus def
+R29152:29155 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29144:29151 Top.LocusDef <> type_map def
+binder 29194:29194 <> S:545
+binder 29196:29197 <> S':546
+binder 29199:29199 <> l:547
+binder 29201:29201 <> v:548
+R29228:29231 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29205:29213 Top.LocusDef <> env_equiv ind
+R29215:29215 Top.LocusDef <> S:545 var
+R29223:29224 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R29218:29218 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29220:29220 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29222:29222 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29219:29219 Top.LocusDef <> l:547 var
+R29221:29221 Top.LocusDef <> v:548 var
+R29225:29226 Top.LocusDef <> S':546 var
+R29232:29242 Top.LocusDef <> remove_type:543 ind
+R29248:29249 Top.LocusDef <> S':546 var
+R29246:29246 Top.LocusDef <> l:547 var
+R29244:29244 Top.LocusDef <> S:545 var
+ind 29263:29269 <> up_type
+constr 29330:29341 <> up_type_rule
+R29281:29284 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29273:29280 Top.LocusDef <> type_map def
+R29290:29293 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29285:29289 Top.QafnySyntax <> locus def
+R29301:29304 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29294:29300 Top.LocusDef <> se_type ind
+R29313:29316 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29305:29312 Top.LocusDef <> type_map def
+binder 29351:29351 <> S:551
+binder 29353:29354 <> S':552
+binder 29356:29356 <> l:553
+binder 29358:29359 <> l1:554
+binder 29361:29361 <> v:555
+binder 29363:29363 <> t:556
+R29394:29397 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29367:29375 Top.LocusDef <> env_equiv ind
+R29377:29377 Top.LocusDef <> S:551 var
+R29389:29390 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R29380:29380 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29386:29386 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29388:29388 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29382:29383 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R29381:29381 Top.LocusDef <> l:553 var
+R29384:29385 Top.LocusDef <> l1:554 var
+R29387:29387 Top.LocusDef <> v:555 var
+R29391:29392 Top.LocusDef <> S':552 var
+R29398:29404 Top.LocusDef <> up_type:549 ind
+R29418:29419 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R29413:29413 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29415:29415 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29417:29417 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29414:29414 Top.LocusDef <> l:553 var
+R29416:29416 Top.LocusDef <> t:556 var
+R29420:29421 Top.LocusDef <> S':552 var
+R29410:29410 Top.LocusDef <> t:556 var
+R29408:29408 Top.LocusDef <> l:553 var
+R29406:29406 Top.LocusDef <> S:551 var
+ind 29436:29443 <> up_types
+constr 29495:29507 <> up_type_empty
+constr 29541:29552 <> up_type_many
+R29454:29457 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29446:29453 Top.LocusDef <> type_map def
+R29466:29469 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29458:29465 Top.LocusDef <> type_map def
+R29478:29481 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29470:29477 Top.LocusDef <> type_map def
+binder 29517:29517 <> T:559
+R29520:29527 Top.LocusDef <> up_types:557 ind
+R29534:29534 Top.LocusDef <> T:559 var
+R29531:29532 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R29529:29529 Top.LocusDef <> T:559 var
+binder 29562:29562 <> T:560
+binder 29564:29565 <> T1:561
+binder 29567:29568 <> T2:562
+binder 29570:29571 <> T3:563
+binder 29573:29573 <> s:564
+binder 29575:29575 <> t:565
+R29594:29597 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29578:29584 Top.LocusDef <> up_type ind
+R29586:29586 Top.LocusDef <> T:560 var
+R29588:29588 Top.LocusDef <> s:564 var
+R29590:29590 Top.LocusDef <> t:565 var
+R29592:29593 Top.LocusDef <> T1:561 var
+R29615:29618 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29598:29605 Top.LocusDef <> up_types:557 ind
+R29613:29614 Top.LocusDef <> T3:563 var
+R29610:29611 Top.LocusDef <> T2:562 var
+R29607:29608 Top.LocusDef <> T1:561 var
+R29619:29626 Top.LocusDef <> up_types:557 ind
+R29642:29643 Top.LocusDef <> T3:563 var
+R29636:29637 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R29631:29631 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29633:29633 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29635:29635 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29632:29632 Top.LocusDef <> s:564 var
+R29634:29634 Top.LocusDef <> t:565 var
+R29638:29639 Top.LocusDef <> T2:562 var
+R29628:29628 Top.LocusDef <> T:560 var
+ind 29658:29667 <> find_state
+constr 29741:29756 <> find_qstate_rule
+binder 29670:29673 <> rmax:566
+R29683:29686 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29678:29682 Top.LocusDef <> state def
+R29692:29695 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29687:29691 Top.QafnySyntax <> locus def
+R29723:29726 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29696:29701 Coq.Init.Datatypes <> option ind
+R29709:29711 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R29704:29708 Top.QafnySyntax <> locus def
+R29712:29721 Top.LocusDef <> state_elem ind
+binder 29766:29766 <> M:569
+binder 29768:29768 <> S:570
+binder 29770:29771 <> S':571
+binder 29773:29773 <> x:572
+binder 29775:29775 <> t:573
+R29800:29803 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29779:29789 Top.LocusDef <> state_equiv ind
+R29791:29794 Top.LocusDef <> rmax:566 var
+R29796:29796 Top.LocusDef <> S:570 var
+R29798:29799 Top.LocusDef <> S':571 var
+R29819:29822 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29804:29811 Top.LocusDef <> find_env ind
+R29818:29818 Top.LocusDef <> t:573 var
+R29816:29816 Top.LocusDef <> x:572 var
+R29813:29814 Top.LocusDef <> S':571 var
+R29823:29832 Top.LocusDef <> find_state:567 ind
+R29842:29842 Top.LocusDef <> t:573 var
+R29840:29840 Top.LocusDef <> x:572 var
+R29834:29834 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29836:29836 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29838:29838 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29835:29835 Top.LocusDef <> M:569 var
+R29837:29837 Top.LocusDef <> S:570 var
+ind 29857:29864 <> pick_mea
+constr 29913:29921 <> pick_meas
+R29871:29874 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29868:29870 Coq.Init.Datatypes <> nat ind
+R29885:29888 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29875:29884 Top.LocusDef <> state_elem ind
+R29889:29889 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29897:29901 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29891:29893 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R29890:29890 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R29894:29896 Coq.Init.Datatypes <> nat ind
+binder 29932:29932 <> n:576
+binder 29934:29934 <> m:577
+binder 29936:29936 <> b:578
+binder 29938:29938 <> i:579
+binder 29940:29940 <> r:580
+binder 29942:29943 <> bl:581
+R29966:29969 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29957:29960 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R29962:29964 Coq.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R29961:29961 Top.LocusDef <> i:579 var
+R29961:29961 Top.LocusDef <> i:579 var
+R29965:29965 Top.LocusDef <> m:577 var
+R29982:29985 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29973:29975 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R29970:29970 Top.LocusDef <> b:578 var
+R29972:29972 Top.LocusDef <> i:579 var
+R29976:29976 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29978:29978 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29981:29981 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R29977:29977 Top.LocusDef <> r:580 var
+R29979:29980 Top.LocusDef <> bl:581 var
+R29986:29993 Top.LocusDef <> pick_mea:574 ind
+R30008:30008 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30015:30016 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30030:30030 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30009:30012 Top.externals.SQIR.externals.QWIRE.Complex <> Cmod def
+R30014:30014 Top.LocusDef <> r:580 var
+R30017:30024 Top.LocusDef <> a_nat2fb def
+R30026:30027 Top.LocusDef <> bl:581 var
+R30029:30029 Top.LocusDef <> n:576 var
+R29998:30001 Top.LocusDef <> Cval constr
+R30003:30003 Top.LocusDef <> m:577 var
+R30005:30005 Top.LocusDef <> b:578 var
+R29995:29995 Top.LocusDef <> n:576 var
+def 30046:30056 <> update_cval
+R30061:30065 Top.LocusDef <> state def
+binder 30059:30059 <> l:582
+R30071:30073 Top.BasicUtility <> var def
+binder 30069:30069 <> a:583
+R30081:30083 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R30080:30080 Coq.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R30084:30086 Coq.Init.Datatypes <> nat ind
+binder 30077:30077 <> v:584
+R30092:30092 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30113:30113 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30119:30119 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30093:30100 Top.LocusDef <> add def
+R30107:30109 Coq.Init.Datatypes <> fst def
+R30111:30111 Top.LocusDef <> l:582 var
+R30104:30104 Top.LocusDef <> v:584 var
+R30102:30102 Top.LocusDef <> a:583 var
+R30114:30116 Coq.Init.Datatypes <> snd def
+R30118:30118 Top.LocusDef <> l:582 var
+ind 30133:30140 <> up_state
+constr 30210:30222 <> up_state_rule
+R30148:30150 Coq.Init.Datatypes <> nat ind
+binder 30143:30146 <> rmax:585
+R30160:30163 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30155:30159 Top.LocusDef <> state def
+R30169:30172 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30164:30168 Top.QafnySyntax <> locus def
+R30183:30186 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30173:30182 Top.LocusDef <> state_elem ind
+R30192:30195 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30187:30191 Top.LocusDef <> state def
+binder 30233:30233 <> S:588
+binder 30235:30235 <> M:589
+binder 30237:30238 <> M':590
+binder 30240:30242 <> M'':591
+binder 30244:30244 <> l:592
+binder 30246:30246 <> t:593
+R30271:30274 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30250:30260 Top.LocusDef <> state_equiv ind
+R30262:30265 Top.LocusDef <> rmax:585 var
+R30267:30267 Top.LocusDef <> M:589 var
+R30269:30270 Top.LocusDef <> M':590 var
+R30296:30299 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30275:30284 Top.LocusDef <> update_env ind
+R30293:30295 Top.LocusDef <> M'':591 var
+R30291:30291 Top.LocusDef <> t:593 var
+R30289:30289 Top.LocusDef <> l:592 var
+R30286:30287 Top.LocusDef <> M':590 var
+R30300:30307 Top.LocusDef <> up_state:586 ind
+R30319:30319 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30321:30321 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30325:30325 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30320:30320 Top.LocusDef <> S:588 var
+R30322:30324 Top.LocusDef <> M'':591 var
+R30317:30317 Top.LocusDef <> t:593 var
+R30315:30315 Top.LocusDef <> l:592 var
+R30309:30309 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30311:30311 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30313:30313 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30310:30310 Top.LocusDef <> S:588 var
+R30312:30312 Top.LocusDef <> M:589 var
+ind 30339:30348 <> mask_state
+constr 30408:30422 <> mask_state_rule
+R30356:30358 Coq.Init.Datatypes <> nat ind
+binder 30351:30354 <> rmax:594
+R30367:30370 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30362:30366 Top.QafnySyntax <> locus def
+R30374:30377 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30371:30373 Coq.Init.Datatypes <> nat ind
+R30383:30386 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30378:30382 Top.LocusDef <> state def
+R30392:30395 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30387:30391 Top.LocusDef <> state def
+binder 30433:30433 <> l:597
+binder 30435:30435 <> n:598
+binder 30437:30437 <> m:599
+binder 30439:30440 <> l1:600
+binder 30442:30442 <> t:601
+binder 30444:30445 <> t':602
+binder 30447:30447 <> S:603
+binder 30449:30450 <> Sa:604
+R30490:30493 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30454:30463 Top.LocusDef <> find_state ind
+R30465:30468 Top.LocusDef <> rmax:594 var
+R30470:30470 Top.LocusDef <> S:603 var
+R30472:30472 Top.LocusDef <> l:597 var
+R30475:30478 Coq.Init.Datatypes <> Some constr
+R30480:30480 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30486:30486 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30488:30488 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R30482:30483 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R30481:30481 Top.LocusDef <> l:597 var
+R30484:30485 Top.LocusDef <> l1:600 var
+R30487:30487 Top.LocusDef <> t:601 var
+R30512:30529 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30503:30505 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R30494:30500 Top.LocusDef <> ses_len def
+R30502:30502 Top.LocusDef <> l:597 var
+R30506:30509 Coq.Init.Datatypes <> Some constr
+R30511:30511 Top.LocusDef <> m:599 var
+R30560:30563 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30550:30552 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R30530:30543 Top.LocusDef <> build_state_ch def
+R30545:30545 Top.LocusDef <> m:599 var
+R30547:30547 Top.LocusDef <> n:598 var
+R30549:30549 Top.LocusDef <> t:601 var
+R30553:30556 Coq.Init.Datatypes <> Some constr
+R30558:30559 Top.LocusDef <> t':602 var
+R30588:30591 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30565:30572 Top.LocusDef <> up_state ind
+R30574:30577 Top.LocusDef <> rmax:594 var
+R30579:30579 Top.LocusDef <> S:603 var
+R30581:30581 Top.LocusDef <> l:597 var
+R30583:30584 Top.LocusDef <> t':602 var
+R30586:30587 Top.LocusDef <> Sa:604 var
+R30592:30601 Top.LocusDef <> mask_state:595 ind
+R30609:30610 Top.LocusDef <> Sa:604 var
+R30607:30607 Top.LocusDef <> S:603 var
+R30605:30605 Top.LocusDef <> n:598 var
+R30603:30603 Top.LocusDef <> l:597 var
+ind 30624:30643 <> type_state_elem_same
+constr 30686:30699 <> nor_state_same
+constr 30757:30770 <> had_state_same
+constr 30826:30838 <> ch_state_same
+R30654:30657 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30647:30653 Top.LocusDef <> se_type ind
+R30668:30671 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R30658:30667 Top.LocusDef <> state_elem ind
+binder 30709:30709 <> p:607
+binder 30711:30711 <> r:608
+R30714:30733 Top.LocusDef <> type_state_elem_same:605 ind
+R30741:30744 Top.LocusDef <> Nval constr
+R30746:30746 Top.LocusDef <> p:607 var
+R30748:30748 Top.LocusDef <> r:608 var
+R30735:30738 Top.LocusDef <> TNor constr
+binder 30780:30781 <> bl:609
+R30784:30803 Top.LocusDef <> type_state_elem_same:605 ind
+R30811:30814 Top.LocusDef <> Hval constr
+R30816:30817 Top.LocusDef <> bl:609 var
+R30805:30808 Top.LocusDef <> THad constr
+binder 30848:30848 <> m:610
+binder 30850:30851 <> bl:611
+R30854:30873 Top.LocusDef <> type_state_elem_same:605 ind
+R30879:30882 Top.LocusDef <> Cval constr
+R30884:30884 Top.LocusDef <> m:610 var
+R30886:30887 Top.LocusDef <> bl:611 var
+R30875:30876 Top.LocusDef <> CH constr
+def 30926:30935 <> dom_to_ses
+R30942:30945 Coq.Init.Datatypes <> list ind
+R30947:30951 Top.QafnySyntax <> locus def
+binder 30938:30938 <> l:612
+R30965:30965 Top.LocusDef <> l:612 var
+R30972:30974 Coq.Init.Datatypes <> nil constr
+R30979:30981 Coq.Init.Datatypes <> nil constr
+R30995:30996 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R31005:31007 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R31021:31021 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R31008:31017 Top.LocusDef <> dom_to_ses:613 def
+def 31040:31049 <> gen_qubits
+R31054:31056 Top.BasicUtility <> var def
+binder 31052:31052 <> x:615
+R31064:31066 Coq.Init.Datatypes <> nat ind
+binder 31060:31060 <> l:616
+binder 31062:31062 <> n:617
+R31080:31080 Top.LocusDef <> n:617 var
+R31092:31094 Coq.Init.Datatypes <> nil constr
+R31098:31098 Coq.Init.Datatypes <> S constr
+R31112:31114 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R31131:31131 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R31105:31105 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R31107:31107 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R31111:31111 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R31106:31106 Top.LocusDef <> x:615 var
+R31109:31109 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R31108:31108 Top.LocusDef <> l:616 var
+R31115:31124 Top.LocusDef <> gen_qubits:618 def
+R31128:31128 Top.LocusDef <> l:616 var
+R31126:31126 Top.LocusDef <> x:615 var
+def 31150:31164 <> gen_qubit_range
+R31169:31173 Top.QafnySyntax <> range def
+binder 31167:31167 <> r:620
+R31187:31187 Top.LocusDef <> r:620 var
+R31195:31195 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R31197:31197 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R31204:31204 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R31211:31211 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R31198:31201 Top.QafnySyntax <> BNum constr
+R31205:31208 Top.QafnySyntax <> BNum constr
+R31216:31219 Coq.Init.Datatypes <> Some constr
+R31222:31231 Top.LocusDef <> gen_qubits def
+R31239:31239 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R31251:31254 Coq.Init.Datatypes <> None constr
+def 31271:31283 <> gen_qubit_ses
+R31288:31292 Top.QafnySyntax <> locus def
+binder 31286:31286 <> s:622
+R31307:31307 Top.LocusDef <> s:622 var
+R31314:31316 Coq.Init.Datatypes <> nil constr
+R31321:31324 Coq.Init.Datatypes <> Some constr
+R31326:31328 Coq.Init.Datatypes <> nil constr
+R31333:31334 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R31352:31364 Top.LocusDef <> gen_qubit_ses:623 def
+R31374:31377 Coq.Init.Datatypes <> None constr
+R31382:31385 Coq.Init.Datatypes <> None constr
+R31420:31423 Coq.Init.Datatypes <> Some constr
+R31449:31463 Top.LocusDef <> gen_qubit_range def
+R31472:31475 Coq.Init.Datatypes <> None constr
+R31480:31483 Coq.Init.Datatypes <> None constr
+R31521:31524 Coq.Init.Datatypes <> Some constr
+R31531:31534 Coq.Init.Datatypes <> Some constr
+R31538:31539 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+def 31590:31599 <> sub_qubits
+R31609:31613 Top.QafnySyntax <> locus def
+binder 31602:31603 <> s1:625
+binder 31605:31606 <> s2:626
+R31636:31648 Top.LocusDef <> gen_qubit_ses def
+R31650:31651 Top.LocusDef <> s1:625 var
+R31658:31661 Coq.Init.Datatypes <> None constr
+R31666:31670 Coq.Init.Logic <> False ind
+R31684:31687 Coq.Init.Datatypes <> Some constr
+R31706:31718 Top.LocusDef <> gen_qubit_ses def
+R31720:31721 Top.LocusDef <> s2:626 var
+R31728:31731 Coq.Init.Datatypes <> None constr
+R31736:31740 Coq.Init.Logic <> False ind
+R31756:31759 Coq.Init.Datatypes <> Some constr
+binder 31775:31775 <> x:627
+R31785:31788 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R31778:31779 Coq.Lists.List <> In def
+R31781:31781 Top.LocusDef <> x:627 var
+R31789:31790 Coq.Lists.List <> In def
+R31792:31792 Top.LocusDef <> x:627 var
+def 31828:31837 <> dis_qubits
+R31847:31851 Top.QafnySyntax <> locus def
+binder 31840:31841 <> s1:628
+binder 31843:31844 <> s2:629
+R31874:31886 Top.LocusDef <> gen_qubit_ses def
+R31888:31889 Top.LocusDef <> s1:628 var
+R31896:31899 Coq.Init.Datatypes <> None constr
+R31904:31908 Coq.Init.Logic <> False ind
+R31922:31925 Coq.Init.Datatypes <> Some constr
+R31944:31956 Top.LocusDef <> gen_qubit_ses def
+R31958:31959 Top.LocusDef <> s2:629 var
+R31966:31969 Coq.Init.Datatypes <> None constr
+R31974:31978 Coq.Init.Logic <> False ind
+R31994:31997 Coq.Init.Datatypes <> Some constr
+R32047:32049 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R32006:32028 Coq.Lists.ListSet <> set_inter def
+R32030:32040 Top.BasicUtility <> posi_eq_dec thm
+R32050:32052 Coq.Init.Datatypes <> nil constr
