@@ -430,33 +430,8 @@ Proof.
       assert (H_exec : exec fuel Skip s = Some s).
 Admitted.
 
-Theorem hoare_completeness : forall P p Q,
-  (forall s s', (forall b, In b P -> eval_cbexp s b = true) ->
-                exists fuel, exec fuel (translate_pexp p) s = Some s' ->
-                (forall b, In b Q -> eval_cbexp s' b = true)) ->
-  hoare_triple P (translate_pexp p) Q.
-Proof.
-  intros P p Q H.
-  induction p.
-  - (* Case: PSKIP *)
-    simpl. apply hoare_consequence with (P' := P) (Q' := Q).
-    + intros s Hs b Hb. apply Hs. assumption.
-
-Admitted.
 
 (* Soundness Theorem: If Hoare triple holds for translated pexp, then it holds for original pexp. *)
-Theorem translate_pexp_soundness : forall P p Q,
-  hoare_triple P (translate_pexp p) Q ->
-  forall s, (forall b, In b P -> eval_cbexp s b = true) ->
-            exists s', exists fuel, exec fuel (translate_pexp p) s = Some s' /\
-            (forall b, In b Q -> eval_cbexp s' b = true).
-Proof.
-  intros P p Q Hht s HP. induction Hht; simpl in *.
-  - exists s. exists 1. split; auto.
-  - destruct IHHht1 as [s' [fuel1 [Hex1 HQ1]]]; auto.
-    destruct IHHht2 as [s'' [fuel2 [Hex2 HQ2]]]; auto.
-Admitted.
-
 Theorem hoare_soundness : forall P p Q,
   hoare_triple P (translate_pexp p) Q ->
   forall s, (forall b, In b P -> eval_cbexp s b = true) ->
@@ -476,6 +451,8 @@ Proof.
     + unfold exec. fold exec.
 
 Admitted. 
+
+
 
 
 
