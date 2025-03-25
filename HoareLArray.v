@@ -405,12 +405,6 @@ Fixpoint translate_pexp (p : pexp) : cmd :=
   | Diffuse x => Skip 
   end.
 
-
-(* Execution correctness definition *)
-Definition correct (P: assertion) (c: cmd) (Q: assertion) : Prop :=
-  forall s, (forall b, In b P -> eval_cbexp s b = true) ->
-            exists s', exec 100 c s = Some s' /\ (forall b, In b Q -> eval_cbexp s' b = true).
-
 (* Completeness theorem from translate_pexp to hoare triple *)
 Theorem translate_pexp_completeness : forall P p Q,
   (forall s s', (forall b, In b P -> eval_cbexp s b = true) ->
