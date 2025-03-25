@@ -406,14 +406,15 @@ Fixpoint translate_pexp (p : pexp) : cmd :=
   end.
 
 (* Completeness theorem from translate_pexp to hoare triple *)
-Theorem translate_pexp_completeness : forall P p Q,
+Theorem translate_cmd_completeness : forall P c Q,
   (forall s s', (forall b, In b P -> eval_cbexp s b = true) ->
-                exists fuel, exec fuel (translate_pexp p) s = Some s' ->
+                exists fuel, exec fuel c s = Some s' ->
                 (forall b, In b Q -> eval_cbexp s' b = true)) ->
-  hoare_triple P (translate_pexp p) Q.
+  hoare_triple P c Q.
+
 Proof.
-  intros P p Q H.
-  induction p.
+  intros P c Q H.
+  induction c.
   - (* Case: PSKIP *)
     simpl. apply hoare_consequence with (P' := P) (Q' := P).
     + intros s Hs b Hb. apply Hs. assumption.
@@ -426,13 +427,14 @@ Admitted.
 
 
 (* Soundness Theorem: If Hoare triple holds for translated pexp, then it holds for original pexp. *)
-Theorem hoare_soundness : forall P p Q,
-  hoare_triple P (translate_pexp p) Q ->
+Theorem hoare_soundness : forall P c Q,
+  hoare_triple P c Q ->
   forall s, (forall b, In b P -> eval_cbexp s b = true) ->
-            exists fuel, exists s', exec fuel (translate_pexp p) s = Some s' /\
+            exists fuel, exists s', exec fuel c s = Some s' /\
             (forall b, In b Q -> eval_cbexp s' b = true).
+
 Proof.
-  intros P p Q Hht. induction Hht; intros s Hs; simpl.
+  intros P c Q Hht. induction Hht; intros s Hs; simpl.
   - (* skip_rule: hoare_triple P Skip P *)
     exists 1. exists s. split.
     + unfold exec. reflexivity.
