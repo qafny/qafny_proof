@@ -408,34 +408,15 @@ Fixpoint translate_pexp (p : pexp) : cmd :=
 (* Translate a classical+quantum state into a logical assertion *)
 Parameter trans_state : state -> assertion.
 Theorem hoare_sound_for_qafny :
-  forall (rmax : nat) (q : atype) (env : aenv) (T : type_map) (φ φ' : qpred) (W W' : cpred) (e : pexp),
+  forall (rmax : nat) (aenv : aenv)
+         (φ φ' : state) (e : pexp) (c : cmd)
+         (P Q : assertion),
     c = translate_pexp e ->
-    P = trans_state φ ->
+    P = trans_state φ  ->
     Q = trans_state φ' ->
     hoare_triple P c Q ->
+    (exists fuel, exec fuel c φ = Some φ') ->
     qfor_sem rmax aenv φ e φ'.
-
-
-
-
-
-
-
-Theorem soundness_of_translation :
-  forall (rmax : nat) (q : atype) (env : aenv) (T : type_map) (φ φ' : qpred) (W W' : cpred) (e : pexp),
-    triple q env T (W, φ) e (W', φ') ->
-    let c := translate_pexp e in
-    forall (P Q : assertion),
-      (* Relate W, φ to P *)
-      (forall s : state, (forall b, In b W -> eval_cbexp s b = true) ->
-                         (exists qs : qstate, sem_qpred env φ qs /\ quant_to_imp qs = s)) ->
-      (* Prove Hoare triple *)
-      hoare_triple P c Q /\
-      (* Relate W', φ' to Q *)
-      (forall s' : state, (exists fuel, exec fuel c s = Some s') ->
-                         (forall b, In b Q -> eval_cbexp s' b = true) ->
-                         exists qs' : qstate, qfor_sem env (stack_empty, quant_to_imp^{-1} s) e (stack_empty, qs') /\ sem_qpred env φ' qs').
-
 
 
 
