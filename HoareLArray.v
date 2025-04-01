@@ -405,48 +405,42 @@ Fixpoint translate_pexp (p : pexp) : cmd :=
   | Diffuse x => Skip 
   end.
 
-(* Completeness theorem from translate_pexp to hoare triple *)
-Theorem translate_cmd_completeness : forall P c Q,
-  (forall s s', (forall b, In b P -> eval_cbexp s b = true) ->
-                exists fuel, exec fuel c s = Some s' ->
-                (forall b, In b Q -> eval_cbexp s' b = true)) ->
-  hoare_triple P c Q.
-
-Proof.
-  intros P c Q H.
-  induction c.
-  - (* Case: PSKIP *)
-    simpl. apply hoare_consequence with (P' := P) (Q' := P).
-    + intros s Hs b Hb. apply Hs. assumption.
-    + apply hoare_skip.
-    + intros s Hs b Hb.
-      specialize (H s s Hs).
-      destruct H as [fuel Hfuel].
-      assert (H_exec : exec fuel Skip s = Some s).
-Admitted.
+(* Translate a classical+quantum state into a logical assertion *)
+Parameter trans_state : state -> assertion.
+Theorem hoare_sound_for_qafny :
+  forall (rmax : nat) (q : atype) (env : aenv) (T : type_map) (φ φ' : qpred) (W W' : cpred) (e : pexp),
+    c = translate_pexp e ->
+    P = trans_state φ ->
+    Q = trans_state φ' ->
+    hoare_triple P c Q ->
+    qfor_sem rmax aenv φ e φ'.
 
 
-(* Soundness Theorem: If Hoare triple holds for translated pexp, then it holds for original pexp. *)
-Theorem hoare_soundness : forall P c Q,
-  hoare_triple P c Q ->
-  forall s, (forall b, In b P -> eval_cbexp s b = true) ->
-            exists fuel, exists s', exec fuel c s = Some s' /\
-            (forall b, In b Q -> eval_cbexp s' b = true).
 
-Proof.
-  intros P c Q Hht. induction Hht; intros s Hs; simpl.
-  - (* skip_rule: hoare_triple P Skip P *)
-    exists 1. exists s. split.
-    + unfold exec. reflexivity.
-    + intros b Hb. apply Hs. assumption.
 
-  - (* seq_rule: hoare_triple P (Seq c1 c2) R *)
-    destruct (IHHht1 s Hs) as [fuel1 [s' [Hexec1 HQ]]].
-    destruct (IHHht2 s' HQ) as [fuel2 [s'' [Hexec2 HR]]].
-    exists (S (fuel1 + fuel2)). exists s''. split.
-    + unfold exec. fold exec.
 
-Admitted. 
+
+
+Theorem soundness_of_translation :
+  forall (rmax : nat) (q : atype) (env : aenv) (T : type_map) (φ φ' : qpred) (W W' : cpred) (e : pexp),
+    triple q env T (W, φ) e (W', φ') ->
+    let c := translate_pexp e in
+    forall (P Q : assertion),
+      (* Relate W, φ to P *)
+      (forall s : state, (forall b, In b W -> eval_cbexp s b = true) ->
+                         (exists qs : qstate, sem_qpred env φ qs /\ quant_to_imp qs = s)) ->
+      (* Prove Hoare triple *)
+      hoare_triple P c Q /\
+      (* Relate W', φ' to Q *)
+      (forall s' : state, (exists fuel, exec fuel c s = Some s') ->
+                         (forall b, In b Q -> eval_cbexp s' b = true) ->
+                         exists qs' : qstate, qfor_sem env (stack_empty, quant_to_imp^{-1} s) e (stack_empty, qs') /\ sem_qpred env φ' qs').
+
+
+
+
+
+ 
 
 
 
