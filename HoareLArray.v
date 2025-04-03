@@ -406,7 +406,63 @@ Fixpoint translate_pexp (p : pexp) : cmd :=
   end.
 
 (* Translate a classical+quantum state into a logical assertion *)
-Parameter trans_state : state -> assertion.
+
+Definition trans_state_elem (se : state_elem) : nat :=
+  match se with
+  | Nval r b => 1 (* Simplified: non-zero for normal mode *)
+  | Hval b => 2   (* Simplified: distinct value for Hadamard mode *)
+  | Cval m f => m (* Simplified: use the number of states *)
+  end.
+
+Definition var_to_string (v : BasicUtility.var) : string :=
+  match v with
+  | _ => "default"  
+  end.
+Definition trans_locus (l : locus) : string :=
+  match l with
+  | (x, BNum a, BNum b) :: _ => var_to_string(x) 
+  | _ => "default" 
+  end.
+
+Definition trans_qstate (q : qstate) : assertion :=
+  flat_map (fun '(l, se) => [CBVar (Array (trans_locus l) (trans_state_elem se))]) q.
+
+Definition trans_stack (W : stack) : assertion :=
+  map (fun '(x, (r, v)) => CBVar (Scalar (var_to_string x))) (AEnv.elements W).
+
+Definition trans_state (phi : aenv * (stack * qstate)) : assertion :=
+  match phi with
+  | (aenv, s) =>
+      let (W, q) := s in
+      trans_stack W ++ trans_qstate q
+  end.
+
+(* Soundness Theorem *)
+Theorem quantum_to_classical_soundness :
+  forall (rmax : nat) (aenv : LocusDef.aenv) (s s' : stack * qstate) (e : pexp),
+    qfor_sem rmax (aenv, s) e (aenv, s') ->
+    exists P Q c,
+      P = trans_state (aenv, s) /\
+      Q = trans_state (aenv, s') /\
+      c = translate_pexp e /\
+      hoare_triple P c Q.
+Proof.
+Admitted.
+(* Completeness theorem *)
+Theorem quantum_to_classical_completeness :
+  forall P Q c,
+    hoare_triple P c Q ->
+    exists e s s' rmax aenv,
+      c = translate_pexp e /\
+      P = trans_state (aenv, s) /\
+      Q = trans_state (aenv, s') /\
+      qfor_sem rmax (aenv, s) e (aenv, s').
+Proof.
+Admitted.
+
+
+(*
+(* Translate a classical+quantum state into a logical assertion *)
 Theorem hoare_sound_for_qafny :
   forall (rmax : nat) (aenv : aenv)
          (φ φ' : state) (e : pexp) (c : cmd)
@@ -415,8 +471,17 @@ Theorem hoare_sound_for_qafny :
     P = trans_state φ  ->
     Q = trans_state φ' ->
     hoare_triple P c Q ->
-    (exists fuel, exec fuel c φ = Some φ') ->
     qfor_sem rmax aenv φ e φ'.
+
+Proof.
+Admitted.
+
+*)
+
+
+
+
+
 
 
 
