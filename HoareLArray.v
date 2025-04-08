@@ -205,8 +205,8 @@ Inductive hoare_triple : assertion -> cmd -> assertion -> Prop :=
       hoare_triple P c1 Q ->
       hoare_triple Q c2 R ->
       hoare_triple P (Seq c1 c2) R
-  | assign_rule : forall Q v e,
-      hoare_triple Q (Assign v e) Q
+  | assign_rule : forall P v e,
+      hoare_triple (subst_assertion P v e) (Assign v e) P
   | if_rule : forall P Q b c1 c2,
       hoare_triple P c1 Q ->
       hoare_triple P c2 Q ->
@@ -265,8 +265,8 @@ Proof.
 Qed.
 
 (* Theorem: Hoare rule for assignment *)
-Theorem hoare_assign : forall Q v e,
-  hoare_triple Q (Assign v e) Q.
+Theorem hoare_assign : forall P v e,
+  hoare_triple (subst_assertion P v e) (Assign v e) P.
 Proof.
   intros. apply assign_rule.
 Qed.
@@ -381,6 +381,7 @@ Fixpoint translate_bexp (b : bexp) : expr :=
   | BTest i a => VarExpr (convert_var i)
   | BNeg b' => Minus (Const 1) (translate_bexp b') 
   end.
+
 Fixpoint translate_pexp (p : pexp) : cmd :=
   match p with
   | PSKIP => Skip
@@ -430,70 +431,50 @@ Definition trans_qstate (q : qstate) : assertion :=
 Definition trans_stack (W : stack) : assertion :=
   map (fun '(x, (r, v)) => CBVar (Scalar (var_to_string x))) (AEnv.elements W).
 
-Definition trans_state (phi : aenv * (stack * qstate)) : assertion :=
+Definition trans_state (phi : LocusDef.aenv * (stack * qstate)) : assertion :=
   match phi with
   | (aenv, s) =>
       let (W, q) := s in
       trans_stack W ++ trans_qstate q
   end.
 
-(* Soundness Theorem *)
+
 Theorem quantum_to_classical_soundness :
   forall (rmax : nat) (aenv : LocusDef.aenv) (s s' : stack * qstate) (e : pexp),
-    qfor_sem rmax (aenv, s) e (aenv, s') ->
+     @qfor_sem rmax aenv s e s' ->
     exists P Q c,
       P = trans_state (aenv, s) /\
       Q = trans_state (aenv, s') /\
       c = translate_pexp e /\
       hoare_triple P c Q.
 Proof.
+  intros rmax aenv s s' e Hsem.
+  induction Hsem.
+  - (* skip_sem *)
+    exists (trans_state (aenv, s)), (trans_state (aenv, s)), Skip.
+    repeat split; try reflexivity.
+    apply hoare_skip.
+
+  - (* let_sem_c *)
+    destruct IHHsem as [P [Q [c [HP [HQ [Hc Htriple]]]]]].
+    exists (trans_state (aenv, s)), Q, (Seq (Assign (convert_var x) (translate_aexp a)) c).
+    repeat split.
+  + exact HQ.
+  + rewrite Hc. 
+
 Admitted.
+
 (* Completeness theorem *)
 Theorem quantum_to_classical_completeness :
   forall P Q c,
     hoare_triple P c Q ->
-    exists e s s' rmax aenv,
+    exists (rmax : nat) (aenv : LocusDef.aenv) (s s' : stack * qstate) (e : pexp),
       c = translate_pexp e /\
       P = trans_state (aenv, s) /\
       Q = trans_state (aenv, s') /\
-      qfor_sem rmax (aenv, s) e (aenv, s').
+    @qfor_sem rmax aenv s e s'.
 Proof.
+  intros P Q c H.
+  induction H.
+
 Admitted.
-
-
-(*
-(* Translate a classical+quantum state into a logical assertion *)
-Theorem hoare_sound_for_qafny :
-  forall (rmax : nat) (aenv : aenv)
-         (φ φ' : state) (e : pexp) (c : cmd)
-         (P Q : assertion),
-    c = translate_pexp e ->
-    P = trans_state φ  ->
-    Q = trans_state φ' ->
-    hoare_triple P c Q ->
-    qfor_sem rmax aenv φ e φ'.
-
-Proof.
-Admitted.
-
-*)
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
