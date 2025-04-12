@@ -477,20 +477,20 @@ Fixpoint trans_qpred (env : aenv) (qp : qpred) : cpred :=
 Definition trans (env : aenv) (W : cpred) (P : qpred) : assertion :=
   W ++ trans_qpred env P.
 
-Import LocusProof.
 
-Theorem quantum_to_classical_soundness :
+Theorem quantum_to_classical_soundness:
   forall (t : atype) (env : aenv) (T : type_map)
          (W : cpred) (P : qpred)
          (e : pexp)
-         (W' : cpred) (Q : qpred),
+         (W' : cpred) (Q : qpred)
+         (fuel : nat) (s s' : state),
     triple t env T (W, P) e (W', Q) ->
-    exists (P' Q' : assertion) (c : cmd),
-      P' = trans env W P /\
-      Q' = trans env W' Q /\
-      c = translate_pexp e /\
-      hoare_triple P' c Q'.
-
+    let P' := trans env W P in
+    let Q' := trans env W' Q in
+    let c := translate_pexp e in
+    (forall b, In b P' -> eval_cbexp s b = true) ->
+    exec fuel c s = Some s' ->
+    (forall b, In b Q' -> eval_cbexp s' b = true).
 
 Proof. 
 
