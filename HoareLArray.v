@@ -20,6 +20,7 @@ Require Import LocusDef.
 Require Import LocusKind.
 Require Import LocusType.
 Require Import LocusSem.
+Require Import LocusProof.
 Require Import LocusTypeProof.
 Require Import Coq.FSets.FMapList.
 Require Import Coq.FSets.FMapFacts.
@@ -35,7 +36,7 @@ Require Import List.
 Require Import Bool.
 Require Import Coq.Logic.FunctionalExtensionality.
 Require Import Coq.Logic.Classical_Prop.
-
+Import LocusProof.
 (* Define variables and arrays *)
 Inductive var := 
   | Scalar (name : string) (* Scalar variable *)
@@ -424,7 +425,7 @@ Definition trans_locus (l : locus) : string :=
   | (x, BNum a, BNum b) :: _ => var_to_string(x) 
   | _ => "default" 
   end.
-
+Definition qpred : Type := list qpred_elem.
 Definition trans_qstate (q : qstate) : assertion :=
   flat_map (fun '(l, se) => [CBVar (Array (trans_locus l) (trans_state_elem se))]) q.
 
@@ -437,32 +438,6 @@ Definition trans_state (phi : LocusDef.aenv * (stack * qstate)) : assertion :=
       let (W, q) := s in
       trans_stack W ++ trans_qstate q
   end.
-
-
-Theorem quantum_to_classical_soundness :
-  forall (rmax : nat) (aenv : LocusDef.aenv) (s s' : stack * qstate) (e : pexp),
-     @qfor_sem rmax aenv s e s' ->
-    exists P Q c,
-      P = trans_state (aenv, s) /\
-      Q = trans_state (aenv, s') /\
-      c = translate_pexp e /\
-      hoare_triple P c Q.
-Proof.
-  intros rmax aenv s s' e Hsem.
-  induction Hsem.
-  - (* skip_sem *)
-    exists (trans_state (aenv, s)), (trans_state (aenv, s)), Skip.
-    repeat split; try reflexivity.
-    apply hoare_skip.
-
-  - (* let_sem_c *)
-    destruct IHHsem as [P [Q [c [HP [HQ [Hc Htriple]]]]]].
-    exists (trans_state (aenv, s)), Q, (Seq (Assign (convert_var x) (translate_aexp a)) c).
-    repeat split.
-  + exact HQ.
-  + rewrite Hc. 
-
-Admitted.
 
 (* Completeness theorem *)
 Theorem quantum_to_classical_completeness :
@@ -478,3 +453,49 @@ Proof.
   induction H.
 
 Admitted.
+
+(* Classical Semantics *)
+Definition hoare_triple_sem (P : assertion) (c : cmd) (Q : assertion) : Prop :=
+  forall (s s' : state) (fuel : nat),
+    (forall b, In b P -> eval_cbexp s b = true) ->
+    exec fuel c s = Some s' ->
+    (forall b, In b Q -> eval_cbexp s' b = true).
+(* Define mode for classical/quantum distinction *)
+Inductive mode : Type := 
+  | CT  (* Classical *)
+  | MT. (* Measurement/Quantum *)
+
+Fixpoint trans_qpred (env : aenv) (qp : qpred) : cpred :=
+  match qp with
+  | (SV l, se) :: rest =>
+      (* You can use env here if needed to resolve variables *)
+      CBVar (Array (trans_locus l) (trans_state_elem se)) :: trans_qpred env rest
+  | _ :: rest => trans_qpred env rest
+  | [] => []
+  end.
+
+Definition trans (env : aenv) (W : cpred) (P : qpred) : assertion :=
+  W ++ trans_qpred env P.
+
+Import LocusProof.
+
+Theorem quantum_to_classical_soundness :
+  forall (t : atype) (env : aenv) (T : type_map)
+         (W : cpred) (P : qpred)
+         (e : pexp)
+         (W' : cpred) (Q : qpred),
+    triple t env T (W, P) e (W', Q) ->
+    exists (P' Q' : assertion) (c : cmd),
+      P' = trans env W P /\
+      Q' = trans env W' Q /\
+      c = translate_pexp e /\
+      hoare_triple P' c Q'.
+
+
+Proof. 
+
+Admitted.
+
+
+
+
