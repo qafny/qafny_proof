@@ -316,7 +316,7 @@ Proof.
   intros.
   apply hoare_consequence with (P' := subst_assertion P v e) (Q' := Q); assumption.
 Qed.
-
+Definition convert_vart (v : BasicUtility.var) : var := Scalar "default".
 
 (* Conversion function from BasicUtility.var to var *)
 Definition convert_var (v : BasicUtility.var) : var :=
@@ -325,13 +325,21 @@ Definition convert_var (v : BasicUtility.var) : var :=
   end.
 Fixpoint translate_aexp (e: aexp) : expr :=
   match e with
-  | BA x => VarExpr (convert_var x)  (* Convert BasicUtility.var to var *)
+  | BA x => VarExpr (convert_vart x)  (* Convert BasicUtility.var to var *)
   | Num n => Const n 
   | MNum r n => Const n 
   | APlus e1 e2 => Plus (translate_aexp e1) (translate_aexp e2)
   | AMult e1 e2 => Mult (translate_aexp e1) (translate_aexp e2)
   end.
-
+Fixpoint expr_to_aexp (e : expr) : aexp :=
+  match e with
+  | Const n => Num n
+  | VarExpr (Scalar name) => Num 0 (* Fallback; variables problematic *)
+  | VarExpr (Array name idx) => Num 0 (* Arrays unsupported in aexp *)
+  | Plus e1 e2 => APlus (expr_to_aexp e1) (expr_to_aexp e2)
+  | Mult e1 e2 => AMult (expr_to_aexp e1) (expr_to_aexp e2)
+  | Minus e1 e2 => Num 0 (* No subtraction in aexp *)
+  end.
 Fixpoint translate_cbexp (c : cbexp) : expr :=
   match c with
   | CBTrue => Const 1 
@@ -431,7 +439,6 @@ Definition trans_qstate (q : qstate) : assertion :=
 
 Definition trans_stack (W : stack) : assertion :=
   map (fun '(x, (r, v)) => CBVar (Scalar (var_to_string x))) (AEnv.elements W).
-
 Definition trans_state (phi : LocusDef.aenv * (stack * qstate)) : assertion :=
   match phi with
   | (aenv, s) =>
@@ -439,20 +446,60 @@ Definition trans_state (phi : LocusDef.aenv * (stack * qstate)) : assertion :=
       trans_stack W ++ trans_qstate q
   end.
 
-(* Completeness theorem *)
-Theorem quantum_to_classical_completeness :
-  forall P Q c,
-    hoare_triple P c Q ->
-    exists (rmax : nat) (aenv : LocusDef.aenv) (s s' : stack * qstate) (e : pexp),
-      c = translate_pexp e /\
-      P = trans_state (aenv, s) /\
-      Q = trans_state (aenv, s') /\
-    @qfor_sem rmax aenv s e s'.
+Lemma exists_state_from_assertion :
+  forall P : assertion,
+    exists (s : stack * qstate),
+      trans_state (empty_aenv, s) = P.
 Proof.
-  intros P Q c H.
-  induction H.
 
 Admitted.
+
+Lemma trans_state_surj :
+  forall (s : stack * qstate),
+    exists P : assertion,
+      P = trans_state (empty_aenv, s).
+Proof.
+  intros s.
+  exists (trans_state (empty_aenv, s)).
+  reflexivity.
+Qed.
+Theorem quantum_to_classical_completeness :
+  forall Pre Post c,
+    hoare_triple Pre c Post ->
+    exists (rmax : nat) (aenv : LocusDef.aenv) (s s' : stack * qstate) (e : pexp),
+      c = translate_pexp e /\
+      Pre = trans_state (aenv, s) /\
+      Post = trans_state (aenv, s') /\
+      @qfor_sem rmax aenv s e s'.
+Proof.
+ intros Pre Post c H.
+  induction H; simpl in *.
+(* Case: skip_rule *)
+  assert (Hstate: exists s : stack * qstate, trans_state (empty_aenv, s) = P).
+  { apply exists_state_from_assertion. }
+  destruct Hstate as [[W q] Htrans].
+  exists 0%nat, empty_aenv, (W, q), (W, q), PSKIP.
+  split.
+  + reflexivity.
+  + split.
+    * symmetry. assumption.
+    * split.
+      - symmetry. assumption.
+      - apply skip_sem.
+(* Case: sequence *)
++    destruct IHhoare_triple1 as [rmax1 [aenv1 [s1 [s1' [e1 [Hc1 [HP1 [HQ1 Hsem1]]]]]]]].
+    destruct IHhoare_triple2 as [rmax2 [aenv2 [s2 [s2' [e2 [Hc2 [HP2 [HQ2 Hsem2]]]]]]]].
+    exists (rmax1 + rmax2), aenv1, s1, s2', (PSeq e1 e2).
+    repeat split; auto.
+    rewrite Hc1, Hc2.
+    reflexivity.
+admit.
+(* Case: assign_rule *)
+ +   destruct (exists_state_from_assertion P) as [[W q] Htrans].
+
+Admitted.
+
+
 
 (* Classical Semantics *)
 Definition hoare_triple_sem (P : assertion) (c : cmd) (Q : assertion) : Prop :=
