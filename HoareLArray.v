@@ -142,20 +142,20 @@ Fixpoint subst (e : expr) (v : var) (e_subst : expr) : expr :=
   | Mult e1 e2 => Mult (subst e1 v e_subst) (subst e2 v e_subst) (* Corrected: Handle multiplication *)
   end.
 (* Extend cbexp syntax to handle ArrayWrite *)
-Inductive cbexp : Type :=
-  | CBTrue : cbexp                (* Represents a constant true condition *)
-  | CBVar : var -> cbexp          (* Represents a Boolean variable *)
-  | CBArrayWrite : string -> expr -> expr -> cbexp (* Represents an array write operation *)
-  | CBAnd : cbexp -> cbexp -> cbexp. (* Represents a conjunction (AND) of two `cbexp` expressions *)
+Inductive cbexpr : Type :=
+  | CBTrue : cbexpr                (* Represents a constant true condition *)
+  | CBVar : var -> cbexpr          (* Represents a Boolean variable *)
+  | CBArrayWrite : string -> expr -> expr -> cbexpr (* Represents an array write operation *)
+  | CBAnd : cbexpr -> cbexpr -> cbexpr. (* Represents a conjunction (AND) of two `cbexp` expressions *)
 (* Define evaluation of cbexp *)
-Fixpoint eval_cbexp (s : state) (b : cbexp) : bool :=
+Fixpoint eval_cbexp (s : state) (b : cbexpr) : bool :=
   match b with
   | CBTrue => true
   | CBVar v => match s v with Some n => Nat.ltb 0 n | None => false end
   | CBArrayWrite name idx val => false (* Array writes are not directly evaluable conditions *)
   | CBAnd b1 b2 => andb (eval_cbexp s b1) (eval_cbexp s b2)
   end.
-Fixpoint subst_cbexp (b : cbexp) (v : var) (e_subst : expr) : cbexp :=
+Fixpoint subst_cbexp (b : cbexpr) (v : var) (e_subst : expr) : cbexpr :=
   match b with
   | CBTrue => CBTrue
   | CBVar x => if eqb_var x v then CBVar v else CBVar x
@@ -163,10 +163,12 @@ Fixpoint subst_cbexp (b : cbexp) (v : var) (e_subst : expr) : cbexp :=
       CBArrayWrite name (subst idx v e_subst) (subst val v e_subst)
   | CBAnd b1 b2 => CBAnd (subst_cbexp b1 v e_subst) (subst_cbexp b2 v e_subst)
   end.
-
+Definition cpredr := list cbexpr.
+(*
 (* Define assertions as cpred *)
 Definition cpred := list cbexp.
 Definition assertion := cpred.
+*)
 (* Equality check for expressions *)
 Fixpoint expr_eqb (e1 e2 : expr) : bool :=
   match e1, e2 with
@@ -177,7 +179,7 @@ Fixpoint expr_eqb (e1 e2 : expr) : bool :=
   | _, _ => false
   end.
 
-Fixpoint subst_array (b : cbexp) (name : string) (idx : expr) (val : expr) : cbexp :=
+Fixpoint subst_array (b : cbexpr) (name : string) (idx : expr) (val : expr) : cbexpr :=
   match b with
   | CBTrue => CBTrue
   | CBVar v => CBVar v
@@ -187,19 +189,19 @@ Fixpoint subst_array (b : cbexp) (name : string) (idx : expr) (val : expr) : cbe
   | CBAnd b1 b2 => CBAnd (subst_array b1 name idx val) (subst_array b2 name idx val)
   end.
 
-Definition subst_assertion_array (P : assertion) (name : string) (idx : expr) (val : expr) : assertion :=
+Definition subst_assertion_array (P : cpredr) (name : string) (idx : expr) (val : expr) : cpredr :=
   map (fun b => subst_array b name idx val) P.
 
-Definition subst_assertion (P : assertion) (v : var) (e_subst : expr) : assertion :=
+Definition subst_assertion (P : cpredr) (v : var) (e_subst : expr) : cpredr :=
   map (fun b => subst_cbexp b v e_subst) P.
 
 (* Define logical entailment for assertions *)
-Definition entails (P Q : assertion) : Prop :=
+Definition entails (P Q : cpredr) : Prop :=
   forall s, (forall b, In b P -> eval_cbexp s b = true) -> 
             (forall b, In b Q -> eval_cbexp s b = true).
 
 (* Hoare triples with the consequence rule *)
-Inductive hoare_triple : assertion -> cmd -> assertion -> Prop :=
+Inductive hoare_triple : cpredr -> cmd ->cpredr -> Prop :=
   | skip_rule : forall P,
       hoare_triple P Skip P
   | seq_rule : forall P Q R c1 c2,
@@ -340,7 +342,8 @@ Fixpoint expr_to_aexp (e : expr) : aexp :=
   | Mult e1 e2 => AMult (expr_to_aexp e1) (expr_to_aexp e2)
   | Minus e1 e2 => Num 0 (* No subtraction in aexp *)
   end.
-Fixpoint translate_cbexp (c : cbexp) : expr :=
+
+Fixpoint translate_cbexp (c : cbexpr) : expr :=
   match c with
   | CBTrue => Const 1 
   | CBVar x => VarExpr x
@@ -352,7 +355,7 @@ Definition extract_var (e : aexp) : option var :=
   | BA v => Some (convert_var v)  
   | _ => None 
   end.
-Definition convert_cbexp (c : QafnySyntax.cbexp) : cbexp :=
+Definition convert_cbexp (c : QafnySyntax.cbexp) : cbexpr :=
   match c with
   | QafnySyntax.CEq e1 e2 =>
       match extract_var e1, extract_var e2 with
@@ -434,12 +437,12 @@ Definition trans_locus (l : locus) : string :=
   | _ => "default" 
   end.
 Definition qpred : Type := list qpred_elem.
-Definition trans_qstate (q : qstate) : assertion :=
+Definition trans_qstate (q : qstate) : cpredr :=
   flat_map (fun '(l, se) => [CBVar (Array (trans_locus l) (trans_state_elem se))]) q.
 
-Definition trans_stack (W : stack) : assertion :=
+Definition trans_stack (W : stack) :cpredr :=
   map (fun '(x, (r, v)) => CBVar (Scalar (var_to_string x))) (AEnv.elements W).
-Definition trans_state (phi : LocusDef.aenv * (stack * qstate)) : assertion :=
+Definition trans_state (phi : LocusDef.aenv * (stack * qstate)) : cpredr:=
   match phi with
   | (aenv, s) =>
       let (W, q) := s in
@@ -447,7 +450,7 @@ Definition trans_state (phi : LocusDef.aenv * (stack * qstate)) : assertion :=
   end.
 
 Lemma exists_state_from_assertion :
-  forall P : assertion,
+  forall P : cpredr,
     exists (s : stack * qstate),
       trans_state (empty_aenv, s) = P.
 Proof.
@@ -456,13 +459,14 @@ Admitted.
 
 Lemma trans_state_surj :
   forall (s : stack * qstate),
-    exists P : assertion,
+    exists P : cpredr,
       P = trans_state (empty_aenv, s).
 Proof.
   intros s.
   exists (trans_state (empty_aenv, s)).
   reflexivity.
 Qed.
+
 Theorem quantum_to_classical_completeness :
   forall Pre Post c,
     hoare_triple Pre c Post ->
@@ -499,10 +503,8 @@ admit.
 
 Admitted.
 
-
-
 (* Classical Semantics *)
-Definition hoare_triple_sem (P : assertion) (c : cmd) (Q : assertion) : Prop :=
+Definition hoare_triple_sem (P : cpredr) (c : cmd) (Q : cpredr) : Prop :=
   forall (s s' : state) (fuel : nat),
     (forall b, In b P -> eval_cbexp s b = true) ->
     exec fuel c s = Some s' ->
@@ -512,24 +514,58 @@ Inductive mode : Type :=
   | CT  (* Classical *)
   | MT. (* Measurement/Quantum *)
 
-Fixpoint trans_qpred (env : aenv) (qp : qpred) : cpred :=
+Fixpoint trans_qpred (env : aenv) (qp : qpred) : cpredr :=
   match qp with
   | (SV l, se) :: rest =>
-      (* You can use env here if needed to resolve variables *)
       CBVar (Array (trans_locus l) (trans_state_elem se)) :: trans_qpred env rest
   | _ :: rest => trans_qpred env rest
   | [] => []
   end.
+(* Placeholder for LocusProof.cpred conversion *)
+Definition convert_locus_cpred (W : LocusProof.cpred) : cpredr :=
+  (* Map LocusProof.cpred elements to cbexpr; customize based on actual type *)
+  [].
 
-Definition trans (env : aenv) (W : cpred) (P : qpred) : assertion :=
-  W ++ trans_qpred env P.
+Definition trans (env : aenv) (W : LocusProof.cpred) (P : qpred) : cpredr :=
+  convert_locus_cpred W ++ trans_qpred env P.
+
+Check trans.
+Theorem quantum_to_classical_soundness :
+  forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
+         (W : LocusProof.cpred) (P : qpred)
+         (e : pexp)
+         (W' : LocusProof.cpred) (Q : qpred)
+         (fuel : nat) (s s' : state),
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W, P) e (W', Q) ->
+    let P' := trans env W P in
+    (forall b, In b P' -> eval_cbexp s b = true) ->
+    let c := translate_pexp e in
+    exec fuel c s = Some s' ->
+    let Q' := trans env W' Q in
+    (forall b, In b Q' -> eval_cbexp s' b = true).
+
+Proof.
+  intros rmax t env T W P e W' Q fuel s s' Htype Htriple HP Hexec.
+  induction Htriple; simpl in *; unfold trans in *.
+  - (* Case: skip_pf *)
+intros Hexec' b HIn.
+apply IHHtriple; auto.
+
+destruct fuel as [|fuel']. 
+ inversion Hexec'.
+simpl in Hexec'.
+simpl in Hexec.
+
+Admitted.
 
 
+(*
 Theorem quantum_to_classical_soundness:
   forall (t : atype) (env : aenv) (T : type_map)
-         (W : cpred) (P : qpred)
+         (W : LocusProof.cpred ) (P : qpred)
          (e : pexp)
-         (W' : cpred) (Q : qpred)
+         (W' : LocusProof.cpred ) (Q : qpred)
          (fuel : nat) (s s' : state),
     triple t env T (W, P) e (W', Q) ->
     let P' := trans env W P in
@@ -544,5 +580,5 @@ Proof.
 Admitted.
 
 
-
+*)
 
