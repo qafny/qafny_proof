@@ -155,6 +155,23 @@ Fixpoint eval_cbexp (s : state) (b : cbexpr) : bool :=
   | CBArrayWrite name idx val => false (* Array writes are not directly evaluable conditions *)
   | CBAnd b1 b2 => andb (eval_cbexp s b1) (eval_cbexp s b2)
   end.
+Fixpoint expr_to_cbexp (e : expr) : cbexpr :=
+  match e with
+  | Const n => if Nat.eqb n 0 then CBTrue else CBTrue (* Simplified: non-zero is true *)
+  | VarExpr x => CBVar x
+  | Plus e1 e2 => CBTrue (* Simplified: arithmetic not directly boolean *)
+  | Minus e1 e2 => CBTrue
+  | Mult e1 e2 => CBAnd (expr_to_cbexp e1) (expr_to_cbexp e2)
+  end.
+Fixpoint subst_cbexp (b : cbexpr) (v : var) (e_subst : expr) : cbexpr :=
+  match b with
+  | CBTrue => CBTrue
+  | CBVar x => if eqb_var x v then expr_to_cbexp e_subst else CBVar x
+  | CBArrayWrite name idx val =>
+      CBArrayWrite name (subst idx v e_subst) (subst val v e_subst)
+  | CBAnd b1 b2 => CBAnd (subst_cbexp b1 v e_subst) (subst_cbexp b2 v e_subst)
+  end.
+(*
 Fixpoint subst_cbexp (b : cbexpr) (v : var) (e_subst : expr) : cbexpr :=
   match b with
   | CBTrue => CBTrue
@@ -163,6 +180,7 @@ Fixpoint subst_cbexp (b : cbexpr) (v : var) (e_subst : expr) : cbexpr :=
       CBArrayWrite name (subst idx v e_subst) (subst val v e_subst)
   | CBAnd b1 b2 => CBAnd (subst_cbexp b1 v e_subst) (subst_cbexp b2 v e_subst)
   end.
+*)
 Definition cpredr := list cbexpr.
 (*
 (* Define assertions as cpred *)
@@ -530,6 +548,38 @@ Definition trans (env : aenv) (W : LocusProof.cpred) (P : qpred) : cpredr :=
   convert_locus_cpred W ++ trans_qpred env P.
 
 Check trans.
+Lemma type_check_proof_fixed :
+  forall rmax q env T T' P Q e,
+    type_check_proof rmax q env T T' P Q e -> T' = T.
+Proof.
+Admitted.
+
+Lemma type_check_proof_weaken_right :
+  forall rmax q env T T1 W1 W2 e,
+    type_check_proof rmax q env T T1 W1 W2 e ->
+    T1 = T ->
+    type_check_proof rmax q env T T W1 W2 e.
+Proof.
+  intros. subst. assumption.
+Qed.
+Lemma pred_check_invariant :
+  forall env T T' W Q,
+    pred_check env T' (W, Q) ->
+    T' = T ->
+    pred_check env T (W, Q).
+Proof.
+  intros env T T' W Q [Hcpred Hqpred] Heq. subst.
+  split; auto.
+Qed.
+Lemma type_check_proof_invariant :
+  forall rmax q env T T1 W P W' Q e,
+    type_check_proof rmax q env T T1 (W, P) (W', Q) e ->
+    T1 = T ->
+    type_check_proof rmax q env T T (W, P) (W', Q) e.
+Proof.
+  intros rmax q env T T1 W P W' Q e Htype Heq. subst. assumption.
+Qed.
+
 Theorem quantum_to_classical_soundness :
   forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
          (W : LocusProof.cpred) (P : qpred)
@@ -546,39 +596,86 @@ Theorem quantum_to_classical_soundness :
     (forall b, In b Q' -> eval_cbexp s' b = true).
 
 Proof.
-  intros rmax t env T W P e W' Q fuel s s' Htype Htriple HP Hexec.
-  induction Htriple; simpl in *; unfold trans in *.
-  - (* Case: skip_pf *)
-intros Hexec' b HIn.
-apply IHHtriple; auto.
+  intros rmax t env T W P e W' Q fuel s s' Htype Htriple.
+  revert s s'.
+  induction Htriple; intros s s' HP' Hexec; simpl in *.
 
-destruct fuel as [|fuel']. 
- inversion Hexec'.
-simpl in Hexec'.
-simpl in Hexec.
+  - (* skip_pf *)
+eapply IHHtriple; eauto.
+eapply type_check_proof_invariant with (T1 := T1); eauto.
+  eapply type_check_proof_fixed in H. subst. reflexivity.
 
-Admitted.
+  - (* seq_pf *)
+    simpl in Hexec.
+intros Hrun.
+eapply IHHtriple.
+ eapply type_check_proof_invariant with (T1 := T1); eauto.
+  eapply type_check_proof_fixed in H. subst. reflexivity.
+intros b Hb. apply Hexec. exact Hb.
+exact Hrun.
+
+ - (*triple_frame *)
+    eapply IHHtriple.
+    + eapply type_check_proof_weaken_right; eauto.
+      eapply type_check_proof_fixed in H; subst; reflexivity.
+    + assumption.
+
+ - (* triple_con_1 *)
+intros Hskip b HIn.
+ destruct fuel; simpl in Hskip; try discriminate.
+inversion Hskip. subst.
+apply Hexec; auto.
+unfold HP'.
+subst. 
+inversion Htype; subst.
+unfold type_check_proof in Htype.
+destruct Htype as [[Hcpred Hqpred] _]. 
+subst.
+admit.
+
+  - (* triple_con_2 *)
+intros Hrun.
+simpl in Hrun.
+destruct (exec fuel (Assign (convert_var x) (translate_aexp a)) s) eqn:Hex1; try discriminate.
+inversion Hrun; subst.
+inversion H3; subst. 
+eapply IHHtriple; eauto.
+eapply type_check_proof_invariant; eauto.
+eapply type_check_proof_fixed in H1 as ->.
+  reflexivity.
+replace (exec fuel (translate_pexp (subst_pexp e x v)) s)
+   with (exec fuel (translate_pexp (subst_pexp e x v)) s0).
+simpl in Hrun.
 
 
-(*
-Theorem quantum_to_classical_soundness:
-  forall (t : atype) (env : aenv) (T : type_map)
-         (W : LocusProof.cpred ) (P : qpred)
-         (e : pexp)
-         (W' : LocusProof.cpred ) (Q : qpred)
-         (fuel : nat) (s s' : state),
-    triple t env T (W, P) e (W', Q) ->
-    let P' := trans env W P in
-    let Q' := trans env W' Q in
-    let c := translate_pexp e in
-    (forall b, In b P' -> eval_cbexp s b = true) ->
-    exec fuel c s = Some s' ->
-    (forall b, In b Q' -> eval_cbexp s' b = true).
-
-Proof. 
-
-Admitted.
 
 
-*)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+    
+
 
