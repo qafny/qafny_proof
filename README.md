@@ -24,6 +24,7 @@ eval $(opam env)
 opam install coq
 
 # install coq-quickchick
+opam repo add coq-released https://coq.inria.fr/opam/released
 opam install coq-quickchick
 ```
 
