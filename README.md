@@ -17,15 +17,19 @@ opam init
 eval $(opam env)
 
 # install some version of the OCaml compiler in a switch named "qnp"
-opam switch create qnp 4.12.0
+opam switch create qnp 4.10.2
 eval $(opam env)
 
-# install Coq -- this will take a while!
+# install Coq -- this will take a while! Note that we need 8.14 at the most!
+opam pin add coq 8.14.1
 opam install coq
+
 
 # install coq-quickchick
 opam repo add coq-released https://coq.inria.fr/opam/released
 opam install coq-quickchick
+
+# Optionally install matching CoqIde version: https://github.com/rocq-prover/platform/releases/tag/2022.01.0
 ```
 
 *Notes*:
