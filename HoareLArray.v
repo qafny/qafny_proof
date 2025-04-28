@@ -163,6 +163,7 @@ Fixpoint expr_to_cbexp (e : expr) : cbexpr :=
   | Minus e1 e2 => CBTrue
   | Mult e1 e2 => CBAnd (expr_to_cbexp e1) (expr_to_cbexp e2)
   end.
+
 Fixpoint subst_cbexp (b : cbexpr) (v : var) (e_subst : expr) : cbexpr :=
   match b with
   | CBTrue => CBTrue
@@ -171,16 +172,7 @@ Fixpoint subst_cbexp (b : cbexpr) (v : var) (e_subst : expr) : cbexpr :=
       CBArrayWrite name (subst idx v e_subst) (subst val v e_subst)
   | CBAnd b1 b2 => CBAnd (subst_cbexp b1 v e_subst) (subst_cbexp b2 v e_subst)
   end.
-(*
-Fixpoint subst_cbexp (b : cbexpr) (v : var) (e_subst : expr) : cbexpr :=
-  match b with
-  | CBTrue => CBTrue
-  | CBVar x => if eqb_var x v then CBVar v else CBVar x
-  | CBArrayWrite name idx val =>
-      CBArrayWrite name (subst idx v e_subst) (subst val v e_subst)
-  | CBAnd b1 b2 => CBAnd (subst_cbexp b1 v e_subst) (subst_cbexp b2 v e_subst)
-  end.
-*)
+
 Definition cpredr := list cbexpr.
 (*
 (* Define assertions as cpred *)
@@ -244,30 +236,6 @@ Inductive hoare_triple : cpredr -> cmd ->cpredr -> Prop :=
       hoare_triple P' c Q' ->
       entails Q' Q ->
       hoare_triple P c Q.
-
-(*
-(* Define Hoare triples *)
-Inductive hoare_triple : assertion -> cmd -> assertion -> Prop :=
-  | skip_rule : forall P,
-      hoare_triple P Skip P
-  | seq_rule : forall P Q R c1 c2,
-      hoare_triple P c1 Q ->
-      hoare_triple Q c2 R ->
-      hoare_triple P (Seq c1 c2) R
-  | assign_rule : forall Q v e,
-      hoare_triple Q (Assign v e) Q
-  | if_rule : forall P Q b c1 c2,
-      hoare_triple P c1 Q ->
-      hoare_triple P c2 Q ->
-      hoare_triple P (If b c1 c2) Q
-  | while_rule : forall P b c,
-      hoare_triple P c P ->
-      hoare_triple P (While b c) P
-| array_write_rule : forall P name idx val,
-      hoare_triple (subst_assertion_array P name idx val) 
-                   (ArrayWrite name idx val) 
-                   P.
-*)
 
 (* Theorem: Hoare rule for skip *)
 Theorem hoare_skip : forall P,
@@ -345,12 +313,13 @@ Definition convert_var (v : BasicUtility.var) : var :=
   end.
 Fixpoint translate_aexp (e: aexp) : expr :=
   match e with
-  | BA x => VarExpr (convert_vart x)  (* Convert BasicUtility.var to var *)
-  | Num n => Const n 
-  | MNum r n => Const n 
+  | BA x => VarExpr (convert_vart x)
+  | Num n => Const n
+  | MNum r n => Const n
   | APlus e1 e2 => Plus (translate_aexp e1) (translate_aexp e2)
   | AMult e1 e2 => Mult (translate_aexp e1) (translate_aexp e2)
   end.
+
 Fixpoint expr_to_aexp (e : expr) : aexp :=
   match e with
   | Const n => Num n
@@ -411,7 +380,35 @@ Fixpoint translate_bexp (b : bexp) : expr :=
   | BTest i a => VarExpr (convert_var i)
   | BNeg b' => Minus (Const 1) (translate_bexp b') 
   end.
-
+(*
+(* Extend translate_pexp for ArrayWrite *)
+Fixpoint translate_pexp (p : pexp) : cmd :=
+  match p with
+  | PSKIP => Skip
+  | Let x (AE a) s =>
+      Seq (Assign (convert_var x) (translate_aexp a)) (translate_pexp s)
+  | Let x (Meas y) s =>
+      Seq (Assign (convert_var x) (VarExpr (convert_var y))) (translate_pexp s)
+  | AppSU e => Skip
+  | AppU l e => Skip
+  | PSeq s1 s2 =>
+      Seq (translate_pexp s1) (translate_pexp s2)
+  | QafnySyntax.If x s1 =>
+      If (translate_bexp x) (translate_pexp s1) Skip
+  | For x l h b p =>
+      Seq (Assign (convert_var x) (translate_aexp l))
+          (While
+             (Minus (translate_aexp h) (VarExpr (convert_var x)))
+             (If (translate_bexp b)
+                 (Seq (translate_pexp p)
+                      (Assign (convert_var x) (Plus (VarExpr (convert_var x)) (Const 1))))
+                 Skip))
+  | Diffuse x => Skip
+  (* Add ArrayWrite case *)
+  | ArrayAssign name idx val =>
+      ArrayWrite name (translate_aexp idx) (translate_aexp val)
+  end.
+*)
 Fixpoint translate_pexp (p : pexp) : cmd :=
   match p with
   | PSKIP => Skip
@@ -467,14 +464,6 @@ Definition trans_state (phi : LocusDef.aenv * (stack * qstate)) : cpredr:=
       trans_stack W ++ trans_qstate q
   end.
 
-Lemma exists_state_from_assertion :
-  forall P : cpredr,
-    exists (s : stack * qstate),
-      trans_state (empty_aenv, s) = P.
-Proof.
-
-Admitted.
-
 Lemma trans_state_surj :
   forall (s : stack * qstate),
     exists P : cpredr,
@@ -485,39 +474,17 @@ Proof.
   reflexivity.
 Qed.
 
-Theorem quantum_to_classical_completeness :
-  forall Pre Post c,
-    hoare_triple Pre c Post ->
-    exists (rmax : nat) (aenv : LocusDef.aenv) (s s' : stack * qstate) (e : pexp),
+Theorem quantum_to_classical_completeness:
+  forall (rmax : nat) (aenv : aenv) (s s' : stack * qstate) (e : pexp),
+    @qfor_sem rmax aenv s e s' ->
+    exists (pre post : cpredr) (c : cmd),
+      hoare_triple pre c post /\
       c = translate_pexp e /\
-      Pre = trans_state (aenv, s) /\
-      Post = trans_state (aenv, s') /\
-      @qfor_sem rmax aenv s e s'.
+      pre = trans_state (aenv, s) /\
+      post = trans_state (aenv, s').
 Proof.
  intros Pre Post c H.
   induction H; simpl in *.
-(* Case: skip_rule *)
-  assert (Hstate: exists s : stack * qstate, trans_state (empty_aenv, s) = P).
-  { apply exists_state_from_assertion. }
-  destruct Hstate as [[W q] Htrans].
-  exists 0%nat, empty_aenv, (W, q), (W, q), PSKIP.
-  split.
-  + reflexivity.
-  + split.
-    * symmetry. assumption.
-    * split.
-      - symmetry. assumption.
-      - apply skip_sem.
-(* Case: sequence *)
-+    destruct IHhoare_triple1 as [rmax1 [aenv1 [s1 [s1' [e1 [Hc1 [HP1 [HQ1 Hsem1]]]]]]]].
-    destruct IHhoare_triple2 as [rmax2 [aenv2 [s2 [s2' [e2 [Hc2 [HP2 [HQ2 Hsem2]]]]]]]].
-    exists (rmax1 + rmax2), aenv1, s1, s2', (PSeq e1 e2).
-    repeat split; auto.
-    rewrite Hc1, Hc2.
-    reflexivity.
-admit.
-(* Case: assign_rule *)
- +   destruct (exists_state_from_assertion P) as [[W q] Htrans].
 
 Admitted.
 
@@ -527,7 +494,7 @@ Definition hoare_triple_sem (P : cpredr) (c : cmd) (Q : cpredr) : Prop :=
     (forall b, In b P -> eval_cbexp s b = true) ->
     exec fuel c s = Some s' ->
     (forall b, In b Q -> eval_cbexp s' b = true).
-(* Define mode for classical/quantum distinction *)
+
 Inductive mode : Type := 
   | CT  (* Classical *)
   | MT. (* Measurement/Quantum *)
@@ -539,9 +506,10 @@ Fixpoint trans_qpred (env : aenv) (qp : qpred) : cpredr :=
   | _ :: rest => trans_qpred env rest
   | [] => []
   end.
-(* Placeholder for LocusProof.cpred conversion *)
+
+
 Definition convert_locus_cpred (W : LocusProof.cpred) : cpredr :=
-  (* Map LocusProof.cpred elements to cbexpr; customize based on actual type *)
+  (* Map LocusProof.cpred elements to cbexpr *)
   [].
 
 Definition trans (env : aenv) (W : LocusProof.cpred) (P : qpred) : cpredr :=
@@ -552,7 +520,20 @@ Lemma type_check_proof_fixed :
   forall rmax q env T T' P Q e,
     type_check_proof rmax q env T T' P Q e -> T' = T.
 Proof.
+
+  intros. destruct H; auto. 
+
 Admitted.
+
+Lemma skip_preserves_preds :
+  forall (rmax : nat) (q : atype) (env : aenv) (T : type_map)
+         (W : cpred) (P : qpred),
+    @locus_system rmax q env T PSKIP T ->
+    W = W /\ P = P.
+Proof.
+  intros rmax q env T W P Hlsys.
+  split; reflexivity.
+Qed.
 
 Lemma type_check_proof_weaken_right :
   forall rmax q env T T1 W1 W2 e,
@@ -580,6 +561,77 @@ Proof.
   intros rmax q env T T1 W P W' Q e Htype Heq. subst. assumption.
 Qed.
 
+Lemma exec_skip_correct :
+  forall fuel s s',
+    exec fuel Skip s = Some s' ->
+    s' = s.
+Proof.
+  intros fuel s s' Hexec.
+  destruct fuel as [| fuel']; simpl in Hexec.
+  - discriminate.
+  - inversion Hexec. reflexivity.
+Qed.
+Lemma trans_preserved_skip :
+  forall env W P b,
+    In b (trans env W P) -> In b (trans env W P).
+Proof.
+  intros. assumption.
+Qed.
+
+Lemma trans_eq_preserved :
+  forall env W P W' Q,
+    W = W' ->
+    P = Q ->
+    trans env W P = trans env W' Q.
+Proof.
+  intros env W P W' Q HeqW HeqP.
+  subst. reflexivity.
+Qed.
+Lemma translate_pexp_subst_let :
+  forall x a e,
+    translate_pexp (Let x (AE a) e) =
+    Seq (Assign (convert_var x) (translate_aexp a)) (translate_pexp e).
+Proof.
+  intros x a e.
+  simpl.
+  reflexivity.
+Qed.
+Lemma skip_preserves_preds_fixed :
+  forall (rmax : nat) (q : atype) (env : aenv) (T : type_map)
+         (W W' : cpred) (P Q : qpred),
+    @locus_system rmax q env T PSKIP T ->
+    W = W' ->
+    P = Q ->
+    W = W' /\ P = Q.
+Proof.
+  intros. split; assumption.
+Qed.
+Lemma skip_preserves_WP :
+  forall (rmax : nat) (q : atype) (env : aenv) (T : type_map)
+         (W W' : cpred) (P Q : qpred),
+    @locus_system rmax q env T PSKIP T ->
+    W' = W ->
+    Q = P ->
+    trans env W P = trans env W' Q.
+Proof.
+  intros rmax q env T W W' P Q Hsys HW HQ.
+  subst W'. subst Q.
+  reflexivity.
+Qed.
+
+Lemma pred_check_implies_same_cpred :
+  forall env T P0 W P W' Q,
+    pred_check env T P0 ->
+    P0 = (W, P) ->
+    P0 = (W', Q) ->
+    W = W'.
+Proof.
+  intros env T P0 W P W' Q Hpred H1 H2.
+  rewrite H1 in H2.
+  injection H2 as HW HP.
+  assumption.
+Qed.
+
 Theorem quantum_to_classical_soundness :
   forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
          (W : LocusProof.cpred) (P : qpred)
@@ -595,18 +647,19 @@ Theorem quantum_to_classical_soundness :
     let Q' := trans env W' Q in
     (forall b, In b Q' -> eval_cbexp s' b = true).
 
+
 Proof.
   intros rmax t env T W P e W' Q fuel s s' Htype Htriple.
   revert s s'.
   induction Htriple; intros s s' HP' Hexec; simpl in *.
 
   - (* skip_pf *)
+intros Hexec1 b Hb.
 eapply IHHtriple; eauto.
 eapply type_check_proof_invariant with (T1 := T1); eauto.
   eapply type_check_proof_fixed in H. subst. reflexivity.
 
   - (* seq_pf *)
-    simpl in Hexec.
 intros Hrun.
 eapply IHHtriple.
  eapply type_check_proof_invariant with (T1 := T1); eauto.
@@ -617,58 +670,162 @@ exact Hrun.
  - (*triple_frame *)
     eapply IHHtriple.
     + eapply type_check_proof_weaken_right; eauto.
-      eapply type_check_proof_fixed in H; subst; reflexivity.
+      eapply type_check_proof_fixed in H. subst. reflexivity.
     + assumption.
 
  - (* triple_con_1 *)
-intros Hskip b HIn.
- destruct fuel; simpl in Hskip; try discriminate.
-inversion Hskip. subst.
-apply Hexec; auto.
-unfold HP'.
-subst. 
-inversion Htype; subst.
-unfold type_check_proof in Htype.
-destruct Htype as [[Hcpred Hqpred] _]. 
-subst.
+intros Hexec_skip b Hb.
+    inversion Hexec_skip; subst.
+    apply exec_skip_correct in Hexec_skip; subst.
+    destruct Htype as [Hcpred [Hlsys Hqpred]].
+    subst. apply Hexec. eauto.
+    assert (W = W' /\ P = Q) as [HeqW HeqP].
+
+{ 
+  destruct P0 as [W_pre P_pre].
+  simpl in *.
+  split.
+}
+
+subst W'. subst P.
+exact Hb.
+  - (* triple_con_2 *)
+    intros Hrun.
+    simpl in Hrun.
+    inversion Hrun; subst.
+      eapply IHHtriple; eauto.
+    + eapply type_check_proof_invariant; eauto.
+      eapply type_check_proof_fixed in H1 as ->.
+       reflexivity.
+     +  inversion H3; subst.
+      eapply type_check_proof_fixed in H1 as ->.
+unfold subst_pexp at 1.
+simpl.
+
 admit.
 
-  - (* triple_con_2 *)
+- (*let_c_pf *)
+
+intros Hrun HIn.
+simpl in Hrun.
+
+repeat intros HInT.
+remember (Assign (convert_var x) (translate_aexp a)) as c1.
+remember (translate_pexp e) as c2.
+simpl in Hrun.
+destruct fuel as [| fuel']; simpl in Hrun; try discriminate.
+destruct (exec fuel' c1 s) eqn:Hex1; try discriminate.
+
+admit.
+
+-(* Case: let_m_pf *)
+
+intros Hrun.
+destruct fuel as [|fuel']; [discriminate Hrun |].
+
+inversion Hrun as [Hseq].
+admit.
+
+- (* let_q_pf *)
+intros Hrun b0 HIn.
+inversion Hrun; subst.
+rewrite <- (Hexec b0); auto.
+inversion Hrun; subst. 
++ destruct fuel; [discriminate Hrun |].
+inversion Hrun; subst.  (* Derives s' = s *)
+reflexivity. 
++ assert (W = W' /\ P = Q) as [HeqW HeqP].
+
+{ 
+ inversion Htype; subst.
+split.
+
+}
+
+subst W'. subst P.
+exact HIn .
+Admitted.
+
+
+(*
+- (* Case: appu_nor_pf *)
+intros Hrun. 
+intros b0 Hb0.
+inversion Hrun; subst.
+
+
+admit.
+
+-(* Case: appu_ch_pf *)
+ intros Hrun.
+ inversion Hrun. subst.
+ intros b0 Hb0.
+admit. 
+- (* Case: apph_nor_pf *)
+ intros Hrun.
+ inversion Hrun. subst.
+ intros b0 Hb0.
+admit. 
+-(* Case: apph_had_pf *)
+  intros Hrun.
+  simpl in Hrun.
+  unfold translate_bexp in Hrun.
+  destruct (simp_bexp b) eqn:Hsimp; try discriminate.
+  rewrite H0 in Hsimp. simpl in Hrun.
+   intros b1 Hb1.
+  eapply IHHtriple; eauto.
+(*
+assert (T1 = T) by (eapply type_check_proof_fixed; eauto); subst.
+exact H.
+
+*)
+apply type_check_proof_weaken_right with (T1 := T1).
+ exact H.
+apply type_check_proof_fixed in H.
+assumption.
+admit.
+-(* Case: if_c_t *)
+intros Hrun b0 HIn.
+simpl in Hrun.
+
+ inversion Hrun; subst. 
+admit.
+
+- (* Case: if_c_f *)
 intros Hrun.
 simpl in Hrun.
-destruct (exec fuel (Assign (convert_var x) (translate_aexp a)) s) eqn:Hex1; try discriminate.
-inversion Hrun; subst.
-inversion H3; subst. 
-eapply IHHtriple; eauto.
-eapply type_check_proof_invariant; eauto.
-eapply type_check_proof_fixed in H1 as ->.
-  reflexivity.
-replace (exec fuel (translate_pexp (subst_pexp e x v)) s)
-   with (exec fuel (translate_pexp (subst_pexp e x v)) s0).
+intros b0 HIn.
+admit.
+-(* Case: if_q *)
+intros Hrun b0 HIn.
 simpl in Hrun.
+admit.
+
+  - (* for_pf_f *)
+    intros Hrun b0 Hb0.
+    simpl in Hrun.
+    inversion Hrun; subst.
+ 
+admit.
+
+ - (* for_pf *)
+    intros Hrun.
+    simpl in Hrun.
+    inversion Hrun; subst.
+    eapply IHHtriple2; eauto.
+    + eapply type_check_proof_invariant; eauto.
+      eapply type_check_proof_fixed in H0; subst; reflexivity.
+   +
+remember (Seq (translate_pexp e1) (translate_pexp e2)) as c_seq.
+revert dependent s.
+revert dependent s'.
+induction fuel as [| fuel' IH]; intros s s' Hrun; simpl in Hrun; try discriminate.
 
 
 
+Admitted.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*)
 
 
 
@@ -677,5 +834,6 @@ simpl in Hrun.
 
  
     
+
 
 
