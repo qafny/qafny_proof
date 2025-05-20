@@ -41,7 +41,13 @@ Import LocusProof.
 Inductive var := 
   | Scalar (name : string) (* Scalar variable *)
   | Array (name : string) (index : nat). (* Array variable with index *)
- 
+Inductive mode : Type :=
+  | CT  (* Classical *)
+  | MT  (* Measurement/Quantum *)
+  | Nor (* Normal quantum state *)
+  | Had (* Hadamard basis *)
+  | Sup (amps : list (Complex.C * nat)) (* Superposition with amplitudes and basis states *)
+  | Ent (qubits : list nat). (* Entangled qubits *)
 Inductive expr :=
   | VarExpr (v : var) (* Variable *)
   | Const (n : nat) (* Natural number constant *)
@@ -143,6 +149,7 @@ Fixpoint subst (e : expr) (v : var) (e_subst : expr) : expr :=
   | Minus e1 e2 => Minus (subst e1 v e_subst) (subst e2 v e_subst)
   | Mult e1 e2 => Mult (subst e1 v e_subst) (subst e2 v e_subst) (* Corrected: Handle multiplication *)
   end.
+
 (* Extend cbexp syntax to handle ArrayWrite *)
 Inductive cbexpr : Type :=
   | CBTrue : cbexpr
@@ -156,6 +163,7 @@ Definition safe_eval (e : expr) (s : state) : nat :=
   | Some n => n
   | None => 0
   end.
+
 Fixpoint eval_cbexp (s : state) (b : cbexpr) : bool :=
   match b with
   | CBTrue => true
@@ -404,7 +412,65 @@ Fixpoint translate_bexp (b : bexp) : expr :=
   | BTest i a => VarExpr (convert_var i)
   | BNeg b' => Minus (Const 1) (translate_bexp b') 
   end.
+(* Convert locus to list nat *)
+Definition locus_to_indices (l : locus) : list nat :=
+  flat_map
+    (fun elem =>
+       match elem with
+       | (x, BNum idx, _) => [idx]
+       | _ => []
+       end)
+    l.
+Definition varia_to_index (p : varia) : expr :=
+  match p with
+  | AExp e => translate_aexp e
+  | Index x e => translate_aexp e
+  end.
+Definition var_to_index (x : var) : expr :=
+  match x with
+  | Scalar _ => Const 0 (* Default qubit 0 *)
+  | Array _ idx => Const idx
+  end.
+Definition superoperator_mode (e : single_u) : cmd :=
+  match e with
+  | RH p => ArrayWrite "q" (varia_to_index p) (Const 2)
+  | SQFT x => ArrayWrite "q" (var_to_index (convert_var x)) (Const 4)
+  | SRQFT x => ArrayWrite "q" (var_to_index (convert_var x)) (Const 4) (* Same mode for simplicity *)
+  end.
 
+(* Compile pexp to array operations *)
+Fixpoint translate_pexp_array (p : pexp) : cmd :=
+  match p with
+  | PSKIP => Skip
+  | Let x (AE a) s =>
+      Seq (Assign (convert_var x) (translate_aexp a)) (translate_pexp_array s)
+  | Let x (Meas y) s =>
+      Seq (ArrayWrite "m" (Const 0) (VarExpr (convert_var y)))
+          (Seq (Assign (convert_var x) (VarExpr (convert_var y)))
+               (translate_pexp_array s))
+  | AppSU e => superoperator_mode e
+  | AppU l e =>
+      fold_right
+        (fun idx acc => Seq (ArrayWrite "q" (Const idx) (Const 1)) acc)
+        Skip
+        (locus_to_indices l)
+  | PSeq s1 s2 =>
+      Seq (translate_pexp_array s1) (translate_pexp_array s2)
+  | QafnySyntax.If x s1 =>
+      If (translate_bexp x) (translate_pexp_array s1) Skip
+  | For x l h b p =>
+      Seq (Assign (convert_var x) (translate_aexp l))
+          (While
+             (Minus (translate_aexp h) (VarExpr (convert_var x)))
+             (If (translate_bexp b)
+                 (Seq (translate_pexp_array p)
+                      (Assign (convert_var x) (Plus (VarExpr (convert_var x)) (Const 1))))
+                 Skip))
+  | Diffuse x =>
+      ArrayWrite "q" (varia_to_index x) (Const 1)
+  end.
+
+(*
 Fixpoint translate_pexp (p : pexp) : cmd :=
   match p with
   | PSKIP => Skip
@@ -428,6 +494,7 @@ Fixpoint translate_pexp (p : pexp) : cmd :=
                  Skip))  
   | Diffuse x => Skip 
   end.
+*)
 
 (* Translate a classical+quantum state into a logical assertion *)
 
@@ -449,52 +516,12 @@ Definition trans_locus (l : locus) : option (string * nat) :=
   | _ => None
   end.
 
-Definition trans_qstate (q : qstate) : cpredr :=
-  flat_map
-    (fun '(l, se) =>
-       match trans_locus l with
-       | Some (name, idx) =>
-           [CBArrayEq name (Const idx) (Const (trans_state_elem se))]
-       | None => []
-       end)
-    q.
-
-
-Definition trans_stack (W : stack) : cpredr :=
-  flat_map
-    (fun '(x, (r, v)) =>
-       let name := var_to_string x in
-       [CBArrayEq name (Const 0) (Const v)]) (AEnv.elements W).
-
-Definition trans_state (phi : LocusDef.aenv * (stack * qstate)) : cpredr:=
-  match phi with
-  | (aenv, s) =>
-      let (W, q) := s in
-      trans_stack W ++ trans_qstate q
-  end.
-
-Lemma trans_state_surj :
-  forall (s : stack * qstate),
-    exists P : cpredr,
-      P = trans_state (empty_aenv, s).
-Proof.
-  intros s.
-  exists (trans_state (empty_aenv, s)).
-  reflexivity.
-Qed.
-
 (* Classical Semantics *)
 Definition hoare_triple_sem (P : cpredr) (c : cmd) (Q : cpredr) : Prop :=
   forall (s s' : state) (fuel : nat),
     (forall b, In b P -> eval_cbexp s b = true) ->
     exec fuel c s = Some s' ->
     (forall b, In b Q -> eval_cbexp s' b = true).
-Inductive mode : Type :=
-  | CT  (* Classical *)
-  | MT (* Measurement/Quantum *)
-  | Nor (* Normal quantum state *)
-  | Had (* Hadamard basis *)
-  | EN  (* Entangled state *).
 
 Fixpoint trans_qpred (env : aenv) (qp : qpred) : cpredr :=
   match qp with
@@ -513,10 +540,11 @@ Definition convert_locus_cpred (W : LocusProof.cpred) : cpredr :=
 Definition trans (env : aenv) (W : LocusProof.cpred) (P : qpred) : cpredr :=
   convert_locus_cpred W ++ trans_qpred env P.
 Check trans.
-Theorem quantum_to_classical_soundness_1:
+
+Theorem quantum_to_classical_completeness:
 forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
          (e : pexp) (c : cmd) (P' Q' : cpredr),
-    c = translate_pexp e ->
+    c = translate_pexp_array e ->
     hoare_triple P' c Q' ->
     exists (W : LocusProof.cpred) (P : qpred)
            (W' : LocusProof.cpred) (Q : qpred),
@@ -531,11 +559,11 @@ intros rmax t env T e c P' Q' Htrans Hhoare.
     inversion Hhoare; subst.
 +
 Admitted.
-Theorem quantum_to_classical_completeness:
+Theorem quantum_to_classical_soundness_1:
   forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
          (e : pexp) (P' Q' : cpredr),
     exists (W W' : LocusProof.cpred) (P Q : qpred) (c : cmd),
-      c = translate_pexp e /\
+      c = translate_pexp_array e /\
       @triple rmax t env T (W, P) e (W', Q) /\
       P' = trans env W P /\
       Q' = trans env W' Q /\
@@ -562,21 +590,6 @@ Lemma skip_preserves_preds :
 Proof.
   intros rmax q env T W P Hlsys.
   split; reflexivity.
-Qed.
-Fixpoint translate_array (env: aenv) (W: cpred) (arr: list qpred) : list cbexpr :=
-  match arr with
-  | [] => []
-  | q :: qs => (trans env W q) ++ (translate_array env W qs)
-  end.
-
-Lemma translate_array_correct:
-  forall env W arr,
-  translate_array env W arr = flat_map (trans env W) arr.
-Proof.
-  intros env W arr.
-  induction arr as [| q qs IH].
-  - simpl. reflexivity.
-  - simpl. rewrite IH. reflexivity.
 Qed.
 
 Lemma type_check_proof_weaken_right :
@@ -633,8 +646,8 @@ Proof.
 Qed.
 Lemma translate_pexp_subst_let :
   forall x a e,
-    translate_pexp (Let x (AE a) e) =
-    Seq (Assign (convert_var x) (translate_aexp a)) (translate_pexp e).
+  translate_pexp_array (Let x (AE a) e) =
+    Seq (Assign (convert_var x) (translate_aexp a)) (translate_pexp_array e).
 Proof.
   intros x a e.
   simpl.
@@ -709,7 +722,7 @@ Theorem quantum_to_classical_soundness :
     @triple rmax t env T (W, P) e (W', Q) ->
     let P' := trans env W P in
     (forall b, In b P' -> eval_cbexp s b = true) ->
-    let c := translate_pexp e in
+    let c := translate_pexp_array e in
     exec fuel c s = Some s' ->
     let Q' := trans env W' Q in
     (forall b, In b Q' -> eval_cbexp s' b = true).
@@ -786,140 +799,48 @@ destruct fuel as [|fuel']; [discriminate Hrun |].
 
 admit.
 
-- (* let_q_pf *)
-intros Hrun b0 HIn.
-inversion Hrun; subst.
-rewrite <- (Hexec b0); auto.
-inversion Hrun; subst. 
-+ destruct fuel; [discriminate Hrun |].
-inversion Hrun; subst.  
-reflexivity. 
-+ assert (W = W' /\ P = Q) as [HeqW HeqP].
-
-{ 
- inversion Htype; subst.
-split.
-
-}
-
-subst W'. subst P.
-exact HIn .
-
-- (* Case: appu_nor_pf *)
-intros Hrun b0 HIn.
-inversion Hrun; subst.
-rewrite <- (Hexec b0); auto.
-inversion Hrun; subst. 
-+ destruct fuel; [discriminate Hrun |].
-inversion Hrun; subst.  
-reflexivity. 
-+ assert (W = W' /\ P = Q) as [HeqW HeqP].
-
-{ 
- inversion Htype; subst.
-split.
-
-}
-
-subst W'. subst P.
-exact HIn .
-- (* Case: appu_ch_pf *)
-intros Hrun b0 HIn.
-inversion Hrun; subst.
-rewrite <- (Hexec b0); auto.
-inversion Hrun; subst. 
-+ destruct fuel; [discriminate Hrun |].
-inversion Hrun; subst.  
-reflexivity. 
-+ assert (W = W' /\ P = Q) as [HeqW HeqP].
-
-{ 
- inversion Htype; subst.
-split.
-
-}
-
-subst W'. subst P.
-exact HIn .
-- (* Case: apph_nor_pf *)
-intros Hrun b0 HIn.
-inversion Hrun; subst.
-rewrite <- (Hexec b0); auto.
-inversion Hrun; subst. 
-+ destruct fuel; [discriminate Hrun |].
-inversion Hrun; subst.  
-reflexivity. 
-+ assert (W = W' /\ P = Q) as [HeqW HeqP].
-
-{ 
- inversion Htype; subst.
-split.
-
-}
-
-subst W'. subst P.
-exact HIn .
--(* Case: apph_had_pf *)
-  intros Hrun.
-  simpl in Hrun.
-  unfold translate_bexp in Hrun.
-  destruct (simp_bexp b) eqn:Hsimp; try discriminate.
-  rewrite H0 in Hsimp. simpl in Hrun.
-   intros b1 Hb1.
-  eapply IHHtriple; eauto.
-apply type_check_proof_weaken_right with (T1 := T1).
- exact H.
-apply type_check_proof_fixed in H.
-assumption.
-admit.
-Admitted.
-
-
-(*
-
-
--(* Case: if_c_t *)
-intros Hrun b0 HIn.
-simpl in Hrun.
-
- inversion Hrun; subst. 
-admit.
-
-- (* Case: if_c_f *)
-intros Hrun.
-simpl in Hrun.
-intros b0 HIn.
-admit.
--(* Case: if_q *)
-intros Hrun b0 HIn.
-simpl in Hrun.
-admit.
-
-  - (* for_pf_f *)
-    intros Hrun b0 Hb0.
-    simpl in Hrun.
-    inversion Hrun; subst.
- 
-admit.
-
- - (* for_pf *)
-    intros Hrun.
-    simpl in Hrun.
-    inversion Hrun; subst.
-    eapply IHHtriple2; eauto.
-    + eapply type_check_proof_invariant; eauto.
-      eapply type_check_proof_fixed in H0; subst; reflexivity.
-   +
-remember (Seq (translate_pexp e1) (translate_pexp e2)) as c_seq.
-revert dependent s.
-revert dependent s'.
-induction fuel as [| fuel' IH]; intros s s' Hrun; simpl in Hrun; try discriminate.
-
-
 
 Admitted.
 
-*)
+(* Translation Quantum State to Array *)
+
+Definition trans_qstate (q : qstate) : cpredr :=
+  flat_map
+    (fun '(l, se) =>
+       match trans_locus l with
+       | Some (name, idx) =>
+           [CBArrayEq name (Const idx) (Const (trans_state_elem se))]
+       | None => []
+       end)
+    q.
+
+Definition trans_stack (W : stack) : cpredr :=
+  flat_map
+    (fun '(x, (r, v)) =>
+       let name := var_to_string x in
+       [CBArrayEq name (Const 0) (Const v)]) (AEnv.elements W).
+
+Definition trans_state (phi : LocusDef.aenv * (stack * qstate)) : cpredr:=
+  match phi with
+  | (aenv, s) =>
+      let (W, q) := s in
+      trans_stack W ++ trans_qstate q
+  end.
+
+Lemma trans_state_surj :
+  forall (s : stack * qstate),
+    exists P : cpredr,
+      P = trans_state (empty_aenv, s).
+Proof.
+  intros s.
+  exists (trans_state (empty_aenv, s)).
+  reflexivity.
+Qed.
+
+
+
+
+
 
 
 
