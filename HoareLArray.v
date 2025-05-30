@@ -37,17 +37,11 @@ Require Import Bool.
 Require Import Coq.Logic.FunctionalExtensionality.
 Require Import Coq.Logic.Classical_Prop.
 Import LocusProof.
+Require Import ZArith.
 (* Define variables and arrays *)
 Inductive var := 
   | Scalar (name : string) (* Scalar variable *)
   | Array (name : string) (index : nat). (* Array variable with index *)
-Inductive mode : Type :=
-  | CT  (* Classical *)
-  | MT  (* Measurement/Quantum *)
-  | Nor (* Normal quantum state *)
-  | Had (* Hadamard basis *)
-  | Sup (amps : list (Complex.C * nat)) (* Superposition with amplitudes and basis states *)
-  | Ent (qubits : list nat). (* Entangled qubits *)
 Inductive expr :=
   | VarExpr (v : var) (* Variable *)
   | Const (n : nat) (* Natural number constant *)
@@ -55,15 +49,63 @@ Inductive expr :=
   | Minus (e1 e2 : expr) (* Subtraction *)
   | Mult (e1 e2 : expr). (* Multiplication *)
 
+(* Use complex_approxt for complex numbers *)
+Definition complex_approx := (Z * Z)%type. (* (real, imag) *)
+Inductive mode : Type :=
+  | CT  (* Classical *)
+  | MT  (* Measurement/Quantum *)
+  | Nor (* Normal quantum state *)
+  | Had (* Hadamard basis *)
+  | Sup (amps : list (complex_approx* nat)) (* Superposition with amplitudes and basis states *)
+  | Ent (qubits : list nat). (* Entangled qubits *)
+(* Complex number equality *)
+Definition complex_approxt_eq (c1 c2 : complex_approx) : bool :=
+  let (r1, i1) := c1 in
+  let (r2, i2) := c2 in
+  andb (Z.eqb r1 r2) (Z.eqb i1 i2).
+(* Complex number addition *)
+Definition complex_add (c1 c2 : complex_approx) : complex_approx :=
+  let (r1, i1) := c1 in
+  let (r2, i2) := c2 in
+  (r1 + r2, i1 + i2)%Z.
+(* Complex number multiplication *)
+Definition complex_mult (c1 c2 : complex_approx) : complex_approx :=
+  let (r1, i1) := c1 in
+  let (r2, i2) := c2 in
+  (r1 * r2 - i1 * i2, r1 * i2 + r2 * i1)%Z.
 
-(* Define the state *)
-Definition state := var -> option nat.
+(* Amplitude list equality *)
+Fixpoint amps_eq (amps1 amps2 : list (complex_approx* nat)) : bool :=
+  match amps1, amps2 with
+  | [], [] => true
+  | (c1, n1) :: t1, (c2, n2) :: t2 =>
+      andb (andb (complex_approxt_eq c1 c2) (Nat.eqb n1 n2)) (amps_eq t1 t2)
+  | _, _ => false
+  end.
 
+(* State updated to use complex_approxt *)
+Definition state := var -> option (nat * list (complex_approx * nat)).
+
+
+(* Map mode to a numerical value for array storage *)
+Definition mode_to_nat (m : mode) : nat :=
+  match m with
+  | CT => 0
+  | MT => 1
+  | Nor => 2
+  | Had => 3
+  | Sup _ => 4
+  | Ent _ => 5
+  end.
 (* Evaluate expressions *)
 Fixpoint eval (e : expr) (s : state) : option nat :=
   match e with
   | Const n => Some n
-  | VarExpr v => s v
+  | VarExpr v => 
+      match s v with
+      | Some (n, _) => Some n (* Extract mode *)
+      | None => None
+      end
   | Plus e1 e2 =>
       match eval e1 s, eval e2 s with
       | Some n1, Some n2 => Some (n1 + n2)
@@ -74,12 +116,13 @@ Fixpoint eval (e : expr) (s : state) : option nat :=
       | Some n1, Some n2 => if n1 <? n2 then None else Some (n1 - n2)
       | _, _ => None
       end
-  | Mult e1 e2 => (* Corrected: Handling Multiplication *)
+  | Mult e1 e2 =>
       match eval e1 s, eval e2 s with
       | Some n1, Some n2 => Some (n1 * n2)
       | _, _ => None
       end
   end.
+
 (* Define equality comparison for variables *)
 Definition eqb_var (v1 v2 : var) : bool :=
   match v1, v2 with
@@ -96,24 +139,28 @@ Inductive cmd :=
   | If (b : expr) (c1 c2 : cmd) (* Conditional *)
   | While (b : expr) (c : cmd). (* While loop *)
 
-
-(* Define execution semantics with a fuel parameter *)
+(* Corrected exec function *)
 Fixpoint exec (fuel : nat) (c : cmd) (s : state) : option state :=
   match fuel with
-  | 0 => None (* Out of fuel *)
+  | 0 => None
   | S fuel' =>
       match c with
       | Skip => Some s
       | Assign v e =>
           match eval e s with
-          | Some val => Some (fun x => if eqb_var x v then Some val else s x)
+          | Some val => Some (fun x => if eqb_var x v then Some (val, []) else s x)
           | None => None
           end
       | ArrayWrite name idx val =>
           match eval idx s, eval val s with
           | Some i, Some v =>
               Some (fun x =>
-                if eqb_var x (Array name i) then Some v else s x)
+                if eqb_var x (Array name i) then
+                  match s (Array name i) with
+                  | Some (_, amps) => Some (v, amps)
+                  | None => Some (v, [])
+                  end
+                else s x)
           | _, _ => None
           end
       | Seq c1 c2 =>
@@ -140,6 +187,7 @@ Fixpoint exec (fuel : nat) (c : cmd) (s : state) : option state :=
       end
   end.
 
+
 (* Define substitution function *)
 Fixpoint subst (e : expr) (v : var) (e_subst : expr) : expr :=
   match e with
@@ -149,33 +197,51 @@ Fixpoint subst (e : expr) (v : var) (e_subst : expr) : expr :=
   | Minus e1 e2 => Minus (subst e1 v e_subst) (subst e2 v e_subst)
   | Mult e1 e2 => Mult (subst e1 v e_subst) (subst e2 v e_subst) (* Corrected: Handle multiplication *)
   end.
-
-(* Extend cbexp syntax to handle ArrayWrite *)
+(* Updated cbexpr type *)
 Inductive cbexpr : Type :=
   | CBTrue : cbexpr
   | CBVar : var -> cbexpr
   | CBArrayWrite : string -> expr -> expr -> cbexpr
   | CBAnd : cbexpr -> cbexpr -> cbexpr
-  | CBArrayEq : string -> expr -> expr -> cbexpr. (* New: A[idx] = val *)
+  | CBArrayEq : string -> expr -> expr -> cbexpr
+  | CBAmpsEq : string -> expr -> list (complex_approx * nat) -> cbexpr.
 
 Definition safe_eval (e : expr) (s : state) : nat :=
   match eval e s with
   | Some n => n
   | None => 0
   end.
-
+(* Corrected eval_cbexp function *)
 Fixpoint eval_cbexp (s : state) (b : cbexpr) : bool :=
   match b with
   | CBTrue => true
-  | CBVar v => match s v with Some n => Nat.ltb 0 n | None => false end
-  | CBArrayWrite name idx val => false (* Not a condition *)
-  | CBAnd b1 b2 => andb (eval_cbexp s b1) (eval_cbexp s b2)
-  | CBArrayEq name idx val =>
-      match eval idx s, eval val s, s (Array name (safe_eval idx s)) with
-      | Some i, Some v, Some n => Nat.eqb n v
-      | _, _, _ => false
+  | CBVar v =>
+      match s v with
+      | Some (n, _) => Nat.eqb n 0
+      | None => false
       end
+  | CBArrayEq name idx val =>
+      match eval idx s, eval val s with
+      | Some i, Some v =>
+          match s (Array name i) with
+          | Some (n, _) => Nat.eqb n v
+          | None => false
+          end
+      | _, _ => false
+      end
+  | CBAmpsEq name idx expected_amps =>
+      match eval idx s with
+      | Some i =>
+          match s (Array name i) with
+          | Some (_, actual_amps) => amps_eq actual_amps expected_amps
+          | None => false
+          end
+      | None => false
+      end
+  | CBAnd b1 b2 => andb (eval_cbexp s b1) (eval_cbexp s b2)
+  | CBArrayWrite _ _ _ => false
   end.
+
 
 Fixpoint expr_to_cbexp (e : expr) : cbexpr :=
   match e with
@@ -185,6 +251,8 @@ Fixpoint expr_to_cbexp (e : expr) : cbexpr :=
   | Minus e1 e2 => CBTrue
   | Mult e1 e2 => CBAnd (expr_to_cbexp e1) (expr_to_cbexp e2)
   end.
+
+(* Corrected subst_cbexp function *)
 Fixpoint subst_cbexp (b : cbexpr) (v : var) (e_subst : expr) : cbexpr :=
   match b with
   | CBTrue => CBTrue
@@ -194,8 +262,9 @@ Fixpoint subst_cbexp (b : cbexpr) (v : var) (e_subst : expr) : cbexpr :=
   | CBAnd b1 b2 => CBAnd (subst_cbexp b1 v e_subst) (subst_cbexp b2 v e_subst)
   | CBArrayEq name idx val =>
       CBArrayEq name (subst idx v e_subst) (subst val v e_subst)
+  | CBAmpsEq name idx expected_amps =>
+      CBAmpsEq name (subst idx v e_subst) expected_amps
   end.
-
 Definition cpredr := list cbexpr.
 
 (* Equality check for expressions *)
@@ -207,18 +276,35 @@ Fixpoint expr_eqb (e1 e2 : expr) : bool :=
   | Minus e1a e1b, Minus e2a e2b => expr_eqb e1a e2a && expr_eqb e1b e2b
   | _, _ => false
   end.
+
+(* Amplitude encoding/decoding : assign a unique nat based on operation and qubit count *)
+Definition encode_amps (amps : list (complex_approx * nat)) (op : single_u) (n : nat) : nat :=
+  match op with
+  | RH _ => 1  (* Hadamard encoding *)
+  | SQFT _ => 2 + n (* QFT encoding *)
+  | SRQFT _ => 3 + n (* Inverse QFT encoding *)
+  end.
+
 Fixpoint subst_array (b : cbexpr) (name : string) (idx : expr) (val : expr) : cbexpr :=
   match b with
   | CBTrue => CBTrue
   | CBVar v => CBVar v
   | CBArrayWrite n i v =>
-      if String.eqb n name && expr_eqb i idx then CBArrayWrite name idx val
-      else CBArrayWrite n i v
-  | CBAnd b1 b2 => CBAnd (subst_array b1 name idx val) (subst_array b2 name idx val)
+      if andb (String.eqb n name) (expr_eqb i idx)
+      then CBArrayWrite n idx val
+      else CBArrayWrite n (subst i (Scalar name) idx) (subst v (Scalar name) val)
   | CBArrayEq n i v =>
-      if String.eqb n name && expr_eqb i idx then CBArrayEq name idx val
-      else CBArrayEq n i v
+      if andb (String.eqb n name) (expr_eqb i idx)
+      then CBArrayEq n idx val
+      else CBArrayEq n (subst i (Scalar name) idx) (subst v (Scalar name) val)
+  | CBAmpsEq n i amps =>
+      if andb (String.eqb n name) (expr_eqb i idx)
+      then CBAmpsEq n idx amps
+      else CBAmpsEq n (subst i (Scalar name) idx) amps
+  | CBAnd b1 b2 =>
+      CBAnd (subst_array b1 name idx val) (subst_array b2 name idx val)
   end.
+
 
 Definition subst_assertion_array (P : cpredr) (name : string) (idx : expr) (val : expr) : cpredr :=
   map (fun b => subst_array b name idx val) P.
@@ -367,11 +453,16 @@ Fixpoint translate_cbexp (c : cbexpr) : expr :=
   match c with
   | CBTrue => Const 1
   | CBVar x => VarExpr x
-  | CBArrayWrite name idx val => Const 0 (* Not a condition *)
+  | CBArrayWrite _ _ _ => Const 0 (* Not a condition — placeholder *)
   | CBAnd b1 b2 => Mult (translate_cbexp b1) (translate_cbexp b2)
   | CBArrayEq name idx val =>
-      Minus (Const 1) (Minus (VarExpr (Array name (safe_eval idx (fun _ => None)))) val)
+      let array_expr := VarExpr (Array name 0) in (* Placeholder index *)
+      let idx_expr := idx in
+      let actual := VarExpr (Array name 0) in (* Symbolic placeholder *)
+      Minus (Const 1) (Minus actual val) (* Translates to equality if both match *)
+  | CBAmpsEq _ _ _ => Const 0 (* Cannot translate complex amplitudes directly *)
   end.
+
 
 Definition extract_var (e : aexp) : option var :=
   match e with
@@ -391,7 +482,6 @@ Definition convert_cbexp (c : QafnySyntax.cbexp) : cbexpr :=
       | _, _ => CBTrue
       end
   end.
-Print varia.
 Definition convert_varia_to_aexp (v : varia) : aexp :=
   match v with
   | AExp e => e  
@@ -412,52 +502,155 @@ Fixpoint translate_bexp (b : bexp) : expr :=
   | BTest i a => VarExpr (convert_var i)
   | BNeg b' => Minus (Const 1) (translate_bexp b') 
   end.
-(* Convert locus to list nat *)
-Definition locus_to_indices (l : locus) : list nat :=
-  flat_map
-    (fun elem =>
-       match elem with
-       | (x, BNum idx, _) => [idx]
-       | _ => []
-       end)
-    l.
+
 Definition varia_to_index (p : varia) : expr :=
   match p with
   | AExp e => translate_aexp e
-  | Index x e => translate_aexp e
+  | Index x e => Plus (VarExpr (convert_var x)) (translate_aexp e)
   end.
+
 Definition var_to_index (x : var) : expr :=
   match x with
-  | Scalar _ => Const 0 (* Default qubit 0 *)
-  | Array _ idx => Const idx
+  | Scalar name => VarExpr (Scalar name)
+  | Array name idx => Const idx
   end.
-Definition superoperator_mode (e : single_u) : cmd :=
-  match e with
-  | RH p => ArrayWrite "q" (varia_to_index p) (Const 2)
-  | SQFT x => ArrayWrite "q" (var_to_index (convert_var x)) (Const 4)
-  | SRQFT x => ArrayWrite "q" (var_to_index (convert_var x)) (Const 4) (* Same mode for simplicity *)
+
+(* Convert locus to list of index expressions *)
+Definition locus_to_indices_expr (l : locus) : list expr :=
+  flat_map
+    (fun elem =>
+       match elem with
+       | (x, BNum idx, _) => [Const idx]
+       | (x, _, _) => [VarExpr (convert_var x)]
+       end)
+    l.
+
+(* Approximate 1/sqrt(2^n) scaled by 1000 *)
+Definition scale_factor (n : nat) : complex_approx :=
+  (1000 / Z.of_nat (Nat.sqrt (Nat.pow 2 n)), 0)%Z.
+
+(* Hadamard transformation *)
+Definition hadamard_amps_single (n : nat) : list (complex_approx * nat) :=
+  let scale : complex_approx := (Z.div 1000 (Z.of_nat (Nat.sqrt 2)), 0%Z) in
+  map (fun k => (scale, k)) (seq 0 2).
+
+(* QFT amplitudes for n qubits *)
+Definition qft_amps (n : nat) : list (complex_approx * nat) :=
+  let len := Nat.pow 2 n in
+  let scale : complex_approx :=
+    (Z.div 1000 (Z.of_nat (Nat.sqrt len)), 0%Z) in
+  map (fun k =>
+         let phase : Z := Z.div (Z.of_nat k * 314%Z) (Z.of_nat len) in
+         let omega_k : complex_approx := (0%Z, phase) in
+         let amp := complex_mult scale omega_k in
+         (amp, k)
+      ) (seq 0 len).
+
+(* Inverse QFT (adjoint of QFT) *)
+Definition inv_qft_amps (n : nat) : list (complex_approx * nat) :=
+  let len := Nat.pow 2 n in
+  let scale : complex_approx := (Z.div 1000 (Z.of_nat (Nat.sqrt len)), 0%Z) in
+  map (fun k =>
+         let phase : Z := Z.div (Z.of_nat k * (-314)%Z) (Z.of_nat len) in
+         let omega_k : complex_approx := (0%Z, phase) in
+         let phased_scale := complex_mult scale omega_k in
+         (phased_scale, k)
+      ) (seq 0 len). 
+
+Definition apply_entanglement (indices : list expr) : cmd :=
+  let ent_mode := Const (mode_to_nat (Ent ([] : list nat))) in
+  fold_right
+    (fun idx acc => Seq (ArrayWrite "q" idx ent_mode) acc)
+    Skip
+    indices.
+
+Definition extract_entangled_qubits (amps : list ((complex_approx )* nat)) : list nat :=
+  map snd amps.
+Compute inv_qft_amps 1.
+Compute hadamard_amps_single 1.
+
+(* Apply quantum operation *)
+Definition apply_quantum_op (op : single_u) (indices : list expr) : cmd :=
+  match op with
+  |RH _ =>
+      fold_right
+        (fun idx acc =>
+           Seq
+             (ArrayWrite "q" idx (Const (mode_to_nat Had)))
+             (Seq
+                (ArrayWrite "amps" idx (Const (encode_amps (hadamard_amps_single 1) op 1)))
+                acc))
+        Skip
+        indices
+
+  | SQFT _ =>
+      let n := length indices in
+      fold_right
+        (fun idx acc =>
+           Seq
+             (ArrayWrite "q" idx (Const (mode_to_nat (Sup (qft_amps n)))))
+             (Seq
+                (ArrayWrite "amps" idx (Const (encode_amps (qft_amps n) op n)))
+                acc))
+        Skip
+        indices
+
+  | SRQFT _ =>
+      let n := length indices in
+      fold_right
+        (fun idx acc =>
+           Seq
+             (ArrayWrite "q" idx (Const (mode_to_nat (Sup (inv_qft_amps n)))))
+             (Seq
+                (ArrayWrite "amps" idx (Const (encode_amps (inv_qft_amps n) op n)))
+                acc))
+        Skip
+        indices
   end.
+
+
 
 (* Compile pexp to array operations *)
 Fixpoint translate_pexp_array (p : pexp) : cmd :=
   match p with
   | PSKIP => Skip
+
   | Let x (AE a) s =>
       Seq (Assign (convert_var x) (translate_aexp a)) (translate_pexp_array s)
+
   | Let x (Meas y) s =>
-      Seq (ArrayWrite "m" (Const 0) (VarExpr (convert_var y)))
-          (Seq (Assign (convert_var x) (VarExpr (convert_var y)))
-               (translate_pexp_array s))
-  | AppSU e => superoperator_mode e
+      let y_var := convert_var y in
+      let y_idx := var_to_index y_var in
+      let aexp_y := AExp (expr_to_aexp (VarExpr y_var)) in
+      Seq
+        (ArrayWrite "q" y_idx (Const (mode_to_nat MT)))
+        (Seq
+           (ArrayWrite "amps" y_idx
+              (Const (encode_amps (hadamard_amps_single 1) (RH aexp_y) 1)))
+           (Seq
+              (Assign (convert_var x) (VarExpr (Array "m" 0)))
+              (translate_pexp_array s)))
+
+  | AppSU e =>
+      match e with
+      | RH p => apply_quantum_op e [varia_to_index p]
+      | SQFT x => apply_quantum_op e [var_to_index (convert_var x)]
+      | SRQFT x => apply_quantum_op e [var_to_index (convert_var x)]
+      end
+
   | AppU l e =>
-      fold_right
-        (fun idx acc => Seq (ArrayWrite "q" (Const idx) (Const 1)) acc)
-        Skip
-        (locus_to_indices l)
+    let mode := mode_to_nat Nor in
+    fold_right
+      (fun idx acc => Seq (ArrayWrite "q" idx (Const mode)) acc)
+      Skip
+      (locus_to_indices_expr l)
+
   | PSeq s1 s2 =>
       Seq (translate_pexp_array s1) (translate_pexp_array s2)
+
   | QafnySyntax.If x s1 =>
       If (translate_bexp x) (translate_pexp_array s1) Skip
+
   | For x l h b p =>
       Seq (Assign (convert_var x) (translate_aexp l))
           (While
@@ -466,45 +659,27 @@ Fixpoint translate_pexp_array (p : pexp) : cmd :=
                  (Seq (translate_pexp_array p)
                       (Assign (convert_var x) (Plus (VarExpr (convert_var x)) (Const 1))))
                  Skip))
+
   | Diffuse x =>
-      ArrayWrite "q" (varia_to_index x) (Const 1)
+      apply_quantum_op (RH x) [varia_to_index x]
   end.
 
-(*
-Fixpoint translate_pexp (p : pexp) : cmd :=
-  match p with
-  | PSKIP => Skip
-  | Let x (AE a) s =>
-      Seq (Assign (convert_var x) (translate_aexp a)) (translate_pexp s)
-  | Let x (Meas y) s =>
-      Seq (Assign (convert_var x) (VarExpr (convert_var y))) (translate_pexp s)
-  | AppSU e => Skip 
-  | AppU l e => Skip 
-  | PSeq s1 s2 =>
-      Seq (translate_pexp s1) (translate_pexp s2)
-  | QafnySyntax.If x s1 =>  
-      If (translate_bexp x) (translate_pexp s1) Skip
-  | For x l h b p =>
-      Seq (Assign (convert_var x) (translate_aexp l)) 
-          (While 
-             (Minus (translate_aexp h) (VarExpr (convert_var x))) 
-             (If (translate_bexp b)  
-                 (Seq (translate_pexp p)
-                      (Assign (convert_var x) (Plus (VarExpr (convert_var x)) (Const 1))))
-                 Skip))  
-  | Diffuse x => Skip 
-  end.
-*)
+Definition test_pexp := AppSU (RH (AExp (Num 0))).
+Compute translate_pexp_array test_pexp.
 
 (* Translate a classical+quantum state into a logical assertion *)
-
 Definition trans_state_elem (se : state_elem) : nat :=
   match se with
   | Nval r b => 1 (* Simplified: non-zero for normal mode *)
   | Hval b => 2   (* Simplified: distinct value for Hadamard mode *)
   | Cval m f => m (* Simplified: use the number of states *)
   end.
-
+Definition trans_state_amps (se : state_elem) : list (complex_approx * nat) :=
+  match se with
+  | Nval r b => [] (* Normal: no amplitude info *)
+  | Hval b => hadamard_amps_single 1
+  | Cval m f => [] (* Classical: assume no amps; or customize *)
+  end.
 Definition var_to_string (v : BasicUtility.var) : string :=
   match v with
   | _ => "default"  
@@ -522,18 +697,22 @@ Definition hoare_triple_sem (P : cpredr) (c : cmd) (Q : cpredr) : Prop :=
     (forall b, In b P -> eval_cbexp s b = true) ->
     exec fuel c s = Some s' ->
     (forall b, In b Q -> eval_cbexp s' b = true).
-
-Fixpoint trans_qpred (env : aenv) (qp : qpred) : cpredr :=
+Fixpoint trans_qpred (env : aenv) (qp :qpred) : cpredr :=
   match qp with
   | (SV l, se) :: rest =>
       match trans_locus l with
       | Some (name, idx) =>
-          [CBArrayEq name (Const idx) (Const (trans_state_elem se))]
-      | None => []
-      end ++ trans_qpred env rest
-  | _ :: rest => trans_qpred env rest
+          let mode := trans_state_elem se in
+          let amps := trans_state_amps se in
+          CBArrayEq name (Const idx) (Const mode)
+          :: CBAmpsEq name (Const idx) amps
+          :: trans_qpred env rest
+      | None => trans_qpred env rest
+      end
+  | (_, _) :: rest => trans_qpred env rest
   | [] => []
   end.
+
 Definition convert_locus_cpred (W : LocusProof.cpred) : cpredr :=
   map (fun _ => CBTrue) W.
 
@@ -803,7 +982,6 @@ admit.
 Admitted.
 
 (* Translation Quantum State to Array *)
-
 Definition trans_qstate (q : qstate) : cpredr :=
   flat_map
     (fun '(l, se) =>
@@ -813,14 +991,12 @@ Definition trans_qstate (q : qstate) : cpredr :=
        | None => []
        end)
     q.
-
 Definition trans_stack (W : stack) : cpredr :=
   flat_map
     (fun '(x, (r, v)) =>
        let name := var_to_string x in
        [CBArrayEq name (Const 0) (Const v)]) (AEnv.elements W).
-
-Definition trans_state (phi : LocusDef.aenv * (stack * qstate)) : cpredr:=
+Definition trans_state (phi : LocusDef.aenv * (stack * qstate)) : cpredr :=
   match phi with
   | (aenv, s) =>
       let (W, q) := s in
@@ -836,10 +1012,6 @@ Proof.
   exists (trans_state (empty_aenv, s)).
   reflexivity.
 Qed.
-
-
-
-
 
 
 
