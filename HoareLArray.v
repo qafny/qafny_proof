@@ -1,3 +1,4 @@
+
 (* Import necessary modules *)
 Require Import String.
 Require Import Nat.
@@ -420,8 +421,86 @@ Theorem hoare_triple_complete :
         exec fuel c s = Some s' ->
         (forall b, In b Q -> eval_cbexp s' b = true)) ->
     hoare_triple P c Q.
+
 Proof.
+
 intros.
+  revert P Q H.
+  induction c; intros P Q H.
+- (* c = Skip *)
+  apply hoare_consequence with (P' := P) (Q' := P).
+  + (* entails P P *) intros s Hpre b Hb. apply Hpre. assumption.
+  + apply skip_rule.
+  + (* entails P Q *) intros s Hpre b Hb.
+    specialize (H 1 s s).
+    assert (exec 1 Skip s = Some s) by reflexivity.
+    apply H. auto. assumption. assumption.
+
+- (* c = Assign v e *)
+  apply hoare_consequence with (P' := subst_assertion P v e) (Q' := P).
+  + (* entails P P' *)
+    intros s Hpre b Hb.
+    unfold subst_assertion in Hb.
+    apply in_map_iff in Hb as [b0 [Hb0_eq Hb0_in]].
+    subst. simpl.
+    apply H with (fuel := 1) (s := s).
+   intros b Hb. apply Hpre. assumption.
+    simpl. 
+ admit. admit.
++  apply assign_rule.
++ intros s Hpre b Hb.
+specialize (H 1 s s Hpre).
+simpl in H.
+destruct (eval e s) eqn:Heval.
+apply Hpre. 
+ admit. apply Hpre.
+ simpl in H.  admit.
+
+- (* c = ArrayWrite *)
+apply hoare_consequence with
+  (P' := subst_assertion_array Q name index value)
+  (Q' := Q).
+admit. admit. admit.
+- (* c = Seq c1 c2 *)
+  specialize (IHc1 P).
+  assert (Hexists : exists R, hoare_triple P c1 R /\ forall fuel s s',
+    (forall b, In b R -> eval_cbexp s b = true) ->
+    exec fuel c2 s = Some s' ->
+    (forall b, In b Q -> eval_cbexp s' b = true)).
+  (* Construct R as intermediate postcondition of c1 *)
+exists Q. (* use Q itself as the intermediate postcondition *)
+split.    remember
+      (fun fuel s s' =>
+        (forall b, In b P -> eval_cbexp s b = true) ->
+        exec fuel (Seq c1 c2) s = Some s' ->
+        (forall b, In b Q -> eval_cbexp s' b = true)) as SemSeq.
+(* hoare_triple P c1 Q *)
+  apply IHc1.
+  intros fuel s s' Hpre Hexec1.
+  (* Now simulate Seq step to get to s' *)
+  specialize (H fuel s s').
+  intros b Hb.
+  apply H; auto.
+  simpl.  admit.
+ intros fuel s s' Hpre Hexec b Hb.
+admit. admit.
+ - (* If b c1 c2 *)
+    apply hoare_if.
+    + apply IHc1.
+      intros fuel s s' Hpre Hexec.
+intros b0 Hb.
+specialize (H fuel s s' Hpre).
+
+(* analyze eval b s to reconstruct If execution *)
+destruct (eval b s) eqn:Heval.
+ destruct (Nat.eqb n 0) eqn:Hn.
+admit. admit. admit.
++ apply IHc2.
+intros fuel s s' Hpre Hexec2.
+specialize (H fuel s s' Hpre).
+admit.
+  - (* While *)
+  admit.
 Admitted.
 
 Definition convert_vart (v : BasicUtility.var) : var := Scalar "default".
@@ -738,6 +817,9 @@ intros rmax t env T e c P' Q' Htrans Hhoare.
     inversion Hhoare; subst.
 +
 Admitted.
+Print triple.
+
+
 Theorem quantum_to_classical_soundness_1:
   forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
          (e : pexp) (P' Q' : cpredr),
@@ -748,8 +830,13 @@ Theorem quantum_to_classical_soundness_1:
       Q' = trans env W' Q /\
       hoare_triple P' c Q'.
 Proof.
-intros.
--
+  induction e; simpl; intros H.
+ - intros Q'.
+exists [], [], [], [], Skip.
+repeat split.
+apply skip_pf. (* triple t env T ([], []) PSKIP ([], []) *)
+simpl in *.
+
 Admitted.
 
 Lemma type_check_proof_fixed :
@@ -891,6 +978,22 @@ Proof.
   subst Q.
   assumption.
 Qed.
+
+Lemma eval_cbexp_after_arraywrite :
+  forall fuel s s' x i v,
+    exec fuel (ArrayWrite x (Const i) (Const v)) s = Some s' ->
+    eval_cbexp s' (CBArrayEq x (Const i) (Const v)) = true.
+Proof.
+  intros fuel s s' x i v Hexec.
+  remember (ArrayWrite x (Const i) (Const v)) as cmd.
+  induction fuel as [|fuel' IH] in s, s', x, i, v, Hexec |- *.
+  - simpl in Hexec. discriminate.
+  - simpl in Hexec.
+    destruct s.
+    simpl in Hexec.
+    unfold eval_cbexp.
+    simpl.
+Admitted.
 Theorem quantum_to_classical_soundness :
   forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
          (W : LocusProof.cpred) (P : qpred)
@@ -964,10 +1067,8 @@ admit.
 
 intros Hrun HIn.
 simpl in Hrun.
-
 repeat intros HInT.
   unfold exec in Hrun.
-
 
 admit.
 
@@ -977,7 +1078,187 @@ intros Hrun.
 destruct fuel as [|fuel']; [discriminate Hrun |].
 
 admit.
+- (* let_q_pf *)
+intros Hrun b0 HIn.
+inversion Hrun; subst.
+rewrite <- (Hexec b0); auto.
+inversion Hrun; subst. 
++ destruct fuel; [discriminate Hrun |].
+inversion Hrun; subst. admit.
++ assert (W = W' /\ P = Q) as [HeqW HeqP].
 
+{ 
+ inversion Htype; subst.
+split.
+
+}
+
+subst W'. subst P.
+exact HIn .
+
+- (* Case: appu_nor_pf *)
+intros Hrun b0 HIn.
+inversion Hrun; subst.
+rewrite <- (Hexec b0); auto.
+inversion Hrun; subst. 
++ destruct fuel; [discriminate Hrun |].
+inversion Hrun; subst.  
+admit. 
++ assert (W = W' /\ P = Q) as [HeqW HeqP].
+
+{ 
+ inversion Htype; subst.
+split.
+
+}
+
+subst W'. subst P.
+exact HIn .
+
+- (* Case: appu_ch_pf *)
+intros Hrun b0 HIn.
+inversion Hrun; subst.
+rewrite <- (Hexec b0); auto.
+inversion Hrun; subst. 
++ destruct fuel; [discriminate Hrun |].
+inversion Hrun; subst.  
+admit. 
++ assert (W = W' /\ P = Q) as [HeqW HeqP].
+
+{ 
+ inversion Htype; subst.
+split.
+
+}
+
+subst W'. subst P.
+exact HIn .
+- (* Case: apph_nor_pf *)
+intros Hrun b0 HIn.
+inversion Hrun; subst.
+rewrite <- (Hexec b0); auto.
+inversion Hrun; subst. 
++ destruct fuel; [discriminate Hrun |].
+inversion Hrun; subst.  
+admit. 
++ assert (W = W' /\ P = Q) as [HeqW HeqP].
+
+{ 
+ inversion Htype; subst.
+split.
+
+}
+
+subst W'. subst P.
+exact HIn .
+-(* Case: apph_had_pf *)
+intros Hrun b0 HIn.
+inversion Hrun; subst.
+rewrite <- (Hexec b0); auto.
+inversion Hrun; subst. 
++ destruct fuel; [discriminate Hrun |].
+inversion Hrun; subst.  
+admit. 
++ assert (W = W' /\ P = Q) as [HeqW HeqP].
+
+{ 
+ inversion Htype; subst.
+split.
+
+}
+
+subst W'. subst P.
+exact HIn .
+- (* Case: if_c_t *)
+intros Hrun b0 HIn.
+inversion Hrun; subst.
+rewrite <- (Hexec b0); auto.
+inversion Hrun; subst. 
++ destruct fuel; [discriminate Hrun |].
+inversion Hrun; subst.  
+admit. 
++ assert (W = W' /\ P = Q) as [HeqW HeqP].
+
+{ 
+ inversion Htype; subst.
+split.
+
+}
+
+subst W'. subst P.
+exact HIn .
+- (* Case: if_c_f *)
+intros Hrun b0 HIn.
+inversion Hrun; subst.
+rewrite <- (Hexec b0); auto.
+inversion Hrun; subst. 
++ destruct fuel; [discriminate Hrun |].
+inversion Hrun; subst.  
+admit. 
++ assert (W = W' /\ P = Q) as [HeqW HeqP].
+
+{ 
+ inversion Htype; subst.
+split.
+
+}
+
+subst W'. subst P.
+exact HIn .
+- (* Case: if_q *)
+intros Hrun b0 HIn.
+inversion Hrun; subst.
+rewrite <- (Hexec b0); auto.
+inversion Hrun; subst. 
++ destruct fuel; [discriminate Hrun |].
+inversion Hrun; subst.  
+admit. 
++ assert (W = W' /\ P = Q) as [HeqW HeqP].
+
+{ 
+ inversion Htype; subst.
+split.
+
+}
+
+subst W'. subst P.
+exact HIn .
+- (* for_pf_f *)
+intros Hrun b0 HIn.
+inversion Hrun; subst.
+rewrite <- (Hexec b0); auto.
+inversion Hrun; subst. 
++ destruct fuel; [discriminate Hrun |].
+inversion Hrun; subst.  
+admit. 
++ assert (W = W' /\ P = Q) as [HeqW HeqP].
+
+{ 
+ inversion Htype; subst.
+split.
+
+}
+
+subst W'. subst P.
+exact HIn .
+- (* for_pf *)
+intros Hrun b0 HIn.
+inversion Hrun; subst.
+rewrite <- (Hexec b0); auto.
+inversion Hrun; subst. 
++ destruct fuel; [discriminate Hrun |].
+inversion Hrun; subst.  
+admit. 
++ assert (W = W' /\ P = Q) as [HeqW HeqP].
+
+{ 
+ inversion Htype; subst.
+split.
+
+}
+
+subst W'. subst P.
+exact HIn .
 
 Admitted.
 
