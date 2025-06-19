@@ -1163,14 +1163,13 @@ Admitted.
 (* Define model semantics for cpredr *)
 Definition set (A : Type) := A -> Prop.
 
-
 Definition model (P : cpredr) (s : state) : Prop :=
   forall b, In b P -> eval_cbexp s b = true.
 
 Definition Mod (P : cpredr) : set state :=
   fun s => model P s.
 
-(* Theorem: If s is a model of P, then s satisfies all assertions in P *)
+(* If s is a model of P, then s satisfies all assertions in P *)
 Theorem model_satisfies_all : forall P s b,
   model P s -> In b P -> eval_cbexp s b = true.
 Proof.
