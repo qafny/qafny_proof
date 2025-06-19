@@ -412,6 +412,8 @@ Proof.
   intros.
   apply hoare_consequence with (P' := subst_assertion P v e) (Q' := Q); assumption.
 Qed.
+Definition update_state (s : state) (x : var) (v : nat * list (complex_approx * nat)) : state :=
+  fun y => if eqb_var x y then Some v else s y.
 
 (* hoare_triple completeness*)
 Theorem hoare_triple_complete :
@@ -435,7 +437,24 @@ intros.
     specialize (H 1 s s).
     assert (exec 1 Skip s = Some s) by reflexivity.
     apply H. auto. assumption. assumption.
-
+(*
+- (* Assign *)
+  apply hoare_consequence with (P' := subst_assertion Q v e) (Q' := Q).
+  + (* entails (subst Q v e) P *)
+    intros s Hsubst b Hb.
+    unfold subst_assertion in Hb.
+    apply in_map_iff in Hb as [b0 [Hb_eq Hb_in_Q]].
+    subst.
+    apply H with (fuel := 1) (s := s).
+    * intros b Hb_in_P.
+      exact (Hsubst b Hb_in_P).
+   (* We must show b ∈ P, but we only have b0 ∈ Q. So this assumption is misplaced. *)
+      admit. (* You would need to strengthen H to handle the substitution *)
+    * simpl. reflexivity.
+    * exact Hb_in_Q.
+  + apply assign_rule.
+  + (* entails Q Q *) intros s Hpre b Hb. apply Hpre, Hb.
+*)
 - (* c = Assign v e *)
   apply hoare_consequence with (P' := subst_assertion P v e) (Q' := P).
   + (* entails P P' *)
@@ -500,6 +519,11 @@ intros fuel s s' Hpre Hexec2.
 specialize (H fuel s s' Hpre).
 admit.
   - (* While *)
+  apply hoare_consequence with (P' := P) (Q' := P).
+  + unfold entails; intros s Hpre b0 Hb0. apply Hpre, Hb0.
+  + apply hoare_while.
+    apply IHc.
+    intros fuel s s' Hpre Hexec.
   admit.
 Admitted.
 
@@ -818,6 +842,22 @@ intros rmax t env T e c P' Q' Htrans Hhoare.
 +
 Admitted.
 Print triple.
+Lemma entails_by_subset :
+  forall P Q : list cbexpr,
+    (forall b, In b Q -> In b P) ->
+    entails P Q.
+Proof.
+  unfold entails.
+  intros P Q Hsubset s Hpre b HbQ.
+  apply Hpre, Hsubset, HbQ.
+Qed.
+Axiom trans_empty_eq :
+
+  forall (env : aenv) (H : cpredr),
+
+    H = trans env [] [].
+Axiom hoare_triple_empty :
+  forall (c : cmd), hoare_triple ([] : list cbexpr) c ([] : list cbexpr).
 
 
 Theorem quantum_to_classical_soundness_1:
@@ -829,13 +869,138 @@ Theorem quantum_to_classical_soundness_1:
       P' = trans env W P /\
       Q' = trans env W' Q /\
       hoare_triple P' c Q'.
+
 Proof.
   induction e; simpl; intros H.
- - intros Q'.
+
+  - (* PSKIP *)
+ intros Q'.
 exists [], [], [], [], Skip.
 repeat split.
 apply skip_pf. (* triple t env T ([], []) PSKIP ([], []) *)
 simpl in *.
++ apply trans_empty_eq.
++ apply trans_empty_eq.
++apply hoare_consequence with (P' := H) (Q' := H).
+ unfold entails; intros s Hpre b Hb. apply Hpre, Hb.
+ apply skip_rule.
+(* entails H Q' *) unfold entails; intros s Hpre b Hb.
+apply Hpre.
+admit.
+- (* Case n = AE a *)
+intros Q'.
+destruct n.
+  destruct (IHe H Q') as [W [W' [P [Q [c [Hc [Htriple [HPtrans [HQtrans Hht]]]]]]]]].
+  exists W, W', P, Q.
+  + exists (Seq (Assign (convert_var x) (translate_aexp n)) c).
+repeat split.
+   rewrite Hc. reflexivity.
+admit. admit. admit. admit.
++ admit.
+-(* *)
+ exists [], [], [], [].
+(* Step 1: define c based on e *)
+set (c := match e with
+          | RH p => apply_quantum_op e [varia_to_index p]
+          | _ => apply_quantum_op e [VarExpr (Scalar "default")]
+          end).
+
+(* Step 2: now provide c as the witness for the existential *)
+exists c.
+(* Step 3: split and prove each conjunct *)
+repeat split.
++ admit.
++ apply trans_empty_eq.
++ apply trans_empty_eq.
++ apply hoare_triple_complete.
+intros fuel s s' Hpre Hexec b Hb.
+assert (s = s') as Hsame.
+{
+  inversion Hexec.
+}
+subst s.
+apply Hpre.
+admit.
+- (* *)
+intros Q'.
+
+(* Explicitly typed predicate lists *)
+set (W := cpred).
+set (W' :=  cpred).
+set (P := qpred).
+set (Q := qpred).
+
+
+(* Command construction *)
+set (c := fold_right (fun (idx : expr) (acc : cmd) => Seq (ArrayWrite "q" idx (Const 2)) acc) Skip
+           (locus_to_indices_expr l)).
+
+(* Construct existential witnesses *)
+ exists [], [], [], [].
+exists c.
+repeat split.
+admit.
++ apply trans_empty_eq.
++ apply trans_empty_eq.
++ apply hoare_triple_complete.
+intros fuel s s' Hpre Hexec b Hb.
+assert (s = s') as Hsame.
+{
+  inversion Hexec.
+}
+subst s.
+apply Hpre.
+admit.
+- (* *)
+intros Q'.
+
+(* Step 1: Use IHe1 to decompose e1 *)
+specialize (IHe1 H).
+(* Step 1: Use IHe1 to get first Hoare triple *)
+destruct (IHe1 H) as
+  [W1 [W1' [P1 [Q1 [c1 [Hc1 [Htr1 [Htrans1 [HQ1' Hhoare1]]]]]]]]].
+(* Use IHe2 on the post-Hoare condition from e1 *)
+destruct (IHe2 H Q') as
+  [W2 [W2' [P2 [Q2 [c2 [Hc2 [Htr2 [Htrans2 [HQ' Hhoare2]]]]]]]]].
+(*
+(* Construct composed command *)
+set (c := Seq c1 c2).
+set (W := W1).
+set (W' := W2').
+set (P := P1).
+set (Q := Q2).
+(* Prove everything *)
+exists W, W', P, Q, c.
+repeat split.
+*subst c. rewrite Hc1, Hc2. reflexivity.
+* admit.
+
+*apply seq_pf with
+  (T1 := T)     (* first type_map *)
+  (T2 := T)     (* second type_map *)
+  (R := (W1', Q1)).
+
+  + exact Htr1.
+  + exact Htr2.
+*)
+
+admit.
+- (* *)
+intros Q'.
+
+(* Use IHe with pre = H to get post Q1' *)
+destruct (IHe H Q') as
+  [W [W' [P [Q [c1 [Hc1 [Htr [Htrans [HQ' Hhoare]]]]]]]]].
+
+(* Construct translated command for If *)
+set (c := If (translate_bexp x) c1 Skip).
+
+admit.
+- (* *)
+admit.
+- (* *)
+admit.
+
 
 Admitted.
 
@@ -883,7 +1048,6 @@ Lemma type_check_proof_invariant :
 Proof.
   intros rmax q env T T1 W P W' Q e Htype Heq. subst. assumption.
 Qed.
-
 Lemma exec_skip_correct :
   forall fuel s s',
     exec fuel Skip s = Some s' ->
@@ -994,6 +1158,54 @@ Proof.
     unfold eval_cbexp.
     simpl.
 Admitted.
+
+
+(* Define model semantics for cpredr *)
+Definition set (A : Type) := A -> Prop.
+
+
+Definition model (P : cpredr) (s : state) : Prop :=
+  forall b, In b P -> eval_cbexp s b = true.
+
+Definition Mod (P : cpredr) : set state :=
+  fun s => model P s.
+
+(* Theorem: If s is a model of P, then s satisfies all assertions in P *)
+Theorem model_satisfies_all : forall P s b,
+  model P s -> In b P -> eval_cbexp s b = true.
+Proof.
+  intros P s b Hmodel Hb.
+  apply Hmodel; assumption.
+Qed.
+
+(* If s' ∈ Mod(Q'), then Q' holds in state s' *)
+Theorem in_mod_implies_eval : forall Q' s',
+  Mod Q' s' -> forall b, In b Q' -> eval_cbexp s' b = true.
+Proof.
+  unfold Mod, model. intros. apply H; assumption.
+Qed.
+
+(* === Qafny to Hoare Logic Compilation Soundness === *)
+Theorem quantum_to_classical_soundness :
+  forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
+         (W W' : LocusProof.cpred) (P Q : qpred)
+         (e : pexp)
+         (φ φ' : state) (fuel : nat),
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W, P) e (W', Q) ->
+    let c := translate_pexp_array e in
+    let P' := trans env W P in
+    let Q' := trans env W' Q in
+    model P' φ ->
+    exec fuel c φ = Some φ' ->
+    model Q' φ'.
+
+Proof.
+
+Admitted.
+
+
+(*
 Theorem quantum_to_classical_soundness :
   forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
          (W : LocusProof.cpred) (P : qpred)
@@ -1261,6 +1473,8 @@ subst W'. subst P.
 exact HIn .
 
 Admitted.
+
+*)
 
 (* Translation Quantum State to Array *)
 Definition trans_qstate (q : qstate) : cpredr :=
