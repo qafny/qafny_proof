@@ -39,6 +39,8 @@ Require Import Coq.Logic.FunctionalExtensionality.
 Require Import Coq.Logic.Classical_Prop.
 Import LocusProof.
 Require Import ZArith.
+Require Import List.
+Import ListNotations.
 (* Define variables and arrays *)
 Inductive var := 
   | Scalar (name : string) (* Scalar variable *)
@@ -437,24 +439,7 @@ intros.
     specialize (H 1 s s).
     assert (exec 1 Skip s = Some s) by reflexivity.
     apply H. auto. assumption. assumption.
-(*
-- (* Assign *)
-  apply hoare_consequence with (P' := subst_assertion Q v e) (Q' := Q).
-  + (* entails (subst Q v e) P *)
-    intros s Hsubst b Hb.
-    unfold subst_assertion in Hb.
-    apply in_map_iff in Hb as [b0 [Hb_eq Hb_in_Q]].
-    subst.
-    apply H with (fuel := 1) (s := s).
-    * intros b Hb_in_P.
-      exact (Hsubst b Hb_in_P).
-   (* We must show b ∈ P, but we only have b0 ∈ Q. So this assumption is misplaced. *)
-      admit. (* You would need to strengthen H to handle the substitution *)
-    * simpl. reflexivity.
-    * exact Hb_in_Q.
-  + apply assign_rule.
-  + (* entails Q Q *) intros s Hpre b Hb. apply Hpre, Hb.
-*)
+
 - (* c = Assign v e *)
   apply hoare_consequence with (P' := subst_assertion P v e) (Q' := P).
   + (* entails P P' *)
@@ -711,6 +696,198 @@ Definition apply_quantum_op (op : single_u) (indices : list expr) : cmd :=
         indices
   end.
 
+(*  Intermediate Representation Operations *)
+Inductive ir_op :=
+  | IRCast (name : string) (idx : expr) (tgt_mode : mode)
+      (* Casts the mode of q[name][idx] to tgt_mode *)
+  | IRLocate (name : string) (indices : list expr)
+      (* Marks the locations of qubits in array q[name][i] *)
+  | IRMap (name : string) (f : expr -> expr)
+      (* Applies f to every element q[name][i] *)
+  | IRTypeUpdate (name : string) (idx : expr) (m : nat)
+      (* Updates the type at q[name][idx] to m *)
+  | IRAmpModify (name : string) (idx : expr) (amp : complex_approx)
+      (* Multiplies amplitudes of q[name][idx] by amp *)
+  | IRPartialMap (name : string) (f : expr -> expr) (cond : expr)
+      (* Applies f to q[name][i] where cond(i) = true *)
+  | IRJoin (name : string) (idx : expr) (locus : list expr)
+      (* Joins q[name][idx] to a locus of indices *)
+  | IRDelete (name : string) (cond : expr -> bool)
+      (* Deletes elements q[name][i] where cond(i) = true *)
+  | IRSumAmplitudes (name : string) (indices : list expr) (result : var)
+      (* Sums squared amplitude magnitudes of q[name][i] for given indices into result *)
+  | IRCopy (src_name : string) (src_idx : expr) (dst_name : string) (dst_idx : expr)
+      (* Copies q[src_name][src_idx] into q[dst_name][dst_idx] *)
+  | IRMerge (name : string) (idx1 idx2 tgt_idx : expr).
+      (* Merges q[name][idx1] and q[name][idx2] into q[name][tgt_idx] *)
+
+(* Hoare Logic Rules for Intermediate Representation Operations *)
+Inductive hoare_ir : cpredr -> ir_op -> cpredr -> Prop :=
+  | hoare_ir_cast : forall P name idx tgt_mode,
+      hoare_ir (CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: P)
+               (IRCast name idx tgt_mode)
+               (CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: P)
+  | hoare_ir_locate : forall P name indices,
+      hoare_ir P (IRLocate name indices) P
+  | hoare_ir_typeupdate : forall P name idx m,
+      hoare_ir (CBArrayEq name idx (Const m) :: P)
+               (IRTypeUpdate name idx m)
+               (CBArrayEq name idx (Const m) :: P)
+  | hoare_ir_ampmodify : forall P name idx amp,
+      forall amps',
+        hoare_ir (CBAmpsEq name idx amps' :: P)
+                 (IRAmpModify name idx amp)
+                 (CBAmpsEq name idx (map (fun '(c,n) => (complex_mult amp c, n)) amps') :: P)
+  | hoare_ir_map : forall P name f,
+      hoare_ir P (IRMap name f) P
+  | hoare_ir_partialmap : forall P name f cond,
+      hoare_ir P (IRPartialMap name f cond) P
+  | hoare_ir_join : forall P name idx loc,
+      hoare_ir P (IRJoin name idx loc) P
+  | hoare_ir_delete : forall P name cond,
+      hoare_ir P (IRDelete name cond) P
+  | hoare_ir_sum : forall P name indices v,
+      hoare_ir P (IRSumAmplitudes name indices v) (CBVar v :: P)
+  | hoare_ir_copy : forall P src_name src_idx dst_name dst_idx,
+      hoare_ir (CBArrayEq dst_name dst_idx (Const 0) :: P)
+               (IRCopy src_name src_idx dst_name dst_idx)
+               (CBArrayEq dst_name dst_idx (Const 0) :: P)
+  | hoare_ir_merge : forall P name idx1 idx2 tgt_idx,
+      hoare_ir P (IRMerge name idx1 idx2 tgt_idx) P.
+
+(* execution semantics for Intermediate Representation Operations *)
+Fixpoint exec_ir (fuel : nat) (ir : ir_op) (s : state) : option state :=
+  match fuel with
+  | 0 => None
+  | S fuel' =>
+      match ir with
+      | IRCast name idx tgt_mode =>
+          match eval idx s with
+          | Some i =>
+              let new_mode := mode_to_nat tgt_mode in
+              Some (fun x =>
+                if eqb_var x (Array name i)
+                then match s (Array name i) with
+                     | Some (_, amps) => Some (new_mode, amps)
+                     | None => Some (new_mode, [])
+                     end
+                else s x)
+          | None => None
+          end
+      | IRLocate _ _ => Some s
+      | IRMap name f =>
+          Some (fun x =>
+            match x with
+            | Array n i =>
+                if String.eqb n name
+                then match eval (f (Const i)) s with
+                     | Some v =>
+                         match s x with
+                         | Some (_, amps) => Some (v, amps)
+                         | None => Some (v, [])
+                         end
+                     | None => s x
+                     end
+                else s x
+            | _ => s x
+            end)
+      | IRTypeUpdate name idx m =>
+          match eval idx s with
+          | Some i =>
+              Some (fun x =>
+                if eqb_var x (Array name i)
+                then match s (Array name i) with
+                     | Some (_, amps) => Some (m, amps)
+                     | None => Some (m, [])
+                     end
+                else s x)
+          | None => None
+          end
+      | IRAmpModify name idx amp =>
+          match eval idx s with
+          | Some i =>
+              match s (Array name i) with
+              | Some (v, amps) =>
+                  let new_amps := map (fun '(c, n) => (complex_mult amp c, n)) amps in
+                  Some (update_state s (Array name i) (v, new_amps))
+              | None => None
+              end
+          | None => None
+          end
+      | IRPartialMap name f cond =>
+          match eval cond s with
+          | Some n =>
+              if Nat.eqb n 0 then Some s
+              else exec_ir fuel' (IRMap name f) s
+          | None => None
+          end
+      | IRJoin name idx locus =>
+          let loc_vals := map (fun e => eval e s) locus in
+          match eval idx s with
+          | Some i =>
+              if existsb (fun x => match x with None => true | _ => false end) loc_vals
+              then None
+              else
+                let indices := map (fun x => match x with Some n => n | None => 0 end) loc_vals in
+                Some (fun x =>
+                  if eqb_var x (Array name i)
+                  then Some (mode_to_nat (Ent indices), [])
+                  else s x)
+          | None => None
+          end
+      | IRDelete name cond =>
+          Some (fun x =>
+            match x with
+            | Array n i =>
+                if andb (String.eqb n name) (cond (Const i))
+                then None
+                else s x
+            | _ => s x
+            end)
+      | IRSumAmplitudes name indices result =>
+          let index_vals := map (fun e => eval e s) indices in
+          if existsb (fun x => match x with None => true | _ => false end) index_vals
+          then None
+          else
+            let sum :=
+              fold_left
+                (fun acc opt_i =>
+                   match opt_i with
+                   | Some i =>
+                       match s (Array name i) with
+                       | Some (_, amps) =>
+                           fold_left
+                             (fun acc' '(c, _) =>
+                                let '(r, im) := c in
+                                acc' + Z.to_nat (r * r + im * im)%Z)
+                             amps acc
+                       | None => acc
+                       end
+                   | None => acc
+                   end)
+                index_vals 0 in
+            Some (update_state s result (sum, []))
+      | IRCopy src_name src_idx dst_name dst_idx =>
+          match eval src_idx s, eval dst_idx s with
+          | Some si, Some di =>
+              match s (Array src_name si) with
+              | Some val => Some (update_state s (Array dst_name di) val)
+              | None => None
+              end
+          | _, _ => None
+          end
+      | IRMerge name idx1 idx2 tgt_idx =>
+          match eval idx1 s, eval idx2 s, eval tgt_idx s with
+          | Some i1, Some i2, Some ti =>
+              match s (Array name i1), s (Array name i2) with
+              | Some (v1, _), Some (v2, _) =>
+                  Some (update_state s (Array name ti) (v1 + v2, []))
+              | _, _ => None
+              end
+          | _, _, _ => None
+          end
+      end
+  end.
 
 
 (* Compile pexp to array operations *)
@@ -1200,7 +1377,28 @@ Theorem quantum_to_classical_soundness :
     model Q' φ'.
 
 Proof.
+  intros rmax t env T W W' P Q e φ φ' fuel Htype Htriple c P' Q' Hmodel Hexec.
+  subst c P' Q'.
+  induction e; simpl in Hexec; simpl in *; subst.
+  - (* Case 1: PSKIP *)
+inversion Htype; subst. (* Extract typing info *)
+    inversion Htriple; subst. (* Extract triple info *)
+    apply exec_skip_correct in Hexec; subst φ'. (* exec fuel Skip φ = Some φ *)
+    (* Since PSKIP preserves state and W' = W, Q = P (via skip_pf) *)
+    unfold model in *.
+   intros b Hb.
++ admit.
++ admit.
++ admit.
++ admit.
 
+    - (* Case 2: Let x (AE a) s *)
+ inversion Htype; subst. (* Extract typing info, get W1, P1, W', Q *)
+admit.
+
+   - (* Case 3: Let x (Meas y) s *)
+ inversion Htype; subst.
+    inversion Htriple; subst.
 Admitted.
 
 
