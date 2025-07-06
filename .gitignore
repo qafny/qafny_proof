@@ -2,3 +2,10 @@
 .nia.cache
 .nra.cache
 .CoqMakefile.d
+*.aux
+*.glob
+*.vo
+*.vok
+*.vos
+CoqMakefile
+CoqMakefile.conf
