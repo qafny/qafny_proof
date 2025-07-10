@@ -66,6 +66,11 @@ Definition complex_approxt_eq (c1 c2 : complex_approx) : bool :=
   let (r1, i1) := c1 in
   let (r2, i2) := c2 in
   andb (Z.eqb r1 r2) (Z.eqb i1 i2).
+(*Normalized Complex Numbers: *)
+Definition normalize_complex (c : complex_approx) : complex_approx :=
+  let (r, i) := c in
+  let norm := Z.sqrt (r * r + i * i) in
+  if Z.eqb norm 0 then (0, 0)%Z else (Z.div r norm, Z.div i norm)%Z.
 (* Complex number addition *)
 Definition complex_add (c1 c2 : complex_approx) : complex_approx :=
   let (r1, i1) := c1 in
@@ -889,6 +894,118 @@ Fixpoint exec_ir (fuel : nat) (ir : ir_op) (s : state) : option state :=
       end
   end.
 
+Fixpoint compile_pexp_to_ir (p : pexp) : list ir_op :=
+  match p with
+  | PSKIP => []
+
+  | Let x (AE a) s =>
+      IRCopy "temp" (translate_aexp a) "q" (Const 0)
+        :: compile_pexp_to_ir s
+
+  | Let x (Meas y) s =>
+      let y_idx := var_to_index (convert_var y) in
+      IRLocate "q" [y_idx] ::
+      IRTypeUpdate "q" y_idx (mode_to_nat MT) ::
+      IRSumAmplitudes "q" [y_idx] (convert_var x)
+        :: compile_pexp_to_ir s
+
+  | AppSU (RH p) =>
+  let idx := varia_to_index p in
+  match hadamard_amps_single 1 with
+  | (c, _) :: _ =>
+      IRCast "q" idx Had ::
+      IRAmpModify "amps" idx c ::
+      nil
+  | [] =>
+      IRCast "q" idx Had ::
+      nil
+   end
+
+  | AppSU (SQFT x) =>
+  let idx := var_to_index (convert_var x) in
+  let amps := qft_amps 1 in
+  match amps with
+  | (c, _) :: _ =>
+      IRCast "q" idx (Sup amps) ::
+      IRAmpModify "amps" idx c ::
+      nil
+  | [] =>
+      IRCast "q" idx (Sup nil) ::
+      nil
+  end
+
+  | AppSU (SRQFT x) =>
+  let idx := var_to_index (convert_var x) in
+  let amps := inv_qft_amps 1 in
+  match amps with
+  | (c, _) :: _ =>
+      IRCast "q" idx (Sup amps) ::
+      IRAmpModify "amps" idx c ::
+      nil
+  | [] =>
+      IRCast "q" idx (Sup nil) ::
+      nil
+  end
+
+  | AppU l e =>
+  let indices := locus_to_indices_expr l in
+  match indices with
+  | idx1 :: idxs =>
+      if String.eqb "e" "CNOT"
+      then
+        IRJoin "q" idx1 idxs ::
+        IRAmpModify "amps" idx1 (1%Z, 0%Z) ::
+        nil
+      else
+        IRJoin "q" idx1 idxs ::
+        nil
+  | _ => nil
+  end
+
+  | PSeq s1 s2 =>
+      compile_pexp_to_ir s1 ++ compile_pexp_to_ir s2
+
+  | QafnySyntax.If x s1 =>
+      let cond := translate_bexp x in
+      let s1_ir := compile_pexp_to_ir s1 in
+      map (fun ir =>
+             match ir with
+             | IRPartialMap name f cond' =>
+                 IRPartialMap name f (Plus cond cond') (* combine conditions *)
+             | _ => ir
+             end) s1_ir
+
+  | For x l h b p =>
+    let x_var := convert_var x in
+    let idx := var_to_index x_var in
+    let l' := translate_aexp l in
+    let h' := translate_aexp h in
+    let lo := safe_eval l' (fun _ => None) in
+    let hi := safe_eval h' (fun _ => None) in
+    let range := seq lo (hi - lo) in
+    flat_map
+      (fun i =>
+         let s := fun _ => Some (i, []) in
+         let cond_val := safe_eval (translate_bexp b) s in
+         if Nat.eqb cond_val 0 then []
+         else
+           let cond_expr := translate_cbexp (CBArrayEq "q" (VarExpr x_var) (Const i)) in
+           let p_ir := compile_pexp_to_ir p in
+           map (fun ir =>
+                  match ir with
+                  | IRPartialMap name f cond' =>
+                      IRPartialMap name f (Plus cond_expr cond')
+                  | _ =>
+                      IRPartialMap "q" (fun e => e) cond_expr
+                  end) p_ir)
+      range
+
+  | Diffuse x =>
+  let idx := varia_to_index x in
+  IRLocate "q" [idx] ::
+  IRAmpModify "amps" idx (1%Z, 0%Z) ::
+  nil
+  end.
 
 (* Compile pexp to array operations *)
 Fixpoint translate_pexp_array (p : pexp) : cmd :=
