@@ -894,6 +894,7 @@ Fixpoint exec_ir (fuel : nat) (ir : ir_op) (s : state) : option state :=
       end
   end.
 
+(* Mapping from qafny to IR *)
 Fixpoint compile_pexp_to_ir (p : pexp) : list ir_op :=
   match p with
   | PSKIP => []
