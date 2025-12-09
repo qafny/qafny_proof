@@ -1008,6 +1008,242 @@ Fixpoint compile_pexp_to_ir (p : pexp) : list ir_op :=
   nil
   end.
 
+(* A single cbexpr holds in state s *)
+Definition eval_pred (p : cbexpr) (s : state) : Prop :=
+  eval_cbexp s p = true.
+
+(* A cpredr (list of cbexpr) holds in state s *)
+Definition sat (P : cpredr) (s : state) : Prop :=
+  List.Forall (fun p => eval_pred p s) P.
+
+(* Semantic meaning of an IR triple wrt exec_ir *)
+Definition hoare_ir_sem (P : cpredr) (op : ir_op) (Q : cpredr) : Prop :=
+  forall fuel s s',
+    exec_ir fuel op s = Some s' ->
+    sat P s ->
+    sat Q s'.
+
+
+
+Lemma hoare_ir_locate_sound :
+  forall P name indices,
+    hoare_ir_sem P (IRLocate name indices) P.
+Proof.
+  unfold hoare_ir_sem, sat, eval_pred.
+  intros P name indices fuel s s' Hexec Hsat.
+  destruct fuel as [|fuel']; simpl in Hexec; try discriminate.
+  inversion Hexec; subst s'; assumption.
+Qed.
+
+
+Lemma hoare_ir_cast_sound :
+  forall P name idx tgt_mode,
+    hoare_ir_sem
+      (CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: P)
+      (IRCast name idx tgt_mode)
+      (CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: P).
+Proof.
+  unfold hoare_ir_sem, sat, eval_pred.
+  intros P name idx tgt_mode fuel s s' Hexec Hsat.
+  destruct fuel as [|fuel']; simpl in Hexec; try discriminate.
+  destruct (eval idx s) as [i|] eqn:Heval; try discriminate.
+  simpl in Hexec.
+  inversion Hexec; subst s'; clear Hexec.
+
+  inversion Hsat as [|p Ps Hhead Htail]; subst; clear Hsat.
+
+  simpl.
+    admit.
+Admitted.
+
+
+Lemma hoare_ir1_ampmodify :
+  forall P name idx amp amps_old,
+    hoare_ir
+      (CBAmpsEq name idx amps_old :: P)
+      (IRAmpModify name idx amp)
+      (CBAmpsEq name idx (map (fun '(c,n) => (complex_mult amp c, n)) amps_old) :: P).
+Proof.
+Admitted.
+
+
+
+Lemma hoare_ir_typeupdate_sound :
+  forall P name idx m,
+    hoare_ir_sem
+      (CBArrayEq name idx (Const m) :: P)
+      (IRTypeUpdate name idx m)
+      (CBArrayEq name idx (Const m) :: P).
+Proof.
+  unfold hoare_ir_sem, sat, eval_pred.
+  intros P name idx m fuel s s' Hexec Hsat.
+  destruct fuel as [|fuel']; simpl in Hexec; try discriminate.
+  destruct (eval idx s) as [i|] eqn:Heval; try discriminate.
+  simpl in Hexec.
+  inversion Hexec; subst s'; clear Hexec.
+
+  inversion Hsat as [|p Ps Hhead Htail]; subst; clear Hsat.
+  simpl.
+Admitted.
+
+Lemma hoare_ir_ampmodify_sound :
+  forall P name idx amp amps_old,
+    hoare_ir
+      (CBAmpsEq name idx amps_old :: P)
+      (IRAmpModify name idx amp)
+      (CBAmpsEq name idx (map (fun '(c,n) => (complex_mult amp c, n)) amps_old) :: P).
+Proof.
+
+Admitted.
+Notation "{{ P }} op {{ Q }}" := (hoare_ir_sem P op Q)
+  (at level 90, op at next level).
+
+Lemma hoare_ir_cast1_sound :
+  forall Γ name idx tgt_mode,
+    {{ Γ }}
+      (IRCast name idx tgt_mode)
+    {{ CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: Γ }}.
+Proof.
+Admitted.
+
+Theorem hoare_ir_sound :
+  forall P op Q,
+    hoare_ir P op Q ->
+    hoare_ir_sem P op Q.
+Proof.
+
+
+Admitted.
+
+
+
+
+
+
+
+
+(* Standard Cantor pairing *)
+Definition nat_pair (x y : nat) : nat :=
+  (x + y) * (x + y + 1) / 2 + y.
+
+(* Encode a list (complex_approx * nat) as a single nat *)
+Fixpoint encode_amp_list (amps : list (complex_approx * nat)) : nat :=
+  match amps with
+  | [] => 0
+  | (c, k) :: tl =>
+      let r := Z.to_nat (fst c) in
+      let i := Z.to_nat (snd c) in
+      let encoded_c := nat_pair (nat_pair r i) k in
+      nat_pair encoded_c (encode_amp_list tl)
+  end.
+
+Fixpoint lower_ir_to_cmd (n_qubits : nat) (ops : list ir_op) : cmd :=
+  match ops with
+  | [] => Skip
+
+  | op :: ops' =>
+      let tail := lower_ir_to_cmd n_qubits ops' in
+      match op with
+
+      (* 1. Cast mode → write mode number into q[] *)
+      | IRCast "q" idx mode =>
+          Seq (ArrayWrite "q" idx (Const (mode_to_nat mode))) tail
+
+      (* 2. Amplitude modification → write an encoded amplitude list *)
+      | IRAmpModify "amps" idx new_amp =>
+          (* Example canonical vector: new_amp on basis 0, zero on basis 1 *)
+          let base_amps : list (complex_approx * nat) :=
+                (new_amp, 0) :: ((0%Z, 0%Z), 1) :: nil in
+          let encoded := encode_amp_list base_amps in
+          Seq (ArrayWrite "amps" idx (Const encoded)) tail
+
+      (* 3. Entanglement → mark all given indices as Ent with their numeric indices *)
+      | IRJoin "q" _ locus =>
+          let ent_indices := map (fun e => safe_eval e (fun _ => None)) locus in
+          let ent_mode := Ent ent_indices in
+          let ent_expr := Const (mode_to_nat ent_mode) in
+          let mark_ent :=
+            fold_right
+              (fun i acc =>
+                 Seq (ArrayWrite "q" i ent_expr) acc)
+              Skip
+              locus
+          in
+          Seq mark_ent tail
+
+      (* 4. Measurement/sum → symbolically store number of indices into result_var *)
+      | IRSumAmplitudes "q" indices result_var =>
+          let n := length indices in
+          Seq (Assign result_var (Const n)) tail
+
+      (* 5. Unconditional map over all qubits in [0 .. n_qubits-1] *)
+      | IRMap "q" f =>
+          let body :=
+            fold_right
+              (fun i acc =>
+                 Seq (ArrayWrite "q" (Const i) (f (Const i))) acc)
+              Skip
+              (seq 0 n_qubits)
+          in
+          Seq body tail
+
+      (* 6. Conditional map: if cond then apply f to every qubit, else just tail *)
+      | IRPartialMap "q" f cond =>
+          let body :=
+            fold_right
+              (fun i acc =>
+                 Seq (ArrayWrite "q" (Const i) (f (Const i))) acc)
+              Skip
+              (seq 0 n_qubits)
+          in
+          If cond
+             (Seq body tail)
+             tail
+
+      (* 7. Fallback: ignore other IR ops for now *)
+      | _ => tail
+      end
+  end.
+
+
+
+(* Rough qubit-counting heuristic for a pexp program *)
+Fixpoint count_qubits_in_pexp (p : pexp) : nat :=
+  match p with
+  | PSKIP => 0
+
+  | Let _ _ s =>
+      count_qubits_in_pexp s
+
+  | AppSU _ =>
+      (* Single-qubit gate; at least one qubit is involved *)
+      1
+
+  | AppU l _ =>
+      (* Use the size of the locus as a lower bound on qubit count *)
+      length (locus_to_indices_expr l)
+
+  | PSeq s1 s2 =>
+      Nat.max (count_qubits_in_pexp s1) (count_qubits_in_pexp s2)
+
+  | QafnySyntax.If _ s1 =>
+      (* Only one branch is explicit here *)
+      count_qubits_in_pexp s1
+
+  | For _ _ _ _ body =>
+      count_qubits_in_pexp body
+
+  | Diffuse _ =>
+      1
+  end.
+
+
+
+Definition classical_program_of (e : pexp) : cmd :=
+  let n := count_qubits_in_pexp e in
+  lower_ir_to_cmd n (compile_pexp_to_ir e).
+
+
 (* Compile pexp to array operations *)
 Fixpoint translate_pexp_array (p : pexp) : cmd :=
   match p with
@@ -1153,6 +1389,8 @@ Axiom trans_empty_eq :
     H = trans env [] [].
 Axiom hoare_triple_empty :
   forall (c : cmd), hoare_triple ([] : list cbexpr) c ([] : list cbexpr).
+
+
 
 
 Theorem quantum_to_classical_soundness_1:
@@ -1479,6 +1717,32 @@ Proof.
   unfold Mod, model. intros. apply H; assumption.
 Qed.
 
+
+Theorem quantum_to_classical_soundness :
+  forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
+         (W W' : LocusProof.cpred) (P Q : qpred)
+         (e : pexp) (φ φ' : state) (fuel : nat),
+
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W, P) e (W', Q) ->
+
+    let c  := classical_program_of e in
+    let P' := trans env W P in
+    let Q' := trans env W' Q in
+
+    model P' φ ->
+    exec fuel c φ = Some φ' ->
+    model Q' φ'.
+
+
+Proof.
+  intros rmax t env T W W' P Q e φ φ' fuel Htype Htriple.
+  intros c P' Q'; subst c P' Q'.
+  induction Htriple; simpl in *; intros Hpre Hexec.
+
+Admitted.
+(*
+
 (* === Qafny to Hoare Logic Compilation Soundness === *)
 Theorem quantum_to_classical_soundness :
   forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
@@ -1790,6 +2054,7 @@ exact HIn .
 Admitted.
 
 *)
+*)
 
 (* Translation Quantum State to Array *)
 Definition trans_qstate (q : qstate) : cpredr :=
@@ -1829,7 +2094,71 @@ Qed.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
     
-
-
