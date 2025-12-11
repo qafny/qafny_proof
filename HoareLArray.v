@@ -1354,6 +1354,8 @@ Definition trans (env : aenv) (W : LocusProof.cpred) (P : qpred) : cpredr :=
   convert_locus_cpred W ++ trans_qpred env P.
 Check trans.
 
+
+
 Theorem quantum_to_classical_completeness:
 forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
          (e : pexp) (c : cmd) (P' Q' : cpredr),
@@ -1717,8 +1719,95 @@ Proof.
   unfold Mod, model. intros. apply H; assumption.
 Qed.
 
+Theorem quantum_to_classical_soundness_weak_1 :
+  forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
+         (e : pexp) (P' Q' : cpredr),
+    (exists (W W' : LocusProof.cpred) (P Q : qpred),
+        @triple rmax t env T (W, P) e (W', Q) /\
+        P' = trans env W P /\
+        Q' = trans env W' Q) ->
+    let c := classical_program_of e in
+    hoare_triple P' c Q'.
+Proof.
 
-Theorem quantum_to_classical_soundness :
+Admitted.
+Inductive hoare_ir_list : cpredr -> list ir_op -> cpredr -> Prop :=
+  | hoare_ir_list_nil : forall P,
+      hoare_ir_list P [] P
+  | hoare_ir_list_cons : forall P Q R op ops,
+      hoare_ir P op Q ->
+      hoare_ir_list Q ops R ->
+      hoare_ir_list P (op :: ops) R.
+Theorem qafny_to_ir_sound :
+  forall rmax t env T W P e W' Q,
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W, P) e (W', Q) ->
+    hoare_ir_list (trans env W P) (compile_pexp_to_ir e) (trans env W' Q).
+Proof.
+
+Admitted.
+
+Theorem Qafny_compilation_sound_IR :
+  forall rmax t env T W P e W' Q,
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W, P) e (W', Q) ->
+    hoare_ir_list
+      (trans env W P)
+      (compile_pexp_to_ir e)
+      (trans env W' Q).
+Proof.
+Admitted.
+
+Theorem quantum_to_classical_soundness_IR_cmd :
+  forall rmax t env T W P e W' Q φ φ' fuel,
+    @triple rmax t env T (W, P) e (W', Q) ->
+    let ops := compile_pexp_to_ir e in
+    let n   := count_qubits_in_pexp e in
+    let c   := lower_ir_to_cmd n ops in
+    let P'  := trans env W P in
+    let Q'  := trans env W' Q in
+    model P' φ ->
+    exec fuel c φ = Some φ' ->
+    model Q' φ'.
+Proof.
+Admitted.
+
+Theorem qafny_compiler_sound :
+  forall rmax t env T W P e W' Q,
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W, P) e (W', Q) ->
+    hoare_triple
+      (trans env W P)
+      (classical_program_of e)
+      (trans env W' Q).
+Proof.
+Admitted.
+
+
+
+Theorem quantum_to_classical_soundness_0 :
+  forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
+         (W W' : LocusProof.cpred) (P Q : qpred)
+         (e : pexp) (φ φ' : state) (fuel : nat),
+    (* Quantum correctness *)
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W, P) e (W', Q) ->
+
+    (* Classical translation *)
+    let c  := classical_program_of e in
+    let P' := trans env W P in
+    let Q' := trans env W' Q in
+
+    model P' φ ->
+    exec fuel c φ = Some φ' ->
+    model Q' φ'.
+Proof.
+
+Admitted.
+
+
+
+Theorem quantum_to_classical_soundness_2 :
   forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
          (W W' : LocusProof.cpred) (P Q : qpred)
          (e : pexp) (φ φ' : state) (fuel : nat),
@@ -2087,11 +2176,6 @@ Proof.
   exists (trans_state (empty_aenv, s)).
   reflexivity.
 Qed.
-
-
-
-
-
 
 
 
