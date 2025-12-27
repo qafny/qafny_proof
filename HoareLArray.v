@@ -1116,6 +1116,33 @@ Proof.
 Admitted.
 
 
+Lemma judge_IRCast :
+  forall P name idx tgt_mode,
+    hoare_ir (CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: P)
+             (IRCast name idx tgt_mode)
+             (CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: P).
+Proof.
+  intros. constructor. 
+Qed.
+
+Lemma judge_IRTypeUpdate :
+  forall P name idx m,
+    hoare_ir (CBArrayEq name idx (Const m) :: P)
+             (IRTypeUpdate name idx m)
+             (CBArrayEq name idx (Const m) :: P).
+Proof.
+  intros. constructor.  
+Qed.
+
+Lemma judge_IRAmpModify :
+  forall P name idx amp amps',
+    hoare_ir (CBAmpsEq name idx amps' :: P)
+             (IRAmpModify name idx amp)
+             (CBAmpsEq name idx (map (fun '(c,n) => (complex_mult amp c, n)) amps') :: P).
+Proof.
+  intros. econstructor.  
+Qed.
+
 
 
 
@@ -1738,6 +1765,21 @@ Inductive hoare_ir_list : cpredr -> list ir_op -> cpredr -> Prop :=
       hoare_ir P op Q ->
       hoare_ir_list Q ops R ->
       hoare_ir_list P (op :: ops) R.
+
+(* Composition for concatenation (needed for PSeq / ++) *)
+Lemma hoare_ir_list_app :
+  forall P Q R ops1 ops2,
+    hoare_ir_list P ops1 Q ->
+    hoare_ir_list Q ops2 R ->
+    hoare_ir_list P (ops1 ++ ops2) R.
+Proof.
+  intros P Q R ops1 ops2 H1 H2.
+  induction H1.
+  - simpl. exact H2.
+  - simpl. econstructor; eauto.
+Qed.
+
+
 Theorem qafny_to_ir_sound :
   forall rmax t env T W P e W' Q,
     type_check_proof rmax t env T T (W, P) (W', Q) e ->
@@ -1830,6 +1872,36 @@ Proof.
   induction Htriple; simpl in *; intros Hpre Hexec.
 
 Admitted.
+
+
+
+(* Execute a list of IR operations sequentially *)
+Fixpoint exec_ir_list (fuel : nat) (ops : list ir_op) (s : state) : option state :=
+  match ops with
+  | [] => Some s
+  | op :: ops' =>
+      match exec_ir fuel op s with
+      | Some s' => exec_ir_list fuel ops' s'
+      | None => None
+      end
+  end.
+
+Theorem quantum_to_classical_soundness_op :
+  forall rmax t env T W P e W' Q φ φ' fuel,
+    @triple rmax t env T (W, P) e (W', Q) ->
+    model (trans env W P) φ ->
+    exec_ir_list fuel (compile_pexp_to_ir e) φ = Some φ' ->
+    model (trans env W' Q) φ'.
+
+
+
+
+
+
+
+
+
+
 (*
 
 (* === Qafny to Hoare Logic Compilation Soundness === *)
