@@ -1147,8 +1147,6 @@ Qed.
 
 
 
-
-
 (* Standard Cantor pairing *)
 Definition nat_pair (x y : nat) : nat :=
   (x + y) * (x + y + 1) / 2 + y.
@@ -1382,7 +1380,6 @@ Definition trans (env : aenv) (W : LocusProof.cpred) (P : qpred) : cpredr :=
 Check trans.
 
 
-
 Theorem quantum_to_classical_completeness:
 forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
          (e : pexp) (c : cmd) (P' Q' : cpredr),
@@ -1393,6 +1390,7 @@ forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
       (@triple rmax t env T (W, P) e (W', Q)) /\
       P' = trans env W P /\
       Q' = trans env W' Q.
+
 Proof.
 intros rmax t env T e c P' Q' Htrans Hhoare.
   induction e; simpl in Htrans; subst c.
@@ -1789,6 +1787,16 @@ Proof.
 
 Admitted.
 
+Lemma hoare_ir_list_map_change_partialmap_cond :
+  forall P Q ops (cond : expr) (g : ir_op -> ir_op),
+    (forall name f cond', g (IRPartialMap name f cond') = IRPartialMap name f (Plus cond cond')) ->
+    (forall op, (forall name f cond', op = IRPartialMap name f cond' -> True) \/ g op = op) ->
+    hoare_ir_list P ops Q ->
+    hoare_ir_list P (map g ops) Q.
+Proof.
+Admitted.
+
+
 Theorem Qafny_compilation_sound_IR :
   forall rmax t env T W P e W' Q,
     type_check_proof rmax t env T T (W, P) (W', Q) e ->
@@ -1798,6 +1806,9 @@ Theorem Qafny_compilation_sound_IR :
       (compile_pexp_to_ir e)
       (trans env W' Q).
 Proof.
+intros rmax q env T W P e W' Q Htc Htr.
+
+
 Admitted.
 
 Theorem quantum_to_classical_soundness_IR_cmd :
@@ -1892,12 +1903,6 @@ Theorem quantum_to_classical_soundness_op :
     model (trans env W P) φ ->
     exec_ir_list fuel (compile_pexp_to_ir e) φ = Some φ' ->
     model (trans env W' Q) φ'.
-
-
-
-
-
-
 
 
 
