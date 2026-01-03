@@ -1795,6 +1795,16 @@ Lemma hoare_ir_list_map_change_partialmap_cond :
     hoare_ir_list P (map g ops) Q.
 Proof.
 Admitted.
+Lemma type_check_proof_strengthen_ctx :
+  forall rmax q env T T' W0 P0 W'0 Q0 e R2,
+    type_check_proof rmax q env (T ++ T') (T ++ T')
+      (W0, P0 ++ R2) (W'0, Q0 ++ R2) e ->
+    type_check_proof rmax q env T T (W0, P0) (W'0, Q0) e.
+
+Proof.
+Admitted.
+
+
 
 
 Theorem Qafny_compilation_sound_IR :
@@ -1806,10 +1816,57 @@ Theorem Qafny_compilation_sound_IR :
       (compile_pexp_to_ir e)
       (trans env W' Q).
 Proof.
-intros rmax q env T W P e W' Q Htc Htr.
+
+intros rmax t env T W P e W' Q Htc Htr.
+  revert Htc.
+  induction Htr; intros Htc; subst; simpl in *.
+
+  (* Case: Skip *)
+  - (* triple_skip *)
+    inversion Htc; subst; clear Htc.
+  apply IHHtr.
+ 
+inversion H0; subst.
+destruct H1 as [Hloc Hpost].
+inversion Hpost; subst.
+  eapply type_check_proof_invariant with (T1 := T1); eauto.
+  eapply type_check_proof_fixed; eauto.
+  - inversion Htc; subst; clear Htc.
+  apply IHHtr.
+  assert (HT : T1 = T).
+  { eapply type_check_proof_fixed; eauto. }
+
+  eapply type_check_proof_invariant with (T1 := T1); eauto.
+
+(* Case: Let x (Meas y) s *)
+  - inversion Htc; subst; clear Htc.
+  apply IHHtr.
+
+  assert (HT : T1 = T).
+  { eapply type_check_proof_fixed; eauto. }
+
+  eapply type_check_proof_invariant with (T1 := T1); eauto.
+
+(* Case: Sequence PSeq s1 s2 *)
+  - inversion Htc; subst; clear Htc.
+   subst.
+admit.
+
+(* Case: Single-qubit gates like AppSU (RH p) — Hadamard *)
+  - inversion Htc; subst; clear Htc.
+admit.
+
+- (* *)
+
+admit.
+
+
+
 
 
 Admitted.
+
+
 
 Theorem quantum_to_classical_soundness_IR_cmd :
   forall rmax t env T W P e W' Q φ φ' fuel,
