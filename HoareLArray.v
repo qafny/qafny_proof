@@ -1883,22 +1883,7 @@ Fixpoint lower_map_expr (name : string) (f : expr -> expr) (xs : list expr) : cm
   end.
 
 
-
-
-
-
-Theorem hoare_ir_list_to_triple :
-  forall P ops Q n,
-    hoare_ir_list P ops Q ->
-    hoare_triple P (lower_ir_to_cmd n ops) Q.
-Proof.
-  intros P ops.
-  induction ops as [|op tl IH]; intros Q n Hlist.
-  - inversion Hlist; subst. simpl. apply hoare_skip.
-  - inversion Hlist as [|P0 P1 P2 op0 tl0 Hop Htl]; subst.
-    simpl.
-Admitted.
-
+(* Soundness lemmas for the most important IR operations *)
 
 Axiom hoare_lower_map_preserve :
   forall P name f xs,
@@ -2095,6 +2080,35 @@ reflexivity.
 - apply entails_refl.
 Qed.
 
+(*  General translation for lists of IR operations  *)
+Theorem hoare_ir_list_to_triple :
+  forall P ops Q n,
+    hoare_ir_list P ops Q ->
+    hoare_triple P (lower_ir_to_cmd n ops) Q.
+Proof.
+  intros P ops.
+  induction ops as [|op tl IH]; intros Q n Hlist.
+  - inversion Hlist; subst. simpl. apply hoare_skip.
+  - inversion Hlist as [|P0 P1 P2 op0 tl0 Hop Htl]; subst.
+    simpl.
+Admitted.
+
+
+(*  Full Translation  *)
+Theorem qafny_compiler_sound_classical :
+  forall rmax t env T W P e W' Q n,
+ type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W,P) e (W',Q) ->
+    hoare_triple
+      (trans env W P)
+      (lower_ir_to_cmd n (compile_pexp_to_ir e))
+      (trans env W' Q).
+Proof.
+  intros.
+  apply hoare_ir_list_to_triple with (n := n).
+eapply Qafny_compilation_sound_IR; eauto.
+
+Qed.
 
 
 Theorem quantum_to_classical_soundness_IR_cmd :
@@ -2169,28 +2183,6 @@ Proof.
   induction Htriple; simpl in *; intros Hpre Hexec.
 
 Admitted.
-
-
-
-(* Execute a list of IR operations sequentially *)
-Fixpoint exec_ir_list (fuel : nat) (ops : list ir_op) (s : state) : option state :=
-  match ops with
-  | [] => Some s
-  | op :: ops' =>
-      match exec_ir fuel op s with
-      | Some s' => exec_ir_list fuel ops' s'
-      | None => None
-      end
-  end.
-
-Theorem quantum_to_classical_soundness_op :
-  forall rmax t env T W P e W' Q φ φ' fuel,
-    @triple rmax t env T (W, P) e (W', Q) ->
-    model (trans env W P) φ ->
-    exec_ir_list fuel (compile_pexp_to_ir e) φ = Some φ' ->
-    model (trans env W' Q) φ'.
-
-
 
 
 (*
