@@ -1,5 +1,5 @@
 Require Import Coq.btauto.Btauto Coq.NArith.Nnat. 
-Require Import Dirac.
+Require Import QuantumLib.Bits.
 
 Definition var := nat.
 

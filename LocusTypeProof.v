@@ -1,10 +1,10 @@
 Require Import Reals.
 Require Import Psatz.
-Require Import Complex.
-Require Import SQIR.
-Require Import VectorStates UnitaryOps Coq.btauto.Btauto Coq.NArith.Nnat Permutation. 
-Require Import Dirac.
-Require Import QPE.
+Require Import QuantumLib.Complex.
+Require Import SQIR.SQIR.
+Require Import QuantumLib.VectorStates.
+Require Import SQIR.UnitaryOps.
+Require Import Coq.btauto.Btauto Coq.NArith.Nnat. 
 Require Import BasicUtility.
 Require Import OQASM.
 Require Import Classical_Prop.
@@ -44,7 +44,7 @@ Proof.
   split. apply find_env_many_1. easy. easy.
   intros. inv H1.
   assert (Some (y ++ s', t) = Some (y ++ s', t)) by auto.
-  apply IHfind_env with (S0 := l2) in H1. destruct H1 as [a' [X1 X2]].
+  apply IHfind_env with (S := l2) in H1. destruct H1 as [a' [X1 X2]].
   exists a'. split. apply find_env_many_2. auto. auto. auto. auto.
 Qed.
 
@@ -284,12 +284,12 @@ Proof.
   intros. unfold kind_env_stack in *.
   intros. split; intros.
   apply H0 in H1. destruct H1.
-  apply aenv_mapsto_equal with (s4 := s2) in H1; try easy.
+  apply aenv_mapsto_equal with (s2 := s2) in H1; try easy.
   exists x0. easy.
   destruct H1.
   apply H0.
   apply AEnvFacts.Equal_sym in H.
-  apply aenv_mapsto_equal with (s4 := s1) in H1; try easy.
+  apply aenv_mapsto_equal with (s2 := s1) in H1; try easy.
   exists x0. easy.
 Qed.
 
@@ -521,11 +521,11 @@ Lemma qfor_sem_local: forall rmax aenv s e s' s1,
    @qfor_sem rmax aenv s e s' -> @qfor_sem rmax aenv (fst s, (snd s)++s1) e (fst s', (snd s')++s1).
 Proof.
   intros. induction H using qfor_sem_ind'; simpl in *; try easy.
-  constructor. apply let_sem_c with (n0 := n); try easy.
+  constructor. apply let_sem_c with (n := n); try easy.
   destruct s; simpl in *.
   replace (s, s' ++ s1) with (fst ((s, q ++ s1)), s' ++ s1) by easy.
-  apply let_sem_m with (W0 := W) (n0 := n); try easy.
-  apply let_sem_q with (W'0 := W') (r0 := r) (v0 := v) (va'0 := va'); try easy.
+  apply let_sem_m with (W := W) (n := n); try easy.
+  apply let_sem_q with (W' := W') (r := r) (v := v) (va' := va'); try easy.
   constructor. easy.
   constructor. easy.
   constructor; easy.
@@ -534,7 +534,7 @@ Proof.
   apply if_sem_cf. easy.
   apply (if_sem_q aenv W W' l l1 n n' (s++s1) (s'++s1) b e m f f' fc fc' fc''); try easy.
   apply bexp_extend with (aenv := aenv) (n := n); try easy.
-  apply seq_sem with (s4 := (fst s0, snd s0 ++ s1)); try easy.
+  apply seq_sem with (s1 := (fst s0, snd s0 ++ s1)); try easy.
   apply for_sem.
   remember (h-l) as n. clear Heqn. clear H.
   generalize dependent s'.
@@ -615,7 +615,7 @@ Proof.
   bdestruct (x1 =? x); subst.
   apply aenv_mapsto_add1 in H9. inv H9. easy.
   apply AEnv.add_3 in H9; try lia.
-  apply H2 with (x0 := x1). simpl.
+  apply H2 with (x := x1). simpl.
   apply in_app_iff. right.
   simpl in *.
   apply list_sub_not_in; try easy. easy.
@@ -644,7 +644,7 @@ Proof.
   destruct s'; try easy.
   split. simpl in *. easy. split; try easy.
   unfold freeVarsNotCAExp, freeVarsNotCPExp in *.
-  intros. simpl in *. apply H2 with (x0 := x0); try easy.
+  intros. simpl in *. apply H2 with (x := x0); try easy.
   apply in_app_iff. left. easy.
  -
   destruct s. simpl in *. inv H3. inv H12. 
@@ -655,7 +655,7 @@ Proof.
   bdestruct (x0 =? x); subst.
   apply aenv_mapsto_add1 in H7. inv H7. easy.
   apply AEnv.add_3 in H7; try lia.
-  apply H2 with (x0 := x0). simpl.
+  apply H2 with (x := x0). simpl.
   right.
   simpl in *.
   apply list_sub_not_in; try easy. easy.
@@ -685,7 +685,7 @@ Proof.
   assert (@qstate_wt ((l, Cval na p) :: l2)).
   unfold qstate_wt in *. intros.
   simpl in *. destruct H10. inv H10. lia.
-  apply H6 with (s := s0) (bl0 := bl0). right. easy.
+  apply H6 with (s := s0) (bl := bl0). right. easy.
   destruct (IHlocus_system H8 H9 H10) as [Y1 [sa [Y2 [Y3 Y4]]]].
   split. easy.
   exists (s,(snd sa)).
@@ -810,9 +810,9 @@ Proof.
                         (mut_fch_state 0 n n' (snd (grab_bool f' m n)))) :: nil)).
   unfold qstate_wt in *.
   intros. simpl in *. destruct H8. inv H8.
-  apply grab_bool_gt. apply H5 with (s := l++s0) (bl0 := bl). left. easy.
+  apply grab_bool_gt. apply H5 with (s := l++s0) (bl := bl). left. easy.
   apply type_bexp_gt in H. easy.
-  apply H5 with (s := s0) (bl0 := bl0). right. easy.
+  apply H5 with (s := s0) (bl := bl0). right. easy.
   destruct (IHlocus_system H7 H3 H8) as [X7 [sa [X8 [X9 [X10 X11]]]]].
   destruct sa; simpl in *. inv X11. inv H13. inv H14.
   split. easy.
@@ -973,13 +973,13 @@ Proof.
 - inv H4. rewrite H1 in H11. inv H11. rewrite simple_env_subst in *; try easy.
   apply IHlocus_system in H12; try easy.
   destruct H12 as [sa [X1 [X2 X3]]]. exists sa. split. easy.
-  split. apply let_sem_c with (n0 := n); try easy. easy.
+  split. apply let_sem_c with (n := n); try easy. easy.
   apply simp_aexp_no_eval in H11. rewrite H11 in *. easy.
 - inv H4. apply type_aexp_mo_no_simp in H0. rewrite H0 in *; try easy.
   unfold update_cval in *. simpl in *.
   apply IHlocus_system in H12; try easy.
   destruct H12 as [sa [X1 [X2 X3]]]; simpl in *.
-  exists sa. split; try easy. split. apply let_sem_m with (W1 := W0) (n0 := n); try easy.
+  exists sa. split; try easy. split. apply let_sem_m with (W := W0) (n := n); try easy.
   easy.
 - inv H4. inv H3. simpl in *. inv H6.
   assert (simple_tenv ((l, CH) :: T)).
@@ -998,7 +998,7 @@ Proof.
      (W', s') s2 ((l, va') :: l2) H4 H15) as [sa [X1 [X2 X3]]].
   simpl in *; subst.
   exists sa. split; try easy.
-  split. apply let_sem_q with (W'0 := W') (r0 := r) (v0 := v) (va'0 := va'); try easy.
+  split. apply let_sem_q with (W' := W') (r := r) (v := v) (va' := va'); try easy.
   easy.
 - inv H2. inv H8. inv H9. inv H3.
   simpl in *. exists ([(l, Nval ra ba)]); simpl in *. split. easy.
@@ -1056,7 +1056,7 @@ Proof.
   destruct H8 as [sb [Y4 [Y5 Y6]]]. destruct s in *; simpl in *; subst.
   exists sb. split; try easy.
   split; try easy.
-  apply seq_sem with (s4 := (s0,sa)); try easy.
+  apply seq_sem with (s1 := (s0,sa)); try easy.
 - inv H2. assert (h-l = 0) by lia. rewrite H2 in *. inv H11.
   exists s1. split; try easy. split; try easy.
   simpl in *. constructor. rewrite H2. constructor.
@@ -1141,7 +1141,7 @@ Proof.
   bdestruct (x0 =? x); subst.
   apply aenv_mapsto_add1 in H7. inv H7. easy.
   apply AEnv.add_3 in H7; try lia.
-  apply H2 with (x0 := x0). simpl.
+  apply H2 with (x := x0). simpl.
   apply in_app_iff. right.
   simpl in *.
   apply list_sub_not_in; try easy. easy.
@@ -1175,7 +1175,7 @@ Proof.
   bdestruct (x0 =? x); subst.
   apply aenv_mapsto_add1 in H7. inv H7. easy.
   apply AEnv.add_3 in H7; try lia.
-  apply H2 with (x0 := x0). simpl.
+  apply H2 with (x := x0). simpl.
   right.
   simpl in *.
   apply list_sub_not_in; try easy. easy.

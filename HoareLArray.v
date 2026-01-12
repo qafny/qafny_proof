@@ -8,11 +8,11 @@ Require Import Coq.Logic.FunctionalExtensionality.
 Require Import Coq.Logic.Classical_Prop.
 Require Import Reals.
 Require Import Psatz.
-Require Import Complex.
-Require Import SQIR.
-Require Import VectorStates UnitaryOps Coq.btauto.Btauto Coq.NArith.Nnat Permutation. 
-Require Import Dirac.
-Require Import QPE.
+Require Import QuantumLib.Complex.
+Require Import SQIR.SQIR.
+Require Import QuantumLib.VectorStates.
+Require Import SQIR.UnitaryOps.
+Require Import Coq.btauto.Btauto Coq.NArith.Nnat. 
 Require Import BasicUtility.
 Require Import Classical_Prop.
 Require Import MathSpec.

@@ -1,9 +1,9 @@
 Require Import Reals.
 Require Import Psatz.
-Require Import SQIR.
-Require Import VectorStates UnitaryOps Coq.btauto.Btauto Coq.NArith.Nnat. 
-Require Import Dirac.
-Require Import QPE.
+Require Import SQIR.SQIR.
+Require Import QuantumLib.VectorStates.
+Require Import SQIR.UnitaryOps.
+Require Import Coq.btauto.Btauto Coq.NArith.Nnat. 
 Require Import BasicUtility.
 Require Import MathSpec.
 Require Import Classical_Prop.

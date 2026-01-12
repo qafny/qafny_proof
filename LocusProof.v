@@ -1,10 +1,10 @@
 Require Import Reals.
 Require Import Psatz.
-Require Import Complex.
-Require Import SQIR.
-Require Import VectorStates UnitaryOps Coq.btauto.Btauto Coq.NArith.Nnat Permutation. 
-Require Import Dirac.
-Require Import QPE.
+Require Import QuantumLib.Complex.
+Require Import SQIR.SQIR.
+Require Import QuantumLib.VectorStates.
+Require Import SQIR.UnitaryOps.
+Require Import Coq.btauto.Btauto Coq.NArith.Nnat. 
 Require Import BasicUtility.
 Require Import Classical_Prop.
 Require Import MathSpec.
@@ -305,7 +305,7 @@ Proof.
   destruct P0. destruct q1. simpl in *. destruct q2. inv Heqq. destruct Q. easy.
   inv HeqC. inv Heqq. apply (model_many n); try easy. simpl in *. easy.
   destruct q1. simpl in *. easy. inv HeqC. inv Heqq. simpl in *.
-  apply IHqmodel with (P := P0) (q4 := q1); try easy. lia.
+  apply IHqmodel with (P := P0) (q1 := q1); try easy. lia.
 Qed.
 
 Lemma qmodel_combine: forall q1 q2 P Q, qmodel q1 P -> qmodel q2 Q -> qmodel (q1++q2) (P++Q).
@@ -974,7 +974,7 @@ Proof.
  apply length_zero_iff_nil in H2; subst.
  simpl in *. subst. constructor; try easy.
  inv HeqTa. inv HeqPa. simpl in *. destruct P. simpl in *. lia.
- simpl in *. inv H2. inv H4. apply IHqpred_check with (T := T0) (P0 := P); try easy.
+ simpl in *. inv H2. inv H4. apply IHqpred_check with (T := T0) (P := P); try easy.
 Qed.
 
 Lemma qpred_check_combine: forall T T' P P', qpred_check T P -> qpred_check T' P' ->
@@ -1147,7 +1147,7 @@ Proof.
   bdestruct (x0 =? x); subst.
   apply aenv_mapsto_add1 in H10. inv H10. easy.
   apply AEnv.add_3 in H10; try lia.
-  apply H2 with (x0 := x0). simpl.
+  apply H2 with (x := x0). simpl.
   apply in_app_iff. right.
   simpl in *.
   apply list_sub_not_in; try easy. easy.
@@ -1185,12 +1185,12 @@ Proof.
   split. simpl in *. apply H8. easy.
   destruct (IHtriple H11) as [sa [Y1 [Y2 Y3]]].
   exists sa. split. split. easy. destruct Y1. simpl in *. 
-  easy. split. apply let_sem_m with (n := va) (W0 := AEnv.add x va s); try easy.
+  easy. split. apply let_sem_m with (n := va) (W := AEnv.add x va s); try easy.
   destruct H as [A1 [A2 A3]].
   destruct H5 as [G1 [G2 G3]]. destruct A3. destruct G3. simpl in *.
   apply qpred_check_same with (T := tenv') in H5; try easy; subst.
   easy.
-  unfold freeVarsNotCPExp,freeVarsNotCAExp in *. intros. simpl in *. apply H2 with (x0 := x0); try easy.
+  unfold freeVarsNotCPExp,freeVarsNotCAExp in *. intros. simpl in *. apply H2 with (x := x0); try easy.
   apply in_app_iff. left. easy.
  -
   assert (freeVarsNotCPExp (AEnv.add x (Mo MT) env) e).
@@ -1199,7 +1199,7 @@ Proof.
   bdestruct (x0 =? x); subst.
   apply aenv_mapsto_add1 in H11. inv H11. easy.
   apply AEnv.add_3 in H11; try lia.
-  apply H2 with (x0 := x0). simpl.
+  apply H2 with (x := x0). simpl.
   right.
   simpl in *.
   apply list_sub_not_in; try easy. easy.
@@ -1410,7 +1410,7 @@ Proof.
   constructor.
   apply assem_bool_cval in H36 as A7. destruct A7 as [ma [fa A7]]; subst.
   apply assem_bool_cval in A5 as A7. destruct A7 as [mb [fb A7]]; subst.
-  split. apply if_sem_q with (n0 := n1) (n' := n) (f'0 := r0)
+  split. apply if_sem_q with (n := n1) (n' := n) (f' := r0)
                 (fc := (Cval (fst (grab_bool f' m0 n1)) r3)) (fc' := Cval m r1); try easy.
   destruct H11 as [G1 [G2 G3]].
   inv G3. inv H6. inv H28. inv H29. inv H24.
@@ -1431,7 +1431,7 @@ Proof.
   intros.
   unfold freeVarsNotCPExp in *.
   intros;simpl in *.
-  apply H2 with (x0 := x0); try easy.
+  apply H2 with (x := x0); try easy.
   bdestruct (x0 =? x); subst. assert (AEnv.In x env). exists (Mo t). easy. easy.
   apply in_app_iff in H10. destruct H10.
   apply freeVarsBExp_subst in H10.
@@ -1731,7 +1731,7 @@ Proof.
   apply simple_qpred_shrink_r in H6. easy.
   split. apply qpred_check_combine; easy.
   split. apply qmodel_combine; try easy.
-  apply triple_frame with (T2 := T'); try easy.
+  apply triple_frame with (T1 := T'); try easy.
   rewrite X3. easy.
 - inv H. destruct s; simpl in *. subst. inv H3. destruct P; simpl in *. inv H7.
   inv H2. simpl in *.
@@ -1756,7 +1756,7 @@ Proof.
   bdestruct (x0 =? x); subst.
   apply aenv_mapsto_add1 in H10. inv H10. easy.
   apply AEnv.add_3 in H10; try lia.
-  apply H1 with (x0 := x0). simpl.
+  apply H1 with (x := x0). simpl.
   apply in_app_iff. right.
   simpl in *.
   apply list_sub_not_in; try easy. easy.
@@ -1811,7 +1811,7 @@ Proof.
   bdestruct (x0 =? x); subst.
   apply aenv_mapsto_add1 in H10. inv H10. easy.
   apply AEnv.add_3 in H10; try lia.
-  apply H1 with (x0 := x0). simpl.
+  apply H1 with (x := x0). simpl.
   right.
   apply list_sub_not_in; try easy. easy.
   assert (simple_tenv ((l, CH) :: T)).
@@ -2008,7 +2008,7 @@ Proof.
   split; try constructor. constructor. constructor.
   constructor;try constructor. inv G1; constructor.
   split; try constructor. apply model_many with (n := n + n'); try easy.
-  apply if_q with (n1 := n) (P' := [(Frozen b (SV l) (SV l0), Cval m0 bl)]) 
+  apply if_q with (n := n) (P' := [(Frozen b (SV l) (SV l0), Cval m0 bl)]) 
     (P'' := [(SV l0, Cval (fst (grab_bool f' m0 n)) r0)])
    (Q := [(SV l0, Cval m bl0)]) (Pa := [(Unfrozen n (BNeg b) (SV (l ++ l0)), Cval m0 bl)])
    (Qa := [(Unfrozen n b (SV (l ++ l0)), Cval m bl0)]) ; try easy.
@@ -2045,7 +2045,7 @@ Proof.
   split. simpl in *. apply cmodel_equal with (m := fst s); try easy.
   inv H7. easy. inv H7. easy.
   exists Q. split; try easy. split; try easy. split; try easy.
-  apply seq_pf with (T3 := T1) (T4 := T2) (R0 := (fst P, R)); try easy.
+  apply seq_pf with (T1 := T1) (T2 := T2) (R := (fst P, R)); try easy.
   split;try easy. split; try easy. inv H3. constructor; try easy.
 - inv H5. assert (h -l = 0) by lia. rewrite H5 in *. inv H16. inv H7. inv H3.
   exists (snd P). split; try easy. split; try easy. split; try easy.

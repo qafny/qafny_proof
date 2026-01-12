@@ -1,5 +1,5 @@
 Require Import Coq.btauto.Btauto Coq.NArith.Nnat Bool. 
-Require Import Dirac.
+Require Import QuantumLib.Bits.
 Require Import BasicUtility.
 Local Open Scope nat_scope.
 
@@ -27,12 +27,11 @@ Proof.
     lia.
 Qed.
 
-
 Lemma mod_sum_lt_bool :
   forall x y M,
     x < M ->
     y < M ->
-    ¬ (M <=? x + y) = (x <=? (x + y) mod M).
+     (¬ (Nat.leb M (x + y))) = (Nat.leb x ((x + y) mod M)).
 Proof.
   intros. bdestruct (M <=? x + y); bdestruct (x <=? (x + y) mod M); try easy.
   assert ((x + y) mod M < x) by (apply mod_sum_lt; lia). lia.

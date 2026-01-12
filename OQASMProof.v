@@ -1,9 +1,9 @@
 Require Import Reals.
 Require Import Psatz.
-Require Import SQIR.
-Require Import VectorStates UnitaryOps Coq.btauto.Btauto Coq.NArith.Nnat. 
-Require Import Dirac.
-Require Import QPE.
+Require Import SQIR.SQIR.
+Require Import QuantumLib.VectorStates.
+Require Import SQIR.UnitaryOps.
+Require Import Coq.btauto.Btauto Coq.NArith.Nnat. 
 Require Import BasicUtility.
 Require Import MathSpec.
 Require Import Classical_Prop.
@@ -7018,11 +7018,10 @@ Proof.
   auto with wf_db.
 Qed.
 
-
-Lemma denote_ID_1 : forall dim n, n < dim -> uc_eval (ID n) = I (2 ^ dim).
+Lemma denote_ID_1 : forall dim n, n < dim -> uc_eval (SQIR.ID n) = I (2 ^ dim).
 Proof.
   intros.
-  rewrite denote_ID. unfold pad.
+  rewrite denote_ID. unfold pad_u, pad.
   bdestruct (n+1<=? dim).
   gridify. easy. lia.
 Qed.
@@ -7531,7 +7530,7 @@ Proof.
   rewrite H2.
   rewrite <- Mmult_assoc.
   assert (WF_Unitary ((A) †)).
-  apply transpose_unitary. unfold WF_Unitary. split. easy. easy.
+  apply adjoint_unitary. easy.
   unfold WF_Unitary in H4. destruct H4.
   rewrite H5.
   rewrite Mmult_1_l; easy.
@@ -7574,7 +7573,7 @@ Proof.
   assert ((i + (1 + (j - i - 1) + 1)) = j + 1) by lia.
   rewrite H3. 
   bdestruct (j + 1 <=? n).
-  unfold proj,pad.
+  unfold proj,pad_u,pad.
   bdestruct (i + 1 <=? n).
   simpl.
   autorewrite with ket_db.
@@ -7609,7 +7608,7 @@ Proof.
   bdestruct (j <? i).
   assert (j + (1 + (i - j - 1) + 1) = i + 1) by lia.
   rewrite H4. 
-  unfold proj,pad.
+  unfold proj,pad_u,pad.
   bdestruct (i + 1 <=? n).
   bdestruct (j + 1 <=? n).
   simpl.
@@ -7630,7 +7629,7 @@ Proof.
   intros f q n r b ? ? ?.
   rewrite (vkron_split n q) by (try assumption; try lia). 
   replace (n - 1 - q)%nat with (n - (q + 1))%nat by lia.
-  unfold proj, pad.
+  unfold proj,pad_u, pad.
   gridify. 
   do 2 (apply f_equal2; try reflexivity). 
   rewrite H1. destruct b; solve_matrix.
@@ -7644,7 +7643,7 @@ Proof.
   intros f q n r b b' ? ? H ?.
   rewrite (vkron_split n q) by (try assumption; try lia). 
   replace (n - 1 - q)%nat with (n - (q + 1))%nat by lia.
-  unfold proj, pad.
+  unfold proj, pad_u, pad.
   gridify. rewrite H.
   destruct b. destruct b'. contradiction. lma.
   destruct b'.  lma. contradiction.
@@ -8235,11 +8234,11 @@ Proof.
       distribute_scale.
       assert (∣0⟩ = ket (Nat.b2n false)).
       autorewrite with ket_db. easy. rewrite H0.
-      rewrite phase_shift_on_basis_state.
+      rewrite phase_shift_on_ket.
       simpl. rewrite Rmult_0_l. simpl. rewrite Cexp_0. Msimpl.
       assert (∣1⟩ = ket (Nat.b2n true)).
       autorewrite with ket_db. easy. rewrite H5.
-      rewrite phase_shift_on_basis_state. simpl.
+      rewrite phase_shift_on_ket. simpl.
       distribute_scale.
       rewrite <- Cexp_add. rewrite Rmult_1_l.
       rewrite turn_angle_add_same. easy. lia.
@@ -8263,11 +8262,11 @@ Proof.
       distribute_scale.
       assert (∣0⟩ = ket (Nat.b2n false)).
       autorewrite with ket_db. easy. rewrite H0.
-      rewrite phase_shift_on_basis_state.
+      rewrite phase_shift_on_ket.
       simpl. rewrite Rmult_0_l. simpl. rewrite Cexp_0. Msimpl.
       assert (∣1⟩ = ket (Nat.b2n true)).
       autorewrite with ket_db. easy. rewrite H5.
-      rewrite phase_shift_on_basis_state. simpl.
+      rewrite phase_shift_on_ket. simpl.
       distribute_scale.
       rewrite <- Cexp_add. rewrite Rmult_1_l.
       rewrite turn_angle_add_r_same. easy. easy.
@@ -8286,7 +8285,7 @@ Proof.
   rewrite denote_ID.
   assert (find_pos vs (x,0) < dim).
   apply H1. easy. unfold find_pos in H6.
-  unfold pad.
+  unfold pad_u, pad.
   bdestruct (start vs x + vmap vs x 0 + 1 <=? dim).
   repeat rewrite id_kron.
   assert (2 ^ (start vs x + vmap vs x 0) * 2 = 2 ^ (start vs x + vmap vs x 0) * (2^1)).
@@ -8340,7 +8339,7 @@ Proof.
   rewrite denote_ID.
   assert (find_pos vs (x,0) < dim).
   apply H1. easy. unfold find_pos in H6.
-  unfold pad.
+  unfold pad_u,pad.
   bdestruct (start vs x + vmap vs x 0 + 1 <=? dim).
   repeat rewrite id_kron.
   assert (2 ^ (start vs x + vmap vs x 0) * 2 = 2 ^ (start vs x + vmap vs x 0) * (2^1)).
@@ -8748,7 +8747,7 @@ Proof.
   rewrite vkron_proj_neq with (b := false) (r := Cexp (2 * PI * turn_angle r rmax)); try easy.
   unfold get_cua in H11.
   rewrite plus_comm in H11. rewrite <- H11.
-  rewrite update_same with (b1 := false).
+  rewrite update_same with (b := false).
   unfold compile_val. Msimpl. easy.
   rewrite lshift_fun_gen_ge by lia. easy.
   intros. rewrite update_twice_eq.
@@ -9169,13 +9168,13 @@ Proof.
       unfold times_rotate. destruct b.
       unfold compile_val.
       distribute_scale.
-      rewrite phase_shift_on_basis_state.
+      rewrite phase_shift_on_ket.
       distribute_scale.
       rewrite <- Cexp_add. simpl. rewrite Rmult_1_l.
       inv H10. rewrite turn_angle_add_same. easy. lia.
       unfold compile_val.
       distribute_scale.
-      rewrite phase_shift_on_basis_state.
+      rewrite phase_shift_on_ket.
       distribute_scale. simpl. 
       rewrite <- Cexp_add. simpl.
       autorewrite with R_db. easy.
@@ -9207,13 +9206,13 @@ Proof.
       unfold times_r_rotate. destruct b. 
       unfold compile_val.
       distribute_scale.
-      rewrite phase_shift_on_basis_state.
+      rewrite phase_shift_on_ket.
       distribute_scale.
       rewrite <- Cexp_add. simpl. rewrite Rmult_1_l.
       inv H10. rewrite turn_angle_add_r_same. easy. easy.
       unfold compile_val.
       distribute_scale.
-      rewrite phase_shift_on_basis_state.
+      rewrite phase_shift_on_ket.
       distribute_scale. simpl. 
       rewrite <- Cexp_add. simpl.
       autorewrite with R_db. easy. easy.

@@ -1,9 +1,9 @@
 Require Import Reals.
 Require Import Psatz.
-Require Import SQIR.
-Require Import VectorStates UnitaryOps Coq.btauto.Btauto Coq.NArith.Nnat. 
-Require Import Dirac.
-Require Import QPE.
+Require Import SQIR.SQIR.
+Require Import QuantumLib.VectorStates.
+Require Import SQIR.UnitaryOps.
+Require Import Coq.btauto.Btauto Coq.NArith.Nnat. 
 Require Import BasicUtility.
 Require Import MathSpec.
 Require Import OQASM.
@@ -2819,7 +2819,7 @@ Proof.
   assert (nval true r = put_cu (f c1) true).
   rewrite eq2. easy. rewrite H15. 
   Check adder01_correct_carry1.
-  rewrite adder01_correct_carry1 with (S0 := f) (v1 := (2 ^ n - 1 - v1)) (v2:=v2)
+  rewrite adder01_correct_carry1 with (S := f) (v1 := (2 ^ n - 1 - v1)) (v2:=v2)
        (S'' := reg_push (reg_push (f [c1 |-> put_cu (f c1) true])
               x (2 ^ n - 1 - v1) n) y ((2 ^ n - 1 - v1) + v2 + 1) n); try easy.
   rewrite reg_push_twice_neq by iner_p.
@@ -3153,7 +3153,7 @@ Proof.
   rewrite eupdate_twice_neq by iner_p.
   clear H4 H5 H6 H7 H8 X1 X2 X3 X4 X5 X6 X7 X8 X9 X10 H9 H10 H11 H12 H13 H14 H15 H16 V1 V2 V3 V4 V5.
   rewrite plus_comm.
-  rewrite <- mod_sum_lt_bool by lia. rewrite plus_comm.
+  rewrite <- mod_sum_lt_bool. rewrite plus_comm.
   rewrite plus_comm in H3.
   assert (v1 + v2 + 2 ^ n - vM = v1 + v2 - vM + 2^n) by lia.
   rewrite H4.
@@ -3168,7 +3168,7 @@ Proof.
   assert (1 <= (v1 + v2) / vM) by (apply Nat.div_le_lower_bound; lia).
   assert ((v1 + v2) / vM = 1) by lia.
   replace (v1 + v2 - vM * ((v1 + v2) / vM)) with (v1 + v2 - vM) by lia.
-  bdestruct (vM <=? v1 + v2). simpl. easy. lia.
+  bdestruct (vM <=? v1 + v2). simpl. easy. lia. lia. lia.
   assert ((v1 + v2) mod vM < vM).
   apply Nat.mod_upper_bound. lia. lia.
   unfold no_equal. split. lia. split. easy. split. easy. split. easy. split. easy. iner_p.
