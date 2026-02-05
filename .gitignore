@@ -9,3 +9,4 @@
 *.vos
 CoqMakefile
 CoqMakefile.conf
+.vscode/settings.json
