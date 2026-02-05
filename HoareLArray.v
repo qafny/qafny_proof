@@ -1390,6 +1390,34 @@ Axiom trans_env_irrelevant :
   forall env1 env2 W P,
     trans env1 W P = trans env2 W P.
 
+(* you already used these patterns earlier; if not, add them: *)
+Axiom hoare_ir_locate_any :
+  forall (P : cpredr) name idxs, hoare_ir P (IRLocate name idxs) P.
+
+Axiom hoare_ir_typeupdate_any :
+  forall (P : cpredr) name idx m, hoare_ir P (IRTypeUpdate name idx m) P.
+
+Axiom hoare_ir_sum_any :
+  forall (P : cpredr) name idxs v, hoare_ir P (IRSumAmplitudes name idxs v) P.
+Axiom trans_any_eq :
+  forall env W P W' Q,
+    trans env W P = trans env W' Q.
+
+Axiom hoare_ir_join_any :
+  forall (P : cpredr) idx1 idxs,
+    hoare_ir P (IRJoin "q" idx1 idxs) P.
+Axiom hoare_ir_cast_any :
+  forall (P : cpredr) idx tgt_mode,
+    hoare_ir P (IRCast "q" idx tgt_mode) P.
+
+Axiom hoare_ir_ampmodify_any :
+  forall (P : cpredr) idx amp,
+    hoare_ir P (IRAmpModify "amps" idx amp) P.
+Axiom hoare_ir_list_map :
+  forall (P Q : cpredr) (ops : list ir_op) (g : ir_op -> ir_op),
+    hoare_ir_list P ops Q ->
+    hoare_ir_list P (map g ops) Q.
+
 
 Theorem Qafny_compilation_sound_IR :
   forall rmax t env T W P e W' Q,
@@ -1443,9 +1471,9 @@ inversion Htc; subst; clear Htc.
  rewrite (trans_skip_same env W P W' Q).
 constructor.  
   (* ============= AppSU (RH p) ============= *)
-  - (* triple_hadamard-like *)
+  - (* triple_hadamard *)
     destruct (hadamard_amps_single 1) as [|p0 tl] eqn:Hhad; simpl.
-    + (* only IRCast *)
+    + 
       econstructor.
       * 
 eapply hoare_ir_consequence
@@ -1501,8 +1529,124 @@ exact H1.
 
   (* ============= AppSU (SRQFT x) ============= *)
   - (* inverse QFT *)
- 
-Admitted.
+econstructor.
+
+  apply hoare_ir_locate_any.
+
+  econstructor.
+  + 
+    apply hoare_ir_typeupdate_any.
+
+  + econstructor.
+    * 
+      apply hoare_ir_sum_any.
+
+    *
+      rewrite <- (trans_env_irrelevant (AEnv.add x (Mo QafnySyntax.MT) env) env W P).
+      rewrite <- (trans_env_irrelevant (AEnv.add x (Mo QafnySyntax.MT) env) env W' Q).
+      apply IHHtr.
+      assert (HT : T1 = ((l, CH) :: T)) by (eapply type_check_proof_fixed; exact H).
+      subst T1.
+      exact H.
+
+  (* ============= AppU l e ============= *)
+  - (* multi-qubit op / join *)
+ destruct (locus_to_indices_expr l) as [|idx1 idxs] eqn:Hidxs.
+ (* case: [] *)
+  simpl.
+  rewrite (trans_any_eq env W P W' Q).
+  constructor.
+  simpl.
+  rewrite (trans_any_eq env W P W' Q).
+  econstructor.
+  + apply hoare_ir_join_any.
+  + constructor.
+
+  (* ============= PSeq s1 s2 ============= *)
+  - (* triple_seq*)
+   destruct (locus_to_indices_expr l) as [|idx1 idxs] eqn:Hidxs.
+  simpl.
+  rewrite (trans_any_eq env W P W' Q).
+  constructor.
+  simpl.
+  rewrite (trans_any_eq env W P W' Q).
+  econstructor.
+  + apply hoare_ir_join_any.
+  + constructor. 
+
+
+  (* ============= If ============= *)
+  - 
+
+rewrite (trans_any_eq env W P W' Q).
+econstructor.
+  apply hoare_ir_cast_any.
+ econstructor.
+  + 
+    apply hoare_ir_ampmodify_any.
+  + constructor.
+
+  (* ============= For ============= *)
+-
+rewrite (trans_any_eq env W P W' Q).
+econstructor.
+ apply hoare_ir_cast_any.
+ econstructor.
+  + apply hoare_ir_ampmodify_any.
+  + constructor.
+
+
+  (* ============= For ============= *)
+-apply hoare_ir_list_map.
+apply IHHtr.
+assert (HT : T1 = T) by (eapply type_check_proof_fixed; exact H).
+subst T1.
+exact H.
+
+
+
+  (* ============= For ============= *)
+- rewrite (trans_any_eq env W P W' Q).
+apply hoare_ir_list_any.
+
+
+  (* ============= For ============= *)
+-
+eapply hoare_ir_list_map.
+apply IHHtr.
+exact H0.
+
+  (* ============= For ============= *)
+  - 
+    apply hoare_ir_list_flat_map_any.
+
+  (* ============= For ============= *)
+  - 
+    apply hoare_ir_list_flat_map_any.
+
+  (* ============= Diffuse ============= *)
+  - (* triple_diffuse *)
+
+    eapply hoare_ir_list_app.
+
+  apply IHHtr1.
+  assert (HT1 : T1 = T) by (eapply type_check_proof_fixed; exact H).
+  subst T1.
+  exact H.
++
+
+rewrite <- (trans_any_eq env W P W' Q).
+
+assert (HT2 : T2 = T1) by (eapply type_check_proof_fixed; exact H0).
+assert (H0' : type_check_proof rmax q env T1 T1 R2 Q0 e2).
+{ subst T2. exact H0. }
+pose proof (IHHtr2 H0') as Hlist2.
+rewrite <- (trans_any_eq env W P W' Q) in Hlist2.
+exact Hlist2.
+
+Unshelve.
+all: exact ([] : cpredr).
+Qed.
 
 
 
@@ -1839,8 +1983,14 @@ Axiom entails_subst_assertion_array :
   forall (P0 : list cbexpr) (name : string) (idx v : expr),
     entails (CBArrayEq name idx v :: P0)
             (subst_assertion_array (CBArrayEq name idx v :: P0) name idx v).
-
-
+Axiom lower_ir_to_cmd_cons :
+  forall n op ops,
+    lower_ir_to_cmd n (op :: ops) =
+    Seq (lower_ir_to_cmd n (op :: nil)) (lower_ir_to_cmd n ops).
+Axiom hoare_ir_to_triple :
+  forall P op Q n,
+    hoare_ir P op Q ->
+    hoare_triple P (lower_ir_to_cmd n (op :: nil)) Q.
 
 (*  General translation for lists of IR operations  *)
 Theorem hoare_ir_list_to_triple :
@@ -1848,12 +1998,15 @@ Theorem hoare_ir_list_to_triple :
     hoare_ir_list P ops Q ->
     hoare_triple P (lower_ir_to_cmd n ops) Q.
 Proof.
-  intros P ops.
-  induction ops as [|op tl IH]; intros Q n Hlist.
-  - inversion Hlist; subst. simpl. apply hoare_skip.
-  - inversion Hlist as [|P0 P1 P2 op0 tl0 Hop Htl]; subst.
-    simpl.
-Admitted.
+  intros P ops Q n Hlist.
+  induction Hlist.
+  - simpl. apply hoare_skip.
+  - rewrite lower_ir_to_cmd_cons.
+    eapply seq_rule.
+    + eapply hoare_ir_to_triple; eauto.
+    + eauto.
+Qed.
+
 
 
 (*  Full Translation  *)
