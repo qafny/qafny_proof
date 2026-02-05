@@ -1338,18 +1338,24 @@ Proof.
 Qed.
 Print type_check_proof.
 
+(* wrong *)
 Axiom type_check_proof_fixed :
   forall rmax t env T T' P Q e,
     type_check_proof rmax t env T T' P Q e -> T' = T.
 
+(* wrong *)
 Axiom trans_skip_same :
   forall env W P W' Q,
     trans env W P = trans env W' Q.
 (* IRCopy does not affect the assertions we care about (or we choose to ignore it). *)
+
+(* prove it in Hoare logic. *)
 Axiom hoare_ir_copy_any :
   forall (P : cpredr) src_name src_idx dst_name dst_idx,
     hoare_ir P (IRCopy src_name src_idx dst_name dst_idx) P.
-(* Consequence for hoare_ir (parallel to hoare_triple consequence) *)
+
+
+(* Consequence for hoare_ir (parallel to hoare_triple consequence), then this should go into the hoare_ir inductive relation *)
 Axiom hoare_ir_consequence :
   forall (P P' Q Q' : cpredr) (op : ir_op),
     entails P P' ->
@@ -1358,54 +1364,81 @@ Axiom hoare_ir_consequence :
     hoare_ir P op Q.
 
 (* Needed for the If translation: allow mapping to preserve hoare_ir_list *)
+(* prove it *)
 Axiom hoare_ir_list_map_id :
   forall (P Q : cpredr) (ops : list ir_op) (g : ir_op -> ir_op),
     (forall op, g op = op) ->
     hoare_ir_list P ops Q ->
     hoare_ir_list P (map g ops) Q.
+
+(* prove it *)
 Axiom hoare_ir_list_flat_map_any :
   forall (P Q : cpredr) (xs : list nat) (F : nat -> list ir_op),
     hoare_ir_list P (flat_map F xs) Q.
+
+(* Yes. but I do not want you to utilize this. *)
 Axiom pred_check_of_type_check_post :
   forall rmax q env T T1 P0 Q e,
     type_check_proof rmax q env T T1 P0 Q e ->
     pred_check env T1 Q.
+
+(*This is doing strhenghhening directly in qafny proof system. Not right. *)
 Axiom type_check_proof_strengthen_post :
   forall rmax q env T T1 P0 Q0 Q' e,
     type_check_proof rmax q env T T1 P0 Q0 e ->
     imply rmax Q' Q0 ->
     pred_check env T1 Q' ->
     type_check_proof rmax q env T T1 P0 Q' e.
+
+
+(* wrong *)
 Axiom pred_check_any :
   forall env T Q, pred_check env T Q.
 
+(* wrong *)
 Axiom entails_any : forall (P Q : list cbexpr), entails P Q.
+
+
+(*you have to prove it, I know it is hard. It seems wrong. this is saying that after the compilation, 
+   e and (subst_pexp e x v) are syntactically the same? *)
 Axiom compile_subst_ir :
   forall e x v,
     compile_pexp_to_ir e = compile_pexp_to_ir (subst_pexp e x v).
+
+(* wrong *)
 Axiom hoare_ir_list_any :
   forall (P : cpredr) (ops : list ir_op) (Q : cpredr),
     hoare_ir_list P ops Q.
+
+(* wrong. This is saying that the env is useless. the translation does not depends on the environment. *)
 Axiom trans_env_irrelevant :
   forall env1 env2 W P,
     trans env1 W P = trans env2 W P.
 
+(* The following three can be proved. *)
 (* you already used these patterns earlier; if not, add them: *)
 Axiom hoare_ir_locate_any :
   forall (P : cpredr) name idxs, hoare_ir P (IRLocate name idxs) P.
+
 
 Axiom hoare_ir_typeupdate_any :
   forall (P : cpredr) name idx m, hoare_ir P (IRTypeUpdate name idx m) P.
 
 Axiom hoare_ir_sum_any :
   forall (P : cpredr) name idxs v, hoare_ir P (IRSumAmplitudes name idxs v) P.
+
+(*This is saying that W and W' are useless in the translation? Wrong.
+   If you really think this, then the definition is the problem. Modify trans defintion. *)
 Axiom trans_any_eq :
   forall env W P W' Q,
     trans env W P = trans env W' Q.
 
+(* you should also prove the three below.*)
 Axiom hoare_ir_join_any :
   forall (P : cpredr) idx1 idxs,
     hoare_ir P (IRJoin "q" idx1 idxs) P.
+
+
 Axiom hoare_ir_cast_any :
   forall (P : cpredr) idx tgt_mode,
     hoare_ir P (IRCast "q" idx tgt_mode) P.
@@ -1413,6 +1446,9 @@ Axiom hoare_ir_cast_any :
 Axiom hoare_ir_ampmodify_any :
   forall (P : cpredr) idx amp,
     hoare_ir P (IRAmpModify "amps" idx amp) P.
+
+
+(*Wrong. really? I do not think so. ops is singleterm, and map is a mapping. *)
 Axiom hoare_ir_list_map :
   forall (P Q : cpredr) (ops : list ir_op) (g : ir_op -> ir_op),
     hoare_ir_list P ops Q ->
