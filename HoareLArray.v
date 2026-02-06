@@ -17,6 +17,7 @@ Require Import BasicUtility.
 Require Import Classical_Prop.
 Require Import MathSpec.
 Require Import QafnySyntax.
+Import QafnySyntax.
 Require Import LocusDef.
 Require Import LocusKind.
 Require Import LocusType.

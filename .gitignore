@@ -10,3 +10,7 @@
 CoqMakefile
 CoqMakefile.conf
 .vscode/settings.json
+Makefile.conf
+Makefile
+.Makefile.d
+Makefile

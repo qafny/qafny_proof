@@ -13,3 +13,4 @@ LocusType.v
 LocusSem.v
 LocusTypeProof.v
 LocusProof.v
+HoareLArray.v
