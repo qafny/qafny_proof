@@ -2112,6 +2112,19 @@ Proof.
             fuel φ φ'); eauto.
 Qed.
 
+Theorem qafny_to_hoare_completeness :
+  forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
+         (e : pexp) (c : list ir_op) (P' Q' : cpredr),
+    c = compile_pexp_to_ir e ->
+    hoare_ir_list P' c Q' ->
+    exists (W : LocusProof.cpred) (P : qpred)
+           (W' : LocusProof.cpred) (Q : qpred),
+      (@triple rmax t env T (W, P) e (W', Q)) /\
+      P' = trans env W P /\
+      Q' = trans env W' Q.
+Proof.
+
+Admitted.
 
 (* Translation Quantum State to Array *)
 Definition trans_qstate (q : qstate) : cpredr :=
