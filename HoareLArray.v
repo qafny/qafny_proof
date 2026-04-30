@@ -2451,34 +2451,6 @@ Proof.
   reflexivity.
 Qed.
 
-Theorem quantum_to_classical_tightness_statement :
-  forall rmax t env T W P e W' Q n,
-    type_check_proof rmax t env T T (W, P) (W', Q) e ->
-    hoare_triple
-      (trans env W P)
-      (lower_ir_to_cmd n (compile_pexp_to_ir e))
-      (trans env W' Q) ->
-    Prop.
-Proof.
-  intros.
-  exact True.
-Qed.
-
-
-Theorem quantum_to_classical_relative_tightness :
-  forall rmax t env T W P e W' Q n,
-    type_check_proof rmax t env T T (W, P) (W', Q) e ->
-    @triple rmax t env T (W, P) e (W', Q) ->
-    hoare_triple
-      (trans env W P)
-      (lower_ir_to_cmd n (compile_pexp_to_ir e))
-      (trans env W' Q).
-Proof.
-  intros rmax t env T W P e W' Q n Htype Htriple.
-  eapply qafny_compiler_sound_classical.
-  - exact Htype.
-  - exact Htriple.
-Qed.
 
 
 
