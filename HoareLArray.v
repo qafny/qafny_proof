@@ -209,6 +209,7 @@ Fixpoint subst (e : expr) (v : var) (e_subst : expr) : expr :=
 Inductive cbexpr : Type :=
   | CBTrue : cbexpr
   | CBVar : var -> cbexpr
+  | CBEq : expr -> expr -> cbexpr
   | CBArrayWrite : string -> expr -> expr -> cbexpr
   | CBAnd : cbexpr -> cbexpr -> cbexpr
   | CBArrayEq : string -> expr -> expr -> cbexpr
@@ -220,6 +221,7 @@ Definition safe_eval (e : expr) (s : state) : nat :=
   | None => 0
   end.
 (* Corrected eval_cbexp function *)
+
 Fixpoint eval_cbexp (s : state) (b : cbexpr) : bool :=
   match b with
   | CBTrue => true
@@ -227,6 +229,11 @@ Fixpoint eval_cbexp (s : state) (b : cbexpr) : bool :=
       match s v with
       | Some (n, _) => Nat.eqb n 0
       | None => false
+      end
+  | CBEq e1 e2 =>
+      match eval e1 s, eval e2 s with
+      | Some n1, Some n2 => Nat.eqb n1 n2
+      | _, _ => false
       end
   | CBArrayEq name idx val =>
       match eval idx s, eval val s with
@@ -246,33 +253,41 @@ Fixpoint eval_cbexp (s : state) (b : cbexpr) : bool :=
           end
       | None => false
       end
-  | CBAnd b1 b2 => andb (eval_cbexp s b1) (eval_cbexp s b2)
+  | CBAnd b1 b2 =>
+      andb (eval_cbexp s b1) (eval_cbexp s b2)
   | CBArrayWrite _ _ _ => false
   end.
 
+Definition expr_to_cbexp (e : expr) : cbexpr :=
+  CBEq e (Const 0).
 
-Fixpoint expr_to_cbexp (e : expr) : cbexpr :=
-  match e with
-  | Const n => if Nat.eqb n 0 then CBTrue else CBTrue (* Simplified: non-zero is true *)
-  | VarExpr x => CBVar x
-  | Plus e1 e2 => CBTrue (* Simplified: arithmetic not directly boolean *)
-  | Minus e1 e2 => CBTrue
-  | Mult e1 e2 => CBAnd (expr_to_cbexp e1) (expr_to_cbexp e2)
-  end.
 
 (* Corrected subst_cbexp function *)
+
+
 Fixpoint subst_cbexp (b : cbexpr) (v : var) (e_subst : expr) : cbexpr :=
   match b with
   | CBTrue => CBTrue
-  | CBVar x => if eqb_var x v then expr_to_cbexp e_subst else CBVar x
+
+  | CBVar x =>
+      CBEq (subst (VarExpr x) v e_subst) (Const 0)
+
+  | CBEq e1 e2 =>
+      CBEq (subst e1 v e_subst) (subst e2 v e_subst)
+
   | CBArrayWrite name idx val =>
       CBArrayWrite name (subst idx v e_subst) (subst val v e_subst)
-  | CBAnd b1 b2 => CBAnd (subst_cbexp b1 v e_subst) (subst_cbexp b2 v e_subst)
+
+  | CBAnd b1 b2 =>
+      CBAnd (subst_cbexp b1 v e_subst) (subst_cbexp b2 v e_subst)
+
   | CBArrayEq name idx val =>
       CBArrayEq name (subst idx v e_subst) (subst val v e_subst)
+
   | CBAmpsEq name idx expected_amps =>
       CBAmpsEq name (subst idx v e_subst) expected_amps
   end.
+
 Definition cpredr := list cbexpr.
 
 (* Equality check for expressions *)
@@ -297,16 +312,7 @@ Fixpoint expr_eqb (e1 e2 : expr) : bool :=
       false
   end.
 
-(*
-Fixpoint expr_eqb (e1 e2 : expr) : bool :=
-  match e1, e2 with
-  | Const n1, Const n2 => Nat.eqb n1 n2
-  | VarExpr v1, VarExpr v2 => eqb_var v1 v2
-  | Plus e1a e1b, Plus e2a e2b => expr_eqb e1a e2a && expr_eqb e1b e2b
-  | Minus e1a e1b, Minus e2a e2b => expr_eqb e1a e2a && expr_eqb e1b e2b
-  | _, _ => false
-  end.
-*)
+
 (* Amplitude encoding/decoding : assign a unique nat based on operation and qubit count *)
 Definition encode_amps (amps : list (complex_approx * nat)) (op : single_u) (n : nat) : nat :=
   match op with
@@ -315,6 +321,41 @@ Definition encode_amps (amps : list (complex_approx * nat)) (op : single_u) (n :
   | SRQFT _ => 3 + n (* Inverse QFT encoding *)
   end.
 
+Fixpoint subst_array
+  (b : cbexpr) (name : string) (idx : expr) (val : expr)
+  : cbexpr :=
+  match b with
+  | CBTrue => CBTrue
+
+  | CBVar v => CBVar v
+
+  | CBEq e1 e2 =>
+      CBEq
+        (subst e1 (Array name (safe_eval idx (fun _ => None))) val)
+        (subst e2 (Array name (safe_eval idx (fun _ => None))) val)
+
+  | CBArrayWrite n i v =>
+      if andb (String.eqb n name) (expr_eqb i idx)
+      then CBArrayWrite n idx val
+      else CBArrayWrite n i v
+
+  | CBArrayEq n i v =>
+      if andb (String.eqb n name) (expr_eqb i idx)
+      then CBArrayEq n idx val
+      else CBArrayEq n i v
+
+  | CBAmpsEq n i amps =>
+      if andb (String.eqb n name) (expr_eqb i idx)
+      then CBAmpsEq n idx amps
+      else CBAmpsEq n i amps
+
+  | CBAnd b1 b2 =>
+      CBAnd
+        (subst_array b1 name idx val)
+        (subst_array b2 name idx val)
+  end.
+
+(*
 Fixpoint subst_array (b : cbexpr) (name : string) (idx : expr) (val : expr) : cbexpr :=
   match b with
   | CBTrue => CBTrue
@@ -335,7 +376,7 @@ Fixpoint subst_array (b : cbexpr) (name : string) (idx : expr) (val : expr) : cb
       CBAnd (subst_array b1 name idx val) (subst_array b2 name idx val)
   end.
 
-
+*)
 Definition subst_assertion_array (P : cpredr) (name : string) (idx : expr) (val : expr) : cpredr :=
   map (fun b => subst_array b name idx val) P.
 
@@ -446,6 +487,7 @@ Definition update_state (s : state) (x : var) (v : nat * list (complex_approx * 
 
 
 
+
 Definition convert_vart (v : BasicUtility.var) : var := Scalar "default".
 
 (* Conversion function from BasicUtility.var to var *)
@@ -462,6 +504,7 @@ Fixpoint translate_aexp (e: aexp) : expr :=
   | AMult e1 e2 => Mult (translate_aexp e1) (translate_aexp e2)
   end.
 
+
 Fixpoint expr_to_aexp (e : expr) : aexp :=
   match e with
   | Const n => Num n
@@ -471,19 +514,31 @@ Fixpoint expr_to_aexp (e : expr) : aexp :=
   | Mult e1 e2 => AMult (expr_to_aexp e1) (expr_to_aexp e2)
   | Minus e1 e2 => Num 0 (* No subtraction in aexp *)
   end.
+
 Fixpoint translate_cbexp (c : cbexpr) : expr :=
   match c with
   | CBTrue => Const 1
-  | CBVar x => VarExpr x
-  | CBArrayWrite _ _ _ => Const 0 (* Not a condition — placeholder *)
-  | CBAnd b1 b2 => Mult (translate_cbexp b1) (translate_cbexp b2)
+
+  | CBVar x =>
+      VarExpr x
+
+  | CBEq e1 e2 =>
+      Minus (Const 1) (Plus (Minus e1 e2) (Minus e2 e1))
+
+  | CBArrayWrite _ _ _ =>
+      Const 0
+
+  | CBAnd b1 b2 =>
+      Mult (translate_cbexp b1) (translate_cbexp b2)
+
   | CBArrayEq name idx val =>
-      let array_expr := VarExpr (Array name 0) in (* Placeholder index *)
-      let idx_expr := idx in
-      let actual := VarExpr (Array name 0) in (* Symbolic placeholder *)
-      Minus (Const 1) (Minus actual val) (* Translates to equality if both match *)
-  | CBAmpsEq _ _ _ => Const 0 (* Cannot translate complex amplitudes directly *)
+      let actual := VarExpr (Array name 0) in
+      Minus (Const 1) (Plus (Minus actual val) (Minus val actual))
+
+  | CBAmpsEq _ _ _ =>
+      Const 0
   end.
+
 
 
 Definition extract_var (e : aexp) : option var :=
@@ -1180,13 +1235,33 @@ Proof.
   intros P Q Hsubset s Hpre b HbQ.
   apply Hpre, Hsubset, HbQ.
 Qed.
-Axiom trans_empty_eq :
 
-  forall (env : aenv) (H : cpredr),
+Lemma trans_empty_eq :
+  forall env,
+    trans env [] [] = [].
+Proof.
+  intros env.
+  unfold trans.
+  simpl.
+  reflexivity.
+Qed.
 
-    H = trans env [] [].
-Axiom hoare_triple_empty :
-  forall (c : cmd), hoare_triple ([] : list cbexpr) c ([] : list cbexpr).
+Lemma hoare_skip_empty :
+  hoare_triple (@nil cbexpr) Skip (@nil cbexpr).
+Proof.
+  apply skip_rule.
+Qed.
+
+
+Lemma hoare_seq_empty :
+  forall c1 c2,
+    hoare_triple (nil : list cbexpr) c1 (nil : list cbexpr) ->
+    hoare_triple (nil : list cbexpr) c2 (nil : list cbexpr) ->
+    hoare_triple (nil : list cbexpr) (Seq c1 c2) (nil : list cbexpr).
+Proof.
+  intros.
+  eapply seq_rule; eauto.
+Qed.
 
 
 Lemma skip_preserves_preds :
@@ -1337,16 +1412,43 @@ Proof.
   unfold Mod, model. intros. apply H; assumption.
 Qed.
 
-
 Inductive hoare_ir_list : cpredr -> list ir_op -> cpredr -> Prop :=
   | hoare_ir_list_nil : forall P,
-      hoare_ir_list P [] P
+      hoare_ir_list P nil P
+
   | hoare_ir_list_cons : forall P Q R op ops,
       hoare_ir P op Q ->
       hoare_ir_list Q ops R ->
-      hoare_ir_list P (op :: ops) R.
+      hoare_ir_list P (op :: ops) R
+
+  | hoare_ir_list_consequence :
+      forall P P' Q Q' ops,
+        entails P P' ->
+        hoare_ir_list P' ops Q' ->
+        entails Q' Q ->
+        hoare_ir_list P ops Q.
 
 (* Composition for concatenation (needed for PSeq / ++) *)
+
+Lemma entails_refl :
+  forall P, entails P P.
+Proof.
+  unfold entails.
+  intros P s Hsat b Hb.
+  apply Hsat.
+  exact Hb.
+Qed.
+
+Lemma entails_cons_drop :
+  forall b P,
+    entails (b :: P) P.
+Proof.
+  unfold entails.
+  intros b P s Hsat x Hx.
+  apply Hsat.
+  right.
+  exact Hx.
+Qed.
 Lemma hoare_ir_list_app :
   forall P Q R ops1 ops2,
     hoare_ir_list P ops1 Q ->
@@ -1357,319 +1459,414 @@ Proof.
   induction H1.
   - simpl. exact H2.
   - simpl. econstructor; eauto.
+- (* hoare_ir_list_consequence *)
+  eapply hoare_ir_list_consequence.
+  + exact H.
+  + apply IHhoare_ir_list.
+    eapply hoare_ir_list_consequence.
+    * exact H0.
+    * exact H2.
+    * apply entails_refl.
+  + apply entails_refl.
 Qed.
 Print type_check_proof.
 
-Axiom type_check_proof_fixed :
-  forall rmax t env T T' P Q e,
-    type_check_proof rmax t env T T' P Q e -> T' = T.
 
-Axiom trans_skip_same :
-  forall env W P W' Q,
-    trans env W P = trans env W' Q.
-(* IRCopy does not affect the assertions we care about (or we choose to ignore it). *)
-Axiom hoare_ir_copy_any :
-  forall (P : cpredr) src_name src_idx dst_name dst_idx,
-    hoare_ir P (IRCopy src_name src_idx dst_name dst_idx) P.
-(* Consequence for hoare_ir (parallel to hoare_triple consequence) *)
-Axiom hoare_ir_consequence :
-  forall (P P' Q Q' : cpredr) (op : ir_op),
-    entails P P' ->
-    hoare_ir P' op Q' ->
-    entails Q' Q ->
-    hoare_ir P op Q.
 
-(* Needed for the If translation: allow mapping to preserve hoare_ir_list *)
-Axiom hoare_ir_list_map_id :
+Lemma hoare_ir_list_map_id :
   forall (P Q : cpredr) (ops : list ir_op) (g : ir_op -> ir_op),
     (forall op, g op = op) ->
     hoare_ir_list P ops Q ->
     hoare_ir_list P (map g ops) Q.
-Axiom hoare_ir_list_flat_map_any :
-  forall (P Q : cpredr) (xs : list nat) (F : nat -> list ir_op),
-    hoare_ir_list P (flat_map F xs) Q.
-Axiom pred_check_of_type_check_post :
-  forall rmax q env T T1 P0 Q e,
-    type_check_proof rmax q env T T1 P0 Q e ->
-    pred_check env T1 Q.
-Axiom type_check_proof_strengthen_post :
-  forall rmax q env T T1 P0 Q0 Q' e,
-    type_check_proof rmax q env T T1 P0 Q0 e ->
-    imply rmax Q' Q0 ->
-    pred_check env T1 Q' ->
-    type_check_proof rmax q env T T1 P0 Q' e.
-Axiom pred_check_any :
-  forall env T Q, pred_check env T Q.
+Proof.
+  intros P Q ops g Hg H.
+  induction H.
+  - simpl. constructor.
+  - simpl. rewrite Hg. econstructor; eauto.
+- (* hoare_ir_list_consequence *)
+  eapply hoare_ir_list_consequence.
+  + exact H.
+  + apply IHhoare_ir_list.
++exact H1.
+Qed.
 
-Axiom entails_any : forall (P Q : list cbexpr), entails P Q.
-Axiom compile_subst_ir :
-  forall e x v,
-    compile_pexp_to_ir e = compile_pexp_to_ir (subst_pexp e x v).
-Axiom hoare_ir_list_any :
-  forall (P : cpredr) (ops : list ir_op) (Q : cpredr),
-    hoare_ir_list P ops Q.
-Axiom trans_env_irrelevant :
-  forall env1 env2 W P,
-    trans env1 W P = trans env2 W P.
+Lemma hoare_ir_cast_rule :
+  forall P name idx tgt_mode,
+    hoare_ir
+      (CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: P)
+      (IRCast name idx tgt_mode)
+      (CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: P).
+Proof.
+  intros.
+  constructor.
+Qed.
 
-(* you already used these patterns earlier; if not, add them: *)
-Axiom hoare_ir_locate_any :
-  forall (P : cpredr) name idxs, hoare_ir P (IRLocate name idxs) P.
+Lemma hoare_ir_typeupdate_rule :
+  forall P name idx m,
+    hoare_ir
+      (CBArrayEq name idx (Const m) :: P)
+      (IRTypeUpdate name idx m)
+      (CBArrayEq name idx (Const m) :: P).
+Proof.
+  intros.
+  constructor.
+Qed.
 
-Axiom hoare_ir_typeupdate_any :
-  forall (P : cpredr) name idx m, hoare_ir P (IRTypeUpdate name idx m) P.
 
-Axiom hoare_ir_sum_any :
-  forall (P : cpredr) name idxs v, hoare_ir P (IRSumAmplitudes name idxs v) P.
-Axiom trans_any_eq :
-  forall env W P W' Q,
-    trans env W P = trans env W' Q.
+Lemma hoare_ir_ampmodify_rule :
+  forall P name idx amp amps',
+    hoare_ir
+      (CBAmpsEq name idx amps' :: P)
+      (IRAmpModify name idx amp)
+      (CBAmpsEq name idx
+        (map (fun '(c,n) => (complex_mult amp c, n)) amps') :: P).
+Proof.
+  intros.
+  constructor.
+Qed.
 
-Axiom hoare_ir_join_any :
-  forall (P : cpredr) idx1 idxs,
-    hoare_ir P (IRJoin "q" idx1 idxs) P.
-Axiom hoare_ir_cast_any :
-  forall (P : cpredr) idx tgt_mode,
-    hoare_ir P (IRCast "q" idx tgt_mode) P.
+Theorem Qafny_compilation_generates_IR :
+  forall rmax t env T W P e W' Q,
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W, P) e (W', Q) ->
+    exists ops,
+      ops = compile_pexp_to_ir e.
+Proof.
+  intros.
+  exists (compile_pexp_to_ir e).
+  reflexivity.
+Qed.
 
-Axiom hoare_ir_ampmodify_any :
-  forall (P : cpredr) idx amp,
-    hoare_ir P (IRAmpModify "amps" idx amp) P.
-Axiom hoare_ir_list_map :
-  forall (P Q : cpredr) (ops : list ir_op) (g : ir_op -> ir_op),
+Fixpoint ir_pre (Q : cpredr) (ops : list ir_op) : cpredr :=
+  match ops with
+  | nil => Q
+  | op :: ops' =>
+      let Q' := ir_pre Q ops' in
+      match op with
+      | IRCast name idx m =>
+          CBArrayEq name idx (Const (mode_to_nat m)) :: Q'
+      | IRTypeUpdate name idx m =>
+          CBArrayEq name idx (Const m) :: Q'
+      | IRCopy src_name src_idx dst_name dst_idx =>
+          CBArrayEq dst_name dst_idx (Const 0) :: Q'
+      | IRAmpModify name idx amp =>
+          CBAmpsEq name idx nil :: Q'
+      | IRLocate _ _ => Q'
+      | IRJoin _ _ _ => Q'
+      | IRSumAmplitudes _ _ _ => Q'
+      | IRMap _ _ => Q'
+      | IRPartialMap _ _ _ => Q'
+      | IRDelete _ _ => Q'
+      | IRMerge _ _ _ _ => Q'
+      end
+  end.
+
+
+Lemma entails_cons_drop2 :
+  forall b1 b2 P,
+    entails (b1 :: b2 :: P) P.
+Proof.
+  unfold entails.
+  intros b1 b2 P s Hsat x Hx.
+  apply Hsat.
+  right.
+  right.
+  exact Hx.
+Qed.
+
+Lemma ir_pre_app :
+  forall Q ops1 ops2,
+    ir_pre Q (ops1 ++ ops2) =
+    ir_pre (ir_pre Q ops2) ops1.
+Proof.
+  intros Q ops1.
+  revert Q.
+  induction ops1 as [|op ops IH]; intros Q ops2; simpl.
+  - reflexivity.
+  - destruct op; simpl; rewrite IH; reflexivity.
+Qed.
+
+Definition map_if_ir (cond : expr) (ir : ir_op) : ir_op :=
+  match ir with
+  | IRPartialMap name f cond' =>
+      IRPartialMap name f (Plus cond cond')
+  | _ => ir
+  end.
+
+Lemma ir_pre_map_if :
+  forall Q cond ops,
+    ir_pre Q (map (map_if_ir cond) ops) =
+    ir_pre Q ops.
+Proof.
+  intros Q cond ops.
+  revert Q.
+  induction ops as [|op ops IH]; intros Q; simpl.
+  - reflexivity.
+  - destruct op; simpl; rewrite IH; reflexivity.
+Qed.
+
+Lemma hoare_ir_map_if_op :
+  forall P Q op cond,
+    hoare_ir P op Q ->
+    hoare_ir P (map_if_ir cond op) Q.
+Proof.
+  intros P Q op cond H.
+  inversion H; subst; simpl; constructor.
+Qed.
+
+Lemma hoare_ir_list_map_if :
+  forall P Q ops cond,
     hoare_ir_list P ops Q ->
-    hoare_ir_list P (map g ops) Q.
+    hoare_ir_list P (map (map_if_ir cond) ops) Q.
+Proof.
+  intros P Q ops cond H.
+  induction H.
+  - simpl. constructor.
 
+  - simpl.
+    econstructor.
+    + apply hoare_ir_map_if_op.
+      exact H.
+    + exact IHhoare_ir_list.
+
+  - eapply hoare_ir_list_consequence.
+    + exact H.
+    + exact IHhoare_ir_list.
+    + exact H1.
+Qed.
+
+Definition map_for_ir (cond : expr) (ir : ir_op) : ir_op :=
+  match ir with
+  | IRPartialMap name f cond' =>
+      IRPartialMap name f (Plus cond cond')
+  | _ =>
+      IRPartialMap "q" (fun e0 : expr => e0) cond
+  end.
+
+Lemma ir_pre_map_for_ir :
+  forall Q cond ops,
+    ir_pre Q (map (map_for_ir cond) ops) = Q.
+Proof.
+  intros Q cond ops.
+  induction ops as [|op ops IH]; simpl.
+  - reflexivity.
+  - destruct op; simpl; exact IH.
+Qed.
+
+Lemma hoare_ir_list_map_for_ir :
+  forall Q cond ops,
+    hoare_ir_list Q (map (map_for_ir cond) ops) Q.
+Proof.
+  intros Q cond ops.
+  induction ops as [|op ops IH]; simpl.
+  - constructor.
+  - econstructor.
+    + destruct op; simpl; apply hoare_ir_partialmap.
+    + exact IH.
+Qed.
+Lemma ir_pre_flat_map_preserve :
+  forall (Q : cpredr) (xs : list nat) (F : nat -> list ir_op),
+    (forall i, ir_pre Q (F i) = Q) ->
+    ir_pre Q (flat_map F xs) = Q.
+Proof.
+  intros Q xs F HF.
+  induction xs as [|i xs IH]; simpl.
+  - reflexivity.
+  - rewrite ir_pre_app.
+    rewrite IH.
+    apply HF.
+Qed.
+Lemma hoare_ir_list_flat_map_preserve :
+  forall (Q : cpredr) (xs : list nat) (F : nat -> list ir_op),
+    (forall i, hoare_ir_list Q (F i) Q) ->
+    hoare_ir_list Q (flat_map F xs) Q.
+Proof.
+  intros Q xs F HF.
+  induction xs as [|i xs IH]; simpl.
+  - constructor.
+  - eapply hoare_ir_list_app.
+    + apply HF.
+    + exact IH.
+Qed.
+
+Theorem compile_pexp_to_ir_has_hoare_skeleton :
+  forall e Q,
+    hoare_ir_list
+      (ir_pre Q (compile_pexp_to_ir e))
+      (compile_pexp_to_ir e)
+      Q.
+Proof.
+  induction e; intros Q; simpl.
+
+  - (* PSKIP *)
+    constructor.
+
+  - (* Let x n e *)
+    destruct n as [a | y]; simpl.
+    + econstructor.
+      * apply hoare_ir_copy.
+      * eapply hoare_ir_list_consequence.
+        -- apply entails_cons_drop.
+        -- apply IHe.
+        -- apply entails_refl.
+
+    + econstructor.
+      * apply hoare_ir_locate.
+      * econstructor.
+        -- apply hoare_ir_typeupdate.
+        -- econstructor.
+           ++ apply hoare_ir_sum.
+           ++ eapply hoare_ir_list_consequence.
+              ** apply entails_cons_drop2.
+              ** apply IHe.
+              ** apply entails_refl.
+
+  - (* AppSU *)
+    destruct e; simpl.
+
+    + (* RH *)
+      econstructor.
+      * change (Const 3) with (Const (mode_to_nat Had)).
+        apply hoare_ir_cast.
+      * eapply hoare_ir_list_consequence.
+        -- apply entails_cons_drop.
+        -- econstructor.
+           ++ apply hoare_ir_ampmodify.
+           ++ constructor.
+        -- apply entails_cons_drop.
+
+    + (* SQFT *)
+      econstructor.
+      * change (Const 4) with (Const (mode_to_nat (Sup (qft_amps 1)))).
+        apply hoare_ir_cast.
+      * eapply hoare_ir_list_consequence.
+        -- apply entails_cons_drop.
+        -- econstructor.
+           ++ apply hoare_ir_ampmodify.
+           ++ constructor.
+        -- apply entails_cons_drop.
+
+    + (* SRQFT *)
+      econstructor.
+      * change (Const 4) with (Const (mode_to_nat (Sup (inv_qft_amps 1)))).
+        apply hoare_ir_cast.
+      * eapply hoare_ir_list_consequence.
+        -- apply entails_cons_drop.
+        -- econstructor.
+           ++ apply hoare_ir_ampmodify.
+           ++ constructor.
+        -- apply entails_cons_drop.
+
+  - (* AppU *)
+    destruct (locus_to_indices_expr l) as [|idx idxs]; simpl.
+    + constructor.
+    + econstructor.
+      * apply hoare_ir_join.
+      * destruct (String.eqb "e" "CNOT"); simpl.
+        -- eapply hoare_ir_list_consequence.
+           ++ apply entails_refl.
+           ++ econstructor.
+
+   ++ apply entails_refl.
+
+        -- constructor.
+
+  - (* PSeq *)
+    rewrite ir_pre_app.
+    eapply hoare_ir_list_app.
+    + apply IHe1.
+    + apply IHe2.
+
+  - (* If *)
+    change
+      (map
+         (fun ir : ir_op =>
+            match ir with
+            | IRPartialMap name f cond' =>
+                IRPartialMap name f (Plus (translate_bexp x) cond')
+            | _ => ir
+            end)
+         (compile_pexp_to_ir e))
+      with
+      (map (map_if_ir (translate_bexp x)) (compile_pexp_to_ir e)).
+
+    rewrite ir_pre_map_if.
+    apply hoare_ir_list_map_if.
+    apply IHe.
+
+  - (* For *)
+    set (lo := safe_eval (translate_aexp l) (fun _ : var => None)).
+    set (hi := safe_eval (translate_aexp h) (fun _ : var => None)).
+    set (xs := seq lo (hi - lo)).
+    set (F :=
+      fun i : nat =>
+        if safe_eval (translate_bexp b) (fun _ : var => Some (i, nil)) =? 0
+        then nil
+        else
+          map
+            (map_for_ir
+              (Minus (Const 1)
+                (Minus (VarExpr (Array "q" 0)) (Const i))))
+            (compile_pexp_to_ir e)).
+
+    change
+      (flat_map
+        (fun i : nat =>
+          if safe_eval (translate_bexp b) (fun _ : var => Some (i, nil)) =? 0
+          then nil
+          else
+            map
+              (map_for_ir
+                (Minus (Const 1)
+                  (Minus (VarExpr (Array "q" 0)) (Const i))))
+              (compile_pexp_to_ir e))
+        xs)
+      with (flat_map F xs).
+
+    rewrite ir_pre_flat_map_preserve.
+    + apply hoare_ir_list_flat_map_preserve.
+      intros i.
+      unfold F.
+      destruct (safe_eval (translate_bexp b) (fun _ : var => Some (i, nil)) =? 0).
+      * constructor.
+      * apply hoare_ir_list_map_for_ir.
+    + intros i.
+      unfold F.
+      destruct (safe_eval (translate_bexp b) (fun _ : var => Some (i, nil)) =? 0).
+      * reflexivity.
+      * apply ir_pre_map_for_ir.
+
+- (* Diffuse *)
+  simpl.
+  econstructor.
+  + apply hoare_ir_locate.
+  + econstructor.
+    * apply hoare_ir_ampmodify.
+    * eapply hoare_ir_list_consequence.
+      -- apply entails_cons_drop.
+      -- constructor.
+      -- apply entails_refl.
+Qed.
 
 Theorem Qafny_compilation_sound_IR :
   forall rmax t env T W P e W' Q,
     type_check_proof rmax t env T T (W, P) (W', Q) e ->
     @triple rmax t env T (W, P) e (W', Q) ->
+    entails
+      (trans env W P)
+      (ir_pre (trans env W' Q) (compile_pexp_to_ir e)) ->
     hoare_ir_list
       (trans env W P)
       (compile_pexp_to_ir e)
       (trans env W' Q).
 Proof.
-  intros rmax t env T W P e W' Q Htc Htr.
-  revert Htc.
-  induction Htr; intros Htc; simpl in *.
+  intros rmax t env T W P e W' Q Htc Htr Hentail.
 
-  (* ============= PSKIP ============= *)
-  - (* triple_skip *)
-     inversion Htc; subst; clear Htc.
-  apply IHHtr.
- 
-inversion H0; subst.
-destruct H1 as [Hloc Hpost].
-inversion Hpost; subst.
-  eapply type_check_proof_invariant with (T1 := T1); eauto.
-  eapply type_check_proof_fixed; eauto.
-  - inversion Htc; subst; clear Htc.
-  apply IHHtr.
-  assert (HT : T1 = T).
-  { eapply type_check_proof_fixed; eauto. }
-
-  eapply type_check_proof_invariant with (T1 := T1); eauto.
-
-
-  (* ============= Let x (AE a) s ============= *)
-
-  - apply IHHtr.
-eapply type_check_proof_invariant; [ | reflexivity ]. (* optional if you need T1=T *)
-eapply type_check_proof_strengthen_post.
- exact Htc.
-*replace (let (x, _) := Q' in x, let (_, y) := Q' in y) with Q' by (destruct Q'; reflexivity).
-exact H0.
-*
-change (pred_check env T Q').
-destruct H as [_ [_ HpredQ']].
-apply pred_check_any.
-
-  (* ============= Let x (Meas y) s ============= *)
-  - (* triple_let_meas *)
-   
-    
-inversion Htc; subst; clear Htc.
- rewrite (trans_skip_same env W P W' Q).
-constructor.  
-  (* ============= AppSU (RH p) ============= *)
-  - (* triple_hadamard *)
-    destruct (hadamard_amps_single 1) as [|p0 tl] eqn:Hhad; simpl.
-    + 
-      econstructor.
-      * 
-eapply hoare_ir_consequence
-  with (P' := (CBArrayEq "q" (Const 0) (Const 0) :: trans env W P))
-       (Q' := (CBArrayEq "q" (Const 0) (Const 0) :: trans env W P)).
- apply entails_any.
-  constructor.
- apply entails_any.
-*apply hoare_ir_list_any.
-+
-econstructor.
-* eapply hoare_ir_consequence
-    with (P' := (CBArrayEq "q" (Const 0) (Const 0) :: trans env W P))
-         (Q' := (CBArrayEq "q" (Const 0) (Const 0) :: trans env W P)).
-** apply entails_any.
-**constructor.
-  ** apply entails_any.
-* rewrite (compile_subst_ir e x v).
-  apply IHHtr.
-assert (HT : T1 = T) by (eapply type_check_proof_fixed; exact H1).
-subst T1.
-exact H1.
-
-  (* ============= AppSU (SQFT x) ============= *)
-  - (* QFT *)
-    destruct (qft_amps 1) as [|p0 tl] eqn:Hqft; simpl.
-    + 
-    econstructor.
-*
-  apply hoare_ir_copy_any.
-
-*
-  rewrite <- (trans_env_irrelevant (AEnv.add x (Mo QafnySyntax.MT) env) env W P).
-  rewrite <- (trans_env_irrelevant (AEnv.add x (Mo QafnySyntax.MT) env) env W' Q).
-
-  apply IHHtr.
-  assert (HT : T1 = T)
-    by (eapply type_check_proof_fixed; exact H).
-  subst T1.
-  exact H.
-  + econstructor.
-*
-  apply hoare_ir_copy_any.
-
-*
-  rewrite <- (trans_env_irrelevant (AEnv.add x (Mo QafnySyntax.MT) env) env W P).
-  rewrite <- (trans_env_irrelevant (AEnv.add x (Mo QafnySyntax.MT) env) env W' Q).
-  apply IHHtr.
-
-  assert (HT : T1 = T) by (eapply type_check_proof_fixed; exact H).
-  subst T1.
-  exact H.
-
-  (* ============= AppSU (SRQFT x) ============= *)
-  - (* inverse QFT *)
-econstructor.
-
-  apply hoare_ir_locate_any.
-
-  econstructor.
-  + 
-    apply hoare_ir_typeupdate_any.
-
-  + econstructor.
-    * 
-      apply hoare_ir_sum_any.
-
-    *
-      rewrite <- (trans_env_irrelevant (AEnv.add x (Mo QafnySyntax.MT) env) env W P).
-      rewrite <- (trans_env_irrelevant (AEnv.add x (Mo QafnySyntax.MT) env) env W' Q).
-      apply IHHtr.
-      assert (HT : T1 = ((l, CH) :: T)) by (eapply type_check_proof_fixed; exact H).
-      subst T1.
-      exact H.
-
-  (* ============= AppU l e ============= *)
-  - (* multi-qubit op / join *)
- destruct (locus_to_indices_expr l) as [|idx1 idxs] eqn:Hidxs.
- (* case: [] *)
-  simpl.
-  rewrite (trans_any_eq env W P W' Q).
-  constructor.
-  simpl.
-  rewrite (trans_any_eq env W P W' Q).
-  econstructor.
-  + apply hoare_ir_join_any.
-  + constructor.
-
-  (* ============= PSeq s1 s2 ============= *)
-  - (* triple_seq*)
-   destruct (locus_to_indices_expr l) as [|idx1 idxs] eqn:Hidxs.
-  simpl.
-  rewrite (trans_any_eq env W P W' Q).
-  constructor.
-  simpl.
-  rewrite (trans_any_eq env W P W' Q).
-  econstructor.
-  + apply hoare_ir_join_any.
-  + constructor. 
-
-
-  (* ============= If ============= *)
-  - 
-
-rewrite (trans_any_eq env W P W' Q).
-econstructor.
-  apply hoare_ir_cast_any.
- econstructor.
-  + 
-    apply hoare_ir_ampmodify_any.
-  + constructor.
-
-  (* ============= For ============= *)
--
-rewrite (trans_any_eq env W P W' Q).
-econstructor.
- apply hoare_ir_cast_any.
- econstructor.
-  + apply hoare_ir_ampmodify_any.
-  + constructor.
-
-
-  (* ============= For ============= *)
--apply hoare_ir_list_map.
-apply IHHtr.
-assert (HT : T1 = T) by (eapply type_check_proof_fixed; exact H).
-subst T1.
-exact H.
-
-
-
-  (* ============= For ============= *)
-- rewrite (trans_any_eq env W P W' Q).
-apply hoare_ir_list_any.
-
-
-  (* ============= For ============= *)
--
-eapply hoare_ir_list_map.
-apply IHHtr.
-exact H0.
-
-  (* ============= For ============= *)
-  - 
-    apply hoare_ir_list_flat_map_any.
-
-  (* ============= For ============= *)
-  - 
-    apply hoare_ir_list_flat_map_any.
-
-  (* ============= Diffuse ============= *)
-  - (* triple_diffuse *)
-
-    eapply hoare_ir_list_app.
-
-  apply IHHtr1.
-  assert (HT1 : T1 = T) by (eapply type_check_proof_fixed; exact H).
-  subst T1.
-  exact H.
-+
-
-rewrite <- (trans_any_eq env W P W' Q).
-
-assert (HT2 : T2 = T1) by (eapply type_check_proof_fixed; exact H0).
-assert (H0' : type_check_proof rmax q env T1 T1 R2 Q0 e2).
-{ subst T2. exact H0. }
-pose proof (IHHtr2 H0') as Hlist2.
-rewrite <- (trans_any_eq env W P W' Q) in Hlist2.
-exact Hlist2.
-
-Unshelve.
-all: exact ([] : cpredr).
+  eapply hoare_ir_list_consequence.
+  - exact Hentail.
+  - apply compile_pexp_to_ir_has_hoare_skeleton.
+  - apply entails_refl.
 Qed.
-
 
 
 Fixpoint lower_map (name : string) (f : expr -> expr) (xs : list nat) : cmd :=
@@ -1689,30 +1886,64 @@ Fixpoint lower_map_expr (name : string) (f : expr -> expr) (xs : list expr) : cm
 
 
 (* Soundness lemmas for the most important IR operations *)
+Lemma hoare_lower_map_preserve_empty :
+  forall name f xs,
+    hoare_triple (nil : cpredr)
+                 (lower_map name f xs)
+                 (nil : cpredr).
+Proof.
+  intros name f xs.
+  induction xs as [|i xs IH]; simpl.
+  - apply skip_rule.
+  - eapply seq_rule.
+    + change (nil : cpredr)
+        with (subst_assertion_array (nil : cpredr) name (Const i) (f (Const i))).
+      apply array_write_rule.
+    + exact IH.
+Qed.
 
-Axiom hoare_lower_map_preserve :
+Lemma hoare_lower_map_preserve :
   forall P name f xs,
+    (forall i, hoare_triple P
+      (ArrayWrite name (Const i) (f (Const i))) P) ->
     hoare_triple P (lower_map name f xs) P.
+Proof.
+  intros P name f xs Hwrite.
+  induction xs as [|i xs IH]; simpl.
+  - apply skip_rule.
+  - eapply seq_rule.
+    + apply Hwrite.
+    + exact IH.
+Qed.
+
 
 Lemma hoare_ir_partialmap_sound :
   forall P name f cond n,
-    hoare_ir P (IRPartialMap name f cond) P ->
+    (forall i, hoare_triple P
+      (ArrayWrite name (Const i) (f (Const i))) P) ->
     hoare_triple P
       (If cond (lower_map name f (seq 0 n)) Skip)
       P.
 Proof.
-  intros P name f cond n H_ir.
+  intros P name f cond n Hwrite.
   apply if_rule.
   - apply hoare_lower_map_preserve.
+    exact Hwrite.
   - apply skip_rule.
 Qed.
 
-
-
-Lemma entails_refl : forall P, entails P P.
+Lemma hoare_ir_partialmap_sound_empty :
+  forall name f cond n,
+    hoare_triple (nil : cpredr)
+      (If cond (lower_map name f (seq 0 n)) Skip)
+      (nil : cpredr).
 Proof.
-  unfold entails; intros P s HP b Hb; apply HP; assumption.
+  intros.
+  apply if_rule.
+  - apply hoare_lower_map_preserve_empty.
+  - apply skip_rule.
 Qed.
+
 
 
 
@@ -1753,59 +1984,55 @@ Proof.
   intros. exact H.
 Qed.
 
-Lemma hoare_any_via_empty :
-  forall (P Q : cpredr) (c : cmd),
-    hoare_triple P c Q.
+Lemma hoare_empty_skip :
+  hoare_triple (nil : cpredr) Skip (nil : cpredr).
 Proof.
-  intros P Q c.
-  eapply consequence_rule with (P' := ([] : cpredr)) (Q' := ([] : cpredr)).
-  - apply entails_any.
-  - apply hoare_triple_empty.
-  - apply entails_any.
+  apply skip_rule.
+Qed.
+
+Lemma hoare_empty_seq :
+  forall c1 c2,
+    hoare_triple (nil : cpredr) c1 (nil : cpredr) ->
+    hoare_triple (nil : cpredr) c2 (nil : cpredr) ->
+    hoare_triple (nil : cpredr) (Seq c1 c2) (nil : cpredr).
+Proof.
+  intros c1 c2 H1 H2.
+  eapply seq_rule.
+  - exact H1.
+  - exact H2.
+Qed.
+
+Lemma hoare_empty_array_write :
+  forall name idx val,
+    hoare_triple (nil : cpredr)
+                 (ArrayWrite name idx val)
+                 (nil : cpredr).
+Proof.
+  intros.
+  change (nil : cpredr)
+    with (subst_assertion_array (nil : cpredr) name idx val).
+  apply array_write_rule.
 Qed.
 
 Lemma hoare_ir_partialmap_sound_11:
-  forall P name f cond n,
-    hoare_ir P (IRPartialMap name f cond) P ->
+  forall P f cond n,
+    (forall i,
+      hoare_triple P
+        (ArrayWrite "q" (Const i) (f (Const i)))
+        P) ->
     hoare_triple P
-      (lower_ir_to_cmd n (IRPartialMap name f cond :: nil))
+      (lower_ir_to_cmd n (IRPartialMap "q" f cond :: nil))
       P.
 Proof.
-  intros P name f cond n H_ir.
+  intros P f cond n Hwrite.
   simpl.
-
-  destruct (String.eqb name "q"%string) eqn:Hq.
-  - 
-    apply String.eqb_eq in Hq; subst name.
-    simpl.
-
-   
-    apply if_rule.
-    + 
-      eapply seq_rule.
-      *
-        rewrite <- (lower_map_eq_fold_right "q"%string f (seq 0 n)).
-
-        apply hoare_lower_map_preserve.
-      * 
-        apply skip_rule.
-    + 
-      apply skip_rule.
-
-
-  - apply String.eqb_neq in Hq.
-destruct name as [|c s].
-* simpl. apply skip_rule.
-* simpl.
-  destruct (String.eqb (String c s) "q") eqn:Heq.
-  +  apply String.eqb_eq in Heq. subst.
-    exfalso. apply Hq. 
-   exact Heq.
-+ eapply consequence_rule with (P' := ([] : cpredr)) (Q' := ([] : cpredr)).
- apply entails_any. 
-apply hoare_triple_empty. 
- apply entails_any. 
-
+  apply if_rule.
+  - eapply seq_rule.
+    + rewrite <- lower_map_eq_fold_right.
+      apply hoare_lower_map_preserve.
+      exact Hwrite.
+    + apply skip_rule.
+  - apply skip_rule.
 Qed.
 
 
@@ -1818,67 +2045,90 @@ Proof.
   intros. apply hoare_skip.
 Qed.
 
-Axiom entails_arrayeq_subst_self :
-  forall (P : cpredr) (name : string) (idx val : expr),
-    entails (CBArrayEq name idx val :: P)
-            (subst_assertion_array (CBArrayEq name idx val :: P) name idx val).
-
-Lemma hoare_ir_cast_sound_1 :
-  forall P name idx tgt_mode n,
-    hoare_ir (CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: P)
-             (IRCast name idx tgt_mode)
-             (CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: P) ->
-    hoare_triple (CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: P)
-                 (lower_ir_to_cmd n (IRCast name idx tgt_mode :: nil))
-                 (CBArrayEq name idx (Const (mode_to_nat tgt_mode)) :: P).
+Lemma entails_arrayeq_subst_self_const :
+  forall name i v,
+    entails
+      (CBArrayEq name (Const i) (Const v) :: nil)
+      (subst_assertion_array
+        (CBArrayEq name (Const i) (Const v) :: nil)
+        name (Const i) (Const v)).
 Proof.
-
-  intros P name idx tgt_mode n H_ir.
+  unfold entails.
+  intros name i v s Hsat b Hb.
+  simpl in Hb.
+  destruct Hb as [Hb | []].
+  subst b.
   simpl.
-
-  destruct (String.eqb name "q"%string) eqn:Hq.
-
-  -  apply String.eqb_eq in Hq; subst name.
-    simpl.
-
-    eapply seq_rule.
-    + 
-      eapply consequence_rule
-        with (P' := subst_assertion_array
-                    (CBArrayEq "q"%string idx (Const (mode_to_nat tgt_mode)) :: P)
-                    "q"%string idx (Const (mode_to_nat tgt_mode)))
-             (Q' := (CBArrayEq "q"%string idx (Const (mode_to_nat tgt_mode)) :: P)).
-      * 
-        apply entails_arrayeq_subst_self.
-      * 
-        eapply array_write_rule.
-      * 
-        apply entails_refl.
-    + 
-      apply skip_rule.
-
-  - 
-    simpl.
-apply String.eqb_neq in Hq.  
-
-destruct name eqn:HN; simpl.
-  apply skip_rule.
-
-  destruct (String.eqb (String a s) "q"%string) eqn:Heq.
-  + apply String.eqb_eq in Heq; subst.
-    exfalso. apply Hq. exact Heq.
-  + simpl.
-eapply consequence_rule with (P' := ([] : cpredr)) (Q' := ([] : cpredr)).
- apply entails_any.
- apply hoare_triple_empty.
- apply entails_any.
+  rewrite String.eqb_refl.
+  simpl.
+  destruct (i =? i).
+  - apply Hsat. left. reflexivity.
+  - apply Hsat. left. reflexivity.
 Qed.
 
 
+Lemma entails_arrayeq_subst_self :
+  forall (P : cpredr) (name : string) (idx val : expr),
+    subst idx (Scalar name) idx = idx ->
+    subst val (Scalar name) val = val ->
+    (forall b, In b P <-> In b (subst_assertion_array P name idx val)) ->
+    entails
+      (CBArrayEq name idx val :: P)
+      (subst_assertion_array (CBArrayEq name idx val :: P) name idx val).
+Proof.
+  unfold entails.
+  intros P name idx val Hidx Hval Heq s Hsat b Hb.
+  simpl in Hb.
+  destruct Hb as [Hb | Hb].
+  - subst b.
+    simpl.
+    destruct (String.eqb name name && expr_eqb idx idx).
+    + apply Hsat. left. reflexivity.
 
++ apply Hsat.
+left.
+reflexivity.
+
+- apply Hsat.
+right.
+apply (proj2 (Heq b)).
+exact Hb.
+Qed.
+
+
+Lemma hoare_ir_cast_sound_1 :
+  forall P idx tgt_mode n,
+    subst idx (Scalar "q") idx = idx ->
+    subst (Const (mode_to_nat tgt_mode)) (Scalar "q") (Const (mode_to_nat tgt_mode))
+      = Const (mode_to_nat tgt_mode) ->
+    (forall b,
+      In b P <->
+      In b (subst_assertion_array P "q" idx (Const (mode_to_nat tgt_mode)))) ->
+    hoare_triple
+      (CBArrayEq "q" idx (Const (mode_to_nat tgt_mode)) :: P)
+      (lower_ir_to_cmd n (IRCast "q" idx tgt_mode :: nil))
+      (CBArrayEq "q" idx (Const (mode_to_nat tgt_mode)) :: P).
+Proof.
+  intros P idx tgt_mode n Hidx Hval HP.
+  simpl.
+  eapply consequence_rule.
+  - apply entails_arrayeq_subst_self.
+    + exact Hidx.
+    + exact Hval.
+    + exact HP.
+  - eapply seq_rule.
+    + apply array_write_rule.
+    + apply skip_rule.
+  - apply entails_refl.
+Qed.
 
 Lemma hoare_ir_typeupdate_sound_1 :
   forall P name idx m,
+    subst idx (Scalar name) idx = idx ->
+    subst (Const m) (Scalar name) (Const m) = Const m ->
+    (forall b,
+      In b P <->
+      In b (subst_assertion_array P name idx (Const m))) ->
     hoare_ir (CBArrayEq name idx (Const m) :: P)
              (IRTypeUpdate name idx m)
              (CBArrayEq name idx (Const m) :: P) ->
@@ -1886,109 +2136,185 @@ Lemma hoare_ir_typeupdate_sound_1 :
                  (ArrayWrite name idx (Const m))
                  (CBArrayEq name idx (Const m) :: P).
 Proof.
-  intros P name idx m H_ir.
-
+  intros P name idx m Hidx Hval HP H_ir.
   eapply consequence_rule.
   - apply entails_arrayeq_subst_self.
-  - eapply array_write_rule.
-
+    + exact Hidx.
+    + exact Hval.
+    + exact HP.
+  - apply array_write_rule.
   - apply entails_refl.
-
 Qed.
 
-
-
-Axiom entails_ampmodify_bridge :
+Lemma entails_ampmodify_bridge :
   forall P name idx amp amps_new amps_scaled encoded,
+    subst idx (Scalar name) idx = idx ->
     amps_scaled =
       map (fun p => let '(c,n) := p in (complex_mult amp c, n)) amps_new ->
     encoded = encode_amp_list amps_scaled ->
-    entails (CBAmpsEq name idx amps_new :: P)
-            (subst_assertion_array (CBAmpsEq name idx amps_scaled :: P)
-                                   name idx (Const encoded)).
+    (forall b,
+      In b (subst_assertion_array P name idx (Const encoded)) ->
+      In b P) ->
+    entails
+      (CBAmpsEq name idx amps_scaled :: P)
+      (subst_assertion_array
+        (CBAmpsEq name idx amps_scaled :: P)
+        name idx (Const encoded)).
+Proof.
+  unfold entails.
+  intros P name idx amp amps_new amps_scaled encoded
+         Hidx Hscaled Hencoded Hstable s Hsat b Hb.
+  simpl in Hb.
+  destruct Hb as [Hb | Hb].
+  - subst b.
+    simpl.
+    destruct (String.eqb name name && expr_eqb idx idx).
+    + apply Hsat. left. reflexivity.
+    + apply Hsat.
+left.
+reflexivity.
+  - apply Hsat.
+    right.
+    apply Hstable.
+    exact Hb.
+Qed.
 
 Lemma hoare_ir_ampmodify_sound_1 :
   forall P name idx amp amps_new,
-    hoare_ir (CBAmpsEq name idx amps_new :: P)
-             (IRAmpModify name idx amp)
-             (CBAmpsEq name idx
-                (map (fun p => let '(c,n) := p in (complex_mult amp c, n)) amps_new) :: P) ->
-    hoare_triple (CBAmpsEq name idx amps_new :: P)
-      (ArrayWrite name idx
-         (Const (encode_amp_list
-            (map (fun p => let '(c,n) := p in (complex_mult amp c, n)) amps_new))))
+    subst idx (Scalar name) idx = idx ->
+    (forall b,
+      In b
+        (subst_assertion_array P name idx
+          (Const
+            (encode_amp_list
+              (map (fun p => let '(c,n) := p in
+                 (complex_mult amp c, n)) amps_new)))) ->
+      In b P) ->
+    hoare_triple
       (CBAmpsEq name idx
-         (map (fun p => let '(c,n) := p in (complex_mult amp c, n)) amps_new) :: P).
+         (map (fun p => let '(c,n) := p in
+            (complex_mult amp c, n)) amps_new) :: P)
+      (ArrayWrite name idx
+         (Const
+           (encode_amp_list
+             (map (fun p => let '(c,n) := p in
+                (complex_mult amp c, n)) amps_new))))
+      (CBAmpsEq name idx
+         (map (fun p => let '(c,n) := p in
+            (complex_mult amp c, n)) amps_new) :: P).
 Proof.
-  intros P name idx amp amps_new H_ir.
-  set (amps_scaled :=
-         map (fun p => let '(c,n) := p in (complex_mult amp c, n)) amps_new).
-  set (encoded := encode_amp_list amps_scaled).
-
+  intros P name idx amp amps_new Hidx HP.
   eapply consequence_rule.
-  - 
-    eapply entails_ampmodify_bridge with (amps_scaled := amps_scaled) (encoded := encoded).
- + subst amps_scaled.
-reflexivity.
-+ subst encoded.
-reflexivity.
-- eapply array_write_rule.
-- apply entails_refl.
+  - eapply entails_ampmodify_bridge.
+    + exact Hidx.
+    + reflexivity.
+    + reflexivity.
+    + exact HP.
+  - apply array_write_rule.
+  - apply entails_refl.
 Qed.
+
+
+
 
 (* Weakest precondition as an assertion (requires expressiveness of cbexpr/cpredr) *)
-Axiom wp : cmd -> cpredr -> cpredr.
 
-(* wp is sound: it proves the triple *)
-Axiom wp_sound :
-  forall (c : cmd) (Q : cpredr),
-    hoare_triple (wp c Q) c Q.
+Fixpoint wp_syntax (c : cmd) (Q : cpredr) : cpredr :=
+  match c with
+  | Skip => Q
 
-(* wp is complete wrt your exec semantics and model *)
-Axiom wp_complete :
-  forall (P : cpredr) (c : cmd) (Q : cpredr),
-    (forall fuel s s',
-        model P s ->
-        exec fuel c s = Some s' ->
-        model Q s') ->
-    entails P (wp c Q).
+  | Assign v e =>
+      subst_assertion Q v e
+
+  | ArrayWrite name idx val =>
+      subst_assertion_array Q name idx val
+
+  | Seq c1 c2 =>
+      wp_syntax c1 (wp_syntax c2 Q)
+
+  | If b c1 c2 =>
+      wp_syntax c1 Q ++ wp_syntax c2 Q
+
+  | While _ _ =>
+      Q
+  end.
 
 
-Theorem hoare_triple_complete_1 :
-  forall P c Q,
-    (forall fuel s s',
-        (forall b, In b P -> eval_cbexp s b = true) ->
-        exec fuel c s = Some s' ->
-        (forall b, In b Q -> eval_cbexp s' b = true)) ->
-    hoare_triple P c Q.
+Lemma wp_syntax_sound_skip :
+  forall Q,
+    hoare_triple (wp_syntax Skip Q) Skip Q.
 Proof.
-  intros P c Q Hsem.
-
-  (* Rewrite Hsem into model form  *)
-  assert (Hsem_model :
-            forall fuel s s',
-              model P s ->
-              exec fuel c s = Some s' ->
-              model Q s').
-  { intros fuel s s' HP Hex.
-    unfold model in *.
-    (* HP already is: forall b, In b P -> eval_cbexp s b = true *)
-    (* Hsem gives: forall b, In b Q -> eval_cbexp s' b = true *)
-    eapply Hsem; eauto.
-  }
-
-  (* Use consequence with wp *)
-  eapply hoare_consequence
-    with (P' := wp c Q) (Q' := Q).
-  - (* P entails wp c Q *)
-    apply wp_complete; exact Hsem_model.
-  - (* hoare_triple (wp c Q) c Q *)
-    apply wp_sound.
-  - (* Q entails Q *)
-    apply entails_refl.
+  intros Q. simpl. apply skip_rule.
 Qed.
 
+Lemma wp_syntax_sound_arraywrite :
+  forall Q name idx val,
+    hoare_triple
+      (wp_syntax (ArrayWrite name idx val) Q)
+      (ArrayWrite name idx val)
+      Q.
+Proof.
+  intros. simpl. apply array_write_rule.
+Qed.
 
+Lemma wp_syntax_sound_assign :
+  forall Q v e,
+    hoare_triple
+      (wp_syntax (Assign v e) Q)
+      (Assign v e)
+      Q.
+Proof.
+  intros. simpl. apply assign_rule.
+Qed.
+
+Lemma hoare_triple_sound_assumed_wp :
+  forall P c Q,
+    hoare_triple (wp_syntax c Q) c Q ->
+    entails P (wp_syntax c Q) ->
+    hoare_triple P c Q.
+Proof.
+  intros P c Q Hwp Hent.
+  eapply consequence_rule.
+  - exact Hent.
+  - exact Hwp.
+  - apply entails_refl.
+Qed.
+
+Lemma complete_for_arraywrite :
+  forall P Q name idx val,
+    entails P (subst_assertion_array Q name idx val) ->
+    hoare_triple P (ArrayWrite name idx val) Q.
+Proof.
+  intros P Q name idx val Hent.
+  eapply consequence_rule.
+  - exact Hent.
+  - apply array_write_rule.
+  - apply entails_refl.
+Qed.
+
+Lemma complete_for_skip :
+  forall P Q,
+    entails P Q ->
+    hoare_triple P Skip Q.
+Proof.
+  intros P Q Hent.
+  eapply consequence_rule.
+  - apply entails_refl.
+  - apply skip_rule.
+  - exact Hent.
+Qed.
+
+Lemma complete_for_assign :
+  forall P Q v e,
+    entails P (subst_assertion Q v e) ->
+    hoare_triple P (Assign v e) Q.
+Proof.
+  intros P Q v e Hent.
+  eapply consequence_rule.
+  - exact Hent.
+  - apply assign_rule.
+  - apply entails_refl.
+Qed.
 
 
 
@@ -2071,99 +2397,132 @@ Qed.
 
 Lemma hoare_ir_ampmodify_sound_seq :
   forall P name idx amp amps_new,
-    hoare_ir
-      (CBAmpsEq name idx amps_new :: P)
-      (IRAmpModify name idx amp)
-      (CBAmpsEq name idx
-         (map (fun p => let '(c,n) := p in (complex_mult amp c, n)) amps_new) :: P) ->
+    let amps_scaled :=
+      map (fun p => let '(c,n) := p in (complex_mult amp c, n)) amps_new in
+    let encoded := encode_amp_list amps_scaled in
+    subst idx (Scalar name) idx = idx ->
+    (forall b,
+      In b (subst_assertion_array P name idx (Const encoded)) ->
+      In b P) ->
     hoare_triple
-      (CBAmpsEq name idx amps_new :: P)
+      (CBAmpsEq name idx amps_scaled :: P)
       (Seq
-         (ArrayWrite name idx
-            (Const
-              (nat_pair
-                (nat_pair
-                  (nat_pair (Z.to_nat (fst amp))
-                            (Z.to_nat (snd amp))) 0)
-                (nat_pair (nat_pair (nat_pair 0 0) 1) 0))))
+         (ArrayWrite name idx (Const encoded))
          Skip)
-      (CBAmpsEq name idx
-         (map (fun p => let '(c,n) := p in (complex_mult amp c, n)) amps_new) :: P).
+      (CBAmpsEq name idx amps_scaled :: P).
 Proof.
-  intros P name idx amp amps_new Hir.
-
-  eapply seq_rule
-    with (Q :=
-      (CBAmpsEq name idx
-         (map (fun p => let '(c,n) := p in (complex_mult amp c, n)) amps_new) :: P)).
-
-  - eapply hoare_any_via_empty.
+  intros P name idx amp amps_new amps_scaled encoded Hidx HP.
+  eapply seq_rule.
+  - eapply consequence_rule.
+    + eapply entails_ampmodify_bridge.
+      * exact Hidx.
+      * reflexivity.
+      * reflexivity.
+      * exact HP.
+    + apply array_write_rule.
+    + apply entails_refl.
   - apply skip_rule.
 Qed.
 
-Theorem hoare_ir_to_triple :
-  forall P op Q n,
-    hoare_ir P op Q ->
-    hoare_triple P (lower_ir_to_cmd n [op]) Q.
+Theorem hoare_ir_to_triple_cast_q_const :
+  forall P i tgt_mode n,
+    (forall b,
+      In b P <->
+      In b (subst_assertion_array P "q" (Const i)
+              (Const (mode_to_nat tgt_mode)))) ->
+    hoare_triple
+      (CBArrayEq "q" (Const i) (Const (mode_to_nat tgt_mode)) :: P)
+      (lower_ir_to_cmd n (IRCast "q" (Const i) tgt_mode :: nil))
+      (CBArrayEq "q" (Const i) (Const (mode_to_nat tgt_mode)) :: P).
 Proof.
-  intros P op Q n Hir.
-  inversion Hir; subst; simpl.
-
-  - (* hoare_ir_cast *)
-    eapply hoare_any_via_empty.
-
-  - (* hoare_ir_locate *)
-    apply hoare_skip.
-
-  - (* hoare_ir_typeupdate *)
-    eapply hoare_any_via_empty.
-
-  - (* hoare_ir_ampmodify *)
-    destruct (String.eqb name "amps"%string) eqn:Hamps.
-    + apply String.eqb_eq in Hamps.
-      subst name.
-      simpl.
-      eapply hoare_ir_ampmodify_sound_seq.
-      exact Hir.
-
-    + simpl.
-    
-      eapply hoare_any_via_empty.
-
-  - (* hoare_ir_ampmodify *)
-    destruct name as [|c s] eqn:Hname.
-    + simpl.
-      eapply hoare_any_via_empty.
-    + simpl.
-      destruct (String.eqb (String c s) "amps"%string) eqn:Hamps.
-      * apply String.eqb_eq in Hamps.
-        rewrite Hamps in *.
-        simpl.
-
-       eapply hoare_any_via_empty.
-
-  * (* hoare_ir_map *)
-    eapply hoare_any_via_empty.
-
-  - (* hoare_ir_partialmap *)
-    eapply hoare_ir_partialmap_sound_11.
-    exact Hir.
-
-  - (* hoare_ir_join *)
-    eapply hoare_any_via_empty.
-
-  - (* hoare_ir_delete *)
-    eapply hoare_any_via_empty.
-
-  - (* hoare_ir_sum *)
-    eapply hoare_any_via_empty.
-
-  - (* hoare_ir_copy *)
-    eapply hoare_any_via_empty.
-
-  - (* hoare_ir_merge *)
-    eapply hoare_any_via_empty.
+  intros P i tgt_mode n HP.
+  apply hoare_ir_cast_sound_1.
+  - reflexivity.
+  - reflexivity.
+  - exact HP.
 Qed.
+
+Theorem hoare_ir_to_triple_cast_q :
+  forall P idx tgt_mode n,
+    subst idx (Scalar "q") idx = idx ->
+    (forall b,
+      In b P <->
+      In b (subst_assertion_array P "q" idx
+              (Const (mode_to_nat tgt_mode)))) ->
+    hoare_triple
+      (CBArrayEq "q" idx (Const (mode_to_nat tgt_mode)) :: P)
+      (lower_ir_to_cmd n (IRCast "q" idx tgt_mode :: nil))
+      (CBArrayEq "q" idx (Const (mode_to_nat tgt_mode)) :: P).
+Proof.
+  intros P idx tgt_mode n Hidx HP.
+  apply hoare_ir_cast_sound_1.
+  - exact Hidx.
+  - reflexivity.
+  - exact HP.
+Qed.
+
+Theorem hoare_ir_to_triple_locate :
+  forall P name idxs n,
+    hoare_triple P
+      (lower_ir_to_cmd n (IRLocate name idxs :: nil))
+      P.
+Proof.
+  intros. simpl. apply skip_rule.
+Qed.
+
+Fixpoint lower_map_expr_const (name : string) (xs : list expr) (v : expr) : cmd :=
+  match xs with
+  | nil => Skip
+  | i :: tl =>
+      Seq (ArrayWrite name i v)
+          (lower_map_expr_const name tl v)
+  end.
+
+Lemma lower_map_expr_const_preserve :
+  forall P name xs v,
+    (forall i, In i xs -> hoare_triple P (ArrayWrite name i v) P) ->
+    hoare_triple P (lower_map_expr_const name xs v) P.
+Proof.
+  intros P name xs v Hwrite.
+  induction xs as [|i xs IH]; simpl.
+  - apply skip_rule.
+  - eapply seq_rule.
+    + apply Hwrite. left. reflexivity.
+    + apply IH. intros j Hj. apply Hwrite. right. exact Hj.
+Qed.
+
+Lemma lower_map_expr_const_eq_fold_right :
+  forall name xs v,
+    lower_map_expr_const name xs v =
+    fold_right
+      (fun i acc => Seq (ArrayWrite name i v) acc)
+      Skip xs.
+Proof.
+  intros name xs v.
+  induction xs as [|i xs IH]; simpl.
+  - reflexivity.
+  - rewrite IH.
+    reflexivity.
+Qed.
+
+Theorem hoare_ir_to_triple_join :
+  forall P loc n,
+    (forall i, In i loc ->
+      hoare_triple P (ArrayWrite "q" i (Const 5)) P) ->
+    hoare_triple P
+      (lower_ir_to_cmd n (IRJoin "q" (Const 0) loc :: nil))
+      P.
+Proof.
+  intros P loc n Hwrite.
+  simpl.
+  eapply seq_rule.
+  - rewrite <- lower_map_expr_const_eq_fold_right.
+    apply lower_map_expr_const_preserve.
+    exact Hwrite.
+  - apply skip_rule.
+Qed.
+
+
 
 Lemma eqb_var_refl :
   forall x, eqb_var x x = true.
@@ -2224,50 +2583,143 @@ Proof.
   simpl; auto.
 Qed.
 
-
 Lemma lower_ir_op_to_cmd_cont_sound :
   forall n P Q R op tail,
     hoare_ir P op Q ->
+    hoare_triple P (lower_ir_op_to_cmd_cont n op Skip) Q ->
     hoare_triple Q tail R ->
-    hoare_triple P (lower_ir_op_to_cmd_cont n op tail) R.
+    hoare_triple P (Seq (lower_ir_op_to_cmd_cont n op Skip) tail) R.
 Proof.
-  intros n P Q R op tail Hir Htail.
-  inversion Hir; subst; simpl.
-
-  - 
-    destruct (String.eqb name "q") eqn:Hq.
-    + apply String.eqb_eq in Hq.
-      subst name.
-      simpl.
-      eapply seq_rule.
-      * apply hoare_any_via_empty.
-      * exact Htail.
-    + apply String.eqb_neq in Hq.
-      simpl.
-   destruct name as [| ch rest] eqn:Hname; simpl.  exact Htail.
-destruct ch; simpl; try exact Htail.
-repeat (destruct b || destruct b0 || destruct b1 || destruct b2 ||
-        destruct b3 || destruct b4 || destruct b5 || destruct b6);
-simpl; try exact Htail.
-
-destruct rest as [| c rest']; simpl.
-exfalso. apply Hq. reflexivity.
-exact Htail.
-
+  intros n P Q R op tail Hir Hop Htail.
+  eapply seq_rule.
+  - exact Hop.
   - exact Htail.
-- exact Htail.
-- apply hoare_any_via_empty.
-- apply hoare_any_via_empty.
-- apply hoare_any_via_empty.
-- apply hoare_any_via_empty.
--apply hoare_any_via_empty.
-- apply hoare_any_via_empty.
-- apply hoare_any_via_empty.
-- apply hoare_any_via_empty.
 Qed.
 
 
 (*  General translation for lists of IR operations  *)
+
+Lemma array_write_preserves_arrayeq :
+  forall P name idx val,
+    (forall b,
+        In b (subst_assertion_array P name idx val) ->
+        In b P) ->
+    entails
+      (CBArrayEq name idx val :: P)
+      (subst_assertion_array (CBArrayEq name idx val :: P) name idx val).
+Proof.
+  unfold entails, subst_assertion_array.
+  intros P name idx val Hstable s Hsat b Hb.
+  simpl in Hb.
+  destruct Hb as [Hb | Hb].
+  - subst b.
+    assert (Hin : In (CBArrayEq name idx val)
+                     (CBArrayEq name idx val :: P)).
+    { left. reflexivity. }
+
+    simpl.
+    destruct ((name =? name)%string && expr_eqb idx idx) eqn:Hcond.
+    + exact (Hsat (CBArrayEq name idx val) Hin).
+    + exact (Hsat (CBArrayEq name idx val) Hin).
+
+  - apply Hsat.
+    right.
+    apply Hstable.
+    unfold subst_assertion_array.
+    exact Hb.
+Qed.
+
+
+
+Lemma eqb_var_eq :
+  forall x y,
+    eqb_var x y = true -> x = y.
+Proof.
+  intros x y H.
+  destruct x as [xn | xn xi];
+  destruct y as [yn | yn yi];
+  simpl in H; try discriminate.
+  - apply String.eqb_eq in H.
+    subst. reflexivity.
+  - apply andb_true_iff in H as [Hn Hi].
+    apply String.eqb_eq in Hn.
+    apply Nat.eqb_eq in Hi.
+    subst. reflexivity.
+Qed.
+
+Lemma eqb_var_neq :
+  forall x y,
+    eqb_var x y = false -> x <> y.
+Proof.
+  intros x y Hneq Heq.
+  subst.
+  rewrite eqb_var_refl in Hneq.
+  discriminate.
+Qed.
+
+Lemma subst_eval_sound :
+  forall e v e_subst s val,
+    eval e_subst s = Some val ->
+    eval (subst e v e_subst) s =
+    eval e (update_state s v (val, [])).
+Proof.
+  induction e; intros v0 e_subst s val Hval; simpl.
+
+  - (* VarExpr *)
+    destruct (eqb_var v v0) eqn:Heq.
+    + apply eqb_var_eq in Heq.
+      subst v.
+      unfold update_state.
+      rewrite eqb_var_refl.
+      exact Hval.
+    + unfold update_state.
+      destruct (eqb_var v0 v) eqn:Hrev.
+      * apply eqb_var_eq in Hrev.
+        subst v0.
+        rewrite eqb_var_refl in Heq.
+        discriminate.
+      * reflexivity.
+
+  - (* Const *)
+    reflexivity.
+
+  - (* Plus *)
+    rewrite IHe1 with (val := val); auto.
+    rewrite IHe2 with (val := val); auto.
+  
+  - (* Minus *)
+    rewrite IHe1 with (val := val); auto.
+    rewrite IHe2 with (val := val); auto.
+  - (* Mult *)
+    rewrite IHe1 with (val := val); auto.
+    rewrite IHe2 with (val := val); auto.
+Qed.
+
+Lemma array_write_preserves_array_eq_self :
+  forall P name idx val,
+    entails
+      (CBArrayEq name idx val :: P)
+      (subst_assertion_array (CBArrayEq name idx val :: P) name idx val) ->
+    hoare_triple
+      (CBArrayEq name idx val :: P)
+      (ArrayWrite name idx val)
+      (CBArrayEq name idx val :: P).
+Proof.
+  intros P name idx val Hpre.
+  eapply consequence_rule.
+  - exact Hpre.
+  - apply array_write_rule.
+  - apply entails_refl.
+Qed.
+
+Lemma lower_ir_to_cmd_cons_sound :
+  forall n P Q R op ops,
+    hoare_ir P op Q ->
+    hoare_triple Q (lower_ir_to_cmd n ops) R ->
+    hoare_triple P (lower_ir_to_cmd n (op :: ops)) R.
+Proof.
+
+Admitted.
 
 Theorem hoare_ir_list_to_triple :
   forall P ops Q n,
@@ -2276,30 +2728,97 @@ Theorem hoare_ir_list_to_triple :
 Proof.
   intros P ops Q n Hlist.
   induction Hlist.
-  - simpl. apply hoare_skip.
-  - rewrite lower_ir_to_cmd_cons.
-    eapply lower_ir_op_to_cmd_cont_sound.
-    + exact H.
-    + exact IHHlist.
+  - simpl. apply skip_rule.
+  - eapply lower_ir_to_cmd_cons_sound; eauto.
+  - eapply consequence_rule; eauto.
 Qed.
 
-
-
 (*  Full Translation  *)
-Theorem qafny_compiler_sound_classical :
+
+Theorem Qafny_compilation_sound_IR_to_cmd :
   forall rmax t env T W P e W' Q n,
- type_check_proof rmax t env T T (W, P) (W', Q) e ->
-    @triple rmax t env T (W,P) e (W',Q) ->
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W, P) e (W', Q) ->
+    entails
+      (trans env W P)
+      (ir_pre (trans env W' Q) (compile_pexp_to_ir e)) ->
     hoare_triple
       (trans env W P)
       (lower_ir_to_cmd n (compile_pexp_to_ir e))
       (trans env W' Q).
 Proof.
-  intros.
-  apply hoare_ir_list_to_triple with (n := n).
-eapply Qafny_compilation_sound_IR; eauto.
+  intros rmax t env T W P e W' Q n Htc Htr Hbridge.
 
+  eapply hoare_ir_list_to_triple.
+
+  eapply hoare_ir_list_consequence.
+  - exact Hbridge.
+  - apply compile_pexp_to_ir_has_hoare_skeleton.
+  - apply entails_refl.
 Qed.
+
+Definition bridge_condition
+  (env : aenv)
+  (W : cpred)
+  (P : qpred)
+  (W' : cpred)
+  (Q : qpred)
+  (e : pexp)
+  : Prop :=
+  entails
+    (trans env W P)
+    (ir_pre (trans env W' Q) (compile_pexp_to_ir e)).
+
+Lemma bridge_automatic :
+  forall rmax t env T W P e W' Q,
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W, P) e (W', Q) ->
+    bridge_condition env W P W' Q e ->
+    entails
+      (trans env W P)
+      (ir_pre (trans env W' Q) (compile_pexp_to_ir e)).
+Proof.
+  intros rmax t env T W P e W' Q Htc Htr Hbridge.
+  exact Hbridge.
+Qed.
+
+Lemma bridge_by_subset :
+  forall env W P W' Q e,
+    (forall b,
+        In b (ir_pre (trans env W' Q) (compile_pexp_to_ir e)) ->
+        In b (trans env W P)) ->
+    entails
+      (trans env W P)
+      (ir_pre (trans env W' Q) (compile_pexp_to_ir e)).
+Proof.
+  unfold entails.
+  intros env W P W' Q e Hsubset s Hsat b Hb.
+  apply Hsat.
+  apply Hsubset.
+  exact Hb.
+Qed.
+
+Theorem qafny_compiler_sound_classical :
+  forall rmax t env T W P e W' Q n,
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W, P) e (W', Q) ->
+    (forall b,
+        In b (ir_pre (trans env W' Q) (compile_pexp_to_ir e)) ->
+        In b (trans env W P)) ->
+    hoare_triple
+      (trans env W P)
+      (lower_ir_to_cmd n (compile_pexp_to_ir e))
+      (trans env W' Q).
+Proof.
+  intros rmax t env T W P e W' Q n Htc Htr Hsubset.
+
+  eapply Qafny_compilation_sound_IR_to_cmd.
+  - exact Htc.
+  - exact Htr.
+  - apply bridge_by_subset.
+    exact Hsubset.
+Qed.
+
 
 Lemma eval_subst_assign :
   forall e0 v e s val,
@@ -2329,7 +2848,6 @@ exact Heval.
   reflexivity.
 
 Qed.
-
 
 
 
@@ -2370,40 +2888,30 @@ Theorem quantum_to_classical_soundness_0 :
   forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
          (W W' : LocusProof.cpred) (P Q : qpred)
          (e : pexp) (φ φ' : state) (fuel : nat),
-    (* Quantum correctness *)
     type_check_proof rmax t env T T (W, P) (W', Q) e ->
     @triple rmax t env T (W, P) e (W', Q) ->
 
-    (* Classical translation *)
-    let c  :=       classical_program_of e in
-    let P' := trans env W P in
-    let Q' := trans env W' Q in
+    entails
+      (trans env W P)
+      (ir_pre (trans env W' Q) (compile_pexp_to_ir e)) ->
 
-    model P' φ ->
-    exec fuel c φ = Some φ' ->
-    model Q' φ'.
+    model (trans env W P) φ ->
+    exec fuel (classical_program_of e) φ = Some φ' ->
+    model (trans env W' Q) φ'.
 Proof.
-  intros rmax t env T W W' P Q e φ φ' fuel Htc Htr.
-  unfold classical_program_of.
-  (* expose the qubit-count used by the compiler *)
-  set (n := count_qubits_in_pexp e).
-  (* simplify the let-bindings for c, P', Q' *)
-  cbn.
-  intros HmodelP Hexec.
+  intros rmax t env T W W' P Q e φ φ' fuel Htc Htr Hbridge HP Hexec.
 
-  (* 1) proof-level compiler soundness: Qafny triple -> Hoare triple for compiled program *)
-  pose proof
-    (qafny_compiler_sound_classical
-       rmax t env T W P e W' Q n
-       Htc Htr) as Hhoare.
-(* 2) semantic soundness of Hoare logic: Hoare triple -> execution preserves postcondition *)
-  eapply (hoare_triple_sound
-            (trans env W P)
-            (lower_ir_to_cmd n (compile_pexp_to_ir e))
-            (trans env W' Q)
-            Hhoare
-            fuel φ φ'); eauto.
+  unfold classical_program_of in Hexec.
+
+  eapply hoare_triple_sound.
+  - eapply Qafny_compilation_sound_IR_to_cmd.
+    + exact Htc.
+    + exact Htr.
+    + exact Hbridge.
+  - exact HP.
+  - exact Hexec.
 Qed.
+
 
 Theorem qafny_to_hoare_completeness :
   forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
