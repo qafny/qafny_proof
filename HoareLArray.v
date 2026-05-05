@@ -2913,7 +2913,8 @@ Proof.
 Qed.
 
 
-Theorem qafny_to_hoare_completeness :
+(*either this or the last one *)
+Theorem qafny_to_hoare_tightness_2 :
   forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
          (e : pexp) (c : list ir_op) (P' Q' : cpredr),
     c = compile_pexp_to_ir e ->
@@ -2926,6 +2927,7 @@ Theorem qafny_to_hoare_completeness :
 Proof.
 
 Admitted.
+
 
 (* Translation Quantum State to Array *)
 Definition trans_qstate (q : qstate) : cpredr :=
