@@ -4026,6 +4026,53 @@ Proof.
 Qed.
 
 
+
+
+
+Lemma relative_tightness_skip_only :
+  forall rmax q env T W P,
+    @locus_system rmax q env T PSKIP T ->
+    pred_check env T (W, P) ->
+    @triple rmax q env T (W, P) PSKIP (W, P).
+Proof.
+  intros.
+  apply skip_pf.
+Qed.
+
+Lemma relative_tightness_aux_fixed_skip :
+  forall rmax q env T W P W' Q,
+    @locus_system rmax q env T PSKIP T ->
+    pred_check env T (W, P) ->
+    pred_check env T (W', Q) ->
+    imply rmax (W, P) (W', Q) ->
+    @triple rmax q env T (W, P) PSKIP (W', Q).
+Proof.
+  intros rmax q env T W P W' Q Hloc Hpre Hpost Himp.
+  destruct Hpre as [Hcp Hqp].
+
+  eapply triple_con_2 with (Q' := (W, P)) (T1 := T).
+
+  - unfold type_check_proof.
+    repeat split; simpl; auto.
+
+  - exact Himp.
+
+  - exact Hpost.
+
+  - apply skip_pf.
+Qed.
+
+Lemma triple_post_consequence :
+  forall rmax t env T T1 e W P W0 Q0 W' Q,
+    type_check_proof rmax t env T T1 (W, P) (W0, Q0) e ->
+    imply rmax (W0, Q0) (W', Q) ->
+    pred_check env T1 (W', Q) ->
+    @triple rmax t env T (W, P) e (W0, Q0) ->
+    @triple rmax t env T (W, P) e (W', Q).
+Proof.
+  intros.
+  eapply triple_con_2 with (Q' := (W0, Q0)) (T1 := T1); eauto.
+Qed.
 Lemma relative_tightness_aux :
   forall rmax t env T e W P W' Q n,
     @locus_system rmax t env T e T ->
@@ -4129,8 +4176,7 @@ Proof.
   reflexivity.
 Qed.
 
-Print triple.
-Print locus_system.
+
 
 
 
