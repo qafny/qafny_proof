@@ -3528,156 +3528,494 @@ Proof.
 Qed.
 
 
-(*
-
-
-
-Theorem hoare_triple_sound :
-  forall P c Q,
-    hoare_triple P c Q ->
-    hoare_valid P c Q.
-Proof.
-  intros P c Q Hhoare.
-  induction Hhoare.
-
-  - (* skip *)
-    unfold hoare_valid.
-    intros fuel s s' HP Hexec.
-    destruct fuel as [|fuel']; simpl in Hexec; try discriminate.
-    inversion Hexec; subst.
-    exact HP.
-
-  - (* seq *)
-    unfold hoare_valid in *.
-    intros fuel s s' HP Hexec.
-    destruct fuel as [|fuel']; simpl in Hexec; try discriminate.
-    destruct (exec fuel' c1 s) as [s0|] eqn:Hc1; try discriminate.
-    eapply IHHhoare2.
-    + eapply IHHhoare1.
-      * exact HP.
-      * exact Hc1.
-    + exact Hexec.
-
-  - (* assign *)
-    unfold hoare_valid.
-    intros fuel s s' HP Hexec.
-    destruct fuel as [|fuel']; simpl in Hexec; try discriminate.
-    destruct (eval e s) as [v0|] eqn:Heval; try discriminate.
-    inversion Hexec; subst.
-    eapply assign_subst_sound.
-    + exact H.
-    + exact Heval.
-    + exact HP.
-
-  - (* if *)
-    unfold hoare_valid in *.
-    intros fuel s s' HP Hexec.
-    destruct fuel as [|fuel']; simpl in Hexec; try discriminate.
-    destruct (eval b s) as [n|] eqn:Hb; try discriminate.
-    destruct (Nat.eqb n 0) eqn:Hn.
-    + eapply IHHhoare2; eauto.
-    + eapply IHHhoare1; eauto.
-
-  - (* while *)
-    unfold hoare_valid in *.
-    intros fuel.
-    induction fuel as [|fuel' IH]; intros s s' HP Hexec.
-    + simpl in Hexec. discriminate.
-    + simpl in Hexec.
-      destruct (eval b s) as [n|] eqn:Hb; try discriminate.
-      destruct (Nat.eqb n 0) eqn:Hn.
-      * inversion Hexec; subst. exact HP.
-      * destruct (exec fuel' c s) as [s0|] eqn:Hbody; try discriminate.
-        eapply IH.
-        -- eapply IHHhoare; eauto.
-        -- exact Hexec.
-
-  - (* array write *)
-    unfold hoare_valid.
-    intros fuel s s' HP Hexec.
-    destruct fuel as [|fuel']; simpl in Hexec; try discriminate.
-    destruct (eval idx s) as [i|] eqn:Hidx; try discriminate.
-    destruct (eval val s) as [v0|] eqn:Hval; try discriminate.
-    inversion Hexec; subst.
-    eapply subst_assertion_array_sound.
-    + exact Hidx.
-    + exact Hval.
-    + exact HP.
-
-  - (* consequence *)
-    unfold hoare_valid in *.
-    intros fuel s s' HP Hexec.
-    apply H1.
-    eapply IHHhoare.
-    + apply H.
-      exact HP.
-    + exact Hexec.
-Qed.
-
-  - (* array write *)
-    unfold hoare_valid.
-    intros fuel s s' HP Hexec.
-    destruct fuel as [|fuel']; simpl in Hexec; try discriminate.
-    destruct (eval idx s) as [i|] eqn:Hidx; try discriminate.
-    destruct (eval val s) as [v0|] eqn:Hval; try discriminate.
-    inversion Hexec; subst.
-    (* Needs array substitution soundness. *)
-    admit.
-
-  - (* consequence *)
-    eapply hoare_valid_consequence; eauto.
-Admitted.
-
-
-
-
-
-
-
-
-
-
-
-Theorem quantum_to_classical_soundness_0 :
-  forall (rmax : nat) (t : atype) (env : aenv) (T : type_map)
-         (W W' : LocusProof.cpred) (P Q : qpred)
-         (e : pexp) (φ φ' : state) (fuel : nat),
-    type_check_proof rmax t env T T (W, P) (W', Q) e ->
-    @triple rmax t env T (W, P) e (W', Q) ->
-    entails
-      (trans env W P)
-      (ir_pre (trans env W' Q) (compile_pexp_to_ir e)) ->
-    (forall P0 Q0 op,
-      hoare_ir P0 op Q0 ->
-      hoare_triple P0
-        (lower_one_ir_to_cmd (count_qubits_in_pexp e) op)
-        Q0) ->
-    model (trans env W P) φ ->
-    exec fuel (classical_program_of e) φ = Some φ' ->
-    model (trans env W' Q) φ'.
-Proof.
-  intros rmax t env T W W' P Q e φ φ' fuel
-         Htc Htr Hbridge Hlower HP Hexec.
-
-  unfold classical_program_of in Hexec.
-
-  eapply hoare_triple_sound.
-  + eapply Qafny_compilation_sound_IR_to_cmd.
-    * exact Htc.
-    * exact Htr.
-    * exact Hbridge.
-    * exact Hlower.
-  + exact HP.
-  + exact Hexec.
-Qed.
-
-*)
-
-
-
 
 (* TIGHTNESS *)
 
+
+Lemma qpred_check_shrink_l :
+  forall T T' P P',
+    qpred_check (T ++ T') (P ++ P') ->
+    length T = length P ->
+    qpred_check T P.
+Proof.
+  intros T T' P P' H Hlen.
+  remember (T ++ T') as Tall.
+  remember (P ++ P') as Pall.
+  revert T T' P P' HeqTall HeqPall Hlen.
+  induction H; intros T0 T'0 P0 P'0 HT HP Hlen.
+  - symmetry in HT.
+    apply app_eq_nil in HT as [HT HT'].
+    symmetry in HP.
+    apply app_eq_nil in HP as [HP HP'].
+    subst. constructor.
+  - destruct T0 as [| [sa0 t0] T0].
+    + simpl in Hlen.
+      destruct P0 as [| p0 P0]; simpl in Hlen; try discriminate.
+      constructor.
+    + destruct P0 as [| [s0 v0] P0]; simpl in Hlen; try discriminate.
+      simpl in HT, HP.
+      inversion HT; subst.
+      inversion HP; subst.
+      constructor; auto.
+      eapply IHqpred_check.
+      * reflexivity.
+      * reflexivity.
+      * inversion Hlen; reflexivity.
+Qed.
+
+Lemma pred_check_app_l :
+  forall env T T' W P R,
+    pred_check env (T ++ T') (W, P ++ R) ->
+    length T = length P ->
+    pred_check env T (W, P).
+Proof.
+  intros env T T' W P R H Hlen.
+  unfold pred_check in *.
+  destruct H as [Hc Hq].
+  split.
+  - exact Hc.
+  - eapply qpred_check_shrink_l.
+    + exact Hq.
+    + exact Hlen.
+Qed.
+
+Lemma type_check_proof_to_locus :
+  forall rmax t env T W P W' Q e,
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @locus_system rmax t env T e T /\
+    pred_check env T (W, P) /\
+    pred_check env T (W', Q).
+Proof.
+  intros rmax t env T W P W' Q e Htc.
+  inversion Htc; subst.
+  destruct H0 as [Hloc Hpost].
+  split.
+  - exact Hloc.
+  - split.
+    + exact H.
+    + exact Hpost.
+Qed.
+
+Lemma locus_systuem_subst_type_map_back_framed :
+  forall (rmax : nat) q env T T' Tframe x v e,
+    subst_type_map T x v = T ->
+    @locus_system rmax q env (subst_type_map T x v) e T' ->
+    @locus_system rmax q env (T ++ Tframe) e (T' ++ Tframe).
+Proof.
+  intros rmax q env T T' Tframe x v e Hsubst Hloc.
+  rewrite <- Hsubst.
+  eapply sub_ses.
+  exact Hloc.
+Qed.
+Lemma locus_system_subst_type_map_framed :
+  forall (rmax : nat) q env T T' Tframe x v e,
+    @locus_system rmax q env (subst_type_map T x v) e T' ->
+    @locus_system rmax q env
+      (subst_type_map T x v ++ Tframe)
+      e
+      (T' ++ Tframe).
+Proof.
+  intros rmax q env T T' Tframe x v e Hloc.
+  eapply sub_ses.
+  exact Hloc.
+Qed.
+
+
+Lemma subst_type_map_app :
+  forall T Tframe x v,
+    subst_type_map (T ++ Tframe) x v =
+    subst_type_map T x v ++ subst_type_map Tframe x v.
+Proof.
+  induction T as [| [l ty] T IHT]; intros Tframe x v; simpl.
+  - reflexivity.
+  - rewrite IHT.
+    reflexivity.
+Qed.
+Lemma subst_type_map_app_frame :
+  forall T Tframe x v,
+    subst_type_map Tframe x v = Tframe ->
+    subst_type_map (T ++ Tframe) x v =
+    subst_type_map T x v ++ Tframe.
+Proof.
+  intros T Tframe x v Hframe.
+  rewrite subst_type_map_app.
+  rewrite Hframe.
+  reflexivity.
+Qed.
+
+Lemma let_c_pf_framed :
+  forall rmax q env T T' Tframe W Q x a v e,
+    ~ AEnv.In (elt:=ktype) x env ->
+    simp_aexp a = Some v ->
+    type_check_proof rmax q env
+      (T ++ Tframe)
+      T'
+      W Q
+      (subst_pexp e x v) ->
+    @triple rmax q env
+      (T ++ Tframe)
+      W
+      (subst_pexp e x v)
+      Q ->
+    @triple rmax q env
+      (T ++ Tframe)
+      W
+      (Let x a e)
+      Q.
+Proof.
+  intros.
+  eapply let_c_pf; eauto.
+Qed.
+
+Lemma maps_to_env_add_old :
+  forall env x y k ky,
+    ~ AEnv.In (elt:=ktype) x env ->
+    AEnv.MapsTo (elt:=ktype) y ky env ->
+    AEnv.MapsTo (elt:=ktype) y ky (AEnv.add x k env).
+Proof.
+  intros env x y k ky Hfresh Hmap.
+  apply AEnv.add_2.
+  - intro Heq.
+    subst y.
+    apply Hfresh.
+    exists ky.
+    exact Hmap.
+  - exact Hmap.
+Qed.
+
+Lemma type_aexp_env_add :
+  forall env x k a ty,
+    ~ AEnv.In (elt:=ktype) x env ->
+    type_aexp env a ty ->
+    type_aexp (AEnv.add x k env) a ty.
+Proof.
+  intros env x k a ty Hfresh Hty.
+  induction Hty.
+
+  - (* ba_type *)
+    eapply ba_type.
+    + exact H.
+    + eapply maps_to_env_add_old; eauto.
+
+  - (* ba_type_q *)
+    eapply ba_type_q.
+    eapply maps_to_env_add_old; eauto.
+
+  - (* num_type *)
+    apply num_type.
+
+  - (* num_type_q *)
+    apply num_type_q.
+
+  - (* plus_type *)
+    eapply plus_type; eauto.
+
+  - (* mult_type *)
+    eapply mult_type; eauto.
+
+  - (* mnum_type *)
+    apply mnum_type.
+Qed.
+
+Lemma type_cbexp_env_add :
+  forall env x k b t,
+    ~ AEnv.In (elt:=ktype) x env ->
+    type_cbexp env b t ->
+    type_cbexp (AEnv.add x k env) b t.
+Proof.
+  intros env x k b t Hfresh H.
+  induction H.
+
+  - eapply ceq_type.
+    + eapply type_aexp_env_add; eauto.
+    + eapply type_aexp_env_add; eauto.
+    + exact H1.
+    + exact H2.
+
+  - eapply clt_type.
+    + eapply type_aexp_env_add; eauto.
+    + eapply type_aexp_env_add; eauto.
+    + exact H1.
+    + exact H2.
+Qed.
+Lemma type_bexp_env_add :
+  forall env x k b ty,
+    ~ AEnv.In (elt:=ktype) x env ->
+    type_bexp env b ty ->
+    type_bexp (AEnv.add x k env) b ty.
+Proof.
+  intros env x k b ty Hfresh H.
+  induction H.
+
+  - apply cb_type.
+    eapply type_cbexp_env_add; eauto.
+
+  - eapply beq_type_1.
+    + eapply maps_to_env_add_old; eauto.
+    + eapply maps_to_env_add_old; eauto.
+    + exact H1.
+
+  - eapply beq_type_2.
+    + eapply maps_to_env_add_old; eauto.
+    + eapply maps_to_env_add_old; eauto.
+    + exact H1.
+
+  - eapply blt_type_1.
+    + eapply maps_to_env_add_old; eauto.
+    + eapply maps_to_env_add_old; eauto.
+    + exact H1.
+
+  - eapply blt_type_2.
+    + eapply maps_to_env_add_old; eauto.
+    + eapply maps_to_env_add_old; eauto.
+    + exact H1.
+
+  - eapply btest_type.
+    + eapply maps_to_env_add_old; eauto.
+    + exact H0.
+
+  - (* bneg_type *)
+    apply bneg_type.
+    apply IHtype_bexp.
+    exact Hfresh.
+Qed.
+
+Lemma in_env_add :
+  forall env x k y,
+    AEnv.In (elt:=ktype) y env ->
+    AEnv.In (elt:=ktype) y (AEnv.add x k env).
+Proof.
+  intros env x k y Hin.
+  destruct Hin as [ky Hmap].
+  destruct (AEnv.E.eq_dec x y) as [Heq | Hneq].
+  - subst.
+    exists k.
+    apply AEnv.add_1.
+    reflexivity.
+  - exists ky.
+    apply AEnv.add_2.
+    + intro Hxy.
+      apply Hneq.
+      exact Hxy.
+    + exact Hmap.
+Qed.
+
+Lemma sublist_env_add :
+  forall xs env x k,
+    sublist xs env ->
+    sublist xs (AEnv.add x k env).
+Proof.
+  intros xs env x k H.
+  unfold sublist in *.
+  induction H.
+  - constructor.
+  - constructor.
+    + apply in_env_add. exact H.
+    + exact IHForall.
+Qed.
+
+Lemma cpred_check_env_add :
+  forall env x k W,
+    cpred_check W env ->
+    cpred_check W (AEnv.add x k env).
+Proof.
+  intros env x k W H.
+  unfold cpred_check in *.
+  induction H.
+  - constructor.
+  - constructor.
+    + apply sublist_env_add. exact H.
+    + exact IHForall.
+Qed.
+
+
+Lemma type_aexp_freevars_sublist :
+  forall env a ty,
+    type_aexp env a ty ->
+    sublist (freeVarsAExp a) env.
+Proof.
+  intros env a ty H.
+  induction H.
+  - simpl.
+    unfold sublist.
+    simpl.
+    constructor.
+    + exists t. exact H0.
+    + constructor.
+
+  - simpl.
+    unfold sublist.
+    simpl.
+    constructor.
+    + exists (QT n). exact H.
+    + constructor.
+
+  - simpl. constructor.
+
+  - simpl. constructor.
+
+  - simpl.
+    unfold sublist in *.
+    rewrite Forall_app.
+    split.
+    + exact IHtype_aexp1.
+    + exact IHtype_aexp2.
+
+  - simpl.
+    unfold sublist in *.
+    rewrite Forall_app.
+    split.
+    + exact IHtype_aexp1.
+    + exact IHtype_aexp2.
+
+  - simpl. constructor.
+Qed.
+
+Lemma pred_check_add_ceq :
+  forall env x a T W P,
+    type_aexp env a (Mo QafnySyntax.MT, []) ->
+    pred_check env T (W, P) ->
+    pred_check (AEnv.add x (Mo QafnySyntax.MT) env) T
+      (CEq x a :: W, P).
+Proof.
+  intros env x a T W P Ha Hpred.
+  unfold pred_check in *.
+  destruct Hpred as [HW HP].
+  simpl in HW, HP.
+  split.
+  - simpl.
+    constructor.
+    + simpl.
+      apply sublist_env_add.
+      eapply type_aexp_freevars_sublist.
+      exact Ha.
+    + apply cpred_check_env_add.
+      exact HW.
+  - exact HP.
+Qed.
+
+Lemma qpred_check_prefix :
+  forall T T' P R,
+    qpred_check (T ++ T') (P ++ R) ->
+    length T = length P ->
+    qpred_check T P.
+Proof.
+  intros T T' P R H Hlen.
+  remember (T ++ T') as Tall.
+  remember (P ++ R) as Pall.
+  revert T T' P R HeqTall HeqPall Hlen.
+  induction H; intros T0 T'0 P0 R0 HT HP Hlen.
+  - symmetry in HT.
+    apply app_eq_nil in HT as [HT HT'].
+    symmetry in HP.
+    apply app_eq_nil in HP as [HP HR].
+    subst.
+    constructor.
+
+  - destruct T0 as [| [sa0 t0] T0].
+    + destruct P0 as [| [s0 v0] P0].
+      * constructor.
+      * simpl in Hlen. discriminate.
+    + destruct P0 as [| [s0 v0] P0].
+      * simpl in Hlen. discriminate.
+      * simpl in HT, HP.
+        inversion HT; subst.
+        inversion HP; subst.
+        constructor; eauto.
+
+Qed.
+
+Lemma pred_check_app_le :
+  forall env T T' W P R,
+    pred_check env (T ++ T') (W, P ++ R) ->
+    length T = length P ->
+    pred_check env T (W, P).
+Proof.
+  intros env T T' W P R H Hlen.
+  unfold pred_check in *.
+  destruct H as [Hc Hq].
+  split.
+  - exact Hc.
+  - eapply qpred_check_shrink_l.
+    + exact Hq.
+    + exact Hlen.
+Qed.
+Lemma qpred_check_length :
+  forall T P,
+    qpred_check T P ->
+    length T = length P.
+Proof.
+  intros T P H.
+  induction H.
+  - reflexivity.
+  - simpl.
+    rewrite IHqpred_check.
+    reflexivity.
+Qed.
+
+Lemma pred_check_q_length :
+  forall env T W P,
+    pred_check env T (W, P) ->
+    length T = length P.
+Proof.
+  intros env T W P H.
+  unfold pred_check in H.
+  destruct H as [_ Hq].
+  apply qpred_check_length.
+  exact Hq.
+Qed.
+Lemma relative_tightness_aux :
+  forall rmax t env T e W P W' Q n,
+    @locus_system rmax t env T e T ->
+    pred_check env T (W, P) ->
+    pred_check env T (W', Q) ->
+    hoare_triple
+      (trans env W P)
+      (lower_ir_to_cmd n (compile_pexp_to_ir e))
+      (trans env W' Q) ->
+    @triple rmax t env T (W, P) e (W', Q).
+Proof.
+  intros rmax t env T e W P W' Q n Hloc Hpre Hpost Hhoare.
+  induction Hloc.
+- replace P with (P ++ []) at 1 by now rewrite app_nil_r.
+replace Q with (Q ++ []) at 1 by now rewrite app_nil_r.
+eapply triple_frame with
+  (T := T')
+  (T1 := T')
+  (T' := T1)
+  (R := []).
+* unfold type_check_proof.
+repeat split.
++ (* pre *)
+  eapply pred_check_app_l.
+**replace P with (P ++ []) by now rewrite app_nil_r.
+replace (T' ++ T1) with ((T' ++ T1) ++ []) by now rewrite app_nil_r.
+
+  
+Admitted.
+
+
+Theorem qafny_compiler_relative_tightness :
+  forall rmax t env T W P e W' Q n,
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    hoare_triple
+      (trans env W P)
+      (lower_ir_to_cmd n (compile_pexp_to_ir e))
+      (trans env W' Q) ->
+    @triple rmax t env T (W, P) e (W', Q).
+Proof.
+  intros rmax t env T W P e W' Q n Htc Hhoare.
+  destruct (type_check_proof_to_locus _ _ _ _ _ _ _ _ _ Htc)
+    as [Hloc [Hpre Hpost]].
+
+  eapply relative_tightness_aux; eauto.
+Qed.
+
+
+
+
+
+(*
 Definition lowered_cmd_reflects_qafny
   (rmax : nat) (t : atype) (env : aenv) (T : type_map)
   (W : cpred) (P : qpred) (e : pexp) (W' : cpred) (Q : qpred)
@@ -3703,7 +4041,7 @@ Proof.
   exact Hcmd.
 Qed.
 
-
+*)
 
 (* Translation Quantum State to Array *)
 Definition trans_qstate (q : qstate) : cpredr :=
@@ -3736,6 +4074,11 @@ Proof.
   exists (trans_state (empty_aenv, s)).
   reflexivity.
 Qed.
+
+
+
+
+
 
 
 
