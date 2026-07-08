@@ -4073,6 +4073,23 @@ Proof.
   intros.
   eapply triple_con_2 with (Q' := (W0, Q0)) (T1 := T1); eauto.
 Qed.
+
+Lemma relative_completeness :
+  forall rmax t env T e W P W0 Q0 W' Q n,
+    type_check_proof rmax t env T T (W, P) (W0, Q0) e ->
+    @triple rmax t env T (W, P) e (W0, Q0) ->
+    imply rmax (W0, Q0) (W', Q) ->
+    pred_check env T (W', Q) ->
+    hoare_triple
+      (trans env W P)
+      (lower_ir_to_cmd n (compile_pexp_to_ir e))
+      (trans env W' Q) ->
+    @triple rmax t env T (W, P) e (W', Q).
+Proof.
+  intros.
+  eapply triple_post_consequence; eauto.
+Qed.
+
 Lemma relative_tightness_aux :
   forall rmax t env T e W P W' Q n,
     @locus_system rmax t env T e T ->
