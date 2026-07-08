@@ -3964,6 +3964,68 @@ Proof.
   apply qpred_check_length.
   exact Hq.
 Qed.
+
+Definition pred_check
+  (env : aenv)
+  (T : type_map)
+  (WP : cpred * qpred) : Prop :=
+  match WP with
+  | (W, P) =>
+      cpred_check W env /\ qpred_check T P
+  end.
+
+Lemma pred_check_length :
+  forall env T W P,
+    pred_check env T (W, P) ->
+    length T = length P.
+Proof.
+  intros env T W P H.
+  unfold pred_check in H.
+  simpl in H.
+  destruct H as [_ Hq].
+  apply qpred_check_length.
+  exact Hq.
+Qed.
+
+Lemma pred_check_app_length_left :
+  forall env T T1 W P,
+    pred_check env (T ++ T1) (W, P) ->
+    T1 = [] ->
+    length T = length P.
+Proof.
+  intros env T T1 W P H HT1.
+  subst T1.
+  rewrite app_nil_r in H.
+  eapply pred_check_length.
+  exact H.
+Qed.
+
+
+Lemma compile_pexp_to_ir_skip :
+  compile_pexp_to_ir PSKIP = [].
+Proof.
+  reflexivity.
+Qed.
+
+Lemma compile_pexp_to_ir_seq :
+  forall s1 s2,
+    compile_pexp_to_ir (PSeq s1 s2) =
+    compile_pexp_to_ir s1 ++ compile_pexp_to_ir s2.
+Proof.
+  reflexivity.
+Qed.
+
+Lemma locus_system_frame :
+  forall rmax q env Tin Tout e Tframe,
+    @locus_system rmax q env Tin e Tout ->
+    @locus_system rmax q env (Tin ++ Tframe) e (Tout ++ Tframe).
+Proof.
+  intros rmax q env Tin Tout e Tframe H.
+  eapply sub_ses.
+  exact H.
+Qed.
+
+
 Lemma relative_tightness_aux :
   forall rmax t env T e W P W' Q n,
     @locus_system rmax t env T e T ->
@@ -3991,7 +4053,26 @@ repeat split.
 **replace P with (P ++ []) by now rewrite app_nil_r.
 replace (T' ++ T1) with ((T' ++ T1) ++ []) by now rewrite app_nil_r.
 
-  
+instantiate (1 := []).
+repeat rewrite app_nil_r.
+exact Hpre.
+** eapply pred_check_length.
+eapply pred_check_app_le with (T' := T1) (R := []).
+*** rewrite app_nil_r.
+  exact Hpre.
+***(* length T' = length P *)
+  eapply pred_check_length.
+eapply pred_check_app_le with (T' := T1) (R := []).
+ rewrite app_nil_r.
+  exact Hpre.
+eapply pred_check_length.
+eapply pred_check_app_le with (T' := T1) (R := []).
+rewrite app_nil_r.
+  exact Hpre.
+eapply pred_check_app_length_left.
+exact Hpre.
+ 
+
 Admitted.
 
 
@@ -4015,33 +4096,6 @@ Qed.
 
 
 
-(*
-Definition lowered_cmd_reflects_qafny
-  (rmax : nat) (t : atype) (env : aenv) (T : type_map)
-  (W : cpred) (P : qpred) (e : pexp) (W' : cpred) (Q : qpred)
-  (n : nat) : Prop :=
-  hoare_triple
-    (trans env W P)
-    (lower_ir_to_cmd n (compile_pexp_to_ir e))
-    (trans env W' Q) ->
-  @triple rmax t env T (W, P) e (W', Q).
-
-Theorem qafny_compiler_relative_tightness :
-  forall rmax t env T W P e W' Q n,
-    type_check_proof rmax t env T T (W, P) (W', Q) e ->
-    lowered_cmd_reflects_qafny rmax t env T W P e W' Q n ->
-    hoare_triple
-      (trans env W P)
-      (lower_ir_to_cmd n (compile_pexp_to_ir e))
-      (trans env W' Q) ->
-    @triple rmax t env T (W, P) e (W', Q).
-Proof.
-  intros rmax t env T W P e W' Q n Htc Hreflect Hcmd.
-  apply Hreflect.
-  exact Hcmd.
-Qed.
-
-*)
 
 (* Translation Quantum State to Array *)
 Definition trans_qstate (q : qstate) : cpredr :=
@@ -4075,16 +4129,8 @@ Proof.
   reflexivity.
 Qed.
 
-
-
-
-
-
-
-
-
-
-
+Print triple.
+Print locus_system.
 
 
 
