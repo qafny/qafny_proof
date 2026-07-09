@@ -1,14 +1,14 @@
-# Qafny
+# Qafny to HILR Proof
 
-Qafny is a project to utilize classical separation logic frameworks to verify quantum program properties.
+We propose a translation proof from Qafny to HLIR.
 
 ## Overview
 
-Many quantum programs are assured by formal verification, but such verification is usually laborious and time-consuming. This paper proposes Qafny, an automated proof system for verifying classical quantum hybrid algorithms. The core of Qafny is a quantum proof system, named the Qafny proof system. It views quantum operations as classical array aggregate operations with the guidance of a type system, which can be effectively verified in a classical separation logic framework. The proof system includes proof rules for proving properties of programs containing quantum conditionals, which is the first system that enables such proving power. We have shown the soundness and completeness of the Qafny proof system as well as the soundness of the proof system compilation from Qafny to Dafny. By using the Qafny implementation in Dafny, we enable the automated verification, with the saving of both human efforts and computer execution time, for many classical quantum hybrid algorithms, including GHZ, Shor’s algorithm, Grover’s algorithm, and quantum walk algorithm. In addition, quantum programs written in Qafny can be compiled to quantum circuits so that every verified quantum program can be run on a quantum machine.
+Verifying quantum programs today requires specialized proof systems built on interactive theorem provers such as Rocq, Lean, Isabelle, or Why3, and even modest quantum algorithms cost substantial human effort to verify. Because quantum programs cannot be effectively checked by runtime testing, formal verification is the only viable path to correctness, making the cost of these bespoke systems the chief barrier to scalable quantum software assurance. We show that verifying a quantum program should be no harder than verifying a classical array program, a paradigm commonly used in parallel programming: the Qafny quantum proof system embeds soundly and relatively completely into Hoare logic with array theory, and we mechanize soundness in Rocq. The embedding determinizes quantum proof obligations and exposes the full machinery of classical automated verifiers (e.g. Dafny and SMT-based separation logic) to quantum code, removing the need for dedicated quantum proof system infrastructure.
 
 ## Setup
 
-To compile Qafny, you will need [Coq](https://coq.inria.fr/) and [QuickChick](https://github.com/QuickChick/QuickChick). We strongly recommend using [opam](https://opam.ocaml.org/doc/Install.html) to install Coq and `opam switch` to manage Coq versions. We currently support Coq **versions 8.16**.
+To compile the project, you will need [Coq](https://coq.inria.fr/) and [QuickChick](https://github.com/QuickChick/QuickChick). We strongly recommend using [opam](https://opam.ocaml.org/doc/Install.html) to install Coq and `opam switch` to manage Coq versions. We currently support Coq **versions 8.16**.
 
 Assuming you have opam installed (following the instructions in the link above), follow the steps below to set up your environment.
 ```
@@ -48,19 +48,19 @@ To pull subsequent updates, run opam install coq-sqir.
 To import SQIR files, use Require Import SQIR.FILENAME
 
 
-## Compiling & Running Qafny
+## Compiling & Running the Proof
 
-Run `make` in the top-level directory to compile our Coq proofs. externals directory contains the coq files from SQIR and QWIRE that support the development of the Qafny proof.
+Run `make` in the top-level directory to compile our Coq proofs. externals directory contains the coq files from SQIR and QWIRE that support the development of the soundness proof.
 If you do not have a make file, please run `coq_makefile -f _CoqProject -o Makefile`
 
 ## Directory Contents
 
-* QafnySyntax.v - The LQafny language syntax.
+* QafnySyntax.v - The Qafny language syntax.
 * LocusDef.v - Locus and state syntax and equation rules.
 * LocusType.v - The Qafny Type system.
 * LocusSem.v - The Qafny language semantics.
-* LocusTypeProof.v - The Qafny Type system Soundness Proof.
-* LocusProof.v - The Qafny proof system and Soundness/Completeness Proof.
-* QafnySQIR.v - The Qafny to SQIR compilation.
+* LocusProof.v - The Qafny proof system.
+* HoareLArray.v - The Hoare Logic and HLIR definition, as well as the soundness proof from Qafny to Hoare Logic for Theorem 6.14 with all the lemmas in Section 6, as well as Pureness theorem (Theorem 4.2) and Lemma 5.2.
+* HoareLArrayComplete.v - The partially finished relatively completeness proof from Qafny to Hoare Logic for Theorem 6.15.
 
 
