@@ -4090,6 +4090,17 @@ Proof.
   eapply triple_post_consequence; eauto.
 Qed.
 
+Lemma app_eq_same_length_nil :
+  forall {A} (xs ys : list A),
+    length (xs ++ ys) = length xs ->
+    ys = [].
+Proof.
+  intros A xs ys H.
+  rewrite app_length in H.
+  assert (length ys = 0) by lia.
+  apply length_zero_iff_nil.
+  exact H0.
+Qed.
 Lemma relative_tightness_aux :
   forall rmax t env T e W P W' Q n,
     @locus_system rmax t env T e T ->
@@ -4135,7 +4146,9 @@ rewrite app_nil_r.
   exact Hpre.
 eapply pred_check_app_length_left.
 exact Hpre.
+eapply app_eq_same_length_nil.
  
+
 
 Admitted.
 
@@ -4157,8 +4170,134 @@ Proof.
 Qed.
 
 
+Lemma triple_skip_consequence :
+  forall rmax q env T W P W' Q,
+    pred_check env T (W, P) ->
+    pred_check env T (W', Q) ->
+    imply rmax (W, P) (W', Q) ->
+    @triple rmax q env T (W, P) PSKIP (W', Q).
+Proof.
+  intros rmax q env T W P W' Q Hpre Hpost Himp.
+
+  eapply triple_con_2 with (Q' := (W, P)) (T1 := T).
+  - unfold type_check_proof.
+    split.
+    + exact Hpre.
+    + split.
+      * change T with ([] ++ T).
+        eapply sub_ses.
+        apply skip_ses.
+      * exact Hpre.
+  - exact Himp.
+  - exact Hpost.
+  - apply skip_pf.
+Qed.
+
+Lemma pred_check_subst_type_map_back :
+  forall env T Tframe x v W P,
+    subst_type_map T x v = T ->
+    pred_check env (T ++ Tframe) (W, P) ->
+    pred_check env (subst_type_map T x v ++ Tframe) (W, P).
+Proof.
+  intros env T Tframe x v W P Hsubst Hpred.
+  rewrite Hsubst.
+  exact Hpred.
+Qed.
 
 
+Lemma hoare_triple_let_c_intro :
+  forall fuel x a e P Q,
+    entails P
+      (subst_assertion_array P "q" (Const 0)
+        (VarExpr (Array "temp"
+          (safe_eval (translate_aexp a) (fun _ => None))))) ->
+    hoare_triple
+      P
+      (lower_ir_to_cmd fuel (compile_pexp_to_ir e))
+      Q ->
+    hoare_triple
+      P
+      (lower_ir_to_cmd fuel (compile_pexp_to_ir (Let x (AE a) e)))
+      Q.
+Proof.
+  intros fuel x a e P Q Hent Hbody.
+  simpl.
+  eapply seq_rule.
+  - eapply consequence_rule.
+    + exact Hent.
+    + apply array_write_rule.
+    + apply entails_refl.
+  - exact Hbody.
+Qed.
+
+
+Lemma imply_refl :
+  forall rmax P,
+    imply rmax P P.
+Proof.
+  intros rmax [W Q].
+  apply imply_cpred.
+  intros s H.
+  exact H.
+Qed.
+
+
+Lemma relative_tightness_aux_framed_exists :
+  forall rmax q env Tin Tout e,
+    @locus_system rmax q env Tin e Tout ->
+    forall W P W' Q R Tframe fuel,
+      pred_check env (Tin ++ Tframe) (W, P ++ R) ->
+      pred_check env (Tout ++ Tframe) (W', Q ++ R) ->
+      imply rmax (W, P ++ R) (W', Q ++ R) ->
+      hoare_triple
+        (trans env W (P ++ R))
+        (lower_ir_to_cmd fuel (compile_pexp_to_ir e))
+        (trans env W' (Q ++ R)) ->
+      exists A B,
+        imply rmax (W, P ++ R) A /\
+        imply rmax B (W', Q ++ R).
+Proof.
+  intros rmax q env Tin Tout e Hloc.
+  intros W P W' Q R Tframe fuel Hpre Hpost Himp Hhoare.
+
+  exists (W, P ++ R).
+  exists (W', Q ++ R).
+
+  split.
+  - apply imply_refl.
+  - apply imply_refl.
+Qed.
+
+Lemma lowered_hoare_reflects_triple_exists_skip :
+  forall rmax q env T W P n,
+    type_check_proof rmax q env T T (W, P) (W, P) PSKIP ->
+    hoare_triple
+      (trans env W P)
+      (lower_ir_to_cmd n (compile_pexp_to_ir PSKIP))
+      (trans env W P) ->
+    exists W0 Q0,
+      @triple rmax q env T (W, P) PSKIP (W0, Q0).
+Proof.
+  intros rmax q env T W P n Htc Hhoare.
+  exists W, P.
+  apply skip_pf.
+Qed.
+
+Lemma pred_check_app_left :
+  forall env T Tframe W P,
+    pred_check env (T ++ Tframe) (W, P) ->
+    length T = length P ->
+    pred_check env T (W, P).
+Proof.
+  intros env T Tframe W P Hpred Hlen.
+  destruct Hpred as [Hc Hq].
+  split.
+  - exact Hc.
+  - eapply qpred_check_shrink_l with (T' := Tframe) (P' := []).
+    + rewrite app_nil_r.
+      exact Hq.
+    + exact Hlen.
+Qed.
 
 
 (* Translation Quantum State to Array *)
@@ -4192,10 +4331,6 @@ Proof.
   exists (trans_state (empty_aenv, s)).
   reflexivity.
 Qed.
-
-
-
-
 
 
 
