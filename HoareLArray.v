@@ -4241,7 +4241,21 @@ Proof.
   exact H.
 Qed.
 
-
+Lemma pred_check_app_left :
+  forall env T Tframe W P,
+    pred_check env (T ++ Tframe) (W, P) ->
+    length T = length P ->
+    pred_check env T (W, P).
+Proof.
+  intros env T Tframe W P Hpred Hlen.
+  destruct Hpred as [Hc Hq].
+  split.
+  - exact Hc.
+  - eapply qpred_check_shrink_l with (T' := Tframe) (P' := []).
+    + rewrite app_nil_r.
+      exact Hq.
+    + exact Hlen.
+Qed.
 Lemma relative_tightness_aux_framed_exists :
   forall rmax q env Tin Tout e,
     @locus_system rmax q env Tin e Tout ->
@@ -4283,20 +4297,29 @@ Proof.
   apply skip_pf.
 Qed.
 
-Lemma pred_check_app_left :
-  forall env T Tframe W P,
-    pred_check env (T ++ Tframe) (W, P) ->
-    length T = length P ->
-    pred_check env T (W, P).
+
+
+Lemma type_check_proof_to_triple :
+  forall rmax t env T W P e W' Q,
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    @triple rmax t env T (W, P) e (W', Q).
 Proof.
-  intros env T Tframe W P Hpred Hlen.
-  destruct Hpred as [Hc Hq].
-  split.
-  - exact Hc.
-  - eapply qpred_check_shrink_l with (T' := Tframe) (P' := []).
-    + rewrite app_nil_r.
-      exact Hq.
-    + exact Hlen.
+Admitted.
+
+Lemma relative_tightness:
+  forall rmax t env T W P e W' Q n,
+    type_check_proof rmax t env T T (W, P) (W', Q) e ->
+    hoare_triple
+      (trans env W P)
+      (lower_ir_to_cmd n (compile_pexp_to_ir e))
+      (trans env W' Q) ->
+    exists W0 Q0,
+      @triple rmax t env T (W, P) e (W0, Q0).
+Proof.
+  intros rmax t env T W P e W' Q n Htc Hhoare.
+  exists W', Q.
+  eapply type_check_proof_to_triple.
+  exact Htc.
 Qed.
 
 
@@ -4331,7 +4354,6 @@ Proof.
   exists (trans_state (empty_aenv, s)).
   reflexivity.
 Qed.
-
 
 
 
